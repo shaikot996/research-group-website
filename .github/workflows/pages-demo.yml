@@ -112,6 +112,37 @@ jobs:
           print("GitHub Pages path rewriting complete.")
           PY
 
+      - name: Disable Next.js hydration for static GitHub Pages demo
+        shell: bash
+        run: |
+          python <<'PYTHON'
+          from pathlib import Path
+          import re
+
+          for f in Path("_site").rglob("*.html"):
+              s = f.read_text(encoding="utf-8", errors="ignore")
+
+              # Next.js hydration would restore routes such as /people,
+              # ignoring the GitHub Pages repository prefix.
+              s = re.sub(
+                  r'<script\b[^>]*>.*?</script>',
+                  '',
+                  s,
+                  flags=re.IGNORECASE | re.DOTALL
+              )
+
+              # Final safety pass for internal absolute links.
+              s = re.sub(
+                  r'href="/(?!research-group-website/)([^"#?]*)',
+                  r'href="/research-group-website/\1',
+                  s
+              )
+
+              f.write_text(s, encoding="utf-8")
+
+          print("Removed Next.js hydration scripts and fixed static links.")
+          PYTHON
+
       - name: Show generated site
         run: |
           echo "===== FILES ====="
