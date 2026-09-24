@@ -1,0 +1,12 @@
+import { existsSync, cpSync } from "node:fs";
+import { resolve } from "node:path";
+import { spawn } from "node:child_process";
+if (existsSync(".env")) process.loadEnvFile(".env");
+if (!existsSync(".next/standalone/server.js")) throw new Error("Run npm run build before npm start.");
+cpSync("public", ".next/standalone/public", { recursive: true });
+cpSync(".next/static", ".next/standalone/.next/static", { recursive: true });
+const database = process.env.DATABASE_URL || "file:../data/site.db";
+const env = { ...process.env, NODE_ENV: "production", HOSTNAME: process.env.BIND_HOST || "127.0.0.1", PORT: process.env.PORT || "3000", DATABASE_URL: database.startsWith("file:") ? `file:${resolve("prisma", database.slice(5)).replaceAll("\\", "/")}` : database, UPLOAD_DIR: resolve(process.env.UPLOAD_DIR || "data/uploads"), PEOPLE_PHOTO_DIR: resolve(process.env.PEOPLE_PHOTO_DIR || "public/people") };
+const child = spawn(process.execPath, [resolve(".next/standalone/server.js")], { stdio: "inherit", env });
+for (const signal of ["SIGINT", "SIGTERM"]) process.on(signal, () => child.kill(signal));
+child.on("exit", code => process.exit(code || 0));

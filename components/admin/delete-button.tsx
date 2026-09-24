@@ -1,0 +1,1 @@
+"use client"; export function DeleteButton(){return <button type="submit" className="border border-red-700/40 px-3 py-2 text-xs font-semibold text-red-700 dark:text-red-300" onClick={e=>{if(!confirm("Delete this item? This cannot be undone."))e.preventDefault()}}>Delete</button>}

@@ -1,0 +1,78 @@
+{
+  "lastReviewed": "2026-09-12",
+  "note": "Source references for member profiles. Profile photos are supplied separately by the group. Owner-confirmed updates take precedence over older public profiles.",
+  "members": [
+    {
+      "name": "Mahbubul Alam Majumdar",
+      "inspireId": "1023635",
+      "sources": [
+        "https://inspirehep.net/authors/1023635?ui-citation-summary=true",
+        "https://www.bracu.ac.bd/about/people/mahbubul-alam-majumdar-phd",
+        "https://cse.bracu.ac.bd/faculty_list",
+        "https://www.bracu.ac.bd/news/school-data-and-sciences-dean-mahbubul-alam-majumdar-receives-spirit-abdus-salam-award",
+        "https://www.bracu.ac.bd/news/brac-university-hosts-receptions-faculty-members-named-ekushey-padak-professor-emeritus",
+        "https://www.bracu.ac.bd/research",
+        "https://hasan-walid.github.io/research/"
+      ]
+    },
+    {
+      "name": "Syed Hasibul Hassan Chowdhury",
+      "inspireId": "1511186",
+      "sources": [
+        "https://inspirehep.net/authors/1511186?ui-citation-summary=true",
+        "https://www.bracu.ac.bd/about/people/syed-hasibul-hassan-chowdhury-phd",
+        "https://orcid.org/0000-0001-9721-2541"
+      ]
+    },
+    {
+      "name": "Ahmed Rakin Kamal",
+      "inspireId": "2763317",
+      "sources": [
+        "https://inspirehep.net/authors/2763317?ui-citation-summary=true",
+        "https://www.bracu.ac.bd/about/people/ahmed-rakin-kamal",
+        "https://ahmedrakinkamal.com/education-and-work-experience",
+        "https://link.springer.com/article/10.1007/JHEP06%282026%29188",
+        "https://sites.google.com/view/string-pheno-seminars/past-talks",
+        "https://amslaurea.unibo.it/id/eprint/30043/"
+      ]
+    },
+    {
+      "name": "Sayeda Tashnuba Jahan",
+      "inspireId": "3088919",
+      "sources": [
+        "https://inspirehep.net/authors/3088919?ui-citation-summary=true",
+        "https://www.bracu.ac.bd/about/people/sayeda-tashnuba-jahan",
+        "https://www.bracu.ac.bd/faculty-directory",
+        "https://amslaurea.unibo.it/view/cds/CDS9245/2023.html"
+      ]
+    },
+    {
+      "name": "Mishaal Hai",
+      "inspireId": "2931658",
+      "sources": [
+        "https://inspirehep.net/authors/2931658?ui-citation-summary=true",
+        "https://orcid.org/0009-0005-9511-5381",
+        "https://dspace.bracu.ac.bd/items/5bbe3cee-2157-4fd7-9091-11f11720f483",
+        "https://bux-home.bracu.ac.bd/courses/course-v1%3AbuX%2BMAT092%2B2022_Fall/about"
+      ]
+    },
+    {
+      "name": "Md Shaikot Jahan Shuvo",
+      "inspireId": "2648798",
+      "sources": [
+        "https://inspirehep.net/authors/2648798?ui-citation-summary=true",
+        "https://www.ccny.cuny.edu/profiles/md-shaikot-jahan-shuvo",
+        "https://dspace.bracu.ac.bd/items/7dfaf712-cd0c-428a-a95b-f9dba2b2e85d",
+        "https://link.springer.com/article/10.1007/JHEP06%282024%29025"
+      ]
+    }
+  ],
+  "revision": "public-members-2026-09-12-v4-rsgi-inspire-wan",
+  "owner_updates": {
+    "date": "2026-09-24",
+    "person": "Md Shaikot Jahan Shuvo",
+    "role": "Research Assistant, BRAC University",
+    "appointment": "August 2026–present",
+    "education": "MPhil in Physics, CUNY Graduate Center (2026)"
+  }
+}

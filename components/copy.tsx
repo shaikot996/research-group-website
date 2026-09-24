@@ -1,0 +1,1 @@
+"use client"; import {useState} from "react"; export function CopyButton({value}:{value:string}){const[c,setC]=useState(false);return <button className="border academic-rule px-3 py-2 text-xs font-semibold" onClick={async()=>{await navigator.clipboard.writeText(value);setC(true);setTimeout(()=>setC(false),1500)}}>{c?"Copied":"Copy BibTeX"}</button>}

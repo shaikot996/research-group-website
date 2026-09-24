@@ -1,0 +1,5 @@
+import type {ReactNode} from "react"; import Link from "next/link";
+export const inputClass="surface focus-ring w-full border academic-rule px-3 py-2.5 text-sm font-normal"; export const textareaClass=inputClass+" leading-6";
+export function Field({label,children,help}:{label:string;children:ReactNode;help?:string}){return <label className="grid gap-1.5 text-sm font-semibold">{label}{children}{help&&<span className="text-xs font-normal leading-5 text-muted">{help}</span>}</label>}
+export function Heading({title,description,editing}:{title:string;description?:string;editing?:boolean}){return <div className="mb-7 flex justify-between gap-4"><div><h1 className="font-serif text-4xl">{editing?`Edit ${title}`:title}</h1>{description&&<p className="mt-2 text-sm leading-6 text-muted">{description}</p>}</div>{editing&&<Link href="?" className="border academic-rule px-3 py-2 text-xs font-semibold">New item</Link>}</div>}
+export function Status({saved,error}:{saved?:string;error?:string}){return saved?<div className="mb-5 border border-green-700/30 p-3 text-sm">Changes saved.</div>:error?<div className="mb-5 border border-red-700/30 p-3 text-sm">{error}</div>:null}

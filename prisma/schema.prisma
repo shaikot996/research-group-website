@@ -1,0 +1,282 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("EDITOR")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Person {
+  id                String             @id @default(cuid())
+  slug              String             @unique
+  name              String
+  role              String
+  title             String
+  affiliation       String
+  email             String?
+  photo             String?
+  bio               String?
+  researchSummary   String?
+  researchInterests String?
+  website           String?
+  googleScholar     String?
+  inspire           String?
+  orcid             String?
+  arxiv             String?
+  github            String?
+  linkedin          String?
+  cvUrl             String?
+  sortOrder         Int                @default(0)
+  featured          Boolean            @default(false)
+  status            String             @default("PUBLISHED")
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  education         Education[]
+  positions         AcademicPosition[]
+  talks             Talk[]
+  software          SoftwareProject[]
+  awards            Award[]
+  teaching          Teaching[]
+  grants            ResearchGrant[]
+  publications      Publication[]
+  projects          Project[]
+  researchAreas     ResearchArea[]
+}
+
+model Education {
+  id          String  @id @default(cuid())
+  degree      String
+  institution String
+  years       String
+  thesis      String?
+  advisor     String?
+  sortOrder   Int     @default(0)
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model AcademicPosition {
+  id          String  @id @default(cuid())
+  title       String
+  institution String
+  years       String
+  description String?
+  sortOrder   Int     @default(0)
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model Talk {
+  id        String   @id @default(cuid())
+  title     String
+  venue     String
+  date      DateTime
+  slidesUrl String?
+  person    Person   @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId  String
+}
+
+model SoftwareProject {
+  id          String  @id @default(cuid())
+  name        String
+  description String
+  url         String?
+  languages   String?
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model Award {
+  id          String  @id @default(cuid())
+  title       String
+  issuer      String?
+  year        String?
+  description String?
+  sortOrder   Int     @default(0)
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model Teaching {
+  id          String  @id @default(cuid())
+  title       String
+  institution String?
+  term        String?
+  description String?
+  sortOrder   Int     @default(0)
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model ResearchGrant {
+  id          String  @id @default(cuid())
+  title       String
+  funder      String
+  grantId     String?
+  role        String?
+  amount      String?
+  period      String?
+  url         String?
+  description String?
+  sortOrder   Int     @default(0)
+  person      Person  @relation(fields: [personId], references: [id], onDelete: Cascade)
+  personId    String
+}
+
+model ResearchArea {
+  id               String        @id @default(cuid())
+  slug             String        @unique
+  title            String
+  shortDescription String
+  overview         String
+  questions        String?
+  methods          String?
+  image            String?
+  sortOrder        Int           @default(0)
+  featured         Boolean       @default(false)
+  status           String        @default("PUBLISHED")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  people           Person[]
+  projects         Project[]
+  publications     Publication[]
+}
+
+model Publication {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  title         String
+  authorText    String
+  year          Int
+  type          String         @default("PREPRINT")
+  journal       String?
+  volume        String?
+  pages         String?
+  doi           String?
+  arxivId       String?
+  inspireUrl    String?
+  pdfUrl        String?
+  abstract      String?
+  bibtex        String?
+  featured      Boolean        @default(false)
+  sortOrder     Int            @default(0)
+  status        String         @default("PUBLISHED")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  authors       Person[]
+  projects      Project[]
+  researchAreas ResearchArea[]
+}
+
+model Project {
+  id               String         @id @default(cuid())
+  slug             String         @unique
+  title            String
+  shortDescription String
+  description      String
+  leadText         String?
+  collaborators    String?
+  startDate        DateTime?
+  endDate          DateTime?
+  status           String         @default("CURRENT")
+  funding          String?
+  githubUrl        String?
+  dataUrl          String?
+  image            String?
+  featured         Boolean        @default(false)
+  sortOrder        Int            @default(0)
+  publishStatus    String         @default("PUBLISHED")
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  members          Person[]
+  publications     Publication[]
+  researchAreas    ResearchArea[]
+}
+
+model NewsPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  summary     String
+  body        String
+  date        DateTime
+  image       String?
+  externalUrl String?
+  featured    Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  status      String   @default("PUBLISHED")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           String
+  speaker         String?
+  affiliation     String?
+  date            DateTime
+  endDate         DateTime?
+  timeText        String?
+  location        String?
+  abstract        String?
+  registrationUrl String?
+  poster          String?
+  status          String    @default("UPCOMING")
+  publishStatus   String    @default("PUBLISHED")
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  eyebrow   String?
+  body      String
+  sortOrder Int      @default(0)
+  status    String   @default("PUBLISHED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  url          String
+  mimeType     String
+  size         Int
+  altText      String?
+  createdAt    DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  institution String?
+  subject     String
+  message     String
+  ipHash      String
+  createdAt   DateTime @default(now())
+}

@@ -1,0 +1,26 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      DATABASE_URL: file:/app/data/site.db
+      UPLOAD_DIR: /app/data/uploads
+      PEOPLE_PHOTO_DIR: /app/public/people
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - research_group_data:/app/data
+      - ./public/people:/app/public/people:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+volumes:
+  research_group_data:

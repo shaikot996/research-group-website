@@ -1,0 +1,18 @@
+[Unit]
+Description=BRAC University research group website
+After=network.target
+
+[Service]
+Type=simple
+User=researchgroup
+Group=researchgroup
+WorkingDirectory=/srv/research-group-website
+Environment=NODE_ENV=production
+EnvironmentFile=/srv/research-group-website/.env
+ExecStart=/usr/bin/node /srv/research-group-website/scripts/serve.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

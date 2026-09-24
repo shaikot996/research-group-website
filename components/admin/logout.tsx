@@ -1,0 +1,1 @@
+"use client"; import {signOut} from "next-auth/react"; export function Logout(){return <button className="border academic-rule px-3 py-2 text-xs font-semibold" onClick={()=>signOut({callbackUrl:"/admin/login"})}>Log out</button>}
