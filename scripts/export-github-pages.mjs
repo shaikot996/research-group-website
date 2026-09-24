@@ -175,7 +175,7 @@ async function fetchChecked(urlPath) {
     return await fetch(`${origin}${urlPath}`, {
       redirect: "follow",
       signal: controller.signal,
-      headers: { "User-Agent": "FPCG-GitHub-Pages-Exporter/4" },
+      headers: { "User-Agent": "CIPM-GitHub-Pages-Exporter/5" },
     });
   } finally {
     clearTimeout(timer);
@@ -352,7 +352,7 @@ function rewriteHtml(html, route) {
   if (/<\/body>/i.test(html)) html = html.replace(/<\/body>/i, `${scriptTag}</body>`);
   else html += scriptTag;
 
-  if (!html.includes("FPCG-GITHUB-PAGES-V4")) html = `<!-- FPCG-GITHUB-PAGES-V4 -->\n${html}`;
+  if (!html.includes("CIPM-GITHUB-PAGES-V5")) html = `<!-- CIPM-GITHUB-PAGES-V5 -->\n${html}`;
   return html;
 }
 

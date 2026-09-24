@@ -1,4 +1,4 @@
-# GitHub Pages V4
+# GitHub Pages V5
 
 This repository is a server-backed Next.js + Prisma application. GitHub Pages cannot run its database/API/admin server, so the public demo is generated as a **validated static snapshot** from the real running app.
 

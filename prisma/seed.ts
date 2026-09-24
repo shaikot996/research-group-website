@@ -1092,9 +1092,9 @@ async function seed(db: Prisma.TransactionClient) {
     data: {
       slug: "about",
       title: "About the Group",
-      eyebrow: "Fundamental Physics",
+      eyebrow: "Computational Intelligence",
       body:
-        "The Fundamental Physics & Cosmology Group brings together researchers at BRAC University and collaborators working on fundamental questions in theoretical physics.\n\n## Research\nOur interests include string theory, quantum gravity, early-universe cosmology, quantum field theory, black holes, compactification and mathematical physics.\n\n## Collaboration\nExplore our people, research projects and publications to learn more about our work. We welcome inquiries from researchers and students with shared interests.\n\n## Institutional Affiliation\nBRAC University, Dhaka, Bangladesh.",
+        "The Computational Intelligence, Physics & Mathematics Group (CIPM) brings together researchers at BRAC University and collaborators working across artificial intelligence, computation, physics and mathematics.\n\n## Research\nOur interests include computational intelligence, artificial intelligence, scientific computing, string theory, quantum gravity, early-universe cosmology, quantum field theory, black holes, compactification and mathematical physics.\n\n## Collaboration\nExplore our people, research projects and publications to learn more about our work. We welcome inquiries from researchers and students with shared interests.\n\n## Institutional Affiliation\nDepartment of Computer Science and Engineering, BRAC University, Dhaka, Bangladesh.",
     },
   });
 

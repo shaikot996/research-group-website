@@ -1,12 +1,12 @@
 export const siteDefaults = {
-  groupName: "Fundamental Physics & Cosmology Group",
-  tagline: "Theoretical Physics, Gravitation, Quantum Fields and Fundamental Cosmology",
-  groupDescription: "Exploring fundamental questions in string theory, quantum gravity, cosmology and mathematical physics at BRAC University.",
-  department: "Department of Mathematics & Physical Sciences",
+  groupName: "Computational Intelligence, Physics & Mathematics Group",
+  tagline: "Artificial Intelligence, Computational Science, Physics and Mathematics",
+  groupDescription: "Exploring computational intelligence, artificial intelligence, mathematical physics, quantum gravity, cosmology and computational science at BRAC University.",
+  department: "Department of Computer Science and Engineering",
   university: "BRAC University",
   location: "Dhaka, Bangladesh",
   contactEmail: "",
   universityUrl: "https://www.bracu.ac.bd/",
-  logoText: "FPCG",
+  logoText: "CIPM",
   footerNote: "Research, publications and academic activities of the group.",
 };

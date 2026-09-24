@@ -18,7 +18,7 @@ const sitemap = await (await get("/sitemap.xml")).text();
 const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(x => new URL(x[1].replaceAll("&amp;", "&")).pathname);
 for (const route of routes) {
   const html = await (await get(route)).text();
-  assert.ok(html.includes("Fundamental Physics"), `Missing site content: ${route}`);
+  assert.ok(html.includes("Computational Intelligence"), `Missing site content: ${route}`);
 }
 const profile = await (await get("/people/md-shaikot-jahan-shuvo")).text();
 assert.ok(profile.includes("MPhil in Physics") && profile.includes("August 2026") && profile.includes("Research Assistant"), "Corrected profile missing");
@@ -29,7 +29,7 @@ assert.ok((await (await get("/contact")).text()).includes("mailto:majumdar@bracu
 const news = await (await get("/news-events")).text();
 assert.ok(news.includes("No upcoming events"));
 const feed = await (await get("/feed.xml")).text();
-assert.ok(feed.includes("&amp; Cosmology Group News"));
+assert.ok(feed.includes("Physics &amp; Mathematics Group News"));
 assert.ok((await (await get("/robots.txt")).text()).includes("Sitemap:"));
 await get("/api/auth/providers", 404);
 await get("/admin/login", 404);

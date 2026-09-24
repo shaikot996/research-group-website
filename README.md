@@ -1,4 +1,4 @@
-# Fundamental Physics & Cosmology Group
+# Computational Intelligence, Physics & Mathematics Group (CIPM)
 
 Research group website for BRAC University, built with Next.js, TypeScript, Prisma and SQLite. It runs on a university-managed Node.js server or Docker behind the university's HTTPS reverse proxy.
 
