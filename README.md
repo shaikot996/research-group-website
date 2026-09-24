@@ -95,3 +95,7 @@ For a local test database with empty portrait folders, `npm run test:smoke -- --
 ## Profile correction
 
 Md Shaikot Jahan Shuvo is listed as **Research Assistant, BRAC University, August 2026–present**, with **MPhil in Physics, The Graduate Center, City University of New York (CUNY), 2026**. The correction is in normalized person, education and appointment records, and is reflected in the member list and profile page.
+
+## GitHub Pages demo
+
+For the GitHub-hosted public demo, run `bash PUBLISH_GITHUB.sh`. This builds a validated static snapshot under the repository project path and publishes it to the `gh-pages` branch. See `GITHUB_PAGES.md` for details.

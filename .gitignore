@@ -15,3 +15,6 @@ playwright-report/
 test-results/
 *.tar.gz
 *.zip
+
+# Generated GitHub Pages snapshot
+_site/
