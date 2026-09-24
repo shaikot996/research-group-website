@@ -20,135 +20,240 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - name: Install
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build application
+      - name: Setup database and build application
         run: |
           npm run setup
           npm run build
 
-      - name: Start server and make static snapshot
+      - name: Start Next.js server
         shell: bash
         run: |
-          PORT=3000 npm start > /tmp/site.log 2>&1 &
-          PID=$!
+          PORT=3000 npm start > /tmp/research-site.log 2>&1 &
+          echo $! > /tmp/research-site.pid
 
-          for i in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3000/ >/dev/null; then
-              break
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:3000/ > /dev/null; then
+              echo "Server ready."
+              exit 0
             fi
+
+            if ! kill -0 "$(cat /tmp/research-site.pid)" 2>/dev/null; then
+              echo "Server crashed:"
+              cat /tmp/research-site.log
+              exit 1
+            fi
+
             sleep 2
           done
 
+          echo "Server did not become ready."
+          cat /tmp/research-site.log
+          exit 1
+
+      - name: Crawl all public pages
+        shell: bash
+        run: |
           rm -rf _site
 
           wget \
             --recursive \
-            --level=10 \
+            --level=20 \
             --page-requisites \
             --convert-links \
             --adjust-extension \
             --no-host-directories \
             --execute robots=off \
+            --reject-regex='/admin(/|$)|/api(/|$)|/login(/|$)' \
             --directory-prefix=_site \
             http://127.0.0.1:3000/
 
-          kill "$PID" || true
+          kill "$(cat /tmp/research-site.pid)" 2>/dev/null || true
 
-          # Copy everything from public as well
+          # Ensure every file in public/ is available in the static demo.
           cp -a public/. _site/
 
           touch _site/.nojekyll
 
-          echo "===== GENERATED HTML PAGES ====="
-          find _site -name '*.html' -print
-
-      - name: Fix GitHub Pages paths
+      - name: Convert snapshot to safe static GitHub Pages site
         shell: bash
         run: |
-          python <<'PY'
+          python3 <<'PY'
           from pathlib import Path
+          from urllib.parse import urlsplit, urlunsplit
+          import os
           import re
 
-          root = Path("_site")
-          prefix = "/research-group-website"
+          root = Path("_site").resolve()
 
-          for f in root.rglob("*"):
-              if not f.is_file():
-                  continue
+          def route_target(path):
+              """
+              Map a server URL such as /people or /people/name
+              to the file wget generated.
+              """
+              clean = path.lstrip("/")
 
-              if f.suffix.lower() in {".html", ".css", ".js"}:
-                  try:
-                      s = f.read_text(encoding="utf-8")
-                  except Exception:
-                      continue
+              if not clean:
+                  return root / "index.html"
 
-                  # Absolute internal URLs -> GitHub Pages project path
-                  s = re.sub(
-                      r'(?P<q>["\'])/(?!/|research-group-website(?:/|["\']))',
-                      lambda m: m.group("q") + prefix + "/",
-                      s
-                  )
+              candidate = root / clean
 
-                  # CSS url(/...)
-                  s = re.sub(
-                      r'url\((["\']?)/(?!/|research-group-website/)',
-                      lambda m: "url(" + m.group(1) + prefix + "/",
-                      s
-                  )
+              # Existing asset/file.
+              if candidate.is_file():
+                  return candidate
 
-                  f.write_text(s, encoding="utf-8")
+              # wget --adjust-extension normally creates route.html.
+              html = root / (clean + ".html")
+              if html.is_file():
+                  return html
 
-          print("GitHub Pages path rewriting complete.")
+              # Directory-style route.
+              index = candidate / "index.html"
+              if index.is_file():
+                  return index
+
+              # Public asset that may have no extension transformation.
+              return candidate
+
+          def static_url(value, html_file):
+              # External URLs, anchors, mailto, etc. stay unchanged.
+              if (
+                  not value
+                  or value.startswith("#")
+                  or value.startswith("//")
+                  or value.startswith("http://")
+                  or value.startswith("https://")
+                  or value.startswith("mailto:")
+                  or value.startswith("tel:")
+                  or value.startswith("data:")
+                  or value.startswith("javascript:")
+              ):
+                  return value
+
+              parts = urlsplit(value)
+
+              # Relative URLs are already handled by wget.
+              if not parts.path.startswith("/"):
+                  return value
+
+              target = route_target(parts.path)
+
+              try:
+                  relative = os.path.relpath(target, html_file.parent)
+              except ValueError:
+                  return value
+
+              relative = relative.replace(os.sep, "/")
+
+              return urlunsplit((
+                  "",
+                  "",
+                  relative,
+                  parts.query,
+                  parts.fragment
+              ))
+
+          for html in root.rglob("*.html"):
+              text = html.read_text(encoding="utf-8", errors="ignore")
+
+              # This deployment is a static demo.
+              # Remove Next client runtime completely so React cannot
+              # rehydrate and restore server-root routes such as /people.
+              text = re.sub(
+                  r"<script\b[^>]*>.*?</script>",
+                  "",
+                  text,
+                  flags=re.IGNORECASE | re.DOTALL,
+              )
+
+              # Remove script preload/module-preload tags as well.
+              text = re.sub(
+                  r'<link\b(?=[^>]*(?:rel=["\'](?:modulepreload|preload)["\']))'
+                  r'(?=[^>]*(?:as=["\']script["\']|rel=["\']modulepreload["\']))'
+                  r'[^>]*>',
+                  "",
+                  text,
+                  flags=re.IGNORECASE,
+              )
+
+              # Fix only actual HTML URL attributes.
+              # DO NOT modify generated JS or CSS.
+              pattern = re.compile(
+                  r'(?P<prefix>\b(?:href|src|action|poster)=)'
+                  r'(?P<quote>["\'])'
+                  r'(?P<url>.*?)'
+                  r'(?P=quote)',
+                  flags=re.IGNORECASE,
+              )
+
+              def replace_url(match):
+                  old = match.group("url")
+                  new = static_url(old, html)
+                  q = match.group("quote")
+                  return f'{match.group("prefix")}{q}{new}{q}'
+
+              text = pattern.sub(replace_url, text)
+
+              html.write_text(text, encoding="utf-8")
+
+          # GitHub Pages supports a custom 404 page.
+          index = root / "index.html"
+          if index.exists():
+              (root / "404.html").write_text(
+                  index.read_text(encoding="utf-8"),
+                  encoding="utf-8"
+              )
+
+          print("\nGenerated HTML pages:")
+          for page in sorted(root.rglob("*.html")):
+              print(page.relative_to(root))
           PY
 
-      - name: Disable Next.js hydration for static GitHub Pages demo
+      - name: Validate generated demo
         shell: bash
         run: |
-          python <<'PYTHON'
-          from pathlib import Path
-          import re
+          set -e
 
-          for f in Path("_site").rglob("*.html"):
-              s = f.read_text(encoding="utf-8", errors="ignore")
+          test -f _site/index.html
 
-              # Next.js hydration would restore routes such as /people,
-              # ignoring the GitHub Pages repository prefix.
-              s = re.sub(
-                  r'<script\b[^>]*>.*?</script>',
-                  '',
-                  s,
-                  flags=re.IGNORECASE | re.DOTALL
-              )
+          echo
+          echo "===== HTML PAGES ====="
+          find _site -type f -name '*.html' | sort
 
-              # Final safety pass for internal absolute links.
-              s = re.sub(
-                  r'href="/(?!research-group-website/)([^"#?]*)',
-                  r'href="/research-group-website/\1',
-                  s
-              )
+          echo
+          echo "===== CHECK FOR BAD ROOT LINKS ====="
 
-              f.write_text(s, encoding="utf-8")
+          if grep -RInE \
+            'href="/(people|research|publications|about)|src="/_next' \
+            _site --include='*.html'; then
+            echo "ERROR: unresolved root-relative URLs remain."
+            exit 1
+          else
+            echo "Static navigation looks clean."
+          fi
 
-          print("Removed Next.js hydration scripts and fixed static links.")
-          PYTHON
+          echo
+          echo "===== CHECK FOR NEXT CLIENT SCRIPTS ====="
 
-      - name: Show generated site
-        run: |
-          echo "===== FILES ====="
-          find _site -maxdepth 4 -type f | sort | head -200
+          if grep -RIn '<script' _site --include='*.html'; then
+            echo "ERROR: script tags remain in generated HTML."
+            exit 1
+          else
+            echo "No client-side Next.js scripts remain."
+          fi
 
-      - name: Configure Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
@@ -157,14 +262,14 @@ jobs:
           path: ./_site
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    needs: build
-    runs-on: ubuntu-latest
-
     steps:
-      - name: Deploy
+      - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
