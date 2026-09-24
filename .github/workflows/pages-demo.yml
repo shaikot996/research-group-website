@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -29,93 +29,98 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install dependencies
+      - name: Install
         run: npm ci
 
-      - name: Build site and create static demo
-        shell: bash
+      - name: Build application
         run: |
           npm run setup
           npm run build
 
-          PORT=3000 BIND_HOST=127.0.0.1 npm start > /tmp/research-site.log 2>&1 &
-          SERVER_PID=$!
+      - name: Start server and make static snapshot
+        shell: bash
+        run: |
+          PORT=3000 npm start > /tmp/site.log 2>&1 &
+          PID=$!
 
-          cleanup() {
-            kill "$SERVER_PID" 2>/dev/null || true
-          }
-          trap cleanup EXIT
-
-          READY=0
-          for i in $(seq 1 90); do
+          for i in $(seq 1 60); do
             if curl -fsS http://127.0.0.1:3000/ >/dev/null; then
-              READY=1
               break
             fi
-
-            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
-              echo "Server stopped unexpectedly:"
-              cat /tmp/research-site.log
-              exit 1
-            fi
-
             sleep 2
           done
 
-          if [ "$READY" -ne 1 ]; then
-            echo "Site did not start."
-            cat /tmp/research-site.log
-            exit 1
-          fi
-
-          rm -rf snapshot _site
-          mkdir -p snapshot _site
+          rm -rf _site
 
           wget \
-            --mirror \
+            --recursive \
+            --level=10 \
+            --page-requisites \
             --convert-links \
             --adjust-extension \
-            --page-requisites \
-            --no-parent \
+            --no-host-directories \
             --execute robots=off \
-            --reject-regex='/(admin|api)(/|$)' \
-            --directory-prefix=snapshot \
+            --directory-prefix=_site \
             http://127.0.0.1:3000/
 
-          cp -a snapshot/127.0.0.1:3000/. _site/
+          kill "$PID" || true
 
-          # Make sure all public images/assets are included.
+          # Copy everything from public as well
           cp -a public/. _site/
 
-          # GitHub Pages does not need Next.js client/server runtime for
-          # this read-only demo. Remove hydration scripts so navigation
-          # behaves as ordinary static HTML.
+          touch _site/.nojekyll
+
+          echo "===== GENERATED HTML PAGES ====="
+          find _site -name '*.html' -print
+
+      - name: Fix GitHub Pages paths
+        shell: bash
+        run: |
           python <<'PY'
           from pathlib import Path
           import re
 
           root = Path("_site")
+          prefix = "/research-group-website"
 
-          for file in root.rglob("*.html"):
-              text = file.read_text(encoding="utf-8", errors="ignore")
-              text = re.sub(
-                  r"<script\b[^>]*>.*?</script>",
-                  "",
-                  text,
-                  flags=re.IGNORECASE | re.DOTALL,
-              )
-              file.write_text(text, encoding="utf-8")
+          for f in root.rglob("*"):
+              if not f.is_file():
+                  continue
+
+              if f.suffix.lower() in {".html", ".css", ".js"}:
+                  try:
+                      s = f.read_text(encoding="utf-8")
+                  except Exception:
+                      continue
+
+                  # Absolute internal URLs -> GitHub Pages project path
+                  s = re.sub(
+                      r'(?P<q>["\'])/(?!/|research-group-website(?:/|["\']))',
+                      lambda m: m.group("q") + prefix + "/",
+                      s
+                  )
+
+                  # CSS url(/...)
+                  s = re.sub(
+                      r'url\((["\']?)/(?!/|research-group-website/)',
+                      lambda m: "url(" + m.group(1) + prefix + "/",
+                      s
+                  )
+
+                  f.write_text(s, encoding="utf-8")
+
+          print("GitHub Pages path rewriting complete.")
           PY
 
-          touch _site/.nojekyll
+      - name: Show generated site
+        run: |
+          echo "===== FILES ====="
+          find _site -maxdepth 4 -type f | sort | head -200
 
-          echo "Generated pages:"
-          find _site -type f | head -50
-
-      - name: Configure GitHub Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload GitHub Pages artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./_site
@@ -125,10 +130,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
