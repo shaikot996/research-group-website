@@ -18,7 +18,7 @@ const sitemap = await (await get("/sitemap.xml")).text();
 const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(x => new URL(x[1].replaceAll("&amp;", "&")).pathname);
 for (const route of routes) {
   const html = await (await get(route)).text();
-  assert.ok(html.includes("Computational Intelligence"), `Missing site content: ${route}`);
+  assert.ok(html.includes("Strings, Artificial Intelligence and Mathematics"), `Missing site content: ${route}`);
 }
 const profile = await (await get("/people/md-shaikot-jahan-shuvo")).text();
 assert.ok(profile.includes("MPhil in Physics") && profile.includes("August 2026") && profile.includes("Research Assistant"), "Corrected profile missing");

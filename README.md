@@ -1,4 +1,4 @@
-# Computational Intelligence, Physics & Mathematics Group (CIPM)
+# Strings, Artificial Intelligence and Mathematics (SAM)
 
 Research group website for BRAC University, built with Next.js, TypeScript, Prisma and SQLite. It runs on a university-managed Node.js server or Docker behind the university's HTTPS reverse proxy.
 

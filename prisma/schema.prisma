@@ -165,7 +165,9 @@ model Publication {
   pages         String?
   doi           String?
   arxivId       String?
+  eprintClass   String?
   inspireUrl    String?
+  citationCount Int?
   pdfUrl        String?
   abstract      String?
   bibtex        String?

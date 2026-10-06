@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { absolute, fmt, humanize, lines } from "@/lib/utils";
-import { InspirePublications } from "@/components/inspire-publications";
 import { Breadcrumbs, ProjectCard, PubEntry, SectionHeader } from "@/components/ui";
 import { Portrait } from "@/components/portrait";
+import { MahbubProfileSections } from "@/components/mahbub-profile-sections";
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -25,7 +25,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!p) notFound();
 
   const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
-  const selected = p.publications.filter((x) => x.featured);
   const externalLinks = [
     ["Website", p.website],
     ["Scholar", p.googleScholar],
@@ -62,7 +61,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <p className="text-sm text-muted">{p.affiliation}</p>
           {p.email && <a className="mt-5 inline-block link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
-            {externalLinks.map(([label, url]) => <a className="link-academic" key={label} href={url}>{label}</a>)}
+            {externalLinks.map(([label, url]) => <a className="link-academic" key={label} href={url} target="_blank" rel="noopener noreferrer">{label}</a>)}
             {p.cvUrl && <a className="bg-[#172a46] px-4 py-2 text-xs font-semibold text-white" href={p.cvUrl}>Download CV</a>}
           </div>
         </div>
@@ -73,10 +72,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           {p.bio && <section><SectionHeader eyebrow="Biography" title="Profile" /><p className="text-lg leading-8 text-muted">{p.bio}</p></section>}
           {p.researchSummary && <section className="mt-14"><SectionHeader eyebrow="Research" title="Current research" /><p className="leading-8 text-muted">{p.researchSummary}</p></section>}
 
-          {selected.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Scholarship" title="Selected publications" />{selected.map((x) => <PubEntry key={x.id} p={x} />)}</section>}
-          {p.publications.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Curated record" title="Site publications" />{p.publications.map((x) => <PubEntry key={x.id} p={x} />)}</section>}
-
-          {p.inspire && <InspirePublications slug={p.slug} profileUrl={p.inspire} />}
+          {p.slug === "mahbubul-alam-majumdar" && <MahbubProfileSections />}
+          {p.publications.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Scholarship" title={p.slug === "mahbubul-alam-majumdar" ? "Selected Research / Publications" : "Publications"} description="One bibliographic record per work, with journal and e-print information combined where available." />{p.publications.map((x) => <PubEntry key={x.id} p={x} />)}</section>}
 
           {p.projects.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Projects" title="Research projects" /><div className="grid gap-8 md:grid-cols-2">{p.projects.map((x) => <ProjectCard key={x.id} p={x} />)}</div></section>}
           {p.software.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Open Source" title="Scientific software" /><div className="divide-y academic-rule border-y academic-rule">{p.software.map((x) => <article key={x.id} className="grid gap-3 py-6 md:grid-cols-[180px_1fr]"><div><h3 className="font-serif text-xl">{x.name}</h3><p className="text-xs text-muted">{x.languages}</p></div><div><p className="text-sm text-muted">{x.description}</p>{x.url && <a className="link-academic text-sm" href={x.url}>Repository →</a>}</div></article>)}</div></section>}

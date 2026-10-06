@@ -17,7 +17,7 @@ async function seed(db: Prisma.TransactionClient) {
     console.log("Existing content preserved; initial data was not reapplied.");
     return;
   }
-  const settings = { ...siteDefaults, dataRevision: "launch-2026-09-24" };
+  const settings = { ...siteDefaults, dataRevision: "sam-2026-10-06" };
 
   for (const [key, value] of Object.entries(settings)) {
     await db.siteSetting.create({ data: { key, value } });
@@ -110,6 +110,7 @@ async function seed(db: Prisma.TransactionClient) {
   const mahbub = await db.person.create({
     data: {
       slug: "mahbubul-alam-majumdar",
+      photo: "/people/mahbubul-alam-majumdar/profile.jpg",
       name: "Mahbubul Alam Majumdar",
       role: "PRINCIPAL_INVESTIGATOR",
       title: "Professor and Dean, School of Data & Computational Sciences",
@@ -346,6 +347,7 @@ async function seed(db: Prisma.TransactionClient) {
   const ahmed = await db.person.create({
     data: {
       slug: "ahmed-rakin-kamal",
+      photo: "/people/ahmed-rakin-kamal/profile.jpg",
       name: "Ahmed Rakin Kamal",
       role: "FACULTY",
       title: "Lecturer (On Leave) · PhD Researcher in Theoretical Physics",
@@ -449,6 +451,7 @@ async function seed(db: Prisma.TransactionClient) {
   const tashnuba = await db.person.create({
     data: {
       slug: "sayeda-tashnuba-jahan",
+      photo: "/people/sayeda-tashnuba-jahan/profile.jpg",
       name: "Sayeda Tashnuba Jahan",
       role: "FACULTY",
       title: "Lecturer",
@@ -547,6 +550,7 @@ async function seed(db: Prisma.TransactionClient) {
   const mishaal = await db.person.create({
     data: {
       slug: "mishaal-hai",
+      photo: "/people/mishaal-hai/profile.jpg",
       name: "Mishaal Hai",
       role: "RESEARCH_ASSISTANT",
       title: "Research Assistant",
@@ -673,6 +677,9 @@ async function seed(db: Prisma.TransactionClient) {
     pages?: string;
     doi?: string;
     arxivId?: string;
+    eprintClass?: string;
+    inspireUrl?: string;
+    citationCount?: number;
     abstract: string;
     featured?: boolean;
     authorIds: string[];
@@ -681,19 +688,15 @@ async function seed(db: Prisma.TransactionClient) {
 
   const publicationSeeds: PublicationSeed[] = [
     {
-      slug: "effect-moduli-redefinitions-fibre-inflation",
-      title: "Effect of moduli redefinitions on fibre inflation",
-      authorText:
-        "Dibya Chakraborty, Mishaal Hai, Sayeda Tashnuba Jahan, Ahmed Rakin Kamal, Md Shaikot Jahan Shuvo",
-      year: 2026,
-      type: "JOURNAL_ARTICLE",
-      journal: "Journal of Cosmology and Astroparticle Physics",
-      volume: "2026(06)",
-      pages: "025",
-      doi: "10.1088/1475-7516/2026/06/025",
+      slug: "fibre-inflation-meets-quintessence",
+      title: "Fibre Inflation Meets Quintessence: Implications of Perturbative Stabilisation",
+      authorText: "Dibya Chakraborty, Mishaal Hai, Sayeda Tashnuba Jahan, Ahmed Rakin Kamal, Md Shaikot Jahan Shuvo",
+      year: 2025,
+      type: "PREPRINT",
       arxivId: "2511.19610",
-      abstract:
-        "A perturbative large-volume string-cosmology study of fibre inflation with modulus redefinitions, including early- and late-time cosmological sectors.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:2511.19610",
+      abstract: "A perturbative string-cosmology analysis connecting fibre-inflation dynamics with late-time quintessence in a controlled stabilisation framework.",
       featured: true,
       authorIds: [mishaal.id, tashnuba.id, ahmed.id, shaikot.id],
       areaSlugs: ["string-compactifications", "early-universe-cosmology"],
@@ -709,8 +712,10 @@ async function seed(db: Prisma.TransactionClient) {
       pages: "188",
       doi: "10.1007/JHEP06(2026)188",
       arxivId: "2512.19793",
-      abstract:
-        "Time-dependent type-IIB supergravity backgrounds with a dynamical compactification scale, fluxes and axiodilaton, together with energy-condition and no-go analyses.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature/3095325",
+      citationCount: 2,
+      abstract: "Time-dependent type-IIB supergravity backgrounds with a dynamical compactification scale, fluxes and axiodilaton, together with energy-condition and no-go analyses.",
       featured: true,
       authorIds: [ahmed.id],
       areaSlugs: ["string-theory", "string-compactifications", "early-universe-cosmology"],
@@ -718,8 +723,7 @@ async function seed(db: Prisma.TransactionClient) {
     {
       slug: "one-loop-d11-d10-four-point-check",
       title: "One loop in D = 11 vs D = 10: 4-point check",
-      authorText:
-        "Aviral Aggarwal, Subhroneel Chakrabarti, Steven Weilong Hsia, Ahmed Rakin Kamal, Linus Wulff",
+      authorText: "Aviral Aggarwal, Subhroneel Chakrabarti, Steven Weilong Hsia, Ahmed Rakin Kamal, Linus Wulff",
       year: 2026,
       type: "JOURNAL_ARTICLE",
       journal: "Journal of High Energy Physics",
@@ -727,8 +731,10 @@ async function seed(db: Prisma.TransactionClient) {
       pages: "010",
       doi: "10.1007/JHEP02(2026)010",
       arxivId: "2506.16391",
-      abstract:
-        "A four-point comparison of one-loop higher-derivative structures in eleven-dimensional supergravity and ten-dimensional type-IIA string theory.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature/2937270",
+      citationCount: 7,
+      abstract: "A four-point comparison of one-loop higher-derivative structures in eleven-dimensional supergravity and ten-dimensional type-IIA string theory.",
       featured: true,
       authorIds: [ahmed.id],
       areaSlugs: ["string-theory", "quantum-field-theory"],
@@ -736,13 +742,13 @@ async function seed(db: Prisma.TransactionClient) {
     {
       slug: "perturbative-kahler-moduli-inflation",
       title: "Perturbative Kähler Moduli Inflation",
-      authorText:
-        "Mishaal Hai, Ahmed Rakin Kamal, Noshin Ferdous Shamma, Md Shaikot Jahan Shuvo",
+      authorText: "Mishaal Hai, Ahmed Rakin Kamal, Noshin Ferdous Shamma, Md Shaikot Jahan Shuvo",
       year: 2025,
       type: "PREPRINT",
       arxivId: "2506.08083",
-      abstract:
-        "Inflationary models from perturbative Kähler-modulus stabilisation in type-IIB compactifications, with controlled effective-field-theory and cosmological regimes.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature/2933166",
+      abstract: "Inflationary models from perturbative Kähler-modulus stabilisation in type-IIB compactifications, with controlled effective-field-theory and cosmological regimes.",
       featured: true,
       authorIds: [mishaal.id, ahmed.id, shaikot.id],
       areaSlugs: ["string-compactifications", "early-universe-cosmology"],
@@ -757,16 +763,17 @@ async function seed(db: Prisma.TransactionClient) {
       volume: "111",
       pages: "L061904",
       doi: "10.1103/PhysRevD.111.L061904",
-      abstract:
-        "An analysis of field redefinitions and T-duality at order α′³ showing an obstruction to lifting the relevant lower-dimensional redefinitions to ten dimensions.",
+      arxivId: "2411.15302",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:2411.15302",
+      abstract: "An analysis of field redefinitions and T-duality at order α′³ showing an obstruction to lifting the relevant lower-dimensional redefinitions to ten dimensions.",
       authorIds: [ahmed.id],
       areaSlugs: ["string-theory", "mathematical-physics"],
     },
     {
       slug: "loop-diagrams-kinetic-theory-waves",
       title: "Loop diagrams in the kinetic theory of waves",
-      authorText:
-        "Vladimir Rosenhaus, Daniel Schubring, Md Shaikot Jahan Shuvo, Michael Smolkin",
+      authorText: "Vladimir Rosenhaus, Daniel Schubring, Md Shaikot Jahan Shuvo, Michael Smolkin",
       year: 2024,
       type: "JOURNAL_ARTICLE",
       journal: "Journal of High Energy Physics",
@@ -774,16 +781,16 @@ async function seed(db: Prisma.TransactionClient) {
       pages: "025",
       doi: "10.1007/JHEP06(2024)025",
       arxivId: "2308.00740",
-      abstract:
-        "A diagrammatic treatment of loop corrections in weak-wave kinetic theory, including a next-to-leading-order kinetic equation and an all-orders graphical prescription.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:2308.00740",
+      abstract: "A diagrammatic treatment of loop corrections in weak-wave kinetic theory, including a next-to-leading-order kinetic equation and an all-orders graphical prescription.",
       featured: true,
       authorIds: [shaikot.id],
       areaSlugs: ["quantum-field-theory"],
     },
     {
       slug: "bopp-shifts-toroidal-shadows",
-      title:
-        "From Bopp shifts to toroidal shadows: K-theoretic gap labels in noncommutative quantum mechanics",
+      title: "From Bopp shifts to toroidal shadows: K-theoretic gap labels in noncommutative quantum mechanics",
       authorText: "Syed Hasibul Hassan Chowdhury",
       year: 2026,
       type: "JOURNAL_ARTICLE",
@@ -791,16 +798,14 @@ async function seed(db: Prisma.TransactionClient) {
       volume: "229",
       pages: "105942",
       doi: "10.1016/j.geomphys.2026.105942",
-      abstract:
-        "A mathematical-physics study connecting Bopp shifts, noncommutative quantum mechanics and toroidal/K-theoretic structures.",
+      abstract: "A mathematical-physics study connecting Bopp shifts, noncommutative quantum mechanics and toroidal/K-theoretic structures.",
       featured: true,
       authorIds: [hasibul.id],
       areaSlugs: ["mathematical-physics"],
     },
     {
       slug: "supersymmetric-qm-noncommutative-plane",
-      title:
-        "Supersymmetric quantum mechanics on a noncommutative plane through the lens of deformation quantization",
+      title: "Supersymmetric quantum mechanics on a noncommutative plane through the lens of deformation quantization",
       authorText: "Md. Rafsanjany Jim, Syed Hasibul Hassan Chowdhury",
       year: 2024,
       type: "JOURNAL_ARTICLE",
@@ -808,8 +813,7 @@ async function seed(db: Prisma.TransactionClient) {
       volume: "467",
       pages: "169718",
       doi: "10.1016/j.aop.2024.169718",
-      abstract:
-        "Supersymmetric quantum mechanics on a noncommutative plane formulated using deformation-quantization methods.",
+      abstract: "Supersymmetric quantum mechanics on a noncommutative plane formulated using deformation-quantization methods.",
       authorIds: [hasibul.id],
       areaSlugs: ["mathematical-physics", "quantum-field-theory"],
     },
@@ -824,24 +828,43 @@ async function seed(db: Prisma.TransactionClient) {
       pages: "168505",
       doi: "10.1016/j.aop.2021.168505",
       arxivId: "2003.12662",
-      abstract:
-        "A study of gauge-invariant spectral information in two-dimensional noncommutative quantum mechanics.",
+      eprintClass: "quant-ph",
+      abstract: "A study of gauge-invariant spectral information in two-dimensional noncommutative quantum mechanics.",
       authorIds: [hasibul.id],
       areaSlugs: ["mathematical-physics"],
     },
     {
-      slug: "inflationary-brane-antibrane-universe",
-      title: "The Inflationary Brane-Antibrane Universe",
-      authorText: "C. P. Burgess, M. Majumdar, D. Nolte, F. Quevedo, G. Rajesh, R.-J. Zhang",
-      year: 2001,
+      slug: "modifications-page-curve-correlations-hawking-radiation",
+      title: "Modifications of the Page Curve from correlations within Hawking radiation",
+      authorText: "Mishkat Al Alvi, Mahbub Majumdar, Md. Abdul Matin, Moinul Hossain Rahat, Avik Roy",
+      year: 2019,
       type: "JOURNAL_ARTICLE",
-      journal: "Journal of High Energy Physics",
-      volume: "2001(07)",
-      pages: "047",
-      doi: "10.1088/1126-6708/2001/07/047",
-      arxivId: "hep-th/0105204",
-      abstract:
-        "A brane-antibrane cosmology in which inter-brane motion can provide an inflationary degree of freedom and tachyon dynamics ends inflation.",
+      journal: "Physics Letters B",
+      volume: "797",
+      pages: "134881",
+      doi: "10.1016/j.physletb.2019.134881",
+      arxivId: "1908.09669",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature/1751208",
+      abstract: "A study of correlations between successive stages of black-hole evaporation and their implications for the Page curve and information recovery.",
+      featured: true,
+      authorIds: [mahbub.id],
+      areaSlugs: ["black-holes-gravitation", "quantum-field-theory"],
+    },
+    {
+      slug: "inflation-tachyon-condensation-large-n",
+      title: "Inflation from tachyon condensation, large N effects",
+      authorText: "Mahbub Majumdar, Anne-Christine Davis",
+      year: 2004,
+      type: "JOURNAL_ARTICLE",
+      journal: "Physical Review D",
+      volume: "69",
+      pages: "103504",
+      doi: "10.1103/PhysRevD.69.103504",
+      arxivId: "hep-th/0304226",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:hep-th/0304226",
+      abstract: "A study of assisted and staggered tachyon condensation showing how large-N brane-antibrane systems can support inflationary dynamics.",
       authorIds: [mahbub.id],
       areaSlugs: ["string-theory", "early-universe-cosmology"],
     },
@@ -856,24 +879,26 @@ async function seed(db: Prisma.TransactionClient) {
       pages: "012",
       doi: "10.1088/1126-6708/2003/12/012",
       arxivId: "hep-th/0304153",
-      abstract:
-        "A cosmological analysis of D-brane and anti-D-brane annihilation in an expanding universe and the resulting dimensional hierarchy of surviving branes.",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:hep-th/0304153",
+      abstract: "A cosmological analysis of D-brane and anti-D-brane annihilation in an expanding universe and the resulting dimensional hierarchy of surviving branes.",
       authorIds: [mahbub.id],
       areaSlugs: ["string-theory", "early-universe-cosmology"],
     },
     {
-      slug: "inflation-tachyon-condensation-large-n",
-      title: "Inflation from tachyon condensation, large N effects",
-      authorText: "Mahbub Majumdar, Anne-Christine Davis",
-      year: 2004,
+      slug: "inflationary-brane-antibrane-universe",
+      title: "The Inflationary Brane-Antibrane Universe",
+      authorText: "C. P. Burgess, M. Majumdar, D. Nolte, F. Quevedo, G. Rajesh, R.-J. Zhang",
+      year: 2001,
       type: "JOURNAL_ARTICLE",
-      journal: "Physical Review D",
-      volume: "69",
-      pages: "103504",
-      doi: "10.1103/PhysRevD.69.103504",
-      arxivId: "hep-th/0304226",
-      abstract:
-        "A study of assisted and staggered tachyon condensation showing how large-N brane-antibrane systems can support inflationary dynamics.",
+      journal: "Journal of High Energy Physics",
+      volume: "2001(07)",
+      pages: "047",
+      doi: "10.1088/1126-6708/2001/07/047",
+      arxivId: "hep-th/0105204",
+      eprintClass: "hep-th",
+      inspireUrl: "https://inspirehep.net/literature?q=arxiv:hep-th/0105204",
+      abstract: "A brane-antibrane cosmology in which inter-brane motion can provide an inflationary degree of freedom and tachyon dynamics ends inflation.",
       authorIds: [mahbub.id],
       areaSlugs: ["string-theory", "early-universe-cosmology"],
     },
@@ -893,11 +918,11 @@ async function seed(db: Prisma.TransactionClient) {
         pages: item.pages,
         doi: item.doi,
         arxivId: item.arxivId,
+        eprintClass: item.eprintClass,
         abstract: item.abstract,
         featured: item.featured ?? false,
-        inspireUrl: item.arxivId
-          ? `https://inspirehep.net/literature?q=arxiv:${encodeURIComponent(item.arxivId)}`
-          : undefined,
+        inspireUrl: item.inspireUrl,
+        citationCount: item.citationCount,
         pdfUrl: item.arxivId?.match(/^\d{4}\.\d{4,5}$/)
           ? `https://arxiv.org/pdf/${item.arxivId}`
           : undefined,
@@ -923,7 +948,7 @@ async function seed(db: Prisma.TransactionClient) {
       members: [ahmed.id, mishaal.id, tashnuba.id, shaikot.id],
       areas: ["string-compactifications", "early-universe-cosmology"],
       publications: [
-        "effect-moduli-redefinitions-fibre-inflation",
+        "fibre-inflation-meets-quintessence",
         "perturbative-kahler-moduli-inflation",
       ],
       featured: true,
@@ -1017,52 +1042,46 @@ async function seed(db: Prisma.TransactionClient) {
 
   const newsItems = [
     {
+      slug: "bangladesh-imo-six-medals-2026",
+      title: "Bangladesh records first six-of-six medal result at IMO",
+      summary: "Bangladesh earned one silver and five bronze medals at IMO 2026, scoring a national-record 121 points and finishing 39th among 117 teams.",
+      date: new Date("2026-07-19T00:00:00Z"),
+      externalUrl: "https://www.imo-official.org/country_team_r.aspx?code=BGD&column=p5&order=desc",
+    },
+    {
       slug: "time-dependent-flux-backgrounds-jhep-2026",
       title: "Time-dependent flux backgrounds published in JHEP",
-      summary:
-        "Ahmed Rakin Kamal and Ratul Mahanta's work on time-dependent type-IIB flux backgrounds appeared in JHEP in June 2026.",
+      summary: "Ahmed Rakin Kamal and Ratul Mahanta's work on time-dependent type-IIB flux backgrounds appeared in JHEP in June 2026.",
       date: new Date("2026-06-17T00:00:00Z"),
       externalUrl: "https://doi.org/10.1007/JHEP06(2026)188",
     },
     {
-      slug: "fibre-inflation-jcap-2026",
-      title: "Fibre-inflation work published in JCAP",
-      summary:
-        "The collaboration on moduli redefinitions and fibre inflation was published in JCAP in June 2026.",
-      date: new Date("2026-06-08T00:00:00Z"),
-      externalUrl: "https://doi.org/10.1088/1475-7516/2026/06/025",
+      slug: "mahbub-ekushey-padak-2026",
+      title: "Mahbubul Alam Majumdar receives Ekushey Padak 2026",
+      summary: "Professor Mahbubul Alam Majumdar received the Ekushey Padak in the Education category, with BRAC University highlighting his work promoting mathematics and the Mathematics Olympiad.",
+      date: new Date("2026-02-26T00:00:00Z"),
+      externalUrl: "https://www.bssnews.net/news/361407",
     },
     {
       slug: "one-loop-d11-d10-jhep-2026",
       title: "Higher-derivative four-point check published in JHEP",
-      summary:
-        "The D=11 versus D=10 one-loop four-point analysis appeared in JHEP in February 2026.",
+      summary: "The D=11 versus D=10 one-loop four-point analysis appeared in JHEP in February 2026.",
       date: new Date("2026-02-02T00:00:00Z"),
       externalUrl: "https://doi.org/10.1007/JHEP02(2026)010",
     },
     {
-      slug: "noncommutative-geometry-jgp-2026",
-      title: "New work in noncommutative mathematical physics",
-      summary:
-        "Syed Hasibul Hassan Chowdhury's 2026 Journal of Geometry and Physics article links Bopp shifts, toroidal structures and K-theoretic gap labels in noncommutative quantum mechanics.",
-      date: new Date("2026-01-15T00:00:00Z"),
-      externalUrl: "https://doi.org/10.1016/j.geomphys.2026.105942",
+      slug: "mahbub-spirit-salam-2026",
+      title: "Mahbubul Alam Majumdar receives 2026 Spirit of Abdus Salam Award",
+      summary: "ICTP recognised Professor Majumdar for efforts to strengthen Bangladesh's scientific and educational foundations.",
+      date: new Date("2026-01-29T00:00:00Z"),
+      externalUrl: "https://www.ictp.it/news/2026/1/spirit-salam-2026-awardees-announced",
     },
     {
-      slug: "ahmed-rakin-kamal-string-pheno-2026",
-      title: "String-Pheno seminar on time-dependent type-IIB backgrounds",
-      summary:
-        "Ahmed Rakin Kamal presented time-dependent flux backgrounds in type IIB supergravity at the String-Pheno Seminars on 10 February 2026.",
-      date: new Date("2026-02-10T00:00:00Z"),
-      externalUrl: "https://sites.google.com/view/string-pheno-seminars/past-talks",
-    },
-    {
-      slug: "pwf-bangladesh-gr-cosmology-school-2025",
-      title: "Group members contribute to PWF Bangladesh school on gravitation and cosmology",
-      summary:
-        "Ahmed Rakin Kamal, Sayeda Tashnuba Jahan and Mishaal Hai were listed among the programme coordinators for the 2025 Physics Without Frontiers Bangladesh School on General Relativity and Cosmology.",
-      date: new Date("2025-05-28T00:00:00Z"),
-      externalUrl: "https://indico.ictp.it/event/11010/",
+      slug: "jni-winter-school-2025",
+      title: "Jamal Nazrul Islam Memorial Winter School in Mathematical and Theoretical Physics",
+      summary: "BRAC University and ICTP Physics Without Frontiers hosted an advanced residential school in Savar on cosmology, string theory, black holes and mathematical physics.",
+      date: new Date("2025-01-29T00:00:00Z"),
+      externalUrl: "https://indico.ictp.it/event/10932/",
     },
   ];
 
@@ -1092,14 +1111,14 @@ async function seed(db: Prisma.TransactionClient) {
     data: {
       slug: "about",
       title: "About the Group",
-      eyebrow: "Computational Intelligence",
+      eyebrow: "Strings · AI · Mathematics",
       body:
-        "The Computational Intelligence, Physics & Mathematics Group (CIPM) brings together researchers at BRAC University and collaborators working across artificial intelligence, computation, physics and mathematics.\n\n## Research\nOur interests include computational intelligence, artificial intelligence, scientific computing, string theory, quantum gravity, early-universe cosmology, quantum field theory, black holes, compactification and mathematical physics.\n\n## Collaboration\nExplore our people, research projects and publications to learn more about our work. We welcome inquiries from researchers and students with shared interests.\n\n## Institutional Affiliation\nDepartment of Computer Science and Engineering, BRAC University, Dhaka, Bangladesh.",
+        "Strings, Artificial Intelligence and Mathematics (SAM) brings together researchers at BRAC University and collaborators working across fundamental physics, mathematics, computation and artificial intelligence.\n\n## Research\nOur interests include string theory, quantum gravity, early-universe cosmology, quantum field theory, black holes, string compactification, mathematical physics, scientific computing and artificial intelligence.\n\n## Collaboration\nExplore our people, research projects and publications to learn more about our work. We welcome inquiries from researchers and students with shared interests.\n\n## Institutional Affiliation\nDepartment of Computer Science and Engineering, BRAC University, Dhaka, Bangladesh.",
     },
   });
 
   console.log(
-    "Initial content ready: 6 researcher profiles, 6 research areas, 5 projects, 12 publications and 6 news items. No scheduled events have been added.",
+    "Initial content ready: 6 researcher profiles, 6 research areas, 5 projects, 13 publications and 6 news items. No scheduled events have been added.",
   );
 }
 
