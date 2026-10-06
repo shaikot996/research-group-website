@@ -423,6 +423,23 @@ async function writeStaticHelpers() {
     syncThemeButtons();
   });
 
+  const featuredSlides = Array.from(document.querySelectorAll("[data-featured-slide]"));
+  if (featuredSlides.length > 1) {
+    let featuredIndex = Math.max(0, featuredSlides.findIndex((slide) => !slide.classList.contains("hidden")));
+    const showFeatured = (next) => {
+      featuredIndex = (next + featuredSlides.length) % featuredSlides.length;
+      featuredSlides.forEach((slide, index) => {
+        const active = index === featuredIndex;
+        slide.classList.toggle("hidden", !active);
+        slide.classList.toggle("grid", active);
+        if (active) slide.removeAttribute("aria-hidden");
+        else slide.setAttribute("aria-hidden", "true");
+      });
+    };
+    showFeatured(featuredIndex);
+    window.setInterval(() => showFeatured(featuredIndex + 1), 8000);
+  }
+
   document.addEventListener("click", async (event) => {
     const button = event.target.closest("[data-copy-value]");
     if (!button) return;
