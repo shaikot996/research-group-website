@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { getSiteSettings } from "@/lib/site";
@@ -25,10 +24,11 @@ export default async function Home() {
   ]);
 
   return <>
-    <section className="relative overflow-hidden border-b academic-rule">
-      <div className="hero-grid absolute inset-0 opacity-70" />
-      <div className="absolute inset-y-0 right-0 hidden w-[48%] lg:block"><Image src="/images/physics-grid.svg" alt="" fill className="object-cover opacity-60 mix-blend-multiply" unoptimized /></div>
-      <div className="container-site relative grid min-h-[520px] items-center py-16 lg:grid-cols-[1.2fr_.8fr]">
+    <section className="hero-shell relative overflow-hidden border-b academic-rule">
+      <div className="hero-grid absolute inset-0" />
+      <div className="hero-art absolute inset-0" aria-hidden="true" />
+      <div className="hero-vignette absolute inset-0" aria-hidden="true" />
+      <div className="container-site relative z-10 grid min-h-[520px] items-center py-16 lg:grid-cols-[1.2fr_.8fr]">
         <div className="max-w-4xl">
           <div className="mb-5 text-xs font-bold uppercase tracking-[.2em] text-accent">{s.university} · {s.location}</div>
           <h1 className="font-serif text-[clamp(3rem,6vw,5.5rem)] leading-[.96] tracking-[-.04em]">{s.groupName}</h1>

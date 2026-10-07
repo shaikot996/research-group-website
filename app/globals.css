@@ -1,2 +1,139 @@
 @tailwind base; @tailwind components; @tailwind utilities;
 :root{color-scheme:light;--bg:#fafaf7;--surface:#fff;--text:#172033;--muted:#667085;--line:#d9dde5;--accent:#8c2131;--navy:#152a46}html.dark{color-scheme:dark;--bg:#0f141b;--surface:#171e28;--text:#f1f4f8;--muted:#bcc5d2;--line:#414c5f;--accent:#f09aaa;--navy:#e5eefc}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{text-underline-offset:3px}.container-site{width:min(1180px,calc(100% - 2rem));margin-inline:auto}.academic-rule{border-color:var(--line)}.surface{background:var(--surface)}.text-muted{color:var(--muted)}.text-accent{color:var(--accent)}.text-navy{color:var(--navy)}.link-academic{color:var(--navy);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--navy) 28%,transparent)}.link-academic:hover{color:var(--accent);text-decoration-color:var(--accent)}.section-space{padding-block:clamp(2.75rem,5.5vw,5.25rem)}.section-heading{font-family:"Iowan Old Style",Baskerville,"Times New Roman",serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.025em;line-height:1.04}.focus-ring:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 65%,white);outline-offset:3px}.prose-academic p{margin:0 0 1.1rem;line-height:1.8;color:var(--muted)}.prose-academic h2{margin:2.2rem 0 .8rem;font-family:"Iowan Old Style",Baskerville,serif;font-size:1.8rem}.prose-academic h3{margin:1.5rem 0 .6rem;font-weight:700}.hero-grid{background-image:linear-gradient(to right,color-mix(in srgb,var(--line) 42%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in srgb,var(--line) 42%,transparent) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%)}@media print{header,footer,.no-print{display:none!important}body{background:white;color:black}.container-site{width:100%}}
+
+
+/* SAM_HERO_BACKGROUND_START */
+
+.hero-shell{
+  isolation:isolate;
+  background:var(--bg);
+}
+
+/*
+  One artwork, two treatments:
+  light mode = pale technical drawing
+  dark mode  = cinematic deep-space artwork
+*/
+.hero-art{
+  pointer-events:none;
+  background-image:url("/images/hero/hero-bg.webp");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover;
+
+  opacity:.22;
+  filter:
+    brightness(2.55)
+    saturate(.58)
+    contrast(.72);
+
+  mix-blend-mode:multiply;
+  transform:scale(1.01);
+}
+
+/*
+  Protects hero typography while allowing the artwork
+  to become progressively more visible toward the right.
+*/
+.hero-vignette{
+  pointer-events:none;
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg) 0%,
+      color-mix(in srgb,var(--bg) 98%,transparent) 24%,
+      color-mix(in srgb,var(--bg) 91%,transparent) 43%,
+      color-mix(in srgb,var(--bg) 54%,transparent) 63%,
+      color-mix(in srgb,var(--bg) 12%,transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--bg) 5%,transparent) 0%,
+      transparent 66%,
+      color-mix(in srgb,var(--bg) 34%,transparent) 100%
+    );
+}
+
+/* keep the original mathematical grid, but subordinate it */
+.hero-shell .hero-grid{
+  opacity:.28;
+}
+
+/* Dark mode: retain the full navy/cosmic character */
+html.dark .hero-art{
+  opacity:.82;
+  filter:
+    brightness(.84)
+    saturate(.92)
+    contrast(1.04);
+
+  mix-blend-mode:screen;
+}
+
+html.dark .hero-vignette{
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg) 0%,
+      color-mix(in srgb,var(--bg) 98%,transparent) 22%,
+      color-mix(in srgb,var(--bg) 91%,transparent) 39%,
+      color-mix(in srgb,var(--bg) 55%,transparent) 57%,
+      color-mix(in srgb,var(--bg) 8%,transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--bg) 14%,transparent) 0%,
+      transparent 67%,
+      color-mix(in srgb,var(--bg) 35%,transparent) 100%
+    );
+}
+
+html.dark .hero-shell .hero-grid{
+  opacity:.18;
+}
+
+/*
+  Mobile: artwork remains present but never competes
+  with the headline.
+*/
+@media (max-width:1023px){
+  .hero-art{
+    background-position:64% center;
+    opacity:.15;
+    filter:
+      brightness(2.65)
+      saturate(.52)
+      contrast(.68);
+  }
+
+  .hero-vignette{
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb,var(--bg) 78%,transparent) 0%,
+        color-mix(in srgb,var(--bg) 92%,transparent) 52%,
+        var(--bg) 100%
+      );
+  }
+
+  html.dark .hero-art{
+    opacity:.48;
+    filter:
+      brightness(.77)
+      saturate(.88)
+      contrast(1.02);
+  }
+
+  html.dark .hero-vignette{
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb,var(--bg) 58%,transparent) 0%,
+        color-mix(in srgb,var(--bg) 82%,transparent) 55%,
+        var(--bg) 100%
+      );
+  }
+}
+
+/* SAM_HERO_BACKGROUND_END */
+
