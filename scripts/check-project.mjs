@@ -30,6 +30,11 @@ const required = [
   "app/page.tsx",
   "app/layout.tsx",
   "app/globals.css",
+  "components/research-snapshot.tsx",
+  "public/people/ahmed-rakin-kamal/cv.pdf",
+  "public/people/mishaal-hai/cv.pdf",
+  "public/people/sayeda-tashnuba-jahan/cv.pdf",
+  "public/people/sayeda-tashnuba-jahan/profile.jpg",
   "app/api/auth/[...nextauth]/route.ts",
   "app/admin/(protected)/page.tsx",
   "app/admin/(protected)/people/page.tsx",
@@ -111,6 +116,47 @@ if (!ahmedBlock.includes('Lecturer (On Leave)') || !ahmedBlock.includes('BRAC Un
 }
 if (!seed.includes('slug: "walid-hasan"') || !seed.includes('role: "RESEARCH_ASSISTANT"') || !seed.includes('contentSource: "DRIVE_BOOTSTRAP"')) {
   console.error("Research Assistant bootstrap profile is missing.");
+  process.exit(1);
+}
+
+
+const researcherTitleChecks = [
+  ["const ahmed", "ahmed-rakin-kamal", "/people/ahmed-rakin-kamal/cv.pdf"],
+  ["const mishaal", "mishaal-hai", "/people/mishaal-hai/cv.pdf"],
+  ["const shaikot", "md-shaikot-jahan-shuvo", null],
+];
+for (const [anchor, slug, cvUrl] of researcherTitleChecks) {
+  const anchorStart = seed.indexOf(anchor);
+  const start = seed.indexOf(`slug: "${slug}"`, Math.max(0, anchorStart));
+  const block = start >= 0 ? seed.slice(start, start + 3500) : "";
+  if (!block.includes('role: "RESEARCHER"') || !block.includes('title: "Co-Principal Investigator"')) {
+    console.error(`${slug} must render as a Researcher with Co-Principal Investigator as the visible title.`);
+    process.exit(1);
+  }
+  if (cvUrl && !block.includes(`cvUrl: "${cvUrl}"`)) {
+    console.error(`${slug} is missing the supplied CV URL.`);
+    process.exit(1);
+  }
+}
+if (!seed.includes('cvUrl: "/people/sayeda-tashnuba-jahan/cv.pdf"')) {
+  console.error("Sayeda Tashnuba Jahan is missing the supplied CV URL.");
+  process.exit(1);
+}
+
+const inspireLib = await readFile(path.join(root, "lib/inspire.ts"), "utf8");
+if (!inspireLib.includes("fetchAllLiterature") || !inspireLib.includes("page += 1") || !inspireLib.includes("a ${bai}")) {
+  console.error("INSPIRE individual publication sync must use BAI-first exhaustive pagination.");
+  process.exit(1);
+}
+const profilePage = await readFile(path.join(root, "app/people/[slug]/page.tsx"), "utf8");
+if (!profilePage.includes("getInspireArticles") || !profilePage.includes("Complete publication record from the verified INSPIRE author identity")) {
+  console.error("Person profiles must render the complete INSPIRE record with local fallback.");
+  process.exit(1);
+}
+const homePage = await readFile(path.join(root, "app/page.tsx"), "utf8");
+const researchPage = await readFile(path.join(root, "app/research/page.tsx"), "utf8");
+if (!homePage.includes("<ResearchSnapshot") || !researchPage.includes("<ResearchSnapshot")) {
+  console.error("Homepage and Research page must share the ResearchSnapshot component.");
   process.exit(1);
 }
 

@@ -16,7 +16,7 @@ type Output = {
   totalCitations: number | null;
   uniquePublications: number | null;
   updatedAt: string | null;
-  authors: Array<{ name: string; controlNumber: string; bai?: string | null }>;
+  authors: Array<{ name: string; controlNumber: string; bai?: string | null; records?: number }>;
 };
 
 const configPath = path.resolve(process.env.INSPIRE_AUTHORS_FILE || "config/inspire-authors.json");
@@ -158,7 +158,7 @@ async function main() {
       const citations = Number(record.metadata?.citation_count ?? 0);
       papers.set(key, Math.max(papers.get(key) ?? 0, Number.isFinite(citations) ? citations : 0));
     }
-    resolvedAuthors.push({ ...author, bai });
+    resolvedAuthors.push({ ...author, bai, records: records.length });
     console.log(`[inspire] ${author.name}${bai ? ` [${bai}]` : ""}: ${records.length} literature record(s)`);
   }
 

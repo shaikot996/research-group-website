@@ -35,7 +35,7 @@
         "https://sites.google.com/view/string-pheno-seminars/past-talks",
         "https://amslaurea.unibo.it/id/eprint/30043/"
       ],
-      "currentGroupStatus": "Researcher; existing profile information retained, including BRAC University Lecturer (On Leave) history"
+      "currentGroupStatus": "Researcher; Co-Principal Investigator; existing profile information retained, including BRAC University Lecturer (On Leave) history"
     },
     {
       "name": "Sayeda Tashnuba Jahan",
@@ -57,7 +57,7 @@
         "https://dspace.bracu.ac.bd/items/5bbe3cee-2157-4fd7-9091-11f11720f483",
         "https://bux-home.bracu.ac.bd/courses/course-v1%3AbuX%2BMAT092%2B2022_Fall/about"
       ],
-      "currentGroupStatus": "Researcher"
+      "currentGroupStatus": "Researcher; Co-Principal Investigator"
     },
     {
       "name": "Md Shaikot Jahan Shuvo",
@@ -68,14 +68,14 @@
         "https://dspace.bracu.ac.bd/items/7dfaf712-cd0c-428a-a95b-f9dba2b2e85d",
         "https://link.springer.com/article/10.1007/JHEP06%282024%29025"
       ],
-      "currentGroupStatus": "Researcher"
+      "currentGroupStatus": "Researcher; Co-Principal Investigator"
     }
   ],
   "revision": "sam-drive-sync-2026-10-07-rakin-researcher-ra-bootstrap",
   "owner_updates": {
     "date": "2026-09-24",
     "person": "Md Shaikot Jahan Shuvo",
-    "role": "Researcher category; Research Assistant appointment at BRAC University",
+    "role": "Researcher category; Co-Principal Investigator displayed role; Research Assistant appointment retained in academic history",
     "appointment": "August 2026–present",
     "education": "MPhil in Physics, CUNY Graduate Center (2026)"
   }

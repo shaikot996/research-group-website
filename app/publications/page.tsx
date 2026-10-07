@@ -22,7 +22,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Q> 
 
   return <div className="container-site section-space">
     <SectionHeader eyebrow="Scholarship" title="Publications" description="One bibliographic record per work, combining journal and e-print information when both are available. INSPIRE HEP is used as the reference source for members with verified INSPIRE identities." />
-    <div className="mb-8 border-l-2 academic-rule pl-4 text-xs leading-6 text-muted">INSPIRE data reviewed 6 October 2026. Citation counts are shown only where a current INSPIRE value was verified; record links remain the authoritative live source.</div>
+    <div className="mb-8 border-l-2 academic-rule pl-4 text-xs leading-6 text-muted">INSPIRE record links remain the authoritative source. Individual member profiles use verified INSPIRE author identities for complete publication lists; group-level publication and citation totals deduplicate shared literature records by INSPIRE control number.</div>
     <form method="get" className="mb-10 grid gap-3 border-y academic-rule py-5 md:grid-cols-4">
       <input name="q" defaultValue={f.q} placeholder="Search title, author, abstract…" className="surface border academic-rule px-3 py-2 md:col-span-2" />
       <select name="year" defaultValue={f.year||""} className="surface border academic-rule px-3 py-2"><option value="">All years</option>{years.map(x=><option key={x.year}>{x.year}</option>)}</select>

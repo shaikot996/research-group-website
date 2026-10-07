@@ -4,6 +4,7 @@ import { absolute, fmt, humanize, lines } from "@/lib/utils";
 import { Breadcrumbs, ProjectCard, PubEntry, SectionHeader } from "@/components/ui";
 import { Portrait } from "@/components/portrait";
 import { MahbubProfileSections } from "@/components/mahbub-profile-sections";
+import { getInspireArticles, type InspireArticle } from "@/lib/inspire";
 
 function driveProfileSections(value?: string | null): Array<[string, string]> {
   if (!value) return [];
@@ -15,6 +16,26 @@ function driveProfileSections(value?: string | null): Array<[string, string]> {
   } catch {
     return [];
   }
+}
+
+function InspireEntry({ article }: { article: InspireArticle }) {
+  return (
+    <article className="border-t academic-rule py-6">
+      <div className="grid gap-3 md:grid-cols-[90px_1fr]">
+        <div className="text-sm font-semibold text-muted">{article.year ?? "—"}</div>
+        <div>
+          <a href={article.url} target="_blank" rel="noopener noreferrer" className="font-serif text-xl leading-snug hover:text-accent">{article.title}</a>
+          {article.authors && <p className="mt-2 text-sm text-muted">{article.authors}</p>}
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted">
+            {article.journal && <span>{article.journal}</span>}
+            {article.arxiv && <a className="link-academic" href={`https://arxiv.org/abs/${article.arxiv}`} target="_blank" rel="noopener noreferrer">arXiv:{article.arxiv}</a>}
+            {article.doi && <a className="link-academic" href={`https://doi.org/${article.doi}`} target="_blank" rel="noopener noreferrer">DOI</a>}
+            {article.citations !== undefined && <span>INSPIRE citations: {article.citations}</span>}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export const dynamic = "force-dynamic";
@@ -38,6 +59,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   });
   if (!p) notFound();
   const extraSections = driveProfileSections(p.profileSections);
+  const inspirePublications = p.inspire ? await getInspireArticles(p.inspire) : null;
 
   const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
   const externalLinks = [
@@ -89,7 +111,22 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           {extraSections.map(([title, text]) => <section className="mt-14" key={title}><SectionHeader title={title} /><p className="whitespace-pre-line leading-8 text-muted">{text}</p></section>)}
 
           {p.slug === "mahbubul-alam-majumdar" && <MahbubProfileSections />}
-          {p.publications.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Scholarship" title={p.slug === "mahbubul-alam-majumdar" ? "Selected Research / Publications" : "Publications"} description="One bibliographic record per work, with journal and e-print information combined where available." />{p.publications.map((x) => <PubEntry key={x.id} p={x} />)}</section>}
+          {inspirePublications && !inspirePublications.error ? (
+            <section className="mt-14">
+              <SectionHeader
+                eyebrow="Scholarship"
+                title={`Publications (${inspirePublications.total})`}
+                description="Complete publication record from the verified INSPIRE author identity. Journal and preprint versions are represented by the same INSPIRE literature record."
+              />
+              {inspirePublications.articles.map((article) => <InspireEntry key={article.id || article.url} article={article} />)}
+              {inspirePublications.searchUrl && <a className="mt-4 inline-block link-academic text-sm" href={inspirePublications.searchUrl} target="_blank" rel="noopener noreferrer">Open complete record on INSPIRE →</a>}
+            </section>
+          ) : p.publications.length > 0 ? (
+            <section className="mt-14">
+              <SectionHeader eyebrow="Scholarship" title={p.slug === "mahbubul-alam-majumdar" ? "Selected Research / Publications" : "Publications"} description="INSPIRE is temporarily unavailable; showing the locally curated publication records." />
+              {p.publications.map((x) => <PubEntry key={x.id} p={x} />)}
+            </section>
+          ) : null}
 
           {p.projects.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Projects" title="Research projects" /><div className="grid gap-8 md:grid-cols-2">{p.projects.map((x) => <ProjectCard key={x.id} p={x} />)}</div></section>}
           {p.software.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Open Source" title="Scientific software" /><div className="divide-y academic-rule border-y academic-rule">{p.software.map((x) => <article key={x.id} className="grid gap-3 py-6 md:grid-cols-[180px_1fr]"><div><h3 className="font-serif text-xl">{x.name}</h3><p className="text-xs text-muted">{x.languages}</p></div><div><p className="text-sm text-muted">{x.description}</p>{x.url && <a className="link-academic text-sm" href={x.url}>Repository →</a>}</div></article>)}</div></section>}

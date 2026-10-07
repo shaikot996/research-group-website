@@ -24,15 +24,19 @@ async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
   }
   await db.person.updateMany({
     where: { slug: { in: ["mishaal-hai", "md-shaikot-jahan-shuvo"] } },
-    data: { role: "RESEARCHER" },
+    data: { role: "RESEARCHER", title: "Co-Principal Investigator" },
   });
   await db.person.updateMany({
     where: { slug: "ahmed-rakin-kamal" },
-    data: { role: "RESEARCHER", status: "PUBLISHED", featured: false, title: "PhD Researcher in Theoretical Physics" },
+    data: { role: "RESEARCHER", status: "PUBLISHED", featured: false, title: "Co-Principal Investigator", cvUrl: "/people/ahmed-rakin-kamal/cv.pdf" },
+  });
+  await db.person.updateMany({
+    where: { slug: "mishaal-hai" },
+    data: { cvUrl: "/people/mishaal-hai/cv.pdf" },
   });
   await db.person.updateMany({
     where: { slug: "sayeda-tashnuba-jahan" },
-    data: { title: "Lecturer (On Leave)" },
+    data: { title: "Lecturer (On Leave)", photo: "/people/sayeda-tashnuba-jahan/profile.jpg", cvUrl: "/people/sayeda-tashnuba-jahan/cv.pdf" },
   });
 
   // Keep one visible Research Assistant in fresh/existing installs before the
@@ -404,8 +408,9 @@ async function seed(db: Prisma.TransactionClient) {
       photo: "/people/ahmed-rakin-kamal/profile.jpg",
       name: "Ahmed Rakin Kamal",
       role: "RESEARCHER",
-      title: "PhD Researcher in Theoretical Physics",
+      title: "Co-Principal Investigator",
       affiliation: "BRAC University · Masaryk University",
+      cvUrl: "/people/ahmed-rakin-kamal/cv.pdf",
       email: "ahmedrakinkamaltunok@gmail.com",
       bio:
         "Ahmed Rakin Kamal is a theoretical physicist working on string theory and quantum gravity. BRAC University lists him as Lecturer (On Leave), while his current research is based at Masaryk University, where he is pursuing a PhD in theoretical physics on higher-derivative corrections in string theory. His public research record also includes string compactification, supergravity, T-duality, moduli stabilisation and string cosmology.",
@@ -511,6 +516,7 @@ async function seed(db: Prisma.TransactionClient) {
       role: "FACULTY",
       title: "Lecturer (On Leave)",
       affiliation: "Department of Mathematics & Physical Sciences, BRAC University",
+      cvUrl: "/people/sayeda-tashnuba-jahan/cv.pdf",
       email: "sayeda.tashnuba@bracu.ac.bd",
       bio:
         "Sayeda Tashnuba Jahan is a theoretical physicist and Lecturer at BRAC University. Her public profile describes research on cosmology, gravity and quantum field theory, with current interests including axion-monodromy inflation and the quantum nature of primordial black holes, following earlier work on black-hole information. She teaches general relativity and cosmology and is active in theoretical-physics training initiatives in Bangladesh.",
@@ -608,8 +614,9 @@ async function seed(db: Prisma.TransactionClient) {
       photo: "/people/mishaal-hai/profile.jpg",
       name: "Mishaal Hai",
       role: "RESEARCHER",
-      title: "Research Assistant",
+      title: "Co-Principal Investigator",
       affiliation: "BRAC University",
+      cvUrl: "/people/mishaal-hai/cv.pdf",
       bio:
         "Mishaal Hai is a theoretical-physics researcher with an MSc in Theoretical Physics from the University of Bologna. His public ORCID record lists current employment as a Research Assistant at BRAC University. His research record includes perturbative string cosmology, moduli stabilisation and fibre inflation, while earlier public teaching material lists interests in black holes and quantum gravity.",
       researchSummary:
@@ -673,7 +680,7 @@ async function seed(db: Prisma.TransactionClient) {
       slug: "md-shaikot-jahan-shuvo",
       name: "Md Shaikot Jahan Shuvo",
       role: "RESEARCHER",
-      title: "Research Assistant",
+      title: "Co-Principal Investigator",
       affiliation: "BRAC University",
       email: "mshuvo@ccny.cuny.edu",
       bio:
