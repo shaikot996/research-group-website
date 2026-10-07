@@ -1,0 +1,71 @@
+name: Sync Drive profiles and publish demo
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drive-profile-sync
+  cancel-in-progress: true
+
+jobs:
+  sync-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_DRIVE_ROOT_FOLDER_ID: "10_rzMMevZi6_T-bajAnmaynab0UbDBtv"
+      GOOGLE_DRIVE_RA_FOLDER_ID: ${{ vars.GOOGLE_DRIVE_RA_FOLDER_ID }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      GOOGLE_DRIVE_API_KEY: ${{ secrets.GOOGLE_DRIVE_API_KEY }}
+      GITHUB_PAGES_BASE_PATH: /research-group-website
+      EXPORT_OUT_DIR: _site
+      EXPORT_ORIGIN: http://127.0.0.1:4173
+      PORT: "4173"
+      BIND_HOST: 127.0.0.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run setup
+      - name: Sync Research Assistants from Drive
+        run: npm run sync:drive:optional
+      - name: Refresh INSPIRE citations when cache is stale
+        run: npm run sync:inspire
+      - run: npm run check:project
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Start production app
+        run: |
+          npm start > /tmp/sam-site.log 2>&1 &
+          echo $! > /tmp/sam-site.pid
+          for i in {1..90}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/sam-site.log
+          exit 1
+      - name: Export static GitHub Pages snapshot
+        run: node scripts/export-github-pages.mjs
+      - name: Publish gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f _site/index.html
+          cd _site
+          git init -q
+          git checkout -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Sync Google Drive research assistants"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin gh-pages
+      - name: Stop production app
+        if: always()
+        run: test ! -f /tmp/sam-site.pid || kill "$(cat /tmp/sam-site.pid)" || true

@@ -18,3 +18,7 @@ test-results/
 
 # Generated GitHub Pages snapshot
 _site/
+
+# Runtime copies of Drive-managed portraits; regenerated from Google Drive.
+data/drive-people/*
+!data/drive-people/.gitkeep

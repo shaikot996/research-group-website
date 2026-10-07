@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh SAM website external content every 10 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+Persistent=true
+Unit=research-group-sync.service
+
+[Install]
+WantedBy=timers.target

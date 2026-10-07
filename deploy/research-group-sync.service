@@ -1,0 +1,13 @@
+[Unit]
+Description=SAM website external content sync
+After=network-online.target research-group.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/research-group-website
+EnvironmentFile=/srv/research-group-website/.env
+ExecStart=/usr/bin/npm run sync:drive:optional
+ExecStart=/usr/bin/npm run sync:inspire
+User=research-group
+Group=research-group

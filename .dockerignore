@@ -14,3 +14,6 @@ public/uploads/*
 backups
 *.tar.gz
 *.zip
+
+data/drive-people/*
+!data/drive-people/.gitkeep

@@ -22,6 +22,12 @@ for (const route of routes) {
 }
 const profile = await (await get("/people/md-shaikot-jahan-shuvo")).text();
 assert.ok(profile.includes("MPhil in Physics") && profile.includes("August 2026") && profile.includes("Research Assistant"), "Corrected profile missing");
+const peoplePage = await (await get("/people")).text();
+assert.ok(peoplePage.includes("Ahmed Rakin Kamal") && peoplePage.includes("Walid Hasan"), "Researcher / Research Assistant listings are incomplete");
+const ahmedProfile = await (await get("/people/ahmed-rakin-kamal")).text();
+assert.ok(ahmedProfile.includes("Researcher") && ahmedProfile.includes("On Leave") && ahmedProfile.includes("Masaryk University"), "Ahmed Rakin Kamal profile/category regression");
+const walidProfile = await (await get("/people/walid-hasan")).text();
+assert.ok(walidProfile.includes("Research Assistant") && walidProfile.includes("Walid Hasan"), "Research Assistant bootstrap profile missing");
 assert.ok((await (await get("/search?q=Shaikot")).text()).includes("Md Shaikot Jahan Shuvo"));
 assert.ok((await (await get("/publications?year=2025")).text()).includes("Perturbative Kähler"));
 await get("/publications?year=invalid");

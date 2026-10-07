@@ -12,12 +12,66 @@ const INSPIRE = {
   hasibul: "https://inspirehep.net/authors/1511186?ui-citation-summary=true",
 };
 
+async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
+  const identitySettings = {
+    groupName: "Strings, Artificial Intelligence and Mathematics",
+    logoText: "SAM",
+    tagline: "Strings, quantum gravity, artificial intelligence and mathematical physics",
+    groupDescription: "A BRAC University research group connecting fundamental theory, mathematical physics, computation and artificial intelligence.",
+  };
+  for (const [key, value] of Object.entries(identitySettings)) {
+    await db.siteSetting.upsert({ where: { key }, update: { value }, create: { key, value } });
+  }
+  await db.person.updateMany({
+    where: { slug: { in: ["mishaal-hai", "md-shaikot-jahan-shuvo"] } },
+    data: { role: "RESEARCHER" },
+  });
+  await db.person.updateMany({
+    where: { slug: "ahmed-rakin-kamal" },
+    data: { role: "RESEARCHER", status: "PUBLISHED", featured: false, title: "PhD Researcher in Theoretical Physics" },
+  });
+  await db.person.updateMany({
+    where: { slug: "sayeda-tashnuba-jahan" },
+    data: { title: "Lecturer (On Leave)" },
+  });
+
+  // Keep one visible Research Assistant in fresh/existing installs before the
+  // first Drive sync. Once the matching Drive folder is discovered,
+  // scripts/sync-drive.ts adopts this row and replaces it with Drive data.
+  const existingWalid = await db.person.findFirst({
+    where: { OR: [{ slug: "walid-hasan" }, { name: "Walid Hasan" }] },
+    select: { id: true },
+  });
+  if (!existingWalid) {
+    await db.person.create({
+      data: {
+        slug: "walid-hasan",
+        name: "Walid Hasan",
+        role: "RESEARCH_ASSISTANT",
+        title: "Theoretical Physics Graduate Student",
+        affiliation: "University of Manitoba · BRAC University alumnus",
+        email: "hasanw@myumanitoba.ca",
+        photo: "https://hasan-walid.github.io/images/Walid_Hasan.jpg",
+        bio: "Walid Hasan is a graduate student in theoretical physics at the University of Manitoba. He completed his undergraduate degree in physics at BRAC University and has worked on string-theory and early-universe research projects.",
+        researchSummary: "String theory, string phenomenology, particle physics and quantum information, with prior work on warped compactification and time-dependent backgrounds.",
+        researchInterests: "String theory\nString phenomenology\nParticle physics\nQuantum information\nWarped compactification\nEarly-universe cosmology",
+        website: "https://hasan-walid.github.io/",
+        contentSource: "DRIVE_BOOTSTRAP",
+        sortOrder: 1000,
+        featured: false,
+        status: "PUBLISHED",
+      },
+    });
+  }
+}
+
 async function seed(db: Prisma.TransactionClient) {
   if (await db.siteSetting.count() || await db.person.count()) {
-    console.log("Existing content preserved; initial data was not reapplied.");
+    await applyRequiredContentCorrections(db);
+    console.log("Existing content preserved; required role/status corrections were applied.");
     return;
   }
-  const settings = { ...siteDefaults, dataRevision: "sam-2026-10-06" };
+  const settings = { ...siteDefaults, dataRevision: "sam-2026-10-07-drive-sync" };
 
   for (const [key, value] of Object.entries(settings)) {
     await db.siteSetting.create({ data: { key, value } });
@@ -349,8 +403,8 @@ async function seed(db: Prisma.TransactionClient) {
       slug: "ahmed-rakin-kamal",
       photo: "/people/ahmed-rakin-kamal/profile.jpg",
       name: "Ahmed Rakin Kamal",
-      role: "FACULTY",
-      title: "Lecturer (On Leave) · PhD Researcher in Theoretical Physics",
+      role: "RESEARCHER",
+      title: "PhD Researcher in Theoretical Physics",
       affiliation: "BRAC University · Masaryk University",
       email: "ahmedrakinkamaltunok@gmail.com",
       bio:
@@ -363,7 +417,8 @@ async function seed(db: Prisma.TransactionClient) {
       orcid: "https://orcid.org/0000-0002-0194-018X",
       website: "https://ahmedrakinkamal.com/",
       sortOrder: 2,
-      featured: true,
+      featured: false,
+      status: "PUBLISHED",
       researchAreas: {
         connect: [
           { id: areaIds["string-theory"] },
@@ -454,7 +509,7 @@ async function seed(db: Prisma.TransactionClient) {
       photo: "/people/sayeda-tashnuba-jahan/profile.jpg",
       name: "Sayeda Tashnuba Jahan",
       role: "FACULTY",
-      title: "Lecturer",
+      title: "Lecturer (On Leave)",
       affiliation: "Department of Mathematics & Physical Sciences, BRAC University",
       email: "sayeda.tashnuba@bracu.ac.bd",
       bio:
@@ -552,7 +607,7 @@ async function seed(db: Prisma.TransactionClient) {
       slug: "mishaal-hai",
       photo: "/people/mishaal-hai/profile.jpg",
       name: "Mishaal Hai",
-      role: "RESEARCH_ASSISTANT",
+      role: "RESEARCHER",
       title: "Research Assistant",
       affiliation: "BRAC University",
       bio:
@@ -617,7 +672,7 @@ async function seed(db: Prisma.TransactionClient) {
     data: {
       slug: "md-shaikot-jahan-shuvo",
       name: "Md Shaikot Jahan Shuvo",
-      role: "RESEARCH_ASSISTANT",
+      role: "RESEARCHER",
       title: "Research Assistant",
       affiliation: "BRAC University",
       email: "mshuvo@ccny.cuny.edu",
@@ -663,6 +718,29 @@ async function seed(db: Prisma.TransactionClient) {
           { title: "Adjunct Lecturer", institution: "BRAC University", years: "July 2020–July 2022", sortOrder: 2 },
         ],
       },
+    },
+  });
+
+  await db.person.create({
+    data: {
+      slug: "walid-hasan",
+      name: "Walid Hasan",
+      role: "RESEARCH_ASSISTANT",
+      title: "Theoretical Physics Graduate Student",
+      affiliation: "University of Manitoba · BRAC University alumnus",
+      email: "hasanw@myumanitoba.ca",
+      photo: "https://hasan-walid.github.io/images/Walid_Hasan.jpg",
+      bio:
+        "Walid Hasan is a graduate student in theoretical physics at the University of Manitoba. He completed his undergraduate degree in physics at BRAC University and has worked on string-theory and early-universe research projects.",
+      researchSummary:
+        "String theory, string phenomenology, particle physics and quantum information, with prior work on warped compactification and time-dependent backgrounds.",
+      researchInterests:
+        "String theory\nString phenomenology\nParticle physics\nQuantum information\nWarped compactification\nEarly-universe cosmology",
+      website: "https://hasan-walid.github.io/",
+      contentSource: "DRIVE_BOOTSTRAP",
+      sortOrder: 1000,
+      featured: false,
+      status: "PUBLISHED",
     },
   });
 
@@ -1117,6 +1195,7 @@ async function seed(db: Prisma.TransactionClient) {
     },
   });
 
+  await applyRequiredContentCorrections(db);
   console.log(
     "Initial content ready: 6 researcher profiles, 6 research areas, 5 projects, 13 publications and 6 news items. No scheduled events have been added.",
   );

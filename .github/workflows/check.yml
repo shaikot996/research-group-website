@@ -12,6 +12,7 @@ jobs:
       - run: npm ci
       - run: npm run setup
       - run: npm run check:project
+      - run: npm run test:content
       - run: npm run build
       - run: npm run typecheck
       - name: Check running site

@@ -100,6 +100,37 @@ for (const [name, id] of publicMembers) {
   }
 }
 
+const ahmedBlock = seed.slice(seed.indexOf('slug: "ahmed-rakin-kamal"'), seed.indexOf('const tashnuba'));
+if (!ahmedBlock.includes('role: "RESEARCHER"') || !ahmedBlock.includes('status: "PUBLISHED"')) {
+  console.error("Ahmed Rakin Kamal must be a published Researcher.");
+  process.exit(1);
+}
+if (!ahmedBlock.includes('Lecturer (On Leave)') || !ahmedBlock.includes('BRAC University')) {
+  console.error("Ahmed Rakin Kamal's existing BRAC University On Leave profile information must be retained.");
+  process.exit(1);
+}
+if (!seed.includes('slug: "walid-hasan"') || !seed.includes('role: "RESEARCH_ASSISTANT"') || !seed.includes('contentSource: "DRIVE_BOOTSTRAP"')) {
+  console.error("Research Assistant bootstrap profile is missing.");
+  process.exit(1);
+}
+
+const driveSync = await readFile(path.join(root, "scripts/sync-drive.ts"), "utf8");
+const googleDrive = await readFile(path.join(root, "lib/google-drive.ts"), "utf8");
+if (!driveSync.includes('GOOGLE_DRIVE_API_KEY') || !driveSync.includes('DRIVE_BOOTSTRAP') || !driveSync.includes('role: "RESEARCH_ASSISTANT"')) {
+  console.error("Drive Research Assistant sync/adoption support is incomplete.");
+  process.exit(1);
+}
+if (!googleDrive.includes("embeddedfolderview") || !googleDrive.includes("parsePublicGoogleDriveFolderHtml") || !driveSync.includes('"public-link"')) {
+  console.error("Credential-free public Google Drive folder sync is incomplete.");
+  process.exit(1);
+}
+
+const inspireAuthors = await readFile(path.join(root, "config/inspire-authors.json"), "utf8");
+if (!inspireAuthors.includes('2763317')) {
+  console.error("Ahmed Rakin Kamal must be included in current-group INSPIRE citation aggregation.");
+  process.exit(1);
+}
+
 const routes = [];
 const sourceFiles = [];
 async function walk(dir) {

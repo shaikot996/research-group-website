@@ -94,8 +94,40 @@ For a local test database with empty portrait folders, `npm run test:smoke -- --
 
 ## Profile correction
 
-Md Shaikot Jahan Shuvo is listed as **Research Assistant, BRAC University, August 2026–present**, with **MPhil in Physics, The Graduate Center, City University of New York (CUNY), 2026**. The correction is in normalized person, education and appointment records, and is reflected in the member list and profile page.
+Md Shaikot Jahan Shuvo is in the **Researcher** category while retaining his **Research Assistant, BRAC University, August 2026–present** appointment, with **MPhil in Physics, The Graduate Center, City University of New York (CUNY), 2026**. Ahmed Rakin Kamal is likewise a **Researcher** and his full existing profile, including the BRAC University Lecturer (On Leave) information, is retained.
 
 ## GitHub Pages demo
 
 For the GitHub-hosted public demo, run `bash PUBLISH_GITHUB.sh`. This builds a validated static snapshot under the repository project path and publishes it to the `gh-pages` branch. See `GITHUB_PAGES.md` for details.
+
+## Google Drive Research Assistant profiles
+
+Research Assistants can now be maintained from Google Drive without editing GitHub. The PI/faculty/researcher custom pages remain local to this repository; Drive-managed profiles are isolated with `contentSource=DRIVE` and cannot overwrite a local profile. A bootstrap Walid Hasan RA row keeps the section visible before the first Drive sync and is automatically adopted/replaced by the real Drive folder.
+
+See **[DRIVE_SYNC.md](DRIVE_SYNC.md)** for the folder convention, credential-free public-folder sync, optional authenticated access, local sync commands, GitHub Actions automation and production deployment behavior.
+
+Useful commands:
+
+```bash
+npm run sync:drive            # sync public Drive directly; credentials are optional
+npm run sync:drive:optional   # same sync, but preserves current data if Drive is temporarily unavailable
+
+Research Assistant editors should use `templates/SAM-Research-Assistant-Profile-Template.docx`, upload it directly as DOCX or open it as a Google Doc, and edit only the placeholder values. The Drive parser understands the template headings and optional `SECTION: Custom title` sections.
+npm run sync:inspire          # refreshes only if the 24h cache is stale
+npm run sync:inspire:force    # force an INSPIRE refresh
+```
+
+The GitHub Pages demo is republished from Drive on a scheduled workflow. Before every Pages build it also checks the INSPIRE group-citation cache and refreshes it when the 24-hour cache has expired (or when no citation cache exists yet). Docker deployments use the same cached refresh logic in the `content-sync` service.
+
+## Local Drive-synced demo
+
+Run:
+
+```bash
+./run-local.sh
+```
+
+The launcher now syncs Google Drive Research Assistants before building and continues polling Drive every 10 minutes while the local site is running. To force an immediate refresh in another terminal, run `./SYNC_DRIVE_NOW.sh`. See `DRIVE_SYNC.md` for access and troubleshooting details.
+
+### Research Assistant Drive profile files
+Drive-managed RA profiles accept native Google Docs, `.txt`, and uploaded `.docx` documents. The provided SAM profile template can therefore be filled in Word/LibreOffice and uploaded directly without conversion.

@@ -108,3 +108,34 @@ Use a new backup directory for each backup. For native Node, stop the systemd se
 | `PORT` | Native launch port; default `3000` |
 
 Implementation follows the [Next.js self-hosting guide](https://nextjs.org/docs/15/app/guides/self-hosting) and [Docker's Next.js guide](https://docs.docker.com/guides/nextjs/).
+
+## External content synchronization
+
+Research Assistant profiles can be synchronized from Google Drive. See `DRIVE_SYNC.md` for the Drive folder convention and public-folder API-key/service-account setup.
+
+Required/recommended variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `GOOGLE_DRIVE_ROOT_FOLDER_ID` | Shared Drive folder root; the repository default is the current Research Assistant Profiles folder |
+| `GOOGLE_DRIVE_RA_FOLDER_ID` | Optional explicit Research Assistants subfolder ID |
+| `GOOGLE_DRIVE_API_KEY` | Restricted Google Drive API key for the current public folder |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Alternative: complete Google service-account JSON; keep this only in secrets/environment |
+| `DRIVE_PEOPLE_ASSET_DIR` | Runtime portrait cache, default `data/drive-people` |
+| `INSPIRE_AUTHORS_FILE` | Stable current-group INSPIRE IDs, default `config/inspire-authors.json` |
+| `INSPIRE_STATS_FILE` | Persistent citation cache, default `data/inspire-stats.json` |
+| `INSPIRE_REFRESH_HOURS` | Citation refresh interval, default `24` |
+
+### Docker
+
+`docker compose up -d --build` starts both the web app and `content-sync`. The sync service checks Drive every 10 minutes. INSPIRE is checked on the same loop but performs a network refresh only when its persistent 24-hour cache is stale.
+
+### Native Node/systemd
+
+Install `deploy/research-group-sync.service` and `deploy/research-group-sync.timer` beside the existing web service, adjust `WorkingDirectory`, `EnvironmentFile`, user/group if your server paths differ, then enable the timer:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now research-group-sync.timer
+systemctl list-timers research-group-sync.timer
+```

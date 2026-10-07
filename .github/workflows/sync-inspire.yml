@@ -1,0 +1,44 @@
+name: Refresh INSPIRE group citations
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 2 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: inspire-citation-sync
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run sync:inspire:force
+      - name: Commit refreshed citation cache
+        run: |
+          if git diff --quiet -- data/inspire-stats.json; then
+            echo "No citation-cache change to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/inspire-stats.json
+          git commit -m "Refresh INSPIRE group citation snapshot"
+          git push origin main
+
+      - name: Republish GitHub Pages with refreshed citation count
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run sync-drive.yml --ref main

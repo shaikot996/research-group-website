@@ -11,6 +11,9 @@ services:
       DATABASE_URL: file:/app/data/site.db
       UPLOAD_DIR: /app/data/uploads
       PEOPLE_PHOTO_DIR: /app/public/people
+      DRIVE_PEOPLE_ASSET_DIR: /app/data/drive-people
+      INSPIRE_AUTHORS_FILE: /app/config/inspire-authors.json
+      INSPIRE_STATS_FILE: /app/data/inspire-stats.json
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
@@ -22,5 +25,32 @@ services:
       timeout: 5s
       start_period: 60s
       retries: 3
+
+  content-sync:
+    build: .
+    restart: unless-stopped
+    init: true
+    depends_on:
+      web:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/app/data/site.db
+      UPLOAD_DIR: /app/data/uploads
+      DRIVE_PEOPLE_ASSET_DIR: /app/data/drive-people
+      INSPIRE_AUTHORS_FILE: /app/config/inspire-authors.json
+      INSPIRE_STATS_FILE: /app/data/inspire-stats.json
+    volumes:
+      - research_group_data:/app/data
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          npm run sync:drive:optional
+          npm run sync:inspire
+          sleep 600
+        done
+
 volumes:
   research_group_data:

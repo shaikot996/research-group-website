@@ -1,0 +1,64 @@
+TEMPLATE INSTRUCTIONS
+[[Keep every heading exactly as written. Replace only the [[...]] placeholder text. Placeholder-only fields are ignored by the website.]]
+
+NAME
+[[REQUIRED: Full name exactly as it should appear on the website]]
+
+CURRENT POSITION
+[[REQUIRED: Example — Research Assistant]]
+
+AFFILIATION
+[[OPTIONAL: Default is BRAC University]]
+
+EMAIL
+[[OPTIONAL: name@example.com]]
+
+PERSONAL WEBSITE
+[[OPTIONAL: https://...]]
+
+GOOGLE SCHOLAR
+[[OPTIONAL: https://scholar.google.com/...]]
+
+INSPIRE-HEP
+[[OPTIONAL: https://inspirehep.net/authors/...]]
+
+ORCID
+[[OPTIONAL: https://orcid.org/...]]
+
+GITHUB
+[[OPTIONAL: https://github.com/...]]
+
+LINKEDIN
+[[OPTIONAL: https://www.linkedin.com/in/...]]
+
+ABOUT ME
+[[REQUIRED: Write a short biography in 1–3 paragraphs.]]
+
+RESEARCH INTERESTS
+- [[REQUIRED: Research topic 1]]
+- [[Research topic 2]]
+- [[Research topic 3]]
+
+CURRENT RESEARCH / PROJECTS
+[[OPTIONAL: Current research/projects]]
+
+EDUCATION
+[[OPTIONAL: One qualification per line]]
+
+RESEARCH EXPERIENCE
+[[OPTIONAL: Relevant research experience]]
+
+SKILLS / TOOLS
+[[OPTIONAL: Skills and tools]]
+
+SELECTED ACHIEVEMENTS / AWARDS
+[[OPTIONAL: One item per line]]
+
+SELECTED PUBLICATIONS / PREPRINTS
+[[OPTIONAL: One item per line]]
+
+OTHER INFORMATION
+[[OPTIONAL: Additional profile information]]
+
+SECTION: Outreach and Service
+[[OPTIONAL EXAMPLE: Rename the section title or remove this example section.]]

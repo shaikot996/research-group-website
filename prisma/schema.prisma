@@ -37,6 +37,10 @@ model Person {
   github            String?
   linkedin          String?
   cvUrl             String?
+  contentSource     String             @default("LOCAL")
+  externalSourceId  String?            @unique
+  profileSections   String?
+  sourceUpdatedAt   DateTime?
   sortOrder         Int                @default(0)
   featured          Boolean            @default(false)
   status            String             @default("PUBLISHED")

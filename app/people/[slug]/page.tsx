@@ -5,6 +5,20 @@ import { Breadcrumbs, ProjectCard, PubEntry, SectionHeader } from "@/components/
 import { Portrait } from "@/components/portrait";
 import { MahbubProfileSections } from "@/components/mahbub-profile-sections";
 
+function driveProfileSections(value?: string | null): Array<[string, string]> {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value) as Record<string, unknown>;
+    return Object.entries(parsed)
+      .filter((entry): entry is [string, string] => typeof entry[1] === "string" && Boolean(entry[1].trim()))
+      .map(([key, text]) => [key === "other" ? "Other information" : humanize(key), text]);
+  } catch {
+    return [];
+  }
+}
+
+export const dynamic = "force-dynamic";
+
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = await prisma.person.findFirst({
@@ -23,6 +37,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     },
   });
   if (!p) notFound();
+  const extraSections = driveProfileSections(p.profileSections);
 
   const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
   const externalLinks = [
@@ -62,15 +77,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           {p.email && <a className="mt-5 inline-block link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
             {externalLinks.map(([label, url]) => <a className="link-academic" key={label} href={url} target="_blank" rel="noopener noreferrer">{label}</a>)}
-            {p.cvUrl && <a className="bg-[#172a46] px-4 py-2 text-xs font-semibold text-white" href={p.cvUrl}>Download CV</a>}
+            {p.cvUrl && <a className="bg-[#172a46] px-4 py-2 text-xs font-semibold text-white" href={p.cvUrl} target="_blank" rel="noopener noreferrer">View CV</a>}
           </div>
         </div>
       </section>
 
       <div className="mt-14 grid gap-14 lg:grid-cols-[1.35fr_.65fr]">
         <div>
-          {p.bio && <section><SectionHeader eyebrow="Biography" title="Profile" /><p className="text-lg leading-8 text-muted">{p.bio}</p></section>}
-          {p.researchSummary && <section className="mt-14"><SectionHeader eyebrow="Research" title="Current research" /><p className="leading-8 text-muted">{p.researchSummary}</p></section>}
+          {p.bio && <section><SectionHeader eyebrow="Biography" title="Profile" /><p className="whitespace-pre-line text-lg leading-8 text-muted">{p.bio}</p></section>}
+          {p.researchSummary && <section className="mt-14"><SectionHeader eyebrow="Research" title="Current research" /><p className="whitespace-pre-line leading-8 text-muted">{p.researchSummary}</p></section>}
+          {extraSections.map(([title, text]) => <section className="mt-14" key={title}><SectionHeader title={title} /><p className="whitespace-pre-line leading-8 text-muted">{text}</p></section>)}
 
           {p.slug === "mahbubul-alam-majumdar" && <MahbubProfileSections />}
           {p.publications.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Scholarship" title={p.slug === "mahbubul-alam-majumdar" ? "Selected Research / Publications" : "Publications"} description="One bibliographic record per work, with journal and e-print information combined where available." />{p.publications.map((x) => <PubEntry key={x.id} p={x} />)}</section>}

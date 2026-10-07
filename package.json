@@ -15,7 +15,12 @@
     "check:project": "node scripts/check-project.mjs",
     "db:migrate": "prisma migrate dev",
     "setup": "node scripts/setup.mjs",
-    "test:smoke": "node scripts/smoke.mjs"
+    "test:smoke": "node scripts/smoke.mjs",
+    "sync:drive": "node --import tsx scripts/sync-drive.ts",
+    "sync:drive:optional": "node --import tsx scripts/sync-drive.ts --optional",
+    "sync:inspire": "node --import tsx scripts/sync-inspire.ts",
+    "sync:inspire:force": "node --import tsx scripts/sync-inspire.ts --force",
+    "test:content": "node --import tsx scripts/test-content.ts"
   },
   "dependencies": {
     "@prisma/client": "6.14.0",
