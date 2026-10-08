@@ -1,6 +1,43 @@
 {
-  "totalCitations": null,
-  "uniquePublications": null,
-  "updatedAt": null,
-  "authors": []
+  "totalCitations": 1066,
+  "uniquePublications": 51,
+  "updatedAt": "2026-10-08T09:10:49.994Z",
+  "authors": [
+    {
+      "name": "Mahbubul Alam Majumdar",
+      "controlNumber": "1023635",
+      "bai": "M.Majumdar.1",
+      "records": 26
+    },
+    {
+      "name": "Syed Hasibul Hassan Chowdhury",
+      "controlNumber": "1511186",
+      "bai": "S.H.H.Chowdhury.1",
+      "records": 16
+    },
+    {
+      "name": "Ahmed Rakin Kamal",
+      "controlNumber": "2763317",
+      "bai": "Ahmed.Rakin.Kamal.1",
+      "records": 8
+    },
+    {
+      "name": "Sayeda Tashnuba Jahan",
+      "controlNumber": "3088919",
+      "bai": "Sayeda.Tashnuba.Jahan.1",
+      "records": 1
+    },
+    {
+      "name": "Mishaal Hai",
+      "controlNumber": "2931658",
+      "bai": "M.Hai.2",
+      "records": 2
+    },
+    {
+      "name": "Md Shaikot Jahan Shuvo",
+      "controlNumber": "2648798",
+      "bai": "Md.Shaikot.Jahan.Shuvo.1",
+      "records": 3
+    }
+  ]
 }
