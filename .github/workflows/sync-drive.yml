@@ -1,6 +1,8 @@
 name: Sync Drive profiles and publish demo
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "*/10 * * * *"
@@ -26,7 +28,9 @@ jobs:
       GOOGLE_DRIVE_RA_FOLDER_ID: ${{ vars.GOOGLE_DRIVE_RA_FOLDER_ID }}
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       GOOGLE_DRIVE_API_KEY: ${{ secrets.GOOGLE_DRIVE_API_KEY }}
-      GITHUB_PAGES_BASE_PATH: /research-group-website
+      # University custom domain is the root, not a GitHub project path.
+      GITHUB_PAGES_BASE_PATH: ""
+      SITE_URL: https://sam.cse.bracu.ac.bd
       EXPORT_OUT_DIR: _site
       EXPORT_ORIGIN: http://127.0.0.1:4173
       PORT: "4173"
@@ -34,6 +38,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Regression test for root-domain Pages export
+        run: node scripts/test-pages-export-fixture.mjs
 
       - uses: actions/setup-node@v4
         with:
@@ -68,6 +75,9 @@ jobs:
 
       - name: Export static GitHub Pages snapshot
         run: node scripts/export-github-pages.mjs
+
+      - name: Verify custom-domain export and required assets
+        run: node scripts/verify-pages-export.mjs
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

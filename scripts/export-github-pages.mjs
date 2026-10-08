@@ -4,8 +4,11 @@ import path from "node:path";
 
 const cwd = process.cwd();
 const origin = (process.env.EXPORT_ORIGIN || "http://127.0.0.1:4173").replace(/\/$/, "");
-const basePathRaw = process.env.GITHUB_PAGES_BASE_PATH || "/research-group-website";
-const basePath = `/${basePathRaw.replace(/^\/+|\/+$/g, "")}`;
+// A custom subdomain serves pages at /, not at the old project subdirectory.
+// Preserve an explicitly empty base path (""), rather than treating it as unset.
+const basePathRaw = process.env.GITHUB_PAGES_BASE_PATH ?? "";
+const trimmedBasePath = basePathRaw.replace(/^\/+|\/+$/g, "");
+const basePath = trimmedBasePath ? `/${trimmedBasePath}` : "";
 const outDir = path.resolve(process.env.EXPORT_OUT_DIR || "_site");
 const publicDir = path.resolve("public");
 const uploadDir = path.resolve(process.env.UPLOAD_DIR || "data/uploads");
@@ -577,22 +580,27 @@ async function validateOutput() {
     process.exitCode = 1;
     return;
   }
-  console.log(`\nValidation passed: ${htmlFiles.length} HTML files checked; all internal root links use ${basePath}.`);
+  console.log(`\nValidation passed: ${htmlFiles.length} HTML files checked; all internal links use ${basePath || "/"}.`);
 }
 
 async function main() {
   console.log(`Exporting ${origin} -> ${outDir}`);
-  console.log(`GitHub Pages base path: ${basePath}`);
+  console.log(`GitHub Pages base path: ${basePath || "/ (custom-domain root)"}`);
   await rm(outDir, { recursive: true, force: true });
   await mkdir(outDir, { recursive: true });
 
   await copyStaticDirectories();
   await crawlPages();
+  // Next.js serves these dynamic SEO/feed endpoints; include them in the
+  // otherwise static GitHub Pages artifact at the official domain root.
+  for (const route of ["/sitemap.xml", "/robots.txt", "/feed.xml"]) queueAsset(route);
   await crawlAssets();
   await rewriteCssAssets();
   await emitPages();
   await writeStaticHelpers();
   await writeFile(path.join(outDir, ".nojekyll"), "", "utf8");
+  // Ensure the Pages artifact itself always carries the official domain.
+  await writeFile(path.join(outDir, "CNAME"), "sam.cse.bracu.ac.bd\n", "utf8");
 
   if (pages.has("/")) {
     const home = await readFile(path.join(outDir, "index.html"), "utf8");
