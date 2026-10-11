@@ -35,7 +35,7 @@ assert.ok((await (await get("/contact")).text()).includes("mailto:majumdar@bracu
 const news = await (await get("/news-events")).text();
 assert.ok(news.includes("No upcoming events"));
 const feed = await (await get("/feed.xml")).text();
-assert.ok(feed.includes("Physics &amp; Mathematics Group News"));
+assert.ok(feed.includes("Strings, Artificial Intelligence and Mathematics News"));
 assert.ok((await (await get("/robots.txt")).text()).includes("Sitemap:"));
 await get("/api/auth/providers", 404);
 await get("/admin/login", 404);
