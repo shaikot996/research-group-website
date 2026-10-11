@@ -209,7 +209,9 @@ async function main() {
   const raFolderId = await findRaFolder(auth);
   console.log(`[drive] RA folder ID: ${raFolderId}; mode: ${explicitRaFolderId ? "explicit" : "auto"}`);
   const children = (await retryDrive("RA folder listing", () => listGoogleDriveChildren(auth, raFolderId))).filter(file =>
-    file.mimeType === GOOGLE_DRIVE_FOLDER_MIME && !/^(news(?:\s*(?:&|and)\s*events?)?|events?(?:\s*(?:&|and)\s*news)?|templates?|shared|media)$/i.test(file.name.trim()),
+    file.mimeType === GOOGLE_DRIVE_FOLDER_MIME &&
+    !/^(news(?:\s*(?:&|and)\s*events?)?|events?(?:\s*(?:&|and)\s*news)?|templates?|shared|media)$/i.test(file.name.trim()) &&
+    !/\b(?:dummy|test[\s-]*folder|placeholder)\b/i.test(file.name),
   );
   console.log(`[drive] Discovered ${children.length} folders: ${children.map(f => f.name).join(", ")}`);
   if (!children.length) throw new Error("No Research Assistant folders found; refusing to overwrite the last published snapshot.");
