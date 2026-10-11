@@ -102,6 +102,7 @@ if (publicItems[2]?.name !== "portrait.jpg" || publicItems[3]?.name !== "CV.pdf"
 console.log("Public Google Drive folder parser tests passed.");
 
 
+async function checkDocxTemplate() {
 const localDocxCandidates = [
   path.resolve("templates/SAM-Research-Assistant-Profile-Template.docx"),
   path.resolve("SAM-Research-Assistant-Profile-Template.docx"),
@@ -116,3 +117,7 @@ if (localDocx) {
   if (parsedDocx.name !== "DOCX Test Person") throw new Error("DOCX placeholder handling failed.");
   console.log("DOCX profile extraction test passed.");
 }
+
+}
+
+checkDocxTemplate().catch(error => { console.error(error); process.exitCode = 1; });
