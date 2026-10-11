@@ -3,7 +3,7 @@ import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
 import { extractDocxText } from "../lib/docx-text";
-import { downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, listGoogleDriveChildren, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile } from "../lib/google-drive";
+import { downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, listGoogleDriveChildren, PublicDriveFolderNotListableError, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile } from "../lib/google-drive";
 
 if (process.env.NODE_ENV !== "production") {
   try { process.loadEnvFile(".env"); } catch { /* CI may provide env directly. */ }
@@ -131,7 +131,16 @@ async function saveCv(auth: GoogleDriveAuth | null, file: GoogleDriveFile | unde
 }
 
 async function syncPerson(auth: GoogleDriveAuth | null, folder: GoogleDriveFile) {
-  const files = await retryDrive(`listing ${folder.name}`, () => listGoogleDriveChildren(auth, folder.id));
+  let files: GoogleDriveFile[];
+  try {
+    files = await retryDrive(`listing ${folder.name}`, () => listGoogleDriveChildren(auth, folder.id));
+  } catch (error) {
+    if (!auth && error instanceof PublicDriveFolderNotListableError) {
+      console.warn(`[drive] Skipping ${folder.name}: no public child links (folder may be empty or inaccessible). Will recheck automatically on the next sync.`);
+      return null;
+    }
+    throw error;
+  }
   const profileFile = chooseProfileFile(files);
   const portrait = choosePortrait(files);
   const cv = chooseCv(files);
