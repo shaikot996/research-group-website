@@ -23,15 +23,15 @@ async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
     await db.siteSetting.upsert({ where: { key }, update: { value }, create: { key, value } });
   }
   await db.person.updateMany({
-    where: { slug: { in: ["mishaal-hai", "md-shaikot-jahan-shuvo"] } },
+    where: { slug: { in: ["mishaal-hai", "md-shaikot-jahan-shuvo"] }, contentSource: { not: "DRIVE_LEADER" } },
     data: { role: "RESEARCHER", title: "Co-Principal Investigator" },
   });
   await db.person.updateMany({
-    where: { slug: "ahmed-rakin-kamal" },
+    where: { slug: "ahmed-rakin-kamal", contentSource: { not: "DRIVE_LEADER" } },
     data: { role: "RESEARCHER", status: "PUBLISHED", featured: false, title: "Co-Principal Investigator", cvUrl: "/people/ahmed-rakin-kamal/cv.pdf" },
   });
   await db.person.updateMany({
-    where: { slug: "mishaal-hai" },
+    where: { slug: "mishaal-hai", contentSource: { not: "DRIVE_LEADER" } },
     data: { cvUrl: "/people/mishaal-hai/cv.pdf" },
   });
   await db.person.updateMany({

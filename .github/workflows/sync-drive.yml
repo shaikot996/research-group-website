@@ -64,6 +64,11 @@ jobs:
           echo "::error::Google Drive RA root could not be read. Keeping the last working Pages deployment."
           exit 1
 
+      - name: Sync Principal Investigators and Co-PIs from Google Docs
+        id: leader_sync
+        continue-on-error: true
+        run: npm run sync:leaders
+
       - name: Refresh INSPIRE citations when cache is stale
         run: npm run sync:inspire
 
@@ -107,7 +112,7 @@ jobs:
         run: test ! -f /tmp/sam-site.pid || kill "$(cat /tmp/sam-site.pid)" || true
 
       - name: Report failed Drive profile imports
-        if: always() && steps.drive_sync.outcome == 'failure'
+        if: always() && (steps.drive_sync.outcome == 'failure' || steps.leader_sync.outcome == 'failure')
         run: |
-          echo "::error::Google Drive sync failed for one or more profiles; check the sync step logs. The previous/live site is preserved if root discovery failed."
+          echo "::error::Google Drive RA or PI/Co-PI sync failed for one or more profiles; check individual sync step logs. The previous/live site is preserved if root discovery failed."
           exit 1

@@ -24,7 +24,7 @@ export async function GET(_: Request, { params }: { params: Promise<{ slug: stri
   if (!/^[a-z0-9-]+$/.test(slug)) return new Response("Not found", { status: 404 });
   const person = await prisma.person.findFirst({ where: { slug, status: "PUBLISHED" }, select: { name: true, contentSource: true } });
   if (!person) return new Response("Not found", { status: 404 });
-  const dirs = person.contentSource === "DRIVE"
+  const dirs = ["DRIVE", "DRIVE_LEADER"].includes(person.contentSource)
     ? [path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug), path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug)]
     : [path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug), path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug)];
   for (const dir of dirs) {
