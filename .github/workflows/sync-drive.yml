@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "2-59/5 * * * *"
 
 permissions:
   contents: read
@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: drive-profile-sync
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   sync-and-publish:
@@ -50,8 +50,19 @@ jobs:
       - run: npm ci
       - run: npm run setup
 
+      # Publish successfully synced people even if one person's import fails.
+      # Fail visibly after deployment; do not silently report a green sync.
       - name: Sync Research Assistants from Drive
-        run: npm run sync:drive:optional
+        id: drive_sync
+        continue-on-error: true
+        run: npm run sync:drive
+
+      # Root discovery failed: preserve the previous published Pages snapshot.
+      - name: Verify Drive root discovery
+        if: steps.drive_sync.outputs.root_ok != 'true'
+        run: |
+          echo "::error::Google Drive RA root could not be read. Keeping the last working Pages deployment."
+          exit 1
 
       - name: Refresh INSPIRE citations when cache is stale
         run: npm run sync:inspire
@@ -94,3 +105,9 @@ jobs:
       - name: Stop production app
         if: always()
         run: test ! -f /tmp/sam-site.pid || kill "$(cat /tmp/sam-site.pid)" || true
+
+      - name: Report failed Drive profile imports
+        if: always() && steps.drive_sync.outcome == 'failure'
+        run: |
+          echo "::error::Google Drive sync failed for one or more profiles; check the sync step logs. The previous/live site is preserved if root discovery failed."
+          exit 1

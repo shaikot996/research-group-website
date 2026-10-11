@@ -81,7 +81,7 @@ Never commit credentials.
 ./run-local.sh
 ```
 
-`run-local.sh` now performs an **immediate Google Drive Research Assistant sync before the build** and, while the local server remains open, repeats the Drive sync every **10 minutes (600 seconds)**. Because the site reads people from the runtime database and Drive portraits/CVs from runtime asset routes, a successful background sync appears after a browser refresh; no rebuild is required for each Drive edit.
+`run-local.sh` now performs an **immediate Google Drive Research Assistant sync before the build** and, while the local server remains open, repeats the Drive sync every **5 minutes (300 seconds)**. Because the site reads people from the runtime database and Drive portraits/CVs from runtime asset routes, a successful background sync appears after a browser refresh; no rebuild is required for each Drive edit.
 
 Disable the watcher but keep the startup sync:
 
@@ -112,7 +112,7 @@ The sync command prints lines such as `[drive] Synced <name> -> /people/<slug>` 
 - Portraits are stored at runtime under `data/drive-people/`.
 - CVs are stored under `data/uploads/` and served inline at `/uploads/<slug>-cv.pdf`.
 
-The GitHub Actions workflow `.github/workflows/sync-drive.yml` checks Drive every 10 minutes and republishes the static GitHub Pages demo. GitHub schedules are best-effort, so a run may start later than the exact cron minute.
+The GitHub Actions workflow `.github/workflows/sync-drive.yml` requests Drive checks every 5 minutes and republishes the static GitHub Pages demo. GitHub scheduled runs are best-effort: runs may be delayed or skipped, and a full build/deploy adds latency. Five-minute end-to-end updates cannot be guaranteed by GitHub Actions.
 
 For the BRACU Node/Docker deployment, run `npm run sync:drive` from cron/systemd every 5–10 minutes using the same environment variables. The importer and parser are the same code used by GitHub Actions.
 
@@ -122,7 +122,7 @@ For the BRACU Node/Docker deployment, run `npm run sync:drive` from cron/systemd
 
 `scripts/sync-inspire.ts` resolves each stable INSPIRE author control number to its exact INSPIRE BAI and queries the official literature API with `a <BAI>`. It then deduplicates literature records by INSPIRE control number and sums each unique paper's `citation_count` once. A control-number `$ref` query remains only as a defensive fallback. Thus a paper coauthored by two configured group members is not double-counted.
 
-The cache is `data/inspire-stats.json`. On refresh failure, a previous successful cache is retained. The 10-minute Drive/Pages workflow checks this cache before every build and refreshes it only when stale (24 hours by default), so the published GitHub Pages snapshot contains the current citation number. `.github/workflows/sync-inspire.yml` also performs a forced daily refresh and dispatches a Pages republish.
+The cache is `data/inspire-stats.json`. On refresh failure, a previous successful cache is retained. The 5-minute Drive/Pages workflow checks this cache before every build and refreshes it only when stale (24 hours by default), so the published GitHub Pages snapshot contains the current citation number. `.github/workflows/sync-inspire.yml` also performs a forced daily refresh and dispatches a Pages republish.
 
 ## DOCX profile support
 
@@ -138,4 +138,4 @@ For the least ambiguity, keep only one current profile document in each person's
 
 ## Local live-update behavior
 
-`run-local.sh` performs a Drive sync before the build and then repeats the Drive sync every `LOCAL_DRIVE_SYNC_SECONDS` (600 seconds / 10 minutes by default). The public homepage and People pages are rendered dynamically in the Node deployment, so after a background sync completes you only need to refresh the browser; restarting or rebuilding the local server is not required.
+`run-local.sh` performs a Drive sync before the build and then repeats the Drive sync every `LOCAL_DRIVE_SYNC_SECONDS` (300 seconds / 5 minutes by default). The public homepage and People pages are rendered dynamically in the Node deployment, so after a background sync completes you only need to refresh the browser; restarting or rebuilding the local server is not required.

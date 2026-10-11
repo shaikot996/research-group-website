@@ -6,7 +6,7 @@ command -v node >/dev/null || { echo "ERROR: Install Node.js 22+ and npm first."
 command -v npm >/dev/null || { echo "ERROR: npm is required." >&2; exit 1; }
 
 PORT_VALUE="${1:-${PORT:-3000}}"
-SYNC_INTERVAL="${LOCAL_DRIVE_SYNC_SECONDS:-600}"
+SYNC_INTERVAL="${LOCAL_DRIVE_SYNC_SECONDS:-300}"
 if ! [[ "$SYNC_INTERVAL" =~ ^[0-9]+$ ]]; then
   echo "ERROR: LOCAL_DRIVE_SYNC_SECONDS must be a non-negative integer." >&2
   exit 1
