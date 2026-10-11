@@ -2,6 +2,7 @@ import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile } from "../lib/drive-profile";
+import { imageExtensionFromBytes, validatePdf, portraitRank, cvRank } from "../lib/drive-leader-media";
 import {
   downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME,
   listGoogleDriveChildren, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile,
@@ -77,19 +78,23 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
   let files: GoogleDriveFile[] = [];
   try { files = await retry(entry.slug + " folder", () => listGoogleDriveChildren(auth, entry.folderId)); }
   catch (e) { console.warn(`[leaders] Optional media listing unavailable for ${entry.slug}: ${String(e)}`); }
-  const image = files.find(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType));
-  const cv = files.find(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf");
+  const image = files
+    .filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
+    .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
+  const cv = files
+    .filter(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf")
+    .sort((a, b) => cvRank(b.name) - cvRank(a.name) || a.name.localeCompare(b.name))[0];
   // The portrait component uses person.photo before its dynamic route.
   // Set photo to null only when a new Drive image replaces the local fallback.
   if (image) Object.assign(update, { photo: null });
-  // Downloads finish before older photo/CV assets are replaced, preventing loss on network errors.
+  // Verify the actual file bytes: Google Drive public downloads may return an HTML login/interstitial page with HTTP 200.
   if (image) {
     const b = await retry(entry.slug + " portrait", () => downloadGoogleDriveFile(auth, image));
-    const ext = path.extname(image.name).toLowerCase();
-    const safeExt = [".jpg", ".jpeg", ".png", ".webp"].includes(ext) ? ext : ".jpg";
+    const safeExt = imageExtensionFromBytes(b);
     const dir = path.join(imgRoot, entry.slug);
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "profile" + safeExt), b);
+    console.log(`[leaders] Portrait verified: ${entry.slug}, ${b.length} bytes, ${safeExt}`);
     for (const other of await readdir(dir)) {
       if (/^profile\.(jpe?g|png|webp)$/i.test(other) && other !== "profile" + safeExt) {
         await unlink(path.join(dir, other));
@@ -98,8 +103,10 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
   }
   if (cv) {
     const b = await retry(entry.slug + " CV", () => downloadGoogleDriveFile(auth, cv));
+    validatePdf(b);
     await mkdir(uploadRoot, { recursive: true });
     await writeFile(path.join(uploadRoot, entry.slug + "-cv.pdf"), b);
+    console.log(`[leaders] CV verified: ${entry.slug}, ${b.length} bytes`);
     await prisma.person.update({ where: { slug: entry.slug }, data: { ...update, cvUrl: "/uploads/" + entry.slug + "-cv.pdf" } });
   } else {
     await prisma.person.update({ where: { slug: entry.slug }, data: update });
