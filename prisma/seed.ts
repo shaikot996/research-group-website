@@ -31,7 +31,7 @@ async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
     data: { role: "RESEARCHER", status: "PUBLISHED", featured: false, title: "Co-Principal Investigator", cvUrl: "/people/ahmed-rakin-kamal/cv.pdf" },
   });
   await db.person.updateMany({
-    where: { slug: "mishaal-hai" },
+    where: { slug: "mishaal-hai", contentSource: { not: "DRIVE_LEADER" } },
     data: { cvUrl: "/people/mishaal-hai/cv.pdf" },
   });
   await db.person.updateMany({
