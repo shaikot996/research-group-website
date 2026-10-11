@@ -109,6 +109,7 @@ The sync command prints lines such as `[drive] Synced <name> -> /people/<slug>` 
 - Removed Drive folder -> corresponding Drive-managed profile becomes unpublished.
 - A Drive folder can never overwrite a local/custom profile slug.
 - Missing optional fields do not prevent a profile from rendering.
+- Empty public Research Assistant folders are skipped and retried automatically on later scheduled syncs. A folder that is private/unlistable can look the same as an empty folder; the sync logs a warning. The parent folder must remain publicly listable in public-link mode.
 - Portraits are stored at runtime under `data/drive-people/`.
 - CVs are stored under `data/uploads/` and served inline at `/uploads/<slug>-cv.pdf`.
 
