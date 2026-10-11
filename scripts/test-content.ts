@@ -86,7 +86,7 @@ if (templateProfile.sections.other) throw new Error("Blank optional placeholder 
 console.log("Google Doc template parser tests passed.");
 
 
-import { GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, parsePublicGoogleDriveFolderHtml } from "../lib/google-drive";
+import { GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, PublicDriveFolderNotListableError, parsePublicGoogleDriveFolderHtml } from "../lib/google-drive";
 
 const publicFolderHtml = `
 <a href="https://drive.google.com/drive/folders/aaaaaaaaaaaaaaaaaaaaa?usp=drive_web"><div>Walid Hasan</div></a>
@@ -98,6 +98,11 @@ if (publicItems.length !== 4) throw new Error(`Public Drive HTML parsing failed:
 if (publicItems[0]?.mimeType !== GOOGLE_DRIVE_FOLDER_MIME || publicItems[0]?.name !== "Walid Hasan") throw new Error("Public Drive folder parsing failed.");
 if (publicItems[1]?.mimeType !== GOOGLE_DOC_MIME || publicItems[1]?.name !== "About Me") throw new Error("Public Google Doc parsing failed.");
 if (publicItems[2]?.name !== "portrait.jpg" || publicItems[3]?.name !== "CV.pdf") throw new Error("Public Drive binary-file parsing failed.");
+
+const emptyListingError = new PublicDriveFolderNotListableError("test-empty-folder");
+if (!(emptyListingError instanceof PublicDriveFolderNotListableError) || !emptyListingError.message.includes("test-empty-folder")) {
+  throw new Error("Empty/non-listable public Drive folder error classification failed.");
+}
 
 console.log("Public Google Drive folder parser tests passed.");
 

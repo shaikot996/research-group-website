@@ -20,6 +20,14 @@ export type GoogleDriveAuth =
 
 export const GOOGLE_DRIVE_FOLDER_MIME = "application/vnd.google-apps.folder";
 export const GOOGLE_DOC_MIME = "application/vnd.google-apps.document";
+
+/** Public folder HTML may have no file links because it is empty or not publicly listable. */
+export class PublicDriveFolderNotListableError extends Error {
+  constructor(public readonly folderId: string) {
+    super(`Public Drive folder ${folderId} returned no parseable child links.`);
+    this.name = "PublicDriveFolderNotListableError";
+  }
+}
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.readonly";
 
 function base64url(value: string | Buffer) {
@@ -126,7 +134,7 @@ async function listPublicGoogleDriveChildren(folderId: string) {
   const html = await response.text();
   const files = parsePublicGoogleDriveFolderHtml(html);
   if (!files.length && !/empty folder|folder is empty/i.test(html)) {
-    throw new Error(`Public Drive folder ${folderId} returned no parseable child links.`);
+    throw new PublicDriveFolderNotListableError(folderId);
   }
   return files;
 }
