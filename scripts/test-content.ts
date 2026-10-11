@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { imageExtensionFromBytes, validatePdf, portraitRank, cvRank } from "../lib/drive-leader-media";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { extractDocxText } from "../lib/docx-text";
@@ -105,6 +106,23 @@ if (!(emptyListingError instanceof PublicDriveFolderNotListableError) || !emptyL
 }
 
 console.log("Public Google Drive folder parser tests passed.");
+
+const jpegSample = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 16, 74, 70, 73, 70, 0, 0]);
+const pngSample = Buffer.from([137,80,78,71,13,10,26,10,0,0,0,0]);
+const webpSample = Buffer.from("RIFF1234WEBP", "ascii");
+if (imageExtensionFromBytes(jpegSample) !== ".jpg") throw new Error("Drive JPEG detection failed.");
+if (imageExtensionFromBytes(pngSample) !== ".png") throw new Error("Drive PNG detection failed.");
+if (imageExtensionFromBytes(webpSample) !== ".webp") throw new Error("Drive WebP detection failed.");
+validatePdf(Buffer.from("%PDF-1.7\\n%%EOF"));
+for (const check of [() => imageExtensionFromBytes(Buffer.from("<html>not an image</html>")), () => validatePdf(Buffer.from("<html>not a pdf</html>"))]) {
+  let rejected = false;
+  try { check(); } catch { rejected = true; }
+  if (!rejected) throw new Error("Drive media validation must reject HTML downloads.");
+}
+if (!(portraitRank("profile.jpg") > portraitRank("random.jpg"))) throw new Error("Canonical Drive photo selection failed.");
+if (!(cvRank("cv.pdf") > cvRank("unrelated.pdf"))) throw new Error("Canonical Drive CV selection failed.");
+console.log("PI/Co-PI Drive media signature and selection tests passed.");
+
 
 
 async function checkDocxTemplate() {
