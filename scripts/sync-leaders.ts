@@ -79,6 +79,9 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
   catch (e) { console.warn(`[leaders] Optional media listing unavailable for ${entry.slug}: ${String(e)}`); }
   const image = files.find(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType));
   const cv = files.find(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf");
+  // The portrait component uses person.photo before its dynamic route.
+  // Set photo to null only when a new Drive image replaces the local fallback.
+  if (image) Object.assign(update, { photo: null });
   // Downloads finish before older photo/CV assets are replaced, preventing loss on network errors.
   if (image) {
     const b = await retry(entry.slug + " portrait", () => downloadGoogleDriveFile(auth, image));
