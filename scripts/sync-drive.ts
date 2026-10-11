@@ -1,4 +1,4 @@
-import { mkdir, readdir, rm, unlink, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readdir, rm, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
@@ -18,6 +18,17 @@ const defaultAffiliation = process.env.DRIVE_DEFAULT_AFFILIATION || "BRAC Univer
 const optional = process.argv.includes("--optional");
 const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
+async function retryDrive<T>(label: string, fn: () => Promise<T>): Promise<T> {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try { return await fn(); }
+    catch (error) {
+      if (attempt === 3) throw error;
+      console.warn(`[drive] Retry ${attempt}/3 for ${label}: ${String(error)}`);
+      await new Promise(resolve => setTimeout(resolve, 750 * attempt));
+    }
+  }
+  throw new Error(`Retry exhausted: ${label}`);
+}
 function scoreByName(file: GoogleDriveFile, pattern: RegExp) { return pattern.test(file.name.toLowerCase()) ? 10 : 0; }
 
 function profileFileScore(file: GoogleDriveFile) {
@@ -51,7 +62,7 @@ function isDocxProfile(file: GoogleDriveFile) {
 
 async function readProfileText(auth: GoogleDriveAuth | null, file: GoogleDriveFile | undefined) {
   if (!file) return "";
-  const bytes = await downloadGoogleDriveFile(auth, file);
+  const bytes = await retryDrive(`download ${file.name}`, () => downloadGoogleDriveFile(auth, file));
   return isDocxProfile(file) ? extractDocxText(bytes) : bytes.toString("utf8");
 }
 function choosePortrait(files: GoogleDriveFile[]) {
@@ -67,7 +78,7 @@ function chooseCv(files: GoogleDriveFile[]) {
 
 async function findRaFolder(auth: GoogleDriveAuth | null) {
   if (explicitRaFolderId) return explicitRaFolderId;
-  const rootChildren = await listGoogleDriveChildren(auth, rootFolderId);
+  const rootChildren = await retryDrive("root folder listing", () => listGoogleDriveChildren(auth, rootFolderId));
   const folders = rootChildren.filter(file => file.mimeType === GOOGLE_DRIVE_FOLDER_MIME);
   const preferred = folders.find(file => /research\s*assist/i.test(file.name));
   if (preferred) return preferred.id;
@@ -94,6 +105,7 @@ async function chooseSlug(externalId: string, name: string) {
 async function savePortrait(auth: GoogleDriveAuth | null, file: GoogleDriveFile | undefined, slug: string) {
   const dir = path.join(assetRoot, slug);
   await mkdir(dir, { recursive: true });
+  const bytes = file ? await retryDrive(`portrait ${file.name}`, () => downloadGoogleDriveFile(auth, file)) : null;
   for (const existing of await readdir(dir).catch(() => [] as string[])) {
     if (/^profile\.(jpe?g|png|webp)$/i.test(existing)) await unlink(path.join(dir, existing)).catch(() => undefined);
   }
@@ -104,7 +116,7 @@ async function savePortrait(auth: GoogleDriveAuth | null, file: GoogleDriveFile 
     : file.mimeType === "image/webp" || nameExt === ".webp"
       ? ".webp"
       : nameExt === ".jpeg" ? ".jpeg" : ".jpg";
-  await writeFile(path.join(dir, `profile${ext}`), await downloadGoogleDriveFile(auth, file));
+  await writeFile(path.join(dir, `profile${ext}`), bytes!);
 }
 
 async function saveCv(auth: GoogleDriveAuth | null, file: GoogleDriveFile | undefined, slug: string) {
@@ -114,12 +126,12 @@ async function saveCv(auth: GoogleDriveAuth | null, file: GoogleDriveFile | unde
     await unlink(target).catch(() => undefined);
     return null;
   }
-  await writeFile(target, await downloadGoogleDriveFile(auth, file));
+  await writeFile(target, await retryDrive(`CV ${file.name}`, () => downloadGoogleDriveFile(auth, file)));
   return `/uploads/${slug}-cv.pdf`;
 }
 
 async function syncPerson(auth: GoogleDriveAuth | null, folder: GoogleDriveFile) {
-  const files = await listGoogleDriveChildren(auth, folder.id);
+  const files = await retryDrive(`listing ${folder.name}`, () => listGoogleDriveChildren(auth, folder.id));
   const profileFile = chooseProfileFile(files);
   const portrait = choosePortrait(files);
   const cv = chooseCv(files);
@@ -186,15 +198,22 @@ async function main() {
   await mkdir(assetRoot, { recursive: true });
   await mkdir(uploadRoot, { recursive: true });
   const raFolderId = await findRaFolder(auth);
-  const children = (await listGoogleDriveChildren(auth, raFolderId)).filter(file =>
+  console.log(`[drive] RA folder ID: ${raFolderId}; mode: ${explicitRaFolderId ? "explicit" : "auto"}`);
+  const children = (await retryDrive("RA folder listing", () => listGoogleDriveChildren(auth, raFolderId))).filter(file =>
     file.mimeType === GOOGLE_DRIVE_FOLDER_MIME && !/^(news(?:\s*(?:&|and)\s*events?)?|events?(?:\s*(?:&|and)\s*news)?|templates?|shared|media)$/i.test(file.name.trim()),
   );
+  console.log(`[drive] Discovered ${children.length} folders: ${children.map(f => f.name).join(", ")}`);
+  if (!children.length) throw new Error("No Research Assistant folders found; refusing to overwrite the last published snapshot.");
+  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, "root_ok=true\n");
   const seen = new Set<string>();
+  let synced = 0, skipped = 0;
+  const failed: string[] = [];
   for (const folder of children) {
     seen.add(folder.id); // discovery succeeded; transient file errors must not unpublish an existing profile
     try {
-      await syncPerson(auth, folder);
+      if (await syncPerson(auth, folder)) synced++; else skipped++;
     } catch (error) {
+      failed.push(folder.name);
       console.error(`[drive] Failed to sync ${folder.name}:`, error);
     }
   }
@@ -207,7 +226,11 @@ async function main() {
       console.log(`[drive] Unpublished missing Drive profile ${person.slug}`);
     }
   }
-  console.log(`[drive] Complete: ${seen.size} Research Assistant profile(s) active.`);
+  console.log(`[drive] Complete: ${synced} synced, ${skipped} skipped, ${failed.length} failed; ${seen.size} discovered.`);
+  if (failed.length) {
+    console.error(`[drive] Failed imports: ${failed.join(", ")}`);
+    if (!optional) process.exitCode = 1;
+  }
 }
 
 main().catch(error => {
