@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { extractDocxText } from "../lib/docx-text";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
+import { portraitDirectories } from "../lib/portrait-paths";
 
 const sample = `NAME: Walid Hasan
 CURRENT POSITION: Research Assistant
@@ -122,6 +123,20 @@ for (const check of [() => imageExtensionFromBytes(Buffer.from("<html>not an ima
 if (!(portraitRank("profile.jpg") > portraitRank("random.jpg"))) throw new Error("Canonical Drive photo selection failed.");
 if (!(cvRank("cv.pdf") > cvRank("unrelated.pdf"))) throw new Error("Canonical Drive CV selection failed.");
 console.log("PI/Co-PI Drive media signature and selection tests passed.");
+
+// Deletion semantics: a Drive-managed leader NEVER reuses the original repository
+// portrait when the Drive folder has no image. RAs retain their legacy fallback.
+const localPortraitRoot = "/tmp/sam-portrait-unit/local";
+const drivePortraitRoot = "/tmp/sam-portrait-unit/drive";
+const leaderDirs = portraitDirectories("DRIVE_LEADER", "md-shaikot-jahan-shuvo", drivePortraitRoot, localPortraitRoot);
+if (leaderDirs.length !== 1 || !leaderDirs[0].startsWith(drivePortraitRoot)) {
+  throw new Error("PI/Co-PI photo deletion can show a stale repository portrait.");
+}
+const raDirs = portraitDirectories("DRIVE", "walid-hasan", drivePortraitRoot, localPortraitRoot);
+if (raDirs.length !== 2 || !raDirs[0].startsWith(drivePortraitRoot) || !raDirs[1].startsWith(localPortraitRoot)) {
+  throw new Error("Research Assistant photo fallback was unexpectedly changed.");
+}
+console.log("Drive-managed leader photo deletion and RA fallback tests passed.");
 
 
 
