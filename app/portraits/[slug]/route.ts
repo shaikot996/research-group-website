@@ -1,4 +1,5 @@
 import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
 import { prisma } from "@/lib/db";
 import { portraitDirectories } from "@/lib/portrait-paths";
 export const runtime = "nodejs";
