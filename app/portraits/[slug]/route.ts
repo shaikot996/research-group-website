@@ -24,9 +24,14 @@ export async function GET(_: Request, { params }: { params: Promise<{ slug: stri
   if (!/^[a-z0-9-]+$/.test(slug)) return new Response("Not found", { status: 404 });
   const person = await prisma.person.findFirst({ where: { slug, status: "PUBLISHED" }, select: { name: true, contentSource: true } });
   if (!person) return new Response("Not found", { status: 404 });
-  const dirs = ["DRIVE", "DRIVE_LEADER"].includes(person.contentSource)
-    ? [path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug), path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug)]
-    : [path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug), path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug)];
+  const driveDir = path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug);
+  const localDir = path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug);
+  // PI/Co-PI images are exclusively Drive-managed: deleting one must NOT
+  // resurrect its older, hardcoded copy from public/people/.
+  // Preserve the previous Research Assistant and local-member fallback behavior.
+  const dirs = person.contentSource === "DRIVE_LEADER"
+    ? [driveDir]
+    : person.contentSource === "DRIVE" ? [driveDir, localDir] : [localDir, driveDir];
   for (const dir of dirs) {
     const portrait = await findPortrait(dir);
     if (portrait) return new Response(new Uint8Array(portrait.bytes), { headers: { "Content-Type": portrait.type, "Cache-Control": "no-cache", "X-Content-Type-Options": "nosniff" } });
