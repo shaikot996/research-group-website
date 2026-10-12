@@ -70,24 +70,26 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
     github: profile.github || null,
     linkedin: profile.linkedin || null,
     contentSource: "DRIVE_LEADER",
+    // PI/Co-PI media are authoritative in their Drive folders; never retain static photos/CVs.
+    photo: null,
+    cvUrl: null,
     externalSourceId: entry.docId,
     sourceUpdatedAt: new Date(),
   };
 
   // Optional images and CVs: preserve existing local media unless replacements are present.
-  let files: GoogleDriveFile[] = [];
-  try { files = await retry(entry.slug + " folder", () => listGoogleDriveChildren(auth, entry.folderId)); }
-  catch (e) { console.warn(`[leaders] Optional media listing unavailable for ${entry.slug}: ${String(e)}`); }
+  // A failed Drive listing is NOT an empty folder. Abort rather than accidentally
+  // treating temporary Drive outages as member-requested photo/CV deletions.
+  const files: GoogleDriveFile[] = await retry(entry.slug + " folder", () => listGoogleDriveChildren(auth, entry.folderId));
   const image = files
     .filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
     .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
   const cv = files
     .filter(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf")
     .sort((a, b) => cvRank(b.name) - cvRank(a.name) || a.name.localeCompare(b.name))[0];
-  // The portrait component uses person.photo before its dynamic route.
-  // Set photo to null only when a new Drive image replaces the local fallback.
-  if (image) Object.assign(update, { photo: null });
-  // Verify the actual file bytes: Google Drive public downloads may return an HTML login/interstitial page with HTTP 200.
+  // The portrait component must load from Drive-managed assets (or show initials
+  // when a member deliberately deletes their photo). Do not fall back to repository photos.
+  // Verify file signatures: Drive public downloads may return HTML with HTTP 200.
   if (image) {
     const b = await retry(entry.slug + " portrait", () => downloadGoogleDriveFile(auth, image));
     const safeExt = imageExtensionFromBytes(b);
@@ -101,6 +103,13 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
       }
     }
   }
+  if (!image) {
+    const dir = path.join(imgRoot, entry.slug);
+    for (const filename of await readdir(dir).catch(() => [] as string[])) {
+      if (/^profile\.(jpe?g|png|webp)$/i.test(filename)) await unlink(path.join(dir, filename));
+    }
+    console.log(`[leaders] Portrait absent in Drive: ${entry.slug}; removed stale synced photo`);
+  }
   if (cv) {
     const b = await retry(entry.slug + " CV", () => downloadGoogleDriveFile(auth, cv));
     validatePdf(b);
@@ -109,7 +118,13 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
     console.log(`[leaders] CV verified: ${entry.slug}, ${b.length} bytes`);
     await prisma.person.update({ where: { slug: entry.slug }, data: { ...update, cvUrl: "/uploads/" + entry.slug + "-cv.pdf" } });
   } else {
+    // The folder is authoritative for CVs as well: remove previously downloaded
+    // copies and unlink former CVs from the profile when users delete them.
+    await unlink(path.join(uploadRoot, entry.slug + "-cv.pdf")).catch((error: NodeJS.ErrnoException) => {
+      if (error.code !== "ENOENT") throw error;
+    });
     await prisma.person.update({ where: { slug: entry.slug }, data: update });
+    console.log(`[leaders] CV absent in Drive: ${entry.slug}; cleared former CV link`);
   }
   console.log(`[leaders] Synced ${entry.slug} from Google Docs (preserved existing curated sections)`);
 }
