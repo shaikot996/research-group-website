@@ -73,6 +73,14 @@ jobs:
         continue-on-error: true
         run: npm run sync:leaders
 
+      # Do not deploy a partially initialized fallback portrait/CV snapshot when
+      # Drive listing/download errors prevented a complete leader sync.
+      - name: Verify PI and Co-PI sync before publishing
+        if: steps.leader_sync.outcome != 'success'
+        run: |
+          echo "::error::PI/Co-PI Drive sync incomplete; keeping the previous Pages deployment."
+          exit 1
+
       - name: Refresh INSPIRE citations when cache is stale
         run: npm run sync:inspire
 

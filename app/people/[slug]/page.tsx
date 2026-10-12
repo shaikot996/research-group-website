@@ -89,7 +89,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
       <section className="grid gap-10 border-b academic-rule pb-12 lg:grid-cols-[280px_1fr]">
         <div className="relative aspect-[4/5] overflow-hidden bg-slate-200">
-          <Portrait slug={p.slug} name={p.name} photo={p.photo} sizes="280px" />
+          <Portrait slug={p.slug} name={p.name} photo={p.photo} revision={p.contentSource === "DRIVE_LEADER" ? p.sourceUpdatedAt?.toISOString() : undefined} sizes="280px" />
         </div>
         <div className="self-end">
           <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{humanize(p.role)}</div>

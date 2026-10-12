@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { prisma } from "@/lib/db";
+import { portraitDirectories } from "@/lib/portrait-paths";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const formats: Record<string, string> = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };
@@ -24,9 +25,11 @@ export async function GET(_: Request, { params }: { params: Promise<{ slug: stri
   if (!/^[a-z0-9-]+$/.test(slug)) return new Response("Not found", { status: 404 });
   const person = await prisma.person.findFirst({ where: { slug, status: "PUBLISHED" }, select: { name: true, contentSource: true } });
   if (!person) return new Response("Not found", { status: 404 });
-  const dirs = ["DRIVE", "DRIVE_LEADER"].includes(person.contentSource)
-    ? [path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug), path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug)]
-    : [path.resolve(process.env.PEOPLE_PHOTO_DIR || "public/people", slug), path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people", slug)];
+  const dirs = portraitDirectories(
+    person.contentSource, slug,
+    process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people",
+    process.env.PEOPLE_PHOTO_DIR || "public/people",
+  );
   for (const dir of dirs) {
     const portrait = await findPortrait(dir);
     if (portrait) return new Response(new Uint8Array(portrait.bytes), { headers: { "Content-Type": portrait.type, "Cache-Control": "no-cache", "X-Content-Type-Options": "nosniff" } });
