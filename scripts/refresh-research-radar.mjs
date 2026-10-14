@@ -36,11 +36,16 @@ export function parseAtom(xml, topic) {
     const id = validId(rawId);
     if (!id) return [];
     const title = contents(entry, "title");
-    const abstract = contents(entry, "summary");
+    const abstract = contents(entry, "summary").replace(/^arXiv:\S+\s+Announce Type:\s*\S+\s+Abstract:\s*/i, "");
     const published = contents(entry, "published");
     if (!isIso(published) || title.length < 12 || !abstract) return [];
     const authors = [...entry.matchAll(/<author(?:\s[^>]*)?>([\s\S]*?)<\/author>/gi)]
       .map(([, a]) => contents(a, "name")).filter(Boolean).slice(0, 12);
+    // arXiv daily Atom feeds use dc:creator instead of the API author nodes.
+    if (!authors.length) {
+      const creator = contents(entry, "creator");
+      if (creator) authors.push(...creator.split(/,\s*/).filter(Boolean).slice(0,12));
+    }
     return [{
       id, title: title.slice(0, 260), authors,
       abstract: abstract.slice(0, 3500),
