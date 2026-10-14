@@ -1,0 +1,50 @@
+name: SAM Drive change watcher
+
+# GitHub-native near-real-time alternative to Apps Script.
+# The initial push starts it once; on clean rotation, it dispatches itself.
+# Schedule is a recovery mechanism after a runner is interrupted.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/watch-drive.yml"
+      - "scripts/watch-drive-changes.mjs"
+      - "scripts/drive-watch-preflight.mjs"
+      - "lib/drive-watch-state.mjs"
+  workflow_dispatch:
+  schedule:
+    - cron: "13 */4 * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: sam-drive-watcher
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 275
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify authenticated Drive roots
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: node --import tsx scripts/drive-watch-preflight.mjs
+      - name: Watch Drive for changes every minute
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: node --import tsx scripts/watch-drive-changes.mjs
+      - name: Continue monitoring on a fresh runner
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run watch-drive.yml --repo shaikot996/research-group-website --ref main

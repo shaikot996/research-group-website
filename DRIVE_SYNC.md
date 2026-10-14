@@ -114,7 +114,7 @@ The sync command prints lines such as `[drive] Synced <name> -> /people/<slug>` 
 - Portraits are stored at runtime under `data/drive-people/`.
 - CVs are stored under `data/uploads/` and served inline at `/uploads/<slug>-cv.pdf`.
 
-An optional **near-real-time Drive change bot** scans the existing RA/PI/Co-PI folders once per minute and dispatches the same GitHub Actions workflow only when the Drive state changes. See [DRIVE_BOT_SETUP.md](DRIVE_BOT_SETUP.md) for the one-time Google Apps Script authorization needed to enable it. The existing two-minute Drive audit logger can remain installed alongside this bot.
+The **GitHub-native Drive watcher** scans RA/PI/Co-PI folder metadata roughly once per minute and dispatches the existing deployment workflow after changes, without an Apps Script account setup. See [GITHUB_DRIVE_WATCHER.md](GITHUB_DRIVE_WATCHER.md). A separate Apps Script watcher also exists as an optional alternative ([DRIVE_BOT_SETUP.md](DRIVE_BOT_SETUP.md)); do not activate both unless redundant deployments are intentional. The existing two-minute Drive audit logger is unaffected.
 
 The GitHub Actions workflow `.github/workflows/sync-drive.yml` requests Drive checks every 5 minutes and republishes the static GitHub Pages demo. GitHub scheduled runs are best-effort: runs may be delayed or skipped, and a full build/deploy adds latency. Five-minute end-to-end updates cannot be guaranteed by GitHub Actions.
 
