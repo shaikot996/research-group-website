@@ -66,14 +66,12 @@ while (Date.now() - startedAt < RUNTIME_MS) {
     if (baseline === null) {
       baseline = sample.digest;
       console.log("[watch] Initial baseline: " + sample.count + " items in " + sample.folders + " folders.");
-      // The existing push-triggered website deploy handles the initial push.
-      // Subsequent scheduled / self-chained watchers refresh the site on startup
-      // to cover any changes in the brief handover interval.
-      if (process.env.GITHUB_EVENT_NAME !== "push") {
-        dispatch("sync-drive.yml", "watcher-handover");
-        lastDispatchMs = Date.now();
-        console.log("[watch] Handover deployment dispatched.");
-      }
+      // Dispatch once at every startup, including the initial push. This
+      // verifies the native GitHub Actions permission and catches edits made
+      // during any runner handover. The target workflow serializes builds.
+      dispatch("sync-drive.yml", "watcher-handover");
+      lastDispatchMs = Date.now();
+      console.log("[watch] Initial deployment dispatched.");
     } else if (sample.digest !== baseline) {
       if (Date.now() - lastDispatchMs >= DEBOUNCE_MS) {
         dispatch("sync-drive.yml", "drive-watcher");
