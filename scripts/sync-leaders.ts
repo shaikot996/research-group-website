@@ -1,35 +1,52 @@
 import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
-import { parseDriveProfile } from "../lib/drive-profile";
+import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
 import { imageExtensionFromBytes, validatePdf, portraitRank, cvRank } from "../lib/drive-leader-media";
+import { candidatePersonFolders, chooseLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import {
   downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME,
-  listGoogleDriveChildren, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile,
+  listGoogleDriveChildren, readGoogleServiceAccount,
+  type GoogleDriveAuth, type GoogleDriveFile,
 } from "../lib/google-drive";
 
 if (process.env.NODE_ENV !== "production") {
-  try { process.loadEnvFile(".env"); } catch { /* GitHub Actions injects env */ }
+  try { process.loadEnvFile(".env"); } catch { /* CI provides environment */ }
 }
 const prisma = new PrismaClient();
-const config = [
-  { slug: "mahbubul-alam-majumdar", docId: "1EdG_uw-eW_lVNvcNMz__uWydIqPfywP6Q1GhM46veKo", folderId: "1cnZuSFd6ZVKe7T2AUqXNokDya7mkRMle" },
-  { slug: "syed-hasibul-hassan-chowdhury", docId: "1lPvsr33Wv1RGvn_530ogjKqEJ8D_mjFn5S-nuP3iJDw", folderId: "1dWR5wvM9GuQyG_CPezk__8dkrhgB2BiW" },
-  { slug: "ahmed-rakin-kamal", docId: "1J2pOnHjX7U3t_aiIpt3NznvyZ0jPZ63Yq_iNX4IMP8I", folderId: "1f8VaS6z-YIqkIrvtUxcn4uKEXVe6Pamp" },
-  { slug: "mishaal-hai", docId: "1E1OcVzUsomwMsFjYzhqOZnBKPuodFthSm6Z5VvW-ESs", folderId: "1rJrAJmhUwMvjSQCELBJbK2jnVO_kOiKH" },
-  { slug: "md-shaikot-jahan-shuvo", docId: "1JfqtGltntXeJpLebHI2MfV4X5OfKFBn5id0MnmWZlBs", folderId: "1U0JuxDwdIVyxDD_sgLa2qHoVQ-gGLEM1" },
-] as const;
+const piRoot = process.env.GOOGLE_DRIVE_PI_FOLDER_ID?.trim() || "19uuYERTNBIaET6MlehwjF6kvS1L7sLlc";
+const copiRoot = process.env.GOOGLE_DRIVE_COPI_FOLDER_ID?.trim() || "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM";
 const imgRoot = path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people");
 const uploadRoot = path.resolve(process.env.UPLOAD_DIR || "data/uploads");
 
-async function retry<T>(label: string, fn: () => Promise<T>) {
+type LeaderRole = "PRINCIPAL_INVESTIGATOR" | "RESEARCHER";
+type LeaderEntry = {
+  slug?: string;
+  docId: string;
+  folderId: string;
+  folderName: string;
+  role: LeaderRole;
+  curated: boolean;
+};
+
+// Stable pointers for the existing curated members. Their roles, research
+// highlights, grants, awards, education, relations and slugs are never reset.
+const curated = [
+  { slug: "mahbubul-alam-majumdar", docId: "1EdG_uw-eW_lVNvcNMz__uWydIqPfywP6Q1GhM46veKo", folderId: "1cnZuSFd6ZVKe7T2AUqXNokDya7mkRMle", folderName: "Mahbubul Alam Majumdar", role: "PRINCIPAL_INVESTIGATOR", curated: true },
+  { slug: "syed-hasibul-hassan-chowdhury", docId: "1lPvsr33Wv1RGvn_530ogjKqEJ8D_mjFn5S-nuP3iJDw", folderId: "1dWR5wvM9GuQyG_CPezk__8dkrhgB2BiW", folderName: "Syed Hasibul Hassan Chowdhury", role: "PRINCIPAL_INVESTIGATOR", curated: true },
+  { slug: "ahmed-rakin-kamal", docId: "1J2pOnHjX7U3t_aiIpt3NznvyZ0jPZ63Yq_iNX4IMP8I", folderId: "1f8VaS6z-YIqkIrvtUxcn4uKEXVe6Pamp", folderName: "Ahmed Rakin Kamal", role: "RESEARCHER", curated: true },
+  { slug: "mishaal-hai", docId: "1E1OcVzUsomwMsFjYzhqOZnBKPuodFthSm6Z5VvW-ESs", folderId: "1rJrAJmhUwMvjSQCELBJbK2jnVO_kOiKH", folderName: "Mishaal Hai", role: "RESEARCHER", curated: true },
+  { slug: "md-shaikot-jahan-shuvo", docId: "1JfqtGltntXeJpLebHI2MfV4X5OfKFBn5id0MnmWZlBs", folderId: "1U0JuxDwdIVyxDD_sgLa2qHoVQ-gGLEM1", folderName: "Md Shaikot Jahan Shuvo", role: "RESEARCHER", curated: true },
+] satisfies LeaderEntry[];
+
+async function retry<T>(label: string, fn: () => Promise<T>): Promise<T> {
   let last: unknown;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try { return await fn(); }
     catch (error) {
       last = error;
       if (attempt < 3) {
-        console.warn(`[leaders] Retrying ${label}: ${String(error)}`);
+        console.warn("[leaders] Retry " + attempt + "/3 for " + label + ": " + String(error));
         await new Promise(resolve => setTimeout(resolve, 900 * attempt));
       }
     }
@@ -37,27 +54,128 @@ async function retry<T>(label: string, fn: () => Promise<T>) {
   throw last;
 }
 
-async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number]) {
-  const existing = await prisma.person.findUnique({ where: { slug: entry.slug } });
-  if (!existing || !["PRINCIPAL_INVESTIGATOR", "RESEARCHER"].includes(existing.role)) {
-    throw new Error(`Expected established PI/Co-PI profile missing: ${entry.slug}`);
+async function discoverLeaders(auth: GoogleDriveAuth | null) {
+  const entries: LeaderEntry[] = [...curated];
+  const knownFolders = new Set(curated.map(person => person.folderId));
+  // Both roots must be readable before a new snapshot is considered valid.
+  for (const { rootId, role, section } of [
+    { rootId: piRoot, role: "PRINCIPAL_INVESTIGATOR" as const, section: "PI" },
+    { rootId: copiRoot, role: "RESEARCHER" as const, section: "Co-PI" },
+  ]) {
+    const children = await retry(section + " folder discovery", () => listGoogleDriveChildren(auth, rootId));
+    for (const folder of children.filter(file => file.mimeType === "application/vnd.google-apps.folder")) {
+      if (isPlaceholderPersonFolder(folder.name)) {
+        console.log("[leaders] Ignoring placeholder " + section + " folder: " + folder.name);
+      }
+    }
+    const folders = candidatePersonFolders(children);
+    console.log("[leaders] " + section + " discovered " + folders.length + " member folders.");
+    for (const folder of folders) {
+      if (knownFolders.has(folder.id)) continue;
+      const files = await retry(section + " listing " + folder.name, () => listGoogleDriveChildren(auth, folder.id));
+      const document = chooseLeaderDocument(files);
+      if (!document) {
+        console.log("[leaders] Skipping " + section + " folder without a Google Doc profile: " + folder.name);
+        continue;
+      }
+      entries.push({
+        folderId: folder.id,
+        folderName: folder.name,
+        docId: document.id,
+        role,
+        curated: false,
+      });
+    }
   }
-  // Stable Google Doc IDs are identity pointers, never the source of profile content.
-  const profileFile: GoogleDriveFile = { id: entry.docId, name: entry.slug + " Profile", mimeType: GOOGLE_DOC_MIME };
-  const bytes = await retry(entry.slug + " Google Doc", () => downloadGoogleDriveFile(auth, profileFile));
-  const body = bytes.toString("utf8");
-  // Fail closed instead of accidentally replacing a complete profile with a login/error page.
-  if (!/(?:^|\n)\s*ABOUT ME\s*(?:\n|$)/i.test(body) ||
-      !/(?:^|\n)\s*NAME\s*(?:\n|$)/i.test(body)) {
-    throw new Error(`Google Doc ${entry.docId} is not a valid SAM profile; preserving published data.`);
+  return entries;
+}
+
+async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promise<boolean> {
+  const existing = entry.curated
+    ? await prisma.person.findUnique({ where: { slug: entry.slug! } })
+    : await prisma.person.findUnique({ where: { externalSourceId: entry.docId } });
+
+  if (entry.curated && (!existing || !["PRINCIPAL_INVESTIGATOR", "RESEARCHER"].includes(existing.role))) {
+    throw new Error("Expected curated leader missing or wrong role: " + entry.slug);
   }
-  const profile = parseDriveProfile(body, existing.name, existing.affiliation);
-  if (!profile.name || profile.name.length > 120) throw new Error(`Invalid profile name: ${entry.slug}`);
-  // Never write role, sort order, awards, education, grants, publications, research-area
-  // connections, custom Mahbub sections, or other curated relations.
+  if (existing && !entry.curated && existing.contentSource !== "DRIVE_LEADER_AUTO") {
+    console.warn("[leaders] Profile already owned by a curated/local source; skipping " + entry.folderName);
+    return false;
+  }
+
+  const profileFile: GoogleDriveFile = {
+    id: entry.docId,
+    name: entry.folderName + " Profile",
+    mimeType: GOOGLE_DOC_MIME,
+  };
+  const raw = await retry(entry.folderName + " Google Doc", () => downloadGoogleDriveFile(auth, profileFile));
+  const body = raw.toString("utf8");
+  if (!isValidLeaderDocument(body)) {
+    if (entry.curated) throw new Error("Invalid curated Google Doc " + entry.docId);
+    console.warn("[leaders] Skipping incomplete profile headings in " + entry.folderName);
+    return false;
+  }
+
+  const profile = parseDriveProfile(body, existing?.name || entry.folderName, existing?.affiliation || "BRAC University");
+  if (!profile.name.trim() || profile.name.length > 120 || isPlaceholderPersonFolder(profile.name)) {
+    console.warn("[leaders] Skipping invalid name in " + entry.folderName);
+    return false;
+  }
+  const slug = existing?.slug || slugifyDriveName(profile.name);
+  if (!existing) {
+    const people = await prisma.person.findMany({
+      select: { slug: true, name: true, email: true, inspire: true, externalSourceId: true },
+    });
+    const duplicate = people.find(person =>
+      person.slug === slug ||
+      normalizePersonIdentity(person.name) === normalizePersonIdentity(profile.name) ||
+      (profile.email && person.email && profile.email.toLowerCase() === person.email.toLowerCase()) ||
+      (profile.inspire && person.inspire && profile.inspire === person.inspire)
+    );
+    if (duplicate) {
+      console.warn("[leaders] Skipping duplicate person " + profile.name + " (already " + duplicate.slug + ")");
+      return false;
+    }
+  }
+
+  // The selected profile belongs to the PI or Co-PI folder. Do not classify
+  // a new leader as a Research Assistant merely because the title is empty.
+  const titleFromDoc = /(?:^|\n)\s*(?:CURRENT POSITION|POSITION|TITLE)\s*(?:\n|:)/i.test(body);
+  const title = titleFromDoc ? profile.title :
+    entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : "Co-Principal Investigator";
+  const files = await retry(entry.folderName + " media listing", () => listGoogleDriveChildren(auth, entry.folderId));
+  const photo = files.filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
+    .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
+  const cv = files.filter(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf")
+    .sort((a, b) => cvRank(b.name) - cvRank(a.name) || a.name.localeCompare(b.name))[0];
+
+  // Validate complete downloads BEFORE modifying any existing profile data.
+  const photoBytes = photo ? await retry(entry.folderName + " portrait", () => downloadGoogleDriveFile(auth, photo)) : null;
+  const photoExt = photoBytes ? imageExtensionFromBytes(photoBytes) : null;
+  const cvBytes = cv ? await retry(entry.folderName + " CV", () => downloadGoogleDriveFile(auth, cv)) : null;
+  if (cvBytes) validatePdf(cvBytes);
+
+  const imageDir = path.join(imgRoot, slug);
+  await mkdir(imageDir, { recursive: true });
+  if (photoBytes && photoExt) await writeFile(path.join(imageDir, "profile" + photoExt), photoBytes);
+  for (const filename of await readdir(imageDir)) {
+    if (/^profile\.(jpe?g|png|webp)$/i.test(filename) && filename !== "profile" + photoExt) {
+      await unlink(path.join(imageDir, filename));
+    }
+  }
+  const cvPath = path.join(uploadRoot, slug + "-cv.pdf");
+  if (cvBytes) {
+    await mkdir(uploadRoot, { recursive: true });
+    await writeFile(cvPath, cvBytes);
+  } else {
+    await unlink(cvPath).catch((error: NodeJS.ErrnoException) => {
+      if (error.code !== "ENOENT") throw error;
+    });
+  }
+
   const update = {
     name: profile.name,
-    title: profile.title,
+    title,
     affiliation: profile.affiliation,
     email: profile.email || null,
     bio: profile.bio || null,
@@ -69,78 +187,85 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: typeof config[number
     orcid: profile.orcid || null,
     github: profile.github || null,
     linkedin: profile.linkedin || null,
-    contentSource: "DRIVE_LEADER",
-    // PI/Co-PI media are authoritative in their Drive folders; never retain static photos/CVs.
     photo: null,
-    cvUrl: null,
+    cvUrl: cvBytes ? "/uploads/" + slug + "-cv.pdf" : null,
     externalSourceId: entry.docId,
+    contentSource: entry.curated ? "DRIVE_LEADER" : "DRIVE_LEADER_AUTO",
     sourceUpdatedAt: new Date(),
   };
 
-  // Optional images and CVs: preserve existing local media unless replacements are present.
-  // A failed Drive listing is NOT an empty folder. Abort rather than accidentally
-  // treating temporary Drive outages as member-requested photo/CV deletions.
-  const files: GoogleDriveFile[] = await retry(entry.slug + " folder", () => listGoogleDriveChildren(auth, entry.folderId));
-  const image = files
-    .filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
-    .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
-  const cv = files
-    .filter(f => /\.pdf$/i.test(f.name) || f.mimeType === "application/pdf")
-    .sort((a, b) => cvRank(b.name) - cvRank(a.name) || a.name.localeCompare(b.name))[0];
-  // The portrait component must load from Drive-managed assets (or show initials
-  // when a member deliberately deletes their photo). Do not fall back to repository photos.
-  // Verify file signatures: Drive public downloads may return HTML with HTTP 200.
-  if (image) {
-    const b = await retry(entry.slug + " portrait", () => downloadGoogleDriveFile(auth, image));
-    const safeExt = imageExtensionFromBytes(b);
-    const dir = path.join(imgRoot, entry.slug);
-    await mkdir(dir, { recursive: true });
-    await writeFile(path.join(dir, "profile" + safeExt), b);
-    console.log(`[leaders] Portrait verified: ${entry.slug}, ${b.length} bytes, ${safeExt}`);
-    for (const other of await readdir(dir)) {
-      if (/^profile\.(jpe?g|png|webp)$/i.test(other) && other !== "profile" + safeExt) {
-        await unlink(path.join(dir, other));
-      }
-    }
-  }
-  if (!image) {
-    const dir = path.join(imgRoot, entry.slug);
-    for (const filename of await readdir(dir).catch(() => [] as string[])) {
-      if (/^profile\.(jpe?g|png|webp)$/i.test(filename)) await unlink(path.join(dir, filename));
-    }
-    console.log(`[leaders] Portrait absent in Drive: ${entry.slug}; removed stale synced photo`);
-  }
-  if (cv) {
-    const b = await retry(entry.slug + " CV", () => downloadGoogleDriveFile(auth, cv));
-    validatePdf(b);
-    await mkdir(uploadRoot, { recursive: true });
-    await writeFile(path.join(uploadRoot, entry.slug + "-cv.pdf"), b);
-    console.log(`[leaders] CV verified: ${entry.slug}, ${b.length} bytes`);
-    await prisma.person.update({ where: { slug: entry.slug }, data: { ...update, cvUrl: "/uploads/" + entry.slug + "-cv.pdf" } });
-  } else {
-    // The folder is authoritative for CVs as well: remove previously downloaded
-    // copies and unlink former CVs from the profile when users delete them.
-    await unlink(path.join(uploadRoot, entry.slug + "-cv.pdf")).catch((error: NodeJS.ErrnoException) => {
-      if (error.code !== "ENOENT") throw error;
+  if (existing) {
+    await prisma.person.update({
+      where: { id: existing.id },
+      data: {
+        ...update,
+        ...(!entry.curated ? {
+          status: "PUBLISHED",
+          role: entry.role,
+          profileSections: Object.keys(profile.sections).length ? JSON.stringify(profile.sections) : null,
+        } : {}),
+      },
     });
-    await prisma.person.update({ where: { slug: entry.slug }, data: update });
-    console.log(`[leaders] CV absent in Drive: ${entry.slug}; cleared former CV link`);
+  } else {
+    await prisma.person.create({
+      data: {
+        ...update,
+        slug,
+        role: entry.role,
+        status: "PUBLISHED",
+        featured: false,
+        sortOrder: 900,
+        profileSections: Object.keys(profile.sections).length ? JSON.stringify(profile.sections) : null,
+      },
+    });
   }
-  console.log(`[leaders] Synced ${entry.slug} from Google Docs (preserved existing curated sections)`);
+  console.log("[leaders] Synced " + (entry.curated ? "curated " : "new ") + entry.folderName + " -> /people/" + slug);
+  return true;
 }
 
 async function main() {
   const account = readGoogleServiceAccount();
   const key = process.env.GOOGLE_DRIVE_API_KEY?.trim();
-  const auth: GoogleDriveAuth | null = account ? { type: "bearer", value: await getGoogleDriveAccessToken(account) } : key ? { type: "apiKey", value: key } : null;
-  console.log(`[leaders] Access mode: ${auth?.type || "public-link"}; ${config.length} existing profiles`);
+  const auth: GoogleDriveAuth | null = account
+    ? { type: "bearer", value: await getGoogleDriveAccessToken(account) }
+    : key ? { type: "apiKey", value: key } : null;
+
+  console.log("[leaders] Access mode: " + (auth?.type || "public-link"));
+  const entries = await discoverLeaders(auth);
+  const encountered = new Set(entries.filter(entry => !entry.curated).map(entry => entry.docId));
+  const failures: string[] = [];
   let successful = 0;
-  const errors: string[] = [];
-  for (const entry of config) {
-    try { await syncOne(auth, entry); successful++; }
-    catch (error) { errors.push(entry.slug); console.error(`[leaders] Failed ${entry.slug}:`, error); }
+  let skipped = 0;
+  for (const entry of entries) {
+    try {
+      if (await syncOne(auth, entry)) successful++;
+      else skipped++;
+    } catch (error) {
+      failures.push(entry.folderName);
+      console.error("[leaders] Failed to sync " + entry.folderName + ": ", error);
+    }
   }
-  console.log(`[leaders] Finished: ${successful} synced, ${errors.length} failed.`);
-  if (errors.length) process.exitCode = 1;
+
+  // A missing folder unpublishes ONLY an automatically created leader.
+  // Never unpublish fixed/curated researchers. Skip archival on partial errors.
+  if (!failures.length) {
+    const autoPeople = await prisma.person.findMany({
+      where: { contentSource: "DRIVE_LEADER_AUTO" },
+      select: { id: true, name: true, externalSourceId: true, status: true },
+    });
+    for (const person of autoPeople) {
+      if (person.externalSourceId && !encountered.has(person.externalSourceId) && person.status === "PUBLISHED") {
+        await prisma.person.update({ where: { id: person.id }, data: { status: "DRAFT" } });
+        console.log("[leaders] Unpublished removed Drive leader " + person.name);
+      }
+    }
+  }
+
+  console.log("[leaders] Finished: " + successful + " synced, " + skipped + " skipped, " +
+    failures.length + " failed; " + entries.length + " discovered.");
+  if (failures.length) process.exitCode = 1;
 }
-main().catch(error => { console.error("[leaders] Fatal sync failure:", error); process.exitCode = 1; }).finally(() => prisma.$disconnect());
+main().catch(error => {
+  console.error("[leaders] Fatal Drive leader sync failure: ", error);
+  process.exitCode = 1;
+}).finally(() => prisma.$disconnect());
