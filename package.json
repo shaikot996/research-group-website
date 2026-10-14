@@ -22,6 +22,7 @@
     "sync:inspire:force": "node --import tsx scripts/sync-inspire.ts --force",
     "test:content": "node --import tsx scripts/test-content.ts && node scripts/test-drive-bot.mjs && node scripts/test-drive-watch.mjs && node --check lib/drive-watch-api.mjs && node --check scripts/watch-drive-changes.mjs && node --check scripts/drive-watch-preflight.mjs",
     "sync:leaders": "node --import tsx scripts/sync-leaders.ts",
+    "sync:editorial": "node --import tsx scripts/sync-editorial.ts",
     "sync:people": "npm run sync:drive && npm run sync:leaders"
   },
   "dependencies": {
