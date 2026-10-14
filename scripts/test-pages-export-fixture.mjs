@@ -50,6 +50,8 @@ try {
   await execute("scripts/verify-pages-export.mjs");
   const homepage = await readFile(path.join(dir, "index.html"), "utf8");
   const stylesheet = await readFile(path.join(dir, "_next/static/chunks/main.css"), "utf8");
+  const staticJs = await readFile(path.join(dir, "static-demo.js"), "utf8");
+  assert.ok(staticJs.includes("[data-radar-explorer]") && staticJs.includes("[data-radar-query]") && staticJs.includes("[data-radar-filter]") && staticJs.includes("[data-radar-more]"), "Static Pages must ship working Radar interactions");
   assert.match(homepage, /href="\/_next\/static\/chunks\/main\.css"/);
   assert.match(homepage, /href="\/people\/"/);
   assert.match(homepage, /src="\/static-demo\.js"/);
