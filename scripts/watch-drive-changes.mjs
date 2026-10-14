@@ -16,6 +16,7 @@ const ROOTS = [
   "10_rzMMevZi6_T-bajAnmaynab0UbDBtv",
   "19uuYERTNBIaET6MlehwjF6kvS1L7sLlc",
   "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM",
+  "19frcFmQJsFFA3xU6TqiypUvEeuVZ2fi6",
 ];
 const POLL_MS = 60000;
 const DEBOUNCE_MS = 150000;
