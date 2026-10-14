@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { getSiteSettings } from "@/lib/site";
 import { AreaCard, ProjectCard, PubEntry, SectionHeader } from "@/components/ui";
 import { FeaturedHighlights } from "@/components/featured-highlights";
+import { ResearchRadarPreview } from "@/components/research-radar-preview";
 import { fmt } from "@/lib/utils";
 import { getGroupCitationStats } from "@/lib/group-stats";
 import { ResearchSnapshot } from "@/components/research-snapshot";
@@ -40,6 +41,8 @@ export default async function Home() {
     </section>
 
     <FeaturedHighlights />
+
+    <ResearchRadarPreview />
 
     <section className="container-site section-space"><SectionHeader eyebrow="Research" title="Questions that connect scales" description="Scientific areas linked directly to their people, projects and publications."/><div className="grid gap-x-10 lg:grid-cols-2">{areas.map((a,i)=><AreaCard key={a.id} a={a} i={i}/>)}</div></section>
 
