@@ -1,0 +1,52 @@
+name: Refresh SAM Research Radar
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/research-radar.yml"
+      - "scripts/refresh-research-radar.mjs"
+      - "data/research-radar.json"
+  workflow_dispatch:
+  schedule:
+    # 08:00 Bangladesh (UTC+06), best-effort GitHub schedule.
+    - cron: "0 2 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sam-research-radar-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test verified-paper parser and ranking
+        run: node scripts/test-research-radar.mjs
+      - name: Fetch official arXiv papers with backup endpoints
+        run: node scripts/refresh-research-radar.mjs
+      - name: Commit verified snapshot (never fabricate records)
+        run: |
+          if git diff --quiet -- data/research-radar.json; then
+            echo "No verified changes to publish."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/research-radar.json
+            git commit -m "Update daily verified Research Radar arXiv digest"
+            git push origin main
+          fi
+      - name: Republish site with refreshed Research Radar snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run sync-drive.yml --repo shaikot996/research-group-website --ref main -f source=research-radar-daily
