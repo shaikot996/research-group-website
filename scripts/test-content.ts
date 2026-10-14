@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { extractDocxText } from "../lib/docx-text";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
+import { candidatePersonFolders, chooseLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import { portraitDirectories } from "../lib/portrait-paths";
 
 const sample = `NAME: Walid Hasan
@@ -159,3 +160,34 @@ if (localDocx) {
 }
 
 checkDocxTemplate().catch(error => { console.error(error); process.exitCode = 1; });
+
+const discoveryFolders = [
+  { id: "one", name: "Real New Co-PI", mimeType: GOOGLE_DRIVE_FOLDER_MIME },
+  { id: "two", name: "Dummy Sama", mimeType: GOOGLE_DRIVE_FOLDER_MIME },
+  { id: "three", name: "New PI", mimeType: GOOGLE_DRIVE_FOLDER_MIME },
+  { id: "four", name: "CV.pdf", mimeType: "application/pdf" },
+];
+const validFolders = candidatePersonFolders(discoveryFolders);
+if (validFolders.length !== 2 || validFolders.some(f => f.name === "Dummy Sama")) {
+  throw new Error("PI/Co-PI auto discovery did not filter placeholder folders correctly.");
+}
+if (!isPlaceholderPersonFolder("Test Folder") || isPlaceholderPersonFolder("Tasnim Jahan")) {
+  throw new Error("Placeholder folder matching incorrectly accepts/rejects member folders.");
+}
+const discoveredProfile = chooseLeaderDocument([
+  { id: "img", name: "portrait.png", mimeType: "image/png" },
+  { id: "info", name: "About Me", mimeType: GOOGLE_DOC_MIME },
+]);
+if (discoveredProfile?.id !== "info") throw new Error("Co-PI profile document was not discovered.");
+if (!isValidLeaderDocument("NAME\nNew Person\nABOUT ME\nResearch biography") ||
+    isValidLeaderDocument("NAME\nNew Person")) {
+  throw new Error("Leader document validation regression.");
+}
+if (normalizePersonIdentity("MD  Shaikot Jahan Shuvo") !== normalizePersonIdentity("Md Shaikot Jahan Shuvo")) {
+  throw new Error("Duplicate leader identity normalization regression.");
+}
+const autoLeaderDirs = portraitDirectories("DRIVE_LEADER_AUTO", "new-co-pi", drivePortraitRoot, localPortraitRoot);
+if (autoLeaderDirs.length !== 1 || !autoLeaderDirs[0].startsWith(drivePortraitRoot)) {
+  throw new Error("Automatically discovered Co-PI must use authoritative Drive portrait assets.");
+}
+console.log("Automatic PI/Co-PI folder discovery and identity guard tests passed.");
