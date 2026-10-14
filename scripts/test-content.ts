@@ -196,7 +196,7 @@ const autoDocx = { id:"word-file",name:"Profile.docx",mimeType:"application/vnd.
 if(!isDocxLeaderDocument(autoDocx) || chooseLeaderDocument([autoDocx])?.id!=="word-file"){
   throw Error("New PI and Co-PI DOCX profile discovery is broken.");
 }
-if(!isValidLeaderDocument("NAME: New Member\\nABOUT ME: String cosmology researcher")){
+if(!isValidLeaderDocument("NAME: New Member\nABOUT ME: String cosmology researcher")){
   throw Error("Inline PI/Co-PI DOCX heading format is not accepted.");
 }
 console.log("DOCX-based PI and Co-PI onboarding tests passed.");
