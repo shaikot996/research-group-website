@@ -87,6 +87,19 @@ jobs:
           echo "::error::PI/Co-PI Drive sync incomplete; keeping the previous Pages deployment."
           exit 1
 
+      - name: Sync News and Events from Google Drive
+        id: editorial_sync
+        continue-on-error: true
+        env:
+          GOOGLE_DRIVE_NEWS_EVENTS_FOLDER_ID: "19frcFmQJsFFA3xU6TqiypUvEeuVZ2fi6"
+        run: npm run sync:editorial
+
+      - name: Verify News and Events sync before publishing
+        if: steps.editorial_sync.outcome != 'success'
+        run: |
+          echo "::error::News and Events Drive sync failed. Preserving the previous GitHub Pages deployment."
+          exit 1
+
       - name: Refresh INSPIRE citations when cache is stale
         run: npm run sync:inspire
 
