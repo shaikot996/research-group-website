@@ -218,7 +218,11 @@ model NewsPost {
   body        String
   date        DateTime
   image       String?
+  gallery     String?
+  category    String?
   externalUrl String?
+  source      String   @default("LOCAL")
+  driveFolderId String? @unique
   featured    Boolean  @default(false)
   sortOrder   Int      @default(0)
   status      String   @default("PUBLISHED")
@@ -239,6 +243,12 @@ model Event {
   abstract        String?
   registrationUrl String?
   poster          String?
+  gallery         String?
+  category        String?
+  description     String?
+  externalUrl     String?
+  source          String    @default("LOCAL")
+  driveFolderId   String?   @unique
   status          String    @default("UPCOMING")
   publishStatus   String    @default("PUBLISHED")
   sortOrder       Int       @default(0)
