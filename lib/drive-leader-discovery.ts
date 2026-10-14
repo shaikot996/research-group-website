@@ -11,9 +11,13 @@ export function candidatePersonFolders(files: GoogleDriveFile[]): GoogleDriveFil
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+export function isDocxLeaderDocument(file: GoogleDriveFile) {
+  return file.mimeType === DOCX_MIME || /\.docx$/i.test(file.name);
+}
 export function chooseLeaderDocument(files: GoogleDriveFile[]): GoogleDriveFile | undefined {
   return files
-    .filter(file => file.mimeType === GOOGLE_DOC_MIME)
+    .filter(file => file.mimeType === GOOGLE_DOC_MIME || isDocxLeaderDocument(file) || file.mimeType === "text/plain")
     .sort((a, b) => {
       const score = (f: GoogleDriveFile) =>
         /(?:profile|about|biography|bio|info)/i.test(f.name) ? 10 : 0;
@@ -22,8 +26,8 @@ export function chooseLeaderDocument(files: GoogleDriveFile[]): GoogleDriveFile 
 }
 
 export function isValidLeaderDocument(body: string): boolean {
-  return /(?:^|\n)\s*NAME\s*(?:\n|$)/i.test(body) &&
-    /(?:^|\n)\s*ABOUT ME\s*(?:\n|$)/i.test(body);
+  return /(?:^|\n)\s*NAME\s*(?::\s*\S.*|\n|$)/i.test(body) &&
+    /(?:^|\n)\s*ABOUT ME\s*(?::\s*\S.*|\n|$)/i.test(body);
 }
 
 export function normalizePersonIdentity(name: string): string {

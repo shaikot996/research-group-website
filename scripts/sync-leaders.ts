@@ -2,8 +2,9 @@ import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
+import { extractDocxText } from "../lib/docx-text";
 import { imageExtensionFromBytes, validatePdf, portraitRank, cvRank } from "../lib/drive-leader-media";
-import { candidatePersonFolders, chooseLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
+import { candidatePersonFolders, chooseLeaderDocument, isDocxLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import {
   downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME,
   listGoogleDriveChildren, readGoogleServiceAccount,
@@ -27,6 +28,7 @@ type LeaderEntry = {
   folderName: string;
   role: LeaderRole;
   curated: boolean;
+  document?: GoogleDriveFile;
 };
 
 // Stable pointers for the existing curated members. Their roles, research
@@ -75,7 +77,7 @@ async function discoverLeaders(auth: GoogleDriveAuth | null) {
       const files = await retry(section + " listing " + folder.name, () => listGoogleDriveChildren(auth, folder.id));
       const document = chooseLeaderDocument(files);
       if (!document) {
-        console.log("[leaders] Skipping " + section + " folder without a Google Doc profile: " + folder.name);
+        console.log("[leaders] Skipping " + section + " folder without a Google Doc/DOCX/TXT profile: " + folder.name);
         continue;
       }
       entries.push({
@@ -83,6 +85,7 @@ async function discoverLeaders(auth: GoogleDriveAuth | null) {
         folderName: folder.name,
         docId: document.id,
         role,
+        document,
         curated: false,
       });
     }
@@ -103,13 +106,13 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     return false;
   }
 
-  const profileFile: GoogleDriveFile = {
+  const profileFile: GoogleDriveFile = entry.document ?? {
     id: entry.docId,
     name: entry.folderName + " Profile",
     mimeType: GOOGLE_DOC_MIME,
   };
-  const raw = await retry(entry.folderName + " Google Doc", () => downloadGoogleDriveFile(auth, profileFile));
-  const body = raw.toString("utf8");
+  const raw = await retry(entry.folderName + " profile document", () => downloadGoogleDriveFile(auth, profileFile));
+  const body = isDocxLeaderDocument(profileFile) ? extractDocxText(raw) : raw.toString("utf8");
   if (!isValidLeaderDocument(body)) {
     if (entry.curated) throw new Error("Invalid curated Google Doc " + entry.docId);
     console.warn("[leaders] Skipping incomplete profile headings in " + entry.folderName);

@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { extractDocxText } from "../lib/docx-text";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
-import { candidatePersonFolders, chooseLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
+import { candidatePersonFolders, chooseLeaderDocument, isDocxLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import { portraitDirectories } from "../lib/portrait-paths";
 
 const sample = `NAME: Walid Hasan
@@ -191,3 +191,12 @@ if (autoLeaderDirs.length !== 1 || !autoLeaderDirs[0].startsWith(drivePortraitRo
   throw new Error("Automatically discovered Co-PI must use authoritative Drive portrait assets.");
 }
 console.log("Automatic PI/Co-PI folder discovery and identity guard tests passed.");
+
+const autoDocx = { id:"word-file",name:"Profile.docx",mimeType:"application/vnd.openxmlformats-officedocument.wordprocessingml.document" };
+if(!isDocxLeaderDocument(autoDocx) || chooseLeaderDocument([autoDocx])?.id!=="word-file"){
+  throw Error("New PI and Co-PI DOCX profile discovery is broken.");
+}
+if(!isValidLeaderDocument("NAME: New Member\nABOUT ME: String cosmology researcher")){
+  throw Error("Inline PI/Co-PI DOCX heading format is not accepted.");
+}
+console.log("DOCX-based PI and Co-PI onboarding tests passed.");

@@ -1,8 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
+import authorWatchlist from "../data/radar-author-watchlist.json" with {type:"json"};
 
 const OUTPUT = "data/research-radar.json";
 const DAYS_TO_KEEP = 60;
-const MAX_HISTORY = 180;
+const MAX_HISTORY = 54;
 const FEEDS = [
   { key: "High-Energy Theory", category: "hep-th" },
   { key: "Quantum Gravity & Cosmology", category: "gr-qc" },
@@ -40,7 +41,7 @@ export function parseAtom(xml, topic) {
     const published = contents(entry, "published");
     if (!isIso(published) || title.length < 12 || !abstract) return [];
     const authors = [...entry.matchAll(/<author(?:\s[^>]*)?>([\s\S]*?)<\/author>/gi)]
-      .map(([, a]) => contents(a, "name")).filter(Boolean).slice(0, 12);
+      .map(([, a]) => contents(a, "name")).filter(Boolean).slice(0, 35);
     // arXiv daily Atom feeds use dc:creator instead of the API author nodes.
     if (!authors.length) {
       const creator = contents(entry, "creator");
@@ -78,14 +79,38 @@ export function parseRss(xml, topic) {
     }];
   });
 }
+const normalizeAuthor = name => String(name||"").normalize("NFKD").toLowerCase()
+  .replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+const matchedAuthors = (paper,list) => (paper.authors||[]).some(author=>
+  list.some(name=>normalizeAuthor(author)===normalizeAuthor(name)));
+const deepPhysics = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|anti.de sitter|ads.?cft|brane|flux vacua|flux compact|type iib|supergrav|worldsheet|matrix string|f.theory|heterotic|de sitter|black hole|quantum gravit|inflation|effective field theor|conformal field theor|topological string|extra dimensions|quantum cosmolog|decompactif|supersymmet|quantum field theor|black brane|m.theory|landscape/i;
+const highlySpecific = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|ads.?cft|flux vacua|type iib|supergrav|worldsheet|f.theory|heterotic|topological string|decompactif|m.theory/i;
+export function isRelevantPaper(paper) {
+  if(matchedAuthors(paper,authorWatchlist.excludedAuthors)) return false;
+  if(matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
+     matchedAuthors(paper,authorWatchlist.groupResearchers))return true;
+  if(matchedAuthors(paper,authorWatchlist.prominentStringTheorists))return true;
+  const text=paper.title+" "+paper.abstract;
+  if(paper.category==="AI for Science")
+    return /machine learning|deep learning|neural network|artificial intelligence|ai for science/i.test(text) &&
+      /string theor|physics|quantum|cosmolog|general relativ|gravitation|mathematical physics|theorem prov|particle physic|field theor|scientific discover/i.test(text);
+  if(paper.category==="Mathematics")
+    return highlySpecific.test(text) || (/quantum field|quantum gravit|black hole|gauge theor/i.test(text) &&
+      /geometry|conformal|supersymmetr|algebra/i.test(text));
+  return highlySpecific.test(text) ||
+    (deepPhysics.test(paper.title) && /gravity|cosmology|field theory|strings|black hole|quantum/i.test(text));
+}
 export function relevance(paper) {
   const haystack = (paper.title + " " + paper.abstract).toLowerCase();
+  const authorScore=matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
+    matchedAuthors(paper,authorWatchlist.groupResearchers) ? 100 :
+    matchedAuthors(paper,authorWatchlist.prominentStringTheorists) ? 50 : 0;
   const focus = (paper.title + " " + paper.abstract.slice(0, 380)).toLowerCase();
   const matched = keywords.test(haystack);
   const strong = keywords.test(focus);
   const daysOld = Math.max(0, (Date.now() - Date.parse(paper.published)) / 86400000);
   const subjects = {"High-Energy Theory":5,"Quantum Gravity & Cosmology":4,"Mathematics":3,"AI for Science":2};
-  return (subjects[paper.category] || 0) + (matched ? 4 : 0) + (strong ? 4 : 0) + Math.max(0, 9 - daysOld / 2);
+  return authorScore + (subjects[paper.category] || 0) + (matched ? 4 : 0) + (strong ? 4 : 0) + Math.max(0, 9 - daysOld / 2);
 }
 export function prepareSnapshot(current, incoming, now = new Date()) {
   const cutoff = now.getTime() - DAYS_TO_KEEP * 86400000;
@@ -93,7 +118,7 @@ export function prepareSnapshot(current, incoming, now = new Date()) {
   for (const item of [...(current.papers || []), ...incoming]) {
     if (!item?.id || !isIso(item.published) || Date.parse(item.published) < cutoff) continue;
     if (Date.parse(item.published) > now.getTime() + 86400000) continue;
-    if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url)) continue;
+    if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url) || !isRelevantPaper(item)) continue;
     const existing = map.get(item.id);
     if (!existing || (incoming.includes(item) && !incoming.includes(existing))) map.set(item.id, item);
   }
@@ -143,6 +168,42 @@ async function fetchCategory(topic) {
   }
   return [];
 }
+export function authorWatchQueries(names, batchSize=5) {
+  const unique=[...new Set(names.filter(Boolean))];
+  const queries=[];
+  for(let i=0;i<unique.length;i+=batchSize) {
+    const batch=unique.slice(i,i+batchSize);
+    queries.push({
+      batch,
+      query:batch.map(name=>'au:"'+name.replaceAll('"',"")+'"').join(" OR ")
+    });
+  }
+  return queries;
+}
+async function fetchWatchlistPapers() {
+  const names=[...authorWatchlist.prominentStringTheorists,
+    ...authorWatchlist.verifiedCoauthors,...authorWatchlist.groupResearchers];
+  const batches=authorWatchQueries(names,5);
+  const found=[];
+  for(const {batch,query} of batches) {
+    const params=new URLSearchParams({
+      search_query:query,start:"0",max_results:"50",
+      sortBy:"submittedDate",sortOrder:"descending"
+    });
+    try {
+      const xml=await download("https://export.arxiv.org/api/query?"+params);
+      const parsed=parseAtom(xml,{key:"High-Energy Theory",category:"hep-th"});
+      // Never treat a substring or coincidental coauthor name as a match.
+      const exact=parsed.filter(p=>matchedAuthors(p,batch));
+      found.push(...exact);
+      console.log("[radar] Author watchlist batch: "+exact.length+" tracked submissions.");
+    } catch(error) {
+      console.warn("[radar] Author watchlist API batch unavailable: "+String(error));
+    }
+    await sleep(3100);
+  }
+  return found;
+}
 async function main() {
   const previous=await loadPrevious();
   const collected=[];
@@ -153,7 +214,9 @@ async function main() {
     collected.push(...papers);
     await sleep(3100); // Respect arXiv API's suggested 3-second minimum.
   }
-  if(successful===0) {
+  const authorPapers=await fetchWatchlistPapers();
+  collected.push(...authorPapers);
+  if(successful===0 && authorPapers.length===0) {
     // Existing checked-in snapshot stays unmodified and the scheduled job
     // fails loudly. Never silently replace verified results with placeholders.
     throw Error("All official arXiv endpoints failed; keeping last known good snapshot.");
@@ -161,8 +224,8 @@ async function main() {
   const snapshot=prepareSnapshot(previous,collected);
   if(!snapshot.papers.length)throw Error("No recent verified papers; preserving existing snapshot.");
   await writeFile(OUTPUT,JSON.stringify(snapshot,null,2)+"\n","utf8");
-  console.log("[radar] Refreshed "+snapshot.papers.length+" unique recent papers from "+
-    successful+"/"+FEEDS.length+" subject feeds.");
+  console.log("[radar] Refreshed "+snapshot.papers.length+" highly relevant papers from "+
+    successful+"/"+FEEDS.length+" subject feeds plus "+authorPapers.length+" tracked-author records.");
 }
 if(process.argv[1]?.endsWith("refresh-research-radar.mjs")) {
   main().catch(error=>{console.error("[radar] "+String(error));process.exitCode=1;});
