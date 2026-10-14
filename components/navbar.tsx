@@ -6,6 +6,7 @@ const links = [
   ["People", "/people"],
   ["Publications", "/publications"],
   ["Projects", "/projects"],
+  ["Open Source", "/open-source"],
   ["News & Events", "/news-events"],
   ["Research Radar", "/research-radar"],
   ["Join Us", "/join"],
@@ -43,7 +44,7 @@ export function Navbar({ name, logo }: { name: string; logo: string }) {
         </div>
       </div>
       <nav className="hidden border-t academic-rule xl:block" aria-label="Primary navigation">
-        <div className="container-site flex min-h-[48px] flex-nowrap items-center justify-center gap-8">
+        <div className="container-site flex min-h-[48px] flex-nowrap items-center justify-center gap-5">
           {links.map(([label,href])=>
             <Link key={href} href={href} className="focus-ring whitespace-nowrap border-b-2 border-transparent px-1 py-3 text-[13px] font-semibold text-muted transition-colors hover:border-[#8c2131] hover:text-accent">{label}</Link>
           )}
