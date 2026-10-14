@@ -1,12 +1,13 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { groupPublications, type GroupLiteratureHit } from "../lib/inspire-publication-snapshot";
 
 if (process.env.NODE_ENV !== "production") {
   try { process.loadEnvFile(".env"); } catch { /* CI can provide env directly. */ }
 }
 
 type AuthorConfig = { name: string; controlNumber: string };
-type LiteratureHit = { id?: string | number; metadata?: { control_number?: number; citation_count?: number } };
+type LiteratureHit = GroupLiteratureHit;
 type AuthorApiRecord = {
   metadata?: {
     ids?: Array<{ schema?: string; value?: string }>;
@@ -136,7 +137,10 @@ async function fetchAuthorLiterature(author: AuthorConfig) {
 
 async function main() {
   const previous = await readOutput();
-  if (!force && previous?.updatedAt && previous.totalCitations !== null) {
+  let publicationCacheMissing = false;
+  try { await readFile(path.resolve("data/inspire-publications.json"), "utf8"); }
+  catch { publicationCacheMissing = true; }
+  if (!force && !publicationCacheMissing && previous?.updatedAt && previous.totalCitations !== null) {
     const age = Date.now() - new Date(previous.updatedAt).getTime();
     if (Number.isFinite(age) && age >= 0 && age < maxAgeMs) {
       console.log(`[inspire] Cache is ${Math.round(age / 3600000)}h old; refresh interval not reached.`);
@@ -148,10 +152,12 @@ async function main() {
   if (!Array.isArray(authors) || !authors.length) throw new Error("No INSPIRE authors configured.");
 
   const papers = new Map<string, number>();
+  const allLiterature: LiteratureHit[] = [];
   const resolvedAuthors: Output["authors"] = [];
 
   for (const author of authors) {
     const { records, bai } = await fetchAuthorLiterature(author);
+    allLiterature.push(...records);
     for (const record of records) {
       const key = String(record.metadata?.control_number ?? record.id ?? "");
       if (!key) continue;
@@ -162,6 +168,8 @@ async function main() {
     console.log(`[inspire] ${author.name}${bai ? ` [${bai}]` : ""}: ${records.length} literature record(s)`);
   }
 
+  const publicationSnapshot = { updatedAt: new Date().toISOString(), records: groupPublications(allLiterature) };
+  if (publicationSnapshot.records.length === 0) throw new Error("INSPIRE returned no group literature; keeping previous publication snapshot.");
   const output: Output = {
     totalCitations: [...papers.values()].reduce((sum, value) => sum + value, 0),
     uniquePublications: papers.size,
@@ -170,6 +178,8 @@ async function main() {
   };
 
   await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+  await writeFile(path.resolve("data/inspire-publications.json"), `${JSON.stringify(publicationSnapshot, null, 2)}\n`, "utf8");
+  console.log(`[inspire] Synced ${publicationSnapshot.records.length} unique chronological publications.`);
   console.log(`[inspire] Total citations: ${output.totalCitations} across ${output.uniquePublications} unique publication(s).`);
 }
 
