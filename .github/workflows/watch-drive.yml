@@ -11,6 +11,7 @@ on:
       - "scripts/watch-drive-changes.mjs"
       - "scripts/drive-watch-preflight.mjs"
       - "lib/drive-watch-state.mjs"
+      - "lib/drive-watch-api.mjs"
   workflow_dispatch:
   schedule:
     - cron: "13 */4 * * *"
@@ -32,17 +33,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
       - name: Verify authenticated Drive roots
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-        run: node --import tsx scripts/drive-watch-preflight.mjs
+        run: node scripts/drive-watch-preflight.mjs
       - name: Watch Drive for changes every minute
         env:
           GH_TOKEN: ${{ github.token }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-        run: node --import tsx scripts/watch-drive-changes.mjs
+        run: node scripts/watch-drive-changes.mjs
       - name: Continue monitoring on a fresh runner
         if: success()
         env:
