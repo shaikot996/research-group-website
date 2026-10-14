@@ -1,4 +1,6 @@
-# SAM Drive Change Bot — one-minute trigger
+# SAM Drive Change Bot — optional Google Apps Script setup
+
+**Update:** The website now has a GitHub-native Drive watcher that starts automatically without Google Apps Script or a personal access token. See [GITHUB_DRIVE_WATCHER.md](GITHUB_DRIVE_WATCHER.md). This older Apps Script bot is **optional**; do not install it unless you specifically need an alternative monitoring service.
 
 **Purpose:** Trigger the existing \`Sync Drive profiles and publish demo\` GitHub Actions workflow after a Google Drive change, without giving the RA/PI/Co-PI editors GitHub accounts.
 
