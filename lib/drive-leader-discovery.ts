@@ -2,7 +2,7 @@ import { GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, type GoogleDriveFile } from 
 
 /** Reserved/testing folders should never generate public member profiles. */
 export function isPlaceholderPersonFolder(name: string): boolean {
-  return /(?:^|[^a-z])(?:dummy|test(?:[\\s_-]*folder)?|placeholder|template|sample)(?:$|[^a-z])/i.test(name);
+  return /(?:^|[^a-z])(?:dummy|test(?:[\s_-]*folder)?|placeholder|template|sample)(?:$|[^a-z])/i.test(name);
 }
 
 export function candidatePersonFolders(files: GoogleDriveFile[]): GoogleDriveFile[] {
@@ -22,11 +22,11 @@ export function chooseLeaderDocument(files: GoogleDriveFile[]): GoogleDriveFile 
 }
 
 export function isValidLeaderDocument(body: string): boolean {
-  return /(?:^|\\n)\\s*NAME\\s*(?:\\n|$)/i.test(body) &&
-    /(?:^|\\n)\\s*ABOUT ME\\s*(?:\\n|$)/i.test(body);
+  return /(?:^|\n)\s*NAME\s*(?:\n|$)/i.test(body) &&
+    /(?:^|\n)\s*ABOUT ME\s*(?:\n|$)/i.test(body);
 }
 
 export function normalizePersonIdentity(name: string): string {
   return name.trim().normalize("NFKD").toLowerCase()
-    .replace(/[\\u0300-\\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+    .replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
 }
