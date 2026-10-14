@@ -95,7 +95,7 @@ export default function ResearchRadarPage() {
       <div className="grid items-start gap-7 border-t academic-rule pt-8 md:grid-cols-[1fr_auto]">
         <div>
           <p className="text-xs font-bold uppercase tracking-[.18em] text-accent">Our editorial standard</p>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">Sources are linked to original arXiv records. Titles, author names, submission dates and abstract excerpts are sourced from arXiv. Rankings use transparent keyword and recency heuristics; no unverified AI summaries, invented paper claims or peer-review status are inferred.</p>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">Sources are linked to original arXiv records. Titles, author names, submission dates and abstract excerpts are sourced from arXiv. Rankings use transparent keyword and recency heuristics; no unverified AI summaries, invented paper claims or peer-review status are inferred. This is an independent discovery tool, not affiliated with or endorsed by arXiv.</p><p className="mt-2 text-xs text-muted">Thank you to arXiv for use of its open access interoperability.</p>
         </div>
         <Link className="text-sm font-semibold text-accent hover:underline" href="/news-events">SAM news & events ↗</Link>
       </div>
