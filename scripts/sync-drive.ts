@@ -3,7 +3,7 @@ import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
 import { extractDocxText } from "../lib/docx-text";
-import { candidatePersonFolders, normalizePersonIdentity } from "../lib/drive-leader-discovery";
+import { candidatePersonFolders, isDocxLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import { imageExtensionFromBytes, validatePdf } from "../lib/drive-leader-media";
 import { downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, listGoogleDriveChildren, PublicDriveFolderNotListableError, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile } from "../lib/google-drive";
 
@@ -58,14 +58,10 @@ function chooseProfileFile(files: GoogleDriveFile[]) {
   })[0];
 }
 
-function isDocxProfile(file: GoogleDriveFile) {
-  return file.mimeType === DOCX_MIME || /\.docx$/i.test(file.name);
-}
-
 async function readProfileText(auth: GoogleDriveAuth | null, file: GoogleDriveFile | undefined) {
   if (!file) return "";
   const bytes = await retryDrive(`download ${file.name}`, () => downloadGoogleDriveFile(auth, file));
-  return isDocxProfile(file) ? extractDocxText(bytes) : bytes.toString("utf8");
+  return isDocxLeaderDocument(file) ? extractDocxText(bytes) : bytes.toString("utf8");
 }
 function choosePortrait(files: GoogleDriveFile[]) {
   const supported = files.filter(file =>

@@ -59,6 +59,9 @@ jobs:
 
       - run: npm ci
       - run: npm run setup
+      # Catch Drive format/discovery regressions before touching published content.
+      - name: Test Drive profile parser and folder discovery
+        run: node --import tsx scripts/test-content.ts
 
       # Publish successfully synced people even if one person's import fails.
       # Fail visibly after deployment; do not silently report a green sync.

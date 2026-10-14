@@ -199,4 +199,19 @@ if(!isDocxLeaderDocument(autoDocx) || chooseLeaderDocument([autoDocx])?.id!=="wo
 if(!isValidLeaderDocument("NAME: New Member\nABOUT ME: String cosmology researcher")){
   throw Error("Inline PI/Co-PI DOCX heading format is not accepted.");
 }
+// Regression: a converted Google Doc may keep its original .docx filename.
+// Drive exports native documents as plain text; never feed that text to ZIP parser.
+const convertedDocxName = { id: "aladin-doc", name: "Aladin SAM profile.docx", mimeType: GOOGLE_DOC_MIME };
+if (isDocxLeaderDocument(convertedDocxName)) {
+  throw new Error("Native Google Doc with .docx filename was incorrectly parsed as a ZIP/DOCX.");
+}
+if (chooseLeaderDocument([convertedDocxName])?.id !== "aladin-doc") {
+  throw new Error("Converted Google Doc with .docx filename must remain a valid profile.");
+}
+const genuineWordFile = { id: "word", name: "profile", mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" };
+if (!isDocxLeaderDocument(genuineWordFile)) {
+  throw new Error("Actual Word MIME type must take precedence over filename.");
+}
+console.log("Converted Google Doc versus actual DOCX MIME regression tests passed.");
+
 console.log("DOCX-based PI and Co-PI onboarding tests passed.");

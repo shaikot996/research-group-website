@@ -13,6 +13,9 @@ export function candidatePersonFolders(files: GoogleDriveFile[]): GoogleDriveFil
 
 const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 export function isDocxLeaderDocument(file: GoogleDriveFile) {
+  // Google Drive allows native Docs to retain a .docx suffix after conversion.
+  // The MIME type is authoritative: native Docs export as UTF-8 text, not ZIP.
+  if (file.mimeType === GOOGLE_DOC_MIME) return false;
   return file.mimeType === DOCX_MIME || /\.docx$/i.test(file.name);
 }
 export function chooseLeaderDocument(files: GoogleDriveFile[]): GoogleDriveFile | undefined {
