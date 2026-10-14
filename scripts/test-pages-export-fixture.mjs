@@ -6,7 +6,7 @@ import os from "node:os";
 import assert from "node:assert/strict";
 
 const dir = await mkdtemp(path.join(os.tmpdir(), "sam-pages-root-"));
-const routes = ["research", "people", "publications", "projects", "news-events", "join", "about", "contact", "search"];
+const routes = ["research", "people", "publications", "projects", "news-events", "research-radar", "join", "about", "contact", "search"];
 const html = (name) => `<!doctype html><html><head><title>${name}</title><link rel="stylesheet" href="/_next/static/chunks/main.css"></head><body><h1>${name}</h1><nav>${routes.map(r=>`<a href="/${r}/">${r}</a>`).join("")}</nav><a href="/">Home</a><img src="/test.svg"><script src="/_next/static/chunks/main.js"></script></body></html>`;
 const server = http.createServer((req, res) => {
   const pathname = new URL(req.url, "http://localhost").pathname;
