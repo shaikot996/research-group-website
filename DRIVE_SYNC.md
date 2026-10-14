@@ -2,8 +2,8 @@
 
 The site uses a hybrid content model:
 
-- GitHub/Prisma local content remains authoritative for PI, faculty, researchers and custom profiles.
-- Google Drive is authoritative for `RESEARCH_ASSISTANT` profiles whose `contentSource` is `DRIVE`.
+- Existing curated PI/Co-PI content, awards, grants, research highlights and local relations remain authoritative in GitHub/Prisma; editable leader profiles, portraits and CVs synchronize from Drive. Newly added PI/Co-PI member folders are automatically imported without a fixed code mapping.
+- Google Drive is authoritative for Research Assistants (`contentSource=DRIVE`) and newly discovered PI/Co-PI member profiles (`contentSource=DRIVE_LEADER_AUTO`).
 - A small `DRIVE_BOOTSTRAP` fallback keeps the initial Research Assistant section visible before the first successful Drive sync; the matching Drive folder is adopted in place rather than duplicated.
 
 ## Drive layout
@@ -61,6 +61,26 @@ Your text here.
 
 The website will render it as its own **Outreach and Service** section. `CUSTOM SECTION: ...` works as well.
 
+
+## Automatic PI and Co-PI onboarding
+
+The sync now discovers new, non-placeholder folders in both Drive roots:
+
+- PI: https://drive.google.com/drive/folders/19uuYERTNBIaET6MlehwjF6kvS1L7sLlc
+- Co-PI: https://drive.google.com/drive/folders/1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM
+
+Create a real person's folder under the appropriate root, containing one **Google Doc** with at least \`NAME\` and \`ABOUT ME\` headings (and optionally \`CURRENT POSITION\`, \`AFFILIATION\`, research information), a portrait (JPG/PNG/WebP) and a CV (PDF). The profile document is required; the photo and CV are optional. The next automatic Drive-triggered GitHub Pages deployment publishes new leaders with a stable slug. PI folders publish as Principal Investigators; Co-PI folders follow the website's existing Researcher / Co-Principal Investigator title convention.
+
+- Existing curated five leader profiles keep their stable identity and custom awards/achievements. New folders cannot overwrite those profiles.
+- Folder names containing Dummy, Test, Placeholder, Template or Sample are excluded from public publishing. In particular, the \`Dummy Sama\` folder in the Co-PI root is **not a real new member**: its Doc repeats an existing person's identity and is intentionally excluded.
+- Duplicate name/email/INSPIRE identity is rejected instead of producing a second person page.
+- Empty or incomplete folders are ignored until a valid profile document arrives.
+- Removing a newly discovered leader folder unpublishes only that automatically generated profile. Curated existing leader profiles remain protected.
+- Changing a portrait/CV rebuilds website assets on the next automatic deployment.
+- Google Drive watcher is configured for approximately one-minute change scanning, with the five-minute GitHub Actions schedule as backup. GitHub runners and Pages builds add variable publication delay; no real-world workflow can guarantee zero errors or an exact delay.
+
+**Research Assistants:** follow the RA folder template above. All valid new RA folders are discovered automatically; empty/photo-only folders and duplicate person identities are skipped, invalid image and CV bytes are rejected. No manual GitHub workflow dispatch is necessary.
+
 ## Google access
 
 The live GitHub Actions sync uses a **Google service account** stored in GitHub Secret `GOOGLE_SERVICE_ACCOUNT_JSON`; the service account has Viewer access to the Research Assistant and PI/Co-PI folders. These folders can remain private. The script also supports a public-link fallback for independent local setups, but authenticated Drive API access is the supported production configuration.
@@ -103,7 +123,7 @@ The sync command prints lines such as `[drive] Synced <name> -> /people/<slug>` 
 
 ## Sync behavior
 
-- New valid Drive person folder -> new RA profile after the next sync.
+- New valid Drive person folder -> new RA, PI or Co-PI profile after the next sync (using the appropriate parent folder).
 - Existing Drive folder changes -> existing profile updates by immutable Drive folder ID.
 - Folder rename does not change an existing profile URL.
 - Removed Drive folder -> corresponding Drive-managed profile becomes unpublished.
