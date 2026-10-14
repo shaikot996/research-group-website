@@ -6,5 +6,9 @@ export function Footer({ s }: { s: Record<string, string> }) {
       <div className="grid content-start gap-2 text-sm"><strong className="mb-2 text-xs uppercase tracking-[.14em] text-slate-400">Navigate</strong><Link href="/research">Research</Link><Link href="/people">People</Link><Link href="/publications">Publications</Link><Link href="/projects">Projects</Link><Link href="/news-events">News & Events</Link></div>
       <div className="grid content-start gap-2 text-sm"><strong className="mb-2 text-xs uppercase tracking-[.14em] text-slate-400">Contact</strong>{s.contactEmail && <a href={`mailto:${s.contactEmail}`}>{s.contactEmail}</a>}<Link href="/contact">Contact the group</Link><a href={s.universityUrl}>University website</a><Link href="/feed.xml">News RSS</Link></div>
     </div>
+    <div className="container-site border-t border-slate-700/60 py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+      <span>© {new Date().getUTCFullYear()} SAM Research Group</span>
+      <span className="inline-flex items-center gap-2">Site visits <img src="https://hits.sh/sam.cse.bracu.ac.bd.svg?label=views&color=64748b&labelColor=101827" alt="Live site visit counter" width="92" height="20" loading="lazy" referrerPolicy="no-referrer" /></span>
+    </div>
   </footer>;
 }
