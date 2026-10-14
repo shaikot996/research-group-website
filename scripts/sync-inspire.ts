@@ -88,7 +88,6 @@ async function fetchAuthorBai(author: AuthorConfig): Promise<string | null> {
 async function fetchLiteraturePage(query: string, page: number) {
   const params = new URLSearchParams({
     q: query,
-    fields: "control_number,citation_count",
     size: "250",
     page: String(page),
     sort: "mostrecent",
