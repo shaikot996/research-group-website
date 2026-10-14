@@ -7,6 +7,7 @@ const links = [
   ["Publications", "/publications"],
   ["Projects", "/projects"],
   ["News & Events", "/news-events"],
+  ["Research Radar", "/research-radar"],
   ["Join Us", "/join"],
   ["About", "/about"],
   ["Contact", "/contact"],

@@ -6,7 +6,7 @@ import path from "node:path";
 const out = path.resolve(process.env.EXPORT_OUT_DIR || "_site");
 const domain = "sam.cse.bracu.ac.bd";
 const errors = [];
-const mandatory = ["index.html", "404.html", ".nojekyll", "CNAME", "static-demo.js", "search-index.json", "sitemap.xml", "robots.txt", "feed.xml", "people/index.html", "research/index.html", "publications/index.html", "projects/index.html", "about/index.html", "contact/index.html", "news-events/index.html", "join/index.html", "search/index.html"];
+const mandatory = ["index.html", "404.html", ".nojekyll", "CNAME", "static-demo.js", "search-index.json", "sitemap.xml", "robots.txt", "feed.xml", "people/index.html", "research/index.html", "publications/index.html", "projects/index.html", "about/index.html", "contact/index.html", "news-events/index.html", "research-radar/index.html", "join/index.html", "search/index.html"];
 for (const rel of mandatory) {
   if (!existsSync(path.join(out, rel))) errors.push(`Missing export file: ${rel}`);
 }
