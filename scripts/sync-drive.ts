@@ -3,6 +3,8 @@ import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
 import { extractDocxText } from "../lib/docx-text";
+import { candidatePersonFolders, normalizePersonIdentity } from "../lib/drive-leader-discovery";
+import { imageExtensionFromBytes, validatePdf } from "../lib/drive-leader-media";
 import { downloadGoogleDriveFile, getGoogleDriveAccessToken, GOOGLE_DOC_MIME, GOOGLE_DRIVE_FOLDER_MIME, listGoogleDriveChildren, PublicDriveFolderNotListableError, readGoogleServiceAccount, type GoogleDriveAuth, type GoogleDriveFile } from "../lib/google-drive";
 
 if (process.env.NODE_ENV !== "production") {
@@ -106,10 +108,16 @@ async function savePortrait(auth: GoogleDriveAuth | null, file: GoogleDriveFile 
   const dir = path.join(assetRoot, slug);
   await mkdir(dir, { recursive: true });
   const bytes = file ? await retryDrive(`portrait ${file.name}`, () => downloadGoogleDriveFile(auth, file)) : null;
+  if (!file) {
+    for (const existing of await readdir(dir).catch(() => [] as string[])) {
+      if (/^profile\.(jpe?g|png|webp)$/i.test(existing)) await unlink(path.join(dir, existing)).catch(() => undefined);
+    }
+    return;
+  }
+  imageExtensionFromBytes(bytes!); // Reject HTML/error payloads before changing a portrait.
   for (const existing of await readdir(dir).catch(() => [] as string[])) {
     if (/^profile\.(jpe?g|png|webp)$/i.test(existing)) await unlink(path.join(dir, existing)).catch(() => undefined);
   }
-  if (!file) return;
   const nameExt = path.extname(file.name).toLowerCase();
   const ext = file.mimeType === "image/png" || nameExt === ".png"
     ? ".png"
@@ -126,7 +134,9 @@ async function saveCv(auth: GoogleDriveAuth | null, file: GoogleDriveFile | unde
     await unlink(target).catch(() => undefined);
     return null;
   }
-  await writeFile(target, await retryDrive(`CV ${file.name}`, () => downloadGoogleDriveFile(auth, file)));
+  const bytes = await retryDrive(`CV ${file.name}`, () => downloadGoogleDriveFile(auth, file));
+  validatePdf(bytes);
+  await writeFile(target, bytes);
   return `/uploads/${slug}-cv.pdf`;
 }
 
@@ -144,12 +154,33 @@ async function syncPerson(auth: GoogleDriveAuth | null, folder: GoogleDriveFile)
   const profileFile = chooseProfileFile(files);
   const portrait = choosePortrait(files);
   const cv = chooseCv(files);
-  if (!profileFile && !portrait && !cv) {
-    console.warn(`[drive] Skipping empty/incomplete folder: ${folder.name}`);
+  if (!profileFile) {
+    console.warn(`[drive] Skipping incomplete folder without a profile document: ${folder.name}`);
     return null;
   }
   const text = await readProfileText(auth, profileFile);
+  if (!text.trim()) {
+    console.warn(`[drive] Skipping empty profile document in: ${folder.name}`);
+    return null;
+  }
   const profile = parseDriveProfile(text, folder.name, defaultAffiliation);
+  if (!profile.name.trim() || profile.name.length > 120) {
+    console.warn(`[drive] Skipping invalid RA name in: ${folder.name}`);
+    return null;
+  }
+  const potentialDuplicates = await prisma.person.findMany({
+    select: { name: true, slug: true, email: true, inspire: true, contentSource: true, externalSourceId: true },
+  });
+  const conflict = potentialDuplicates.find(person => person.externalSourceId !== folder.id &&
+    person.contentSource !== "DRIVE_BOOTSTRAP" && (
+      normalizePersonIdentity(person.name) === normalizePersonIdentity(profile.name) ||
+      (profile.email && person.email && profile.email.toLowerCase() === person.email.toLowerCase()) ||
+      (profile.inspire && person.inspire && profile.inspire === person.inspire)
+    ));
+  if (conflict) {
+    console.warn(`[drive] Skipping duplicate RA ${profile.name}; member already exists as ${conflict.slug}`);
+    return null;
+  }
   const slug = await chooseSlug(folder.id, profile.name);
   const collision = await prisma.person.findUnique({ where: { slug }, select: { id: true, contentSource: true, externalSourceId: true } });
   if (collision && !["DRIVE", "DRIVE_BOOTSTRAP"].includes(collision.contentSource) && collision.externalSourceId !== folder.id) {
@@ -208,11 +239,8 @@ async function main() {
   await mkdir(uploadRoot, { recursive: true });
   const raFolderId = await findRaFolder(auth);
   console.log(`[drive] RA folder ID: ${raFolderId}; mode: ${explicitRaFolderId ? "explicit" : "auto"}`);
-  const children = (await retryDrive("RA folder listing", () => listGoogleDriveChildren(auth, raFolderId))).filter(file =>
-    file.mimeType === GOOGLE_DRIVE_FOLDER_MIME &&
-    !/^(news(?:\s*(?:&|and)\s*events?)?|events?(?:\s*(?:&|and)\s*news)?|templates?|shared|media)$/i.test(file.name.trim()) &&
-    !/\b(?:dummy|test[\s-]*folder|placeholder)\b/i.test(file.name),
-  );
+  const children = candidatePersonFolders(await retryDrive("RA folder listing", () => listGoogleDriveChildren(auth, raFolderId)))
+    .filter(file => !/^(news(?:\s*(?:&|and)\s*events?)?|events?(?:\s*(?:&|and)\s*news)?|shared|media)$/i.test(file.name.trim()));
   console.log(`[drive] Discovered ${children.length} folders: ${children.map(f => f.name).join(", ")}`);
   if (!children.length) throw new Error("No Research Assistant folders found; refusing to overwrite the last published snapshot.");
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, "root_ok=true\n");
