@@ -9,6 +9,7 @@ on:
     paths:
       - ".github/workflows/watch-drive.yml"
       - "scripts/watch-drive-changes.mjs"
+      - "scripts/drive-watch-preflight.mjs"
       - "lib/drive-watch-state.mjs"
   workflow_dispatch:
   schedule:
@@ -33,6 +34,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Verify authenticated Drive roots
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: node --import tsx scripts/drive-watch-preflight.mjs
       - name: Watch Drive for changes every minute
         env:
           GH_TOKEN: ${{ github.token }}
