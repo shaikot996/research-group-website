@@ -34,6 +34,8 @@ await get("/publications?year=invalid");
 assert.ok((await (await get("/contact")).text()).includes("mailto:majumdar@bracu.ac.bd"));
 const news = await (await get("/news-events")).text();
 assert.ok(news.includes("Latest news") && news.includes("Upcoming events"), "News and Events editorial sections are missing");
+const radar = await (await get("/research-radar")).text();
+assert.ok(radar.includes("Research Radar") && radar.includes("Explore the latest") && radar.includes("original arXiv"), "Radar page missing expected sections");
 const feed = await (await get("/feed.xml")).text();
 assert.ok(feed.includes("Strings, Artificial Intelligence and Mathematics News"));
 assert.ok((await (await get("/robots.txt")).text()).includes("Sitemap:"));
