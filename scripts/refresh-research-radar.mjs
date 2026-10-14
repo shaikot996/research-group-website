@@ -1,8 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
+import authorWatchlist from "../data/radar-author-watchlist.json" with {type:"json"};
 
 const OUTPUT = "data/research-radar.json";
 const DAYS_TO_KEEP = 60;
-const MAX_HISTORY = 180;
+const MAX_HISTORY = 54;
 const FEEDS = [
   { key: "High-Energy Theory", category: "hep-th" },
   { key: "Quantum Gravity & Cosmology", category: "gr-qc" },
@@ -40,7 +41,7 @@ export function parseAtom(xml, topic) {
     const published = contents(entry, "published");
     if (!isIso(published) || title.length < 12 || !abstract) return [];
     const authors = [...entry.matchAll(/<author(?:\s[^>]*)?>([\s\S]*?)<\/author>/gi)]
-      .map(([, a]) => contents(a, "name")).filter(Boolean).slice(0, 12);
+      .map(([, a]) => contents(a, "name")).filter(Boolean).slice(0, 35);
     // arXiv daily Atom feeds use dc:creator instead of the API author nodes.
     if (!authors.length) {
       const creator = contents(entry, "creator");
@@ -78,14 +79,38 @@ export function parseRss(xml, topic) {
     }];
   });
 }
+const normalizeAuthor = name => String(name||"").normalize("NFKD").toLowerCase()
+  .replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+const matchedAuthors = (paper,list) => (paper.authors||[]).some(author=>
+  list.some(name=>normalizeAuthor(author)===normalizeAuthor(name)));
+const deepPhysics = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|anti.de sitter|ads.?cft|brane|flux vacua|flux compact|type iib|supergrav|worldsheet|matrix string|f.theory|heterotic|de sitter|black hole|quantum gravit|inflation|effective field theor|conformal field theor|topological string|extra dimensions|quantum cosmolog|decompactif|supersymmet|quantum field theor|black brane|m.theory|landscape/i;
+const highlySpecific = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|ads.?cft|flux vacua|type iib|supergrav|worldsheet|f.theory|heterotic|topological string|decompactif|m.theory/i;
+export function isRelevantPaper(paper) {
+  if(matchedAuthors(paper,authorWatchlist.excludedAuthors)) return false;
+  if(matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
+     matchedAuthors(paper,authorWatchlist.groupResearchers))return true;
+  if(matchedAuthors(paper,authorWatchlist.prominentStringTheorists))return true;
+  const text=paper.title+" "+paper.abstract;
+  if(paper.category==="AI for Science")
+    return /machine learning|deep learning|neural network|artificial intelligence|ai for science/i.test(text) &&
+      /string theor|physics|quantum|cosmolog|general relativ|gravitation|mathematical physics|theorem prov|particle physic|field theor|scientific discover/i.test(text);
+  if(paper.category==="Mathematics")
+    return highlySpecific.test(text) || (/quantum field|quantum gravit|black hole|gauge theor/i.test(text) &&
+      /geometry|conformal|supersymmetr|algebra/i.test(text));
+  return highlySpecific.test(text) ||
+    (deepPhysics.test(paper.title) && /gravity|cosmology|field theory|strings|black hole|quantum/i.test(text));
+}
 export function relevance(paper) {
   const haystack = (paper.title + " " + paper.abstract).toLowerCase();
+  const authorScore=matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
+    matchedAuthors(paper,authorWatchlist.groupResearchers) ? 100 :
+    matchedAuthors(paper,authorWatchlist.prominentStringTheorists) ? 50 : 0;
   const focus = (paper.title + " " + paper.abstract.slice(0, 380)).toLowerCase();
   const matched = keywords.test(haystack);
   const strong = keywords.test(focus);
   const daysOld = Math.max(0, (Date.now() - Date.parse(paper.published)) / 86400000);
   const subjects = {"High-Energy Theory":5,"Quantum Gravity & Cosmology":4,"Mathematics":3,"AI for Science":2};
-  return (subjects[paper.category] || 0) + (matched ? 4 : 0) + (strong ? 4 : 0) + Math.max(0, 9 - daysOld / 2);
+  return authorScore + (subjects[paper.category] || 0) + (matched ? 4 : 0) + (strong ? 4 : 0) + Math.max(0, 9 - daysOld / 2);
 }
 export function prepareSnapshot(current, incoming, now = new Date()) {
   const cutoff = now.getTime() - DAYS_TO_KEEP * 86400000;
@@ -93,7 +118,7 @@ export function prepareSnapshot(current, incoming, now = new Date()) {
   for (const item of [...(current.papers || []), ...incoming]) {
     if (!item?.id || !isIso(item.published) || Date.parse(item.published) < cutoff) continue;
     if (Date.parse(item.published) > now.getTime() + 86400000) continue;
-    if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url)) continue;
+    if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url) || !isRelevantPaper(item)) continue;
     const existing = map.get(item.id);
     if (!existing || (incoming.includes(item) && !incoming.includes(existing))) map.set(item.id, item);
   }
