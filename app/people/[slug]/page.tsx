@@ -5,6 +5,7 @@ import { Breadcrumbs, ProjectCard, PubEntry, SectionHeader } from "@/components/
 import { Portrait } from "@/components/portrait";
 import { MahbubProfileSections } from "@/components/mahbub-profile-sections";
 import { getInspireArticles, type InspireArticle } from "@/lib/inspire";
+import { getMemberCitationMap, memberCitationFor } from "@/lib/member-citations";
 
 function driveProfileSections(value?: string | null): Array<[string, string]> {
   if (!value) return [];
@@ -60,6 +61,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!p) notFound();
   const extraSections = driveProfileSections(p.profileSections);
   const inspirePublications = p.inspire ? await getInspireArticles(p.inspire) : null;
+  const memberCitationMap = await getMemberCitationMap();
+  const cachedCitations = memberCitationFor(memberCitationMap, p.inspire);
+  const currentArticles = inspirePublications && !inspirePublications.error ? inspirePublications.articles : [];
+  const liveCitations = currentArticles.length
+    ? {
+        citations: [...new Map(currentArticles.map((article) => [article.id, article.citations ?? 0])).values()]
+          .reduce((sum, count) => sum + count, 0),
+        publications: new Set(currentArticles.map((article) => article.id)).size,
+      }
+    : null;
+  const memberCitationStats = cachedCitations ?? liveCitations;
 
   const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
   const externalLinks = [
@@ -96,6 +108,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <h1 className="mt-3 font-serif text-5xl md:text-6xl">{p.name}</h1>
           <p className="mt-3 text-lg text-navy">{p.title}</p>
           <p className="text-sm text-muted">{p.affiliation}</p>
+          {memberCitationStats && <div className="mt-5 flex flex-wrap gap-6 border-y academic-rule py-4">
+            <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.citations.toLocaleString("en-US")}</div><div className="text-xs text-muted">INSPIRE citations</div></div>
+            <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.publications}</div><div className="text-xs text-muted">INSPIRE publications</div></div>
+          </div>}
           {p.email && <a className="mt-5 inline-block link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
             {externalLinks.map(([label, url]) => <a className="link-academic" key={label} href={url} target="_blank" rel="noopener noreferrer">{label}</a>)}
