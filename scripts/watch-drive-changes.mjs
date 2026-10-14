@@ -6,10 +6,10 @@
 import { execFileSync } from "node:child_process";
 import { driveFingerprint } from "../lib/drive-watch-state.mjs";
 import {
-  readGoogleServiceAccount,
-  getGoogleDriveAccessToken,
-  listGoogleDriveChildren,
-} from "../lib/google-drive.ts";
+  readWatchServiceAccount,
+  getWatchDriveAccessToken,
+  listWatchDriveChildren,
+} from "../lib/drive-watch-api.mjs";
 
 const REPO = "shaikot996/research-group-website";
 const ROOTS = [
@@ -20,7 +20,7 @@ const ROOTS = [
 const POLL_MS = 60000;
 const DEBOUNCE_MS = 150000;
 const RUNTIME_MS = 250 * 60000; // 4h 10m, below Actions' 6h job cap.
-const account = readGoogleServiceAccount();
+const account = readWatchServiceAccount();
 
 if (!account) throw new Error("A Google service account is required for the Drive watcher.");
 if (!process.env.GH_TOKEN) throw new Error("Native GitHub Actions token is missing.");
@@ -35,10 +35,10 @@ function sleep(ms) {
 async function listWithRefresh(id) {
   // Google OAuth access tokens expire within one hour.
   if (!authToken || Date.now() - lastAuthMs > 45 * 60000) {
-    authToken = await getGoogleDriveAccessToken(account);
+    authToken = await getWatchDriveAccessToken(account);
     lastAuthMs = Date.now();
   }
-  return listGoogleDriveChildren({ type: "bearer", value: authToken }, id);
+  return listWatchDriveChildren(authToken, id);
 }
 
 function dispatch(workflow, source) {
