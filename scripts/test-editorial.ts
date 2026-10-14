@@ -11,7 +11,7 @@ const news = [
 const n = parseEditorialDocument(news,"Example story");
 if(n.title!=="A significant SAM result"||n.kind!=="NEWS"||!n.published||!n.featured||
   n.body.indexOf("second paragraph")<0||n.category!=="Research") throw Error("News field parser failed.");
-if(n.date.toISOString()!=="2026-10-13T18:00:00.000Z") throw Error("Dhaka publication date conversion failed.");
+if(n.date.toISOString()!=="2026-10-14T06:00:00.000Z") throw Error("Dhaka publication date conversion failed.");
 
 const event = [
   "TYPE: EVENT","TITLE: Special Seminar","SUMMARY: A public lecture on quantum physics.",
