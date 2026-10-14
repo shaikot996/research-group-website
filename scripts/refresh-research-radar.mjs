@@ -168,6 +168,42 @@ async function fetchCategory(topic) {
   }
   return [];
 }
+export function authorWatchQueries(names, batchSize=5) {
+  const unique=[...new Set(names.filter(Boolean))];
+  const queries=[];
+  for(let i=0;i<unique.length;i+=batchSize) {
+    const batch=unique.slice(i,i+batchSize);
+    queries.push({
+      batch,
+      query:batch.map(name=>'au:"'+name.replaceAll('"',"")+'"').join(" OR ")
+    });
+  }
+  return queries;
+}
+async function fetchWatchlistPapers() {
+  const names=[...authorWatchlist.prominentStringTheorists,
+    ...authorWatchlist.verifiedCoauthors,...authorWatchlist.groupResearchers];
+  const batches=authorWatchQueries(names,5);
+  const found=[];
+  for(const {batch,query} of batches) {
+    const params=new URLSearchParams({
+      search_query:query,start:"0",max_results:"50",
+      sortBy:"submittedDate",sortOrder:"descending"
+    });
+    try {
+      const xml=await download("https://export.arxiv.org/api/query?"+params);
+      const parsed=parseAtom(xml,{key:"High-Energy Theory",category:"hep-th"});
+      // Never treat a substring or coincidental coauthor name as a match.
+      const exact=parsed.filter(p=>matchedAuthors(p,batch));
+      found.push(...exact);
+      console.log("[radar] Author watchlist batch: "+exact.length+" tracked submissions.");
+    } catch(error) {
+      console.warn("[radar] Author watchlist API batch unavailable: "+String(error));
+    }
+    await sleep(3100);
+  }
+  return found;
+}
 async function main() {
   const previous=await loadPrevious();
   const collected=[];
@@ -178,7 +214,9 @@ async function main() {
     collected.push(...papers);
     await sleep(3100); // Respect arXiv API's suggested 3-second minimum.
   }
-  if(successful===0) {
+  const authorPapers=await fetchWatchlistPapers();
+  collected.push(...authorPapers);
+  if(successful===0 && authorPapers.length===0) {
     // Existing checked-in snapshot stays unmodified and the scheduled job
     // fails loudly. Never silently replace verified results with placeholders.
     throw Error("All official arXiv endpoints failed; keeping last known good snapshot.");
@@ -186,8 +224,8 @@ async function main() {
   const snapshot=prepareSnapshot(previous,collected);
   if(!snapshot.papers.length)throw Error("No recent verified papers; preserving existing snapshot.");
   await writeFile(OUTPUT,JSON.stringify(snapshot,null,2)+"\n","utf8");
-  console.log("[radar] Refreshed "+snapshot.papers.length+" unique recent papers from "+
-    successful+"/"+FEEDS.length+" subject feeds.");
+  console.log("[radar] Refreshed "+snapshot.papers.length+" highly relevant papers from "+
+    successful+"/"+FEEDS.length+" subject feeds plus "+authorPapers.length+" tracked-author records.");
 }
 if(process.argv[1]?.endsWith("refresh-research-radar.mjs")) {
   main().catch(error=>{console.error("[radar] "+String(error));process.exitCode=1;});
