@@ -63,7 +63,7 @@ The website will render it as its own **Outreach and Service** section. `CUSTOM 
 
 ## Google access
 
-The current Research Assistant folder is shared as **Anyone with the link**, so **no Google Cloud credential is required** for the default setup. The sync script can discover the public folder hierarchy, export public Google Docs as text, and download the public portrait/CV files directly.
+The live GitHub Actions sync uses a **Google service account** stored in GitHub Secret `GOOGLE_SERVICE_ACCOUNT_JSON`; the service account has Viewer access to the Research Assistant and PI/Co-PI folders. These folders can remain private. The script also supports a public-link fallback for independent local setups, but authenticated Drive API access is the supported production configuration.
 
 Optional authentication is still supported if the folder is later made private or you want API-backed access:
 
@@ -113,6 +113,8 @@ The sync command prints lines such as `[drive] Synced <name> -> /people/<slug>` 
 - Empty public Research Assistant folders are skipped and retried automatically on later scheduled syncs. A folder that is private/unlistable can look the same as an empty folder; the sync logs a warning. The parent folder must remain publicly listable in public-link mode.
 - Portraits are stored at runtime under `data/drive-people/`.
 - CVs are stored under `data/uploads/` and served inline at `/uploads/<slug>-cv.pdf`.
+
+An optional **near-real-time Drive change bot** scans the existing RA/PI/Co-PI folders once per minute and dispatches the same GitHub Actions workflow only when the Drive state changes. See [DRIVE_BOT_SETUP.md](DRIVE_BOT_SETUP.md) for the one-time Google Apps Script authorization needed to enable it. The existing two-minute Drive audit logger can remain installed alongside this bot.
 
 The GitHub Actions workflow `.github/workflows/sync-drive.yml` requests Drive checks every 5 minutes and republishes the static GitHub Pages demo. GitHub scheduled runs are best-effort: runs may be delayed or skipped, and a full build/deploy adds latency. Five-minute end-to-end updates cannot be guaranteed by GitHub Actions.
 

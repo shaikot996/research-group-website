@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      source:
+        description: "Source of the external refresh request"
+        required: false
+        type: string
+        default: manual
   schedule:
     # Offset from GitHub's high-traffic top-of-hour slot.
     # Re-register the scheduler after observed missing cron-triggered runs.
