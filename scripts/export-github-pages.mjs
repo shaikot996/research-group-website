@@ -455,6 +455,57 @@ async function writeStaticHelpers() {
     } catch {}
   });
 
+  // GitHub Pages intentionally strips Next.js runtime. Restore the Radar
+  // interactions on the static HTML using data attributes, not React hydration.
+  document.querySelectorAll("[data-radar-explorer]").forEach((host) => {
+    const input = host.querySelector("[data-radar-query]");
+    const filterButtons = Array.from(host.querySelectorAll("[data-radar-filter]"));
+    const cards = Array.from(host.querySelectorAll("[data-radar-card]"));
+    const count = host.querySelector("[data-radar-count]");
+    const grid = host.querySelector("[data-radar-grid]");
+    const empty = host.querySelector("[data-radar-empty]");
+    const moreWrap = host.querySelector("[data-radar-more-wrap]");
+    const more = host.querySelector("[data-radar-more]");
+    let category = "All", limit = 12;
+    const render = () => {
+      const query = (input?.value || "").trim().toLowerCase();
+      const matches = cards.filter(card => (category === "All" ||
+        card.dataset.radarSubject === category) &&
+        (!query || (card.dataset.radarSearch || "").includes(query)));
+      let shown = 0;
+      const allow = new Set(matches.slice(0,limit));
+      cards.forEach(card => {
+        const visible = allow.has(card);
+        card.style.display = visible ? "flex" : "none";
+        if (visible) shown++;
+      });
+      if (grid) grid.style.display = matches.length ? "grid" : "none";
+      if (empty) empty.style.display = matches.length ? "none" : "block";
+      if (moreWrap) moreWrap.style.display = shown < matches.length ? "block" : "none";
+      if (count) count.textContent = matches.length + " focused " +
+        (matches.length === 1 ? "paper" : "papers");
+      filterButtons.forEach(btn => {
+        const active = btn.dataset.radarFilter === category;
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+        btn.classList.toggle("bg-[#8c2131]", active);
+        btn.classList.toggle("text-white", active);
+        btn.classList.toggle("border-[#8c2131]", active);
+        btn.classList.toggle("text-[var(--text)]", !active);
+        btn.classList.toggle("academic-rule", !active);
+      });
+    };
+    filterButtons.forEach(btn => btn.addEventListener("click", () => {
+      category = btn.dataset.radarFilter || "All";
+      limit = 12; render();
+    }));
+    input?.addEventListener("input", () => { limit=12; render(); });
+    more?.addEventListener("click", () => { limit += 12; render(); });
+    host.querySelector("[data-radar-clear]")?.addEventListener("click", () => {
+      category="All"; limit=12; if(input)input.value=""; render();
+    });
+    render();
+  });
+
   const form = document.querySelector('form[data-static-search]') ||
     (location.pathname.includes('/search') ? document.querySelector('form') : null);
   if (form) {
