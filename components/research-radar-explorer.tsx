@@ -64,7 +64,11 @@ export function RadarExplorer({papers}:{papers:RadarPaper[]}) {
           <a href={paper.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent">{paper.title}</a>
         </h3>
         <p className="mt-4 line-clamp-2 text-xs leading-6 text-muted">{paper.authors.length?paper.authors.join(", "):"Authors in original arXiv record"}</p>
-        <p className="mt-4 line-clamp-4 text-sm leading-7 text-muted">{short(paper.abstract)}</p>
+        <p className="mt-4 line-clamp-3 text-sm leading-7 text-muted">{short(paper.abstract)}</p>
+        <details className="mt-3 mb-5 border-l-2 border-[#8c2131] pl-3 text-sm text-muted">
+          <summary className="focus-ring w-fit cursor-pointer font-semibold text-accent">Full original arXiv abstract ▾</summary>
+          <p className="mt-3 whitespace-pre-line leading-7">{paper.abstract}</p>
+        </details>
         <div className="mt-auto flex items-center justify-between gap-4 border-t academic-rule pt-5 text-xs">
           <span className="font-medium text-muted">arXiv:{paper.id} · Preprint</span>
           <a href={paper.url} target="_blank" rel="noopener noreferrer" className="font-bold text-accent">Read ↗</a>
