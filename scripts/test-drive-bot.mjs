@@ -12,7 +12,7 @@ const properties = new Map([["SAM_GITHUB_TOKEN", "fake-offline-token"]]);
 const triggers = [];
 const sent = [];
 let shouldFailDispatch = false;
-const now = 1770768000000;
+const now = Date.now();
 
 const rootIds = [
   "10_rzMMevZi6_T-bajAnmaynab0UbDBtv",
