@@ -17,7 +17,7 @@ type Output = {
   totalCitations: number | null;
   uniquePublications: number | null;
   updatedAt: string | null;
-  authors: Array<{ name: string; controlNumber: string; bai?: string | null; records?: number }>;
+  authors: Array<{ name: string; controlNumber: string; bai?: string | null; records?: number; citations?: number }>;
 };
 
 const configPath = path.resolve(process.env.INSPIRE_AUTHORS_FILE || "config/inspire-authors.json");
@@ -139,7 +139,8 @@ async function main() {
   let publicationCacheMissing = false;
   try { await readFile(path.resolve("data/inspire-publications.json"), "utf8"); }
   catch { publicationCacheMissing = true; }
-  if (!force && !publicationCacheMissing && previous?.updatedAt && previous.totalCitations !== null) {
+  const memberStatsMissing = !previous?.authors?.length || previous.authors.some((author) => !Number.isFinite(author.citations));
+  if (!force && !publicationCacheMissing && !memberStatsMissing && previous?.updatedAt && previous.totalCitations !== null) {
     const age = Date.now() - new Date(previous.updatedAt).getTime();
     if (Number.isFinite(age) && age >= 0 && age < maxAgeMs) {
       console.log(`[inspire] Cache is ${Math.round(age / 3600000)}h old; refresh interval not reached.`);
@@ -156,15 +157,18 @@ async function main() {
 
   for (const author of authors) {
     const { records, bai } = await fetchAuthorLiterature(author);
+    const authorPapers = new Map<string, number>();
     allLiterature.push(...records);
     for (const record of records) {
       const key = String(record.metadata?.control_number ?? record.id ?? "");
       if (!key) continue;
       const citations = Number(record.metadata?.citation_count ?? 0);
       papers.set(key, Math.max(papers.get(key) ?? 0, Number.isFinite(citations) ? citations : 0));
+      authorPapers.set(key, Math.max(authorPapers.get(key) ?? 0, Number.isFinite(citations) ? citations : 0));
     }
-    resolvedAuthors.push({ ...author, bai, records: records.length });
-    console.log(`[inspire] ${author.name}${bai ? ` [${bai}]` : ""}: ${records.length} literature record(s)`);
+    const personalCitations = [...authorPapers.values()].reduce((sum, citations) => sum + citations, 0);
+    resolvedAuthors.push({ ...author, bai, records: authorPapers.size, citations: personalCitations });
+    console.log(`[inspire] ${author.name}${bai ? ` [${bai}]` : ""}: ${authorPapers.size} record(s), ${personalCitations} citations`);
   }
 
   const publicationSnapshot = { updatedAt: new Date().toISOString(), records: groupPublications(allLiterature) };
