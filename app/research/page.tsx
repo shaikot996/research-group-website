@@ -30,7 +30,7 @@ export default async function Page() {
             activeProjects={projectCount}
             researchAreas={areas.length}
             totalCitations={citationStats.totalCitations}
-            updatedAt={citationStats.updatedAt}
+            updatedAt={citationStats.updatedAt} researchGateAuthors={citationStats.researchGateAuthors}
           />
         </aside>
       </div>
