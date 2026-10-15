@@ -17,10 +17,11 @@ if (process.env.NODE_ENV !== "production") {
 const prisma = new PrismaClient();
 const piRoot = process.env.GOOGLE_DRIVE_PI_FOLDER_ID?.trim() || "19uuYERTNBIaET6MlehwjF6kvS1L7sLlc";
 const copiRoot = process.env.GOOGLE_DRIVE_COPI_FOLDER_ID?.trim() || "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM";
+const facultyRoot = process.env.GOOGLE_DRIVE_FACULTY_FOLDER_ID?.trim() || "1cDxQKvnfbPdoqv3uFqGsw0iGZDGPyv71";
 const imgRoot = path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people");
 const uploadRoot = path.resolve(process.env.UPLOAD_DIR || "data/uploads");
 
-type LeaderRole = "PRINCIPAL_INVESTIGATOR" | "RESEARCHER";
+type LeaderRole = "PRINCIPAL_INVESTIGATOR" | "RESEARCHER" | "FACULTY";
 type LeaderEntry = {
   slug?: string;
   docId: string;
@@ -38,6 +39,7 @@ const curated = [
   { slug: "syed-hasibul-hassan-chowdhury", docId: "1lPvsr33Wv1RGvn_530ogjKqEJ8D_mjFn5S-nuP3iJDw", folderId: "1dWR5wvM9GuQyG_CPezk__8dkrhgB2BiW", folderName: "Syed Hasibul Hassan Chowdhury", role: "PRINCIPAL_INVESTIGATOR", curated: true },
   { slug: "ahmed-rakin-kamal", docId: "1J2pOnHjX7U3t_aiIpt3NznvyZ0jPZ63Yq_iNX4IMP8I", folderId: "1f8VaS6z-YIqkIrvtUxcn4uKEXVe6Pamp", folderName: "Ahmed Rakin Kamal", role: "RESEARCHER", curated: true },
   { slug: "mishaal-hai", docId: "1E1OcVzUsomwMsFjYzhqOZnBKPuodFthSm6Z5VvW-ESs", folderId: "1rJrAJmhUwMvjSQCELBJbK2jnVO_kOiKH", folderName: "Mishaal Hai", role: "RESEARCHER", curated: true },
+  { slug: "sayeda-tashnuba-jahan", docId: "1_I5KhyqwxLQoiwhJP70N_RTTPLpAs_-OtDWKysrY7yk", folderId: "1Eixc5Qtjw9GFczqQzQlG4iJIbP7cygKs", folderName: "Sayeda Tashnuba Jahan", role: "FACULTY", curated: true },
   { slug: "md-shaikot-jahan-shuvo", docId: "1JfqtGltntXeJpLebHI2MfV4X5OfKFBn5id0MnmWZlBs", folderId: "1U0JuxDwdIVyxDD_sgLa2qHoVQ-gGLEM1", folderName: "Md Shaikot Jahan Shuvo", role: "RESEARCHER", curated: true },
 ] satisfies LeaderEntry[];
 
@@ -63,6 +65,7 @@ async function discoverLeaders(auth: GoogleDriveAuth | null) {
   for (const { rootId, role, section } of [
     { rootId: piRoot, role: "PRINCIPAL_INVESTIGATOR" as const, section: "PI" },
     { rootId: copiRoot, role: "RESEARCHER" as const, section: "Co-PI" },
+    { rootId: facultyRoot, role: "FACULTY" as const, section: "Faculty" },
   ]) {
     const children = await retry(section + " folder discovery", () => listGoogleDriveChildren(auth, rootId));
     for (const folder of children.filter(file => file.mimeType === "application/vnd.google-apps.folder")) {
@@ -98,7 +101,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     ? await prisma.person.findUnique({ where: { slug: entry.slug! } })
     : await prisma.person.findUnique({ where: { externalSourceId: entry.docId } });
 
-  if (entry.curated && (!existing || !["PRINCIPAL_INVESTIGATOR", "RESEARCHER"].includes(existing.role))) {
+  if (entry.curated && (!existing || !["PRINCIPAL_INVESTIGATOR", "RESEARCHER", "FACULTY"].includes(existing.role))) {
     throw new Error("Expected curated leader missing or wrong role: " + entry.slug);
   }
   if (existing && !entry.curated && existing.contentSource !== "DRIVE_LEADER_AUTO") {
@@ -145,7 +148,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
   // a new leader as a Research Assistant merely because the title is empty.
   const titleFromDoc = /(?:^|\n)\s*(?:CURRENT POSITION|POSITION|TITLE)\s*(?:\n|:)/i.test(body);
   const title = titleFromDoc ? profile.title :
-    entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : "Co-Principal Investigator";
+    entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : entry.role === "FACULTY" ? "Faculty" : "Co-Principal Investigator";
   const files = await retry(entry.folderName + " media listing", () => listGoogleDriveChildren(auth, entry.folderId));
   const photo = files.filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
     .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
