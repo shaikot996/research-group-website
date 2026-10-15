@@ -6,6 +6,15 @@ import path from "node:path";
 const out = path.resolve(process.env.EXPORT_OUT_DIR || "_site");
 const domain = "sam.cse.bracu.ac.bd";
 const errors = [];
+const googleVerificationFilename = "google541d3d739d6713f5.html";
+const expectedGoogleVerification = "google-site-verification: google541d3d739d6713f5.html";
+const verificationPath = path.join(out, googleVerificationFilename);
+if (!existsSync(verificationPath)) {
+  errors.push("Google Search Console ownership verification file missing from Pages export");
+} else {
+  const actual = (await readFile(verificationPath, "utf8")).trim();
+  if (actual !== expectedGoogleVerification) errors.push("Google verification file content mismatch");
+}
 const mandatory = ["index.html", "404.html", ".nojekyll", "CNAME", "static-demo.js", "search-index.json", "sitemap.xml", "robots.txt", "feed.xml", "people/index.html", "research/index.html", "publications/index.html", "projects/index.html", "about/index.html", "contact/index.html", "news-events/index.html", "research-radar/index.html", "open-source/index.html", "open-source/ray/index.html", "images/open-source/ray-spacetime.webp", "join/index.html", "search/index.html"];
 for (const rel of mandatory) {
   if (!existsSync(path.join(out, rel))) errors.push(`Missing export file: ${rel}`);
@@ -51,7 +60,7 @@ if (existsSync(path.join(out, "robots.txt"))) {
 if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
   const profile = await readFile(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"), "utf8");
   if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");
-  if (!profile.includes('application/ld+json')) errors.push("Person profile missing structured data");
+  if (!/<script\b[^>]*type=["\']application\/ld\+json["\'][^>]*>[\s\S]*?https:\/\/schema\.org[\s\S]*?<\/script>/i.test(profile)) errors.push("Person profile missing preserved JSON-LD structured data");
 }
 if (existsSync(path.join(out, "index.html"))) {
   const home = await readFile(path.join(out, "index.html"), "utf8");
