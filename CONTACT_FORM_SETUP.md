@@ -1,13 +1,54 @@
-# Contact Responses — Deployment
+# SAM contact form — deploy in one Google Apps Script file
 
-Private Drive folder: https://drive.google.com/drive/folders/1LQDh6HGkzjQHxqtpc4TtHSsLiv3kipK-
+## Architecture
 
-1. Create an Apps Script project as the SAM Google Drive owner; paste `scripts/sam-contact-receiver.gs`.
-2. Under Script Properties, set `SAM_CONTACT_FOLDER_ID=1LQDh6HGkzjQHxqtpc4TtHSsLiv3kipK-`.
-3. Deploy as Web App (execute as owner). Anonymous visitors must be allowed to POST, but no Drive folder must be made publicly readable.
-4. Set repository Actions variable `SAM_CONTACT_ENDPOINT` to the Apps Script deployed /exec endpoint. Redeploy website.
-5. Run a test submission, inspect whether a uniquely timestamped applicant folder and Response.txt + PDF appear, and test a rejected bad PDF.
+GitHub Pages publishes **static HTML** and intentionally removes Next.js hydration scripts.
+Therefore the original React onSubmit handler never executes on the live website.
+The secure form instead lives inside Google Apps Script HtmlService and uses
+`google.script.run.saveSubmission(form)` with the actual HTML form as the only argument.
 
-The form remains disabled until the endpoint variable exists. On cross-origin Apps Script responses, browsers generally cannot read the actual response, so client UI must not promise verified delivery. For stronger delivery receipts, spam control, abuse throttling and secure uploads, deploy a trusted same-origin proxy and return proper JSON / CAPTCHA checks.
+This transfers the optional PDF as a Google Apps Script Blob, runs validation
+and Drive writes server-side, and shows **real confirmation** only after
+`saveSubmission()` returns successfully. No cross-origin CORS hacks, no public
+Drive file links, and no credentials shipped to the browser.
 
-Google Drive files saved by Apps Script are private to folder permissions, but anyone with the receiver endpoint may submit. Don't embed Google credentials in the website or commit private Drive file contents.
+### One-time owner-only steps
+
+1. As the Google account **owning the private SAM Drive folder**, open
+   https://script.google.com/home/projects/create
+2. Replace `Code.gs` entirely with the file
+   [`scripts/sam-contact-receiver.gs`](scripts/sam-contact-receiver.gs) and save.
+   The destination is already set to the private Contact Responses folder:
+   https://drive.google.com/drive/folders/1LQDh6HGkzjQHxqtpc4TtHSsLiv3kipK-
+3. In **Deploy > New deployment > Web app** set:
+   - Execute as **Me**
+   - Who has access **Anyone**
+   - Deploy and authorize the Drive permission prompts.
+   If a university Workspace policy blocks anonymous Apps Script web apps,
+   ask the workspace admin or use a Google account that permits anonymous Apps Script web apps.
+4. Copy the **/exec** deployment URL. In GitHub repository Settings >
+   Secrets and variables > Actions > Variables, create/update:
+   `SAM_CONTACT_ENDPOINT=https://script.google.com/macros/s/DEPLOYMENT_ID/exec`
+5. Trigger workflow **Sync Drive profiles and publish demo** in GitHub Actions
+   or push to `main`. The build uses `NEXT_PUBLIC_SAM_CONTACT_ENDPOINT`.
+6. Open https://sam.cse.bracu.ac.bd/contact/ and submit a test with a PDF.
+   The web form must return `Received successfully. Reference: SAM-...`.
+   Confirm that a folder containing **Response.txt** and **CV.pdf** appears
+   in Contact Responses. Test no-CV submission separately.
+   
+## Controls
+
+- Full name, email, inquiry type and message are mandatory.
+- CV optional, at most 5 MiB, magic bytes must start with `%PDF-`.
+- One timestamped person-specific folder per accepted submission.
+- File validation happens *before* folder creation.
+- A honeypot catches trivial form automation.
+- Private Drive folder access remains owner controlled; do **not** share it publicly.
+- A publicly accessible intake app can still be spammed. If necessary, place
+  rate limiting and CAPTCHA in front of the intake before promoting widely.
+
+## Connecting from ChatGPT
+
+The existing Google Drive/GitHub connectors cannot create or deploy an Apps
+Script Web App, nor write GitHub Actions variables. The **one-time deployment**
+above needs the account owner's authorization. All subsequent file storage is automatic.
