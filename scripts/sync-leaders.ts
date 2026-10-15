@@ -193,9 +193,9 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     orcid: profile.orcid || null,
     github: profile.github || null,
     linkedin: profile.linkedin || null,
-    // For Hasib, use the verified ResearchGate headshot until a local portrait
-    // is uploaded to the person's Drive folder. All other members are unchanged.
-    photo: photoBytes ? null : entry.curated ? (existing?.photo?.startsWith("/people/") ? existing.photo : null) : null,
+    // Drive media is authoritative for every synced leader. Never restore
+    // a stale repository profile image after a successful Drive sync.
+    photo: null,
     cvUrl: cvBytes ? "/uploads/" + slug + "-cv.pdf" : entry.curated ? existing?.cvUrl || null : null,
     externalSourceId: entry.docId,
     contentSource: entry.curated ? "DRIVE_LEADER" : "DRIVE_LEADER_AUTO",

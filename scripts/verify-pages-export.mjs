@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 const out = path.resolve(process.env.EXPORT_OUT_DIR || "_site");
 const domain = "sam.cse.bracu.ac.bd";
@@ -57,6 +58,40 @@ if (existsSync(path.join(out, "robots.txt"))) {
   const robots = await readFile(path.join(out, "robots.txt"), "utf8");
   if (!robots.includes(`https://${domain}/sitemap.xml`)) errors.push("robots.txt points to the wrong sitemap");
 }
+
+const joinExport = path.join(out, "join", "index.html");
+if (existsSync(joinExport)) {
+  const join = await readFile(joinExport, "utf8");
+  if (!join.includes("Undergraduate Research Opportunities") ||
+      join.includes("Prospective Graduate Students") ||
+      join.includes("Postdoctoral Researchers")) {
+    errors.push("Join Us export contains outdated recruitment text; expected undergraduate research only");
+  }
+}
+
+// Compare deployed DP bytes with the authoritative Drive snapshot from this run.
+// This catches wrong portrait sources, stale assets, and accidental dummy images.
+const shaikotSource = path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people",
+  "md-shaikot-jahan-shuvo", "profile.png");
+const shaikotExport = path.join(out, "portraits", "md-shaikot-jahan-shuvo.png");
+const shaikotPage = path.join(out, "people", "index.html");
+if (!existsSync(shaikotSource)) {
+  errors.push("Shaikot's current Google Drive profile.png was not synced");
+} else if (!existsSync(shaikotExport)) {
+  errors.push("Shaikot's profile portrait PNG missing from Pages export");
+} else {
+  const checksum = (bytes) => createHash("sha256").update(bytes).digest("hex");
+  const original = await readFile(shaikotSource);
+  const published = await readFile(shaikotExport);
+  if (checksum(original) !== checksum(published)) errors.push("Shaikot portrait does not match current Drive image bytes");
+}
+if (existsSync(shaikotPage)) {
+  const people = await readFile(shaikotPage, "utf8");
+  if (!/src="\/portraits\/md-shaikot-jahan-shuvo\.png(?:\?[^"]*)?"/.test(people)) {
+    errors.push("People card still points to an outdated Shaikot portrait URL");
+  }
+}
+
 if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
   const profile = await readFile(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"), "utf8");
   if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");

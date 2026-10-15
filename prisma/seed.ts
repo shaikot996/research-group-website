@@ -22,6 +22,14 @@ async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
   for (const [key, value] of Object.entries(identitySettings)) {
     await db.siteSetting.upsert({ where: { key }, update: { value }, create: { key, value } });
   }
+  // Keep the published database fallback consistent with /join, even when
+  // a database survives multiple Drive sync and deployment cycles.
+  const joinBody = "## Undergraduate Research Opportunities\\nWe welcome motivated undergraduate students interested in theoretical physics, mathematics, artificial intelligence and computational research. Opportunities depend on current research projects, preparation and mentorship capacity. Students can share their academic background, research interests and optional CV.\\n\\n## Research Collaborations and Visitors\\nWe welcome inquiries regarding collaborations, scholarly seminars and focused computational projects.\\n\\n## How to Express Interest\\nIntroduce your background, relevant experience and interest in SAM research. Contact the group through the Contact page.";
+  await db.page.upsert({
+    where: { slug: "join" },
+    create: { slug: "join", eyebrow: "Opportunities", title: "Join Us", body: joinBody },
+    update: { eyebrow: "Opportunities", title: "Join Us", body: joinBody, status: "PUBLISHED" },
+  });
   await db.person.updateMany({
     where: { slug: { in: ["mishaal-hai", "md-shaikot-jahan-shuvo"] }, contentSource: { not: "DRIVE_LEADER" } },
     data: { role: "RESEARCHER", title: "Co-Principal Investigator" },
@@ -35,8 +43,8 @@ async function applyRequiredContentCorrections(db: Prisma.TransactionClient) {
     data: { cvUrl: "/people/mishaal-hai/cv.pdf" },
   });
   await db.person.updateMany({
-    where: { slug: "sayeda-tashnuba-jahan" },
-    data: { title: "Lecturer (On Leave)", photo: "/people/sayeda-tashnuba-jahan/profile.jpg", cvUrl: "/people/sayeda-tashnuba-jahan/cv.pdf" },
+    where: { slug: "sayeda-tashnuba-jahan", contentSource: { not: "DRIVE_LEADER" } },
+    data: { title: "Lecturer (On Leave)", cvUrl: "/people/sayeda-tashnuba-jahan/cv.pdf" },
   });
 
   // Keep one visible Research Assistant in fresh/existing installs before the
@@ -1188,7 +1196,7 @@ async function seed(db: Prisma.TransactionClient) {
       title: "Join Us",
       eyebrow: "Opportunities",
       body:
-        "## Prospective Graduate Students\nWe welcome inquiries from students whose interests overlap strongly with the group's current research. Specific openings depend on supervision capacity and funding availability.\n\n## Undergraduate Researchers\nMotivated students may contact the group with a concise description of their preparation and research interests.\n\n## Research Assistants and Postdoctoral Researchers\nWhen funded positions are available, calls will be posted here.\n\n## Visitors and Collaborations\nResearchers interested in seminars, visits or focused collaborations are welcome to make contact.\n\n## How to Contact Us\nA useful first message includes a CV, transcript where relevant, a short statement of interests, and links to representative publications, projects or software.",
+        "## Undergraduate Research Opportunities\nWe welcome motivated undergraduate students interested in theoretical physics, mathematics, artificial intelligence and computational research. Opportunities depend on current research projects, preparation and mentorship capacity. Students can share their academic background, research interests and optional CV.\n\n## Research Collaborations and Visitors\nWe welcome inquiries regarding collaborations, scholarly seminars and focused computational projects.\n\n## How to Express Interest\nIntroduce your background, relevant experience and interest in SAM research. Contact the group through the Contact page.",
     },
   });
 
