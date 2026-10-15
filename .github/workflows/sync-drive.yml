@@ -39,6 +39,7 @@ jobs:
       # University custom domain is the root, not a GitHub project path.
       GITHUB_PAGES_BASE_PATH: ""
       SITE_URL: https://sam.cse.bracu.ac.bd
+      NEXT_PUBLIC_SAM_CONTACT_ENDPOINT: ${{ vars.SAM_CONTACT_ENDPOINT }}
       EXPORT_OUT_DIR: _site
       EXPORT_ORIGIN: http://127.0.0.1:4173
       PORT: "4173"
