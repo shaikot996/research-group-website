@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 950" role="img" aria-label="Black hole and spacetime curvature">
+<defs><radialGradient id="space"><stop stop-color="#17365f"/><stop offset=".6" stop-color="#07182f"/><stop offset="1" stop-color="#020813"/></radialGradient><radialGradient id="halo"><stop offset=".41" stop-color="#000"/><stop offset=".58" stop-color="#040507"/><stop offset=".65" stop-color="#ffebad"/><stop offset=".72" stop-color="#fda64d" stop-opacity=".85"/><stop offset=".88" stop-color="#b13b25" stop-opacity=".26"/><stop offset="1" stop-color="#a04321" stop-opacity="0"/></radialGradient><linearGradient id="disk"><stop stop-color="#21558b" stop-opacity=".15"/><stop offset=".27" stop-color="#ffc776"/><stop offset=".53" stop-color="#fff2c5"/><stop offset=".72" stop-color="#f28b38"/><stop offset="1" stop-color="#d2512f" stop-opacity=".03"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="18"/></filter><filter id="soft"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<rect width="1600" height="950" fill="url(#space)"/>
+<g fill="#d6e7ff" opacity=".75"><circle cx="125" cy="110" r="2"/><circle cx="291" cy="305" r="1.5"/><circle cx="560" cy="78" r="2"/><circle cx="945" cy="153" r="2"/><circle cx="1494" cy="240" r="2"/><circle cx="1315" cy="775" r="2"/><circle cx="120" cy="830" r="1.8"/><circle cx="1510" cy="880" r="1.6"/><circle cx="365" cy="714" r="1.5"/><circle cx="1083" cy="42" r="1.5"/></g>
+<g fill="none" stroke="#3472ad" stroke-width="2.4" opacity=".42"><path d="M-120 535 Q780 980 1740 550"/><path d="M-120 620 Q800 1090 1740 630"/><path d="M-120 710 Q800 1200 1740 720"/><path d="M-120 830 Q800 1300 1740 830"/><path d="M100 -80 Q150 530 660 1050"/><path d="M370 -80 Q350 540 740 1050"/><path d="M700 -80 Q650 600 800 1050"/><path d="M950 -80 Q1030 540 900 1050"/><path d="M1210 -80 Q1330 510 1050 1050"/><path d="M1500 -80 Q1700 580 1160 1050"/></g>
+<ellipse cx="855" cy="500" rx="635" ry="170" transform="rotate(16 855 500)" fill="#fe8d36" opacity=".45" filter="url(#glow)"/>
+<ellipse cx="855" cy="500" rx="620" ry="110" transform="rotate(16 855 500)" fill="none" stroke="url(#disk)" stroke-width="41" opacity=".95" filter="url(#soft)"/>
+<circle cx="856" cy="432" r="285" fill="url(#halo)" filter="url(#soft)"/>
+<circle cx="855" cy="434" r="206" fill="#010208"/>
+<path d="M245 300 C560 371 716 479 1035 542 S1434 663 1554 705" stroke="#ffe3a0" stroke-width="26" fill="none" opacity=".85" filter="url(#glow)"/>
+<path d="M245 300 C560 371 716 479 1035 542 S1434 663 1554 705" stroke="url(#disk)" stroke-width="10" fill="none" opacity=".9"/>
+<path d="M560 395 C698 207 927 164 1072 324" stroke="#ffb15e" stroke-width="11" fill="none" opacity=".65" filter="url(#soft)"/>
+<ellipse cx="855" cy="500" rx="610" ry="112" transform="rotate(16 855 500)" fill="none" stroke="#ffc985" stroke-width="4" opacity=".8"/>
+</svg>
