@@ -59,6 +59,7 @@ if (existsSync(path.join(out, "robots.txt"))) {
   if (!robots.includes(`https://${domain}/sitemap.xml`)) errors.push("robots.txt points to the wrong sitemap");
 }
 
+if (process.env.SAM_VERIFY_CURRENT_PROFILES === "1") {
 const joinExport = path.join(out, "join", "index.html");
 if (existsSync(joinExport)) {
   const join = await readFile(joinExport, "utf8");
@@ -92,6 +93,7 @@ if (existsSync(shaikotPage)) {
   }
 }
 
+}
 if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
   const profile = await readFile(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"), "utf8");
   if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");

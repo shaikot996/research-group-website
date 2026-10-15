@@ -128,6 +128,8 @@ jobs:
         run: node scripts/export-github-pages.mjs
 
       - name: Verify custom-domain export and required assets
+        env:
+          SAM_VERIFY_CURRENT_PROFILES: "1"
         run: node scripts/verify-pages-export.mjs
 
       - name: Configure GitHub Pages
