@@ -17,7 +17,8 @@ const now = Date.now();
 const rootIds = [
   "10_rzMMevZi6_T-bajAnmaynab0UbDBtv",
   "19uuYERTNBIaET6MlehwjF6kvS1L7sLlc",
-  "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM"
+  "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM",
+  "1cDxQKvnfbPdoqv3uFqGsw0iGZDGPyv71"
 ];
 const folders = new Map(rootIds.map((id) => [id, { id, name: "root", updated: 100, files: [], folders: [] }]));
 folders.get(rootIds[0]).files.push({ id: "first-profile", name: "About Me", updated: 200, size: 100 });
@@ -84,7 +85,7 @@ const ctx = {
 
 const bot = vm.createContext(ctx);
 new vm.Script(script).runInContext(bot);
-assert.equal(bot.SAM_DRIVE_BOT_CONFIG.roots.length, 3);
+assert.equal(bot.SAM_DRIVE_BOT_CONFIG.roots.length, 4);
 assert.equal(bot.SAM_DRIVE_BOT_CONFIG.cooldownMilliseconds, 90000);
 
 bot.installSamDriveBot();
