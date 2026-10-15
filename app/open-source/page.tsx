@@ -21,7 +21,7 @@ export default function OpenSourceHub() {
           </div>
         </div>
         <div className="relative overflow-hidden border border-white/10 bg-[#08121e] shadow-[0_30px_65px_#0005]">
-          <img src="/images/open-source/ray-spacetime.webp" alt="Subtle illustration of a black hole and curved spacetime grid, without text" className="aspect-[1.7] h-full w-full object-cover" />
+          <img src="/images/open-source/ray-spacetime-hd.svg" alt="Subtle illustration of a black hole and curved spacetime grid, without text" className="aspect-[1.7] h-full w-full object-cover" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0b1628]/25 via-transparent to-[#0b1628]/20"/>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function OpenSourceHub() {
       </div>
       <article className="grid overflow-hidden border academic-rule bg-[var(--surface)] shadow-sm lg:grid-cols-[.93fr_1.07fr]">
         <div className="relative min-h-[240px] bg-[#081725] sm:min-h-[350px]">
-          <img src="/images/open-source/ray-spacetime.webp" alt="Black hole and spacetime geometry visualization" className="absolute inset-0 h-full w-full object-cover" loading="lazy"/>
+          <img src="/images/open-source/ray-spacetime-hd.svg" alt="Black hole and spacetime geometry visualization" className="absolute inset-0 h-full w-full object-cover" loading="lazy"/>
           <span className="absolute bottom-5 left-5 border border-white/50 bg-[#0a1927]/85 px-3 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-white">Research software · Wolfram Language</span>
         </div>
         <div className="flex flex-col p-7 sm:p-9 lg:p-11">
