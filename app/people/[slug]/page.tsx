@@ -72,12 +72,21 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       }
     : null;
   const memberCitationStats = cachedCitations ?? liveCitations;
+  // ResearchGate represents a broader subject scope than INSPIRE. Keep their
+  // source-specific counts distinct; never add potentially overlapping citations.
+  const isHasibProfile = p.slug === "syed-hasibul-hassan-chowdhury";
+  const researchGateSnapshot = isHasibProfile ? {
+    publications: 29, citations: 119,
+    url: "https://www.researchgate.net/profile/S-Chowdhury-2",
+    observed: "2026-10-16",
+  } : null;
 
   const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
   const externalLinks = [
     ["Website", p.website],
     ["Scholar", p.googleScholar],
     ["INSPIRE", p.inspire],
+    ["ResearchGate", p.slug === "syed-hasibul-hassan-chowdhury" ? "https://www.researchgate.net/profile/S-Chowdhury-2" : null],
     ["ORCID", p.orcid],
     ["arXiv", p.arxiv],
     ["GitHub", p.github],
@@ -111,6 +120,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           {memberCitationStats && <div className="mt-5 flex flex-wrap gap-6 border-y academic-rule py-4">
             <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.citations.toLocaleString("en-US")}</div><div className="text-xs text-muted">INSPIRE citations</div></div>
             <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.publications}</div><div className="text-xs text-muted">INSPIRE publications</div></div>
+          </div>}
+          {researchGateSnapshot && <div className="mt-3 flex flex-wrap gap-6 border-b academic-rule pb-4">
+            <div><div className="text-2xl font-semibold tabular-nums">{researchGateSnapshot.citations}</div><div className="text-xs text-muted">ResearchGate citations</div></div>
+            <div><div className="text-2xl font-semibold tabular-nums">{researchGateSnapshot.publications}</div><div className="text-xs text-muted">ResearchGate publications</div></div>
+            <div className="self-end text-xs text-muted"><a href={researchGateSnapshot.url} target="_blank" rel="noopener noreferrer" className="link-academic">Source ↗</a><span className="ml-2">Snapshot: {researchGateSnapshot.observed}</span></div>
           </div>}
           {p.email && <a className="mt-5 inline-block link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
