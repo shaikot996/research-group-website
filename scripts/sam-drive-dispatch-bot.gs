@@ -22,7 +22,8 @@ var SAM_DRIVE_BOT_CONFIG = {
   roots: [
     { name: "Research Assistants", id: "10_rzMMevZi6_T-bajAnmaynab0UbDBtv" },
     { name: "Principal Investigators", id: "19uuYERTNBIaET6MlehwjF6kvS1L7sLlc" },
-    { name: "Co-Principal Investigators", id: "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM" }
+    { name: "Co-Principal Investigators", id: "1BePrxyFvH-xlqAMZVuEbgtn8qV9a1GjM" },
+    { name: "Faculty", id: "1cDxQKvnfbPdoqv3uFqGsw0iGZDGPyv71" }
   ],
   cooldownMilliseconds: 90000,
   maxNodes: 3000

@@ -173,7 +173,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
   if (cvBytes) {
     await mkdir(uploadRoot, { recursive: true });
     await writeFile(cvPath, cvBytes);
-  } else {
+  } else if (!entry.curated) {
     await unlink(cvPath).catch((error: NodeJS.ErrnoException) => {
       if (error.code !== "ENOENT") throw error;
     });
@@ -195,10 +195,8 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     linkedin: profile.linkedin || null,
     // For Hasib, use the verified ResearchGate headshot until a local portrait
     // is uploaded to the person's Drive folder. All other members are unchanged.
-    photo: entry.slug === "syed-hasibul-hassan-chowdhury" && !photoBytes
-      ? "https://i1.rgstatic.net/ii/profile.image/346784745443329-1459691334458_Q128/S-Chowdhury-2.jpg"
-      : null,
-    cvUrl: cvBytes ? "/uploads/" + slug + "-cv.pdf" : null,
+    photo: photoBytes ? null : entry.curated ? (existing?.photo?.startsWith("/people/") ? existing.photo : null) : null,
+    cvUrl: cvBytes ? "/uploads/" + slug + "-cv.pdf" : entry.curated ? existing?.cvUrl || null : null,
     externalSourceId: entry.docId,
     contentSource: entry.curated ? "DRIVE_LEADER" : "DRIVE_LEADER_AUTO",
     sourceUpdatedAt: new Date(),

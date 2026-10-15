@@ -48,6 +48,11 @@ if (existsSync(path.join(out, "robots.txt"))) {
   const robots = await readFile(path.join(out, "robots.txt"), "utf8");
   if (!robots.includes(`https://${domain}/sitemap.xml`)) errors.push("robots.txt points to the wrong sitemap");
 }
+if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
+  const profile = await readFile(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"), "utf8");
+  if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");
+  if (!profile.includes('application/ld+json')) errors.push("Person profile missing structured data");
+}
 if (existsSync(path.join(out, "index.html"))) {
   const home = await readFile(path.join(out, "index.html"), "utf8");
   if (!/href=["']\/_next\/static\/[^"']+\.css["']/.test(home)) errors.push("Homepage is missing root-relative Next.js CSS link");

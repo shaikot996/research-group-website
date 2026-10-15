@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { absolute, fmt, humanize, lines } from "@/lib/utils";
 import { Breadcrumbs, ProjectCard, PubEntry, SectionHeader } from "@/components/ui";
@@ -38,6 +39,27 @@ function InspireEntry({ article }: { article: InspireArticle }) {
       </div>
     </article>
   );
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const p = await prisma.person.findFirst({
+    where: { slug, status: "PUBLISHED" },
+    select: { name: true, title: true, affiliation: true, bio: true, researchInterests: true, photo: true, inspire: true },
+  });
+  if (!p) return { title: "Researcher not found", robots: { index: false, follow: false } };
+  const canonical = absolute(`/people/${slug}/`);
+  const description = [p.title, p.affiliation, p.researchInterests?.split("\\n").slice(0, 3).join(", ") || p.bio?.slice(0, 120)]
+    .filter(Boolean).join(" · ").slice(0, 260);
+  return {
+    title: `${p.name} — Research Profile`,
+    description,
+    alternates: { canonical },
+    openGraph: { type: "profile", title: p.name, description, url: canonical,
+      images: [{url:absolute(`/portraits/${slug}`),alt:`Photograph of ${p.name}`}] },
+    twitter: {card:"summary_large_image", title:p.name, description },
+    robots: { index: true, follow: true },
+  };
 }
 
 export const dynamic = "force-dynamic";
@@ -98,6 +120,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     affiliation: { "@type": "Organization", name: p.affiliation },
     url: absolute(`/people/${p.slug}`),
     sameAs: same,
+    image: absolute(`/portraits/${p.slug}`),
+    description: p.bio || p.researchSummary || undefined,
+    knowsAbout: lines(p.researchInterests),
+    identifier: p.inspire || undefined,
+    mainEntityOfPage: absolute(`/people/${p.slug}/`),
   };
 
   return (
