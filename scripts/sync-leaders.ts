@@ -193,7 +193,11 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     orcid: profile.orcid || null,
     github: profile.github || null,
     linkedin: profile.linkedin || null,
-    photo: null,
+    // For Hasib, use the verified ResearchGate headshot until a local portrait
+    // is uploaded to the person's Drive folder. All other members are unchanged.
+    photo: entry.slug === "syed-hasibul-hassan-chowdhury" && !photoBytes
+      ? "https://i1.rgstatic.net/ii/profile.image/346784745443329-1459691334458_Q128/S-Chowdhury-2.jpg"
+      : null,
     cvUrl: cvBytes ? "/uploads/" + slug + "-cv.pdf" : null,
     externalSourceId: entry.docId,
     contentSource: entry.curated ? "DRIVE_LEADER" : "DRIVE_LEADER_AUTO",
