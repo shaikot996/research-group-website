@@ -327,9 +327,9 @@ function rewriteSrcset(value, route) {
 function stripNextRuntime(html) {
   // The Pages build strips executable Next.js hydration scripts, but JSON-LD
   // is non-executable structured data required for researcher search indexing.
-  html = html.replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, (tag) => {
+  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (tag) => {
     const opening = tag.slice(0, tag.indexOf(">") + 1);
-    return /\\btype\\s*=\\s*(["'])application\\/ld\\+json\\1/i.test(opening) ? tag : "";
+    return /\btype\s*=\s*(["'])application\/ld\+json\1/i.test(opening) ? tag : "";
   });
   html = html.replace(/<link\b(?=[^>]*(?:rel=["']modulepreload["']|as=["']script["']))[^>]*>/gi, "");
   return html;
