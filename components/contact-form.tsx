@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-const rawEndpoint = process.env.NEXT_PUBLIC_SAM_CONTACT_ENDPOINT?.trim() || "";
+// This Apps Script URL is intentionally public: the form is an embedded intake page.
+// A repository variable may override it for future Google Apps Script deployments.
+const DEFAULT_CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyC9qstSB5g0Epdh5j6xA0TAB6Q7jOUU8Hdecm90SJjMYeKWqUC8FZuO_C79t8TStc/exec";
+const rawEndpoint = process.env.NEXT_PUBLIC_SAM_CONTACT_ENDPOINT?.trim() || DEFAULT_CONTACT_ENDPOINT;
 const endpoint = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec(?:\?.*)?$/.test(rawEndpoint) ? rawEndpoint : "";
 
 export const metadata: Metadata = {
