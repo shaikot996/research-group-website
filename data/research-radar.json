@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T06:47:16.212Z",
+  "updatedAt": "2026-10-16T06:36:44.594Z",
   "status": "verified",
   "sources": [
     "arXiv (official research preprints)"
@@ -185,6 +185,25 @@
       "abstract": "We study the inflationary no-boundary wavefunction in a ``linear-roll limit,'' in which $G_N \\to 0$ while the Hubble scale $H$ and the slope of the inflaton potential are held fixed. Although bulk graviton fluctuations are suppressed in this limit, quantum inflaton fluctuations remain finite. Because reheating occurs on a surface of fixed inflaton value, these fluctuations become fluctuations of the conformal factor of the reheating metric. The probability measure for these fluctuations simplifies drastically and becomes Gaussian, even for large fluctuations. The resulting log-correlated theory at superhorizon scales is a $d$-dimensional analog of Liouville gravity without the exponential potential, which we call Logarithmic Gravity. The quadratic and linear terms are determined by conformally covariant scattering data; in even dimensions we relate them to the critical GJMS operator and Branson $Q$-curvature. From bulk unitarity, we argue that one-loop effects do not generate additional conformal-factor dependence in the physical probability measure, and we verify the cancellation explicitly in $2 + 1$ dimensions. For the no-boundary norm with a rolling inflaton, we show that the noncompact residual conformal symmetries can be gauge fixed with a finite Faddeev-Popov determinant, so they do not force the sphere contribution to vanish. In addition, conditioning on the absence of vacuum decay by bubble nucleation generates the Liouville exponential potential in the probability measure.",
       "published": "2026-09-29T17:21:27.000Z",
       "url": "https://arxiv.org/abs/2609.38052",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.21751",
+      "title": "Multi-Higgs production from a theory of varying Higgs quartic and top Yukawa couplings",
+      "authors": [
+        "Ulf Danielsson",
+        "Rikard Enberg",
+        "Gunnar Ingelman",
+        "Soumyadip Kundu",
+        "Tanumoy Mandal",
+        "Subhadip Mitra"
+      ],
+      "abstract": "We study the collider phenomenology of a theory in which the Higgs quartic self-coupling and the top Yukawa coupling are \\textit{varying couplings}, which arise dynamically from two scalar fields, $φ_1$ and $φ_2$. Depending on the scalar masses relative to twice the top-quark mass, the heavy scalars decay mainly to Higgs boson pairs ($hh$) or to top-quark pairs ($t\\bar t$), giving two distinct signatures. We find sizeable cross sections for resonant $hh$ production, and also for the background-suppressed process with three Higgs bosons ($hhh$) from associated production, $pp \\to hφ_i \\to hhh$. By recasting ATLAS resonance searches, we set bounds on the effective new-physics scales $Λ_1$ and $Λ_2$ at the TeV scale. We also show that the High-Luminosity LHC (HL-LHC) will probe this parameter space further, through combined measurements of the $hh$, $t\\bar t$ and multi-Higgs channels. This gives a strong, multi-channel test of whether the electroweak sector has a dynamical origin.",
+      "published": "2026-10-15T12:07:57.000Z",
+      "url": "https://arxiv.org/abs/2610.21751",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
@@ -497,24 +516,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.07134",
-      "title": "All-Orders Classical Soft Graviton Theorems in the Newtonian Limit and Beyond",
-      "authors": [
-        "Debanjan Karan",
-        "Babli Khatun",
-        "Raghu Mahajan",
-        "Biswajit Sahoo",
-        "Ashoke Sen"
-      ],
-      "abstract": "The classical soft graviton theorem aims to determine certain terms in the early- and late-time tails of the gravitational waveform produced in a scattering process, using only the asymptotic momenta of the scattered objects. In this paper we find an infinite series of leading-logarithmic tail terms in the Newtonian limit, where the incoming and outgoing particles move slowly, but the scattering itself can be violent. The all-orders conjecture of Alessio, Di Vecchia and Heissenberg agrees with our results for two-particle scattering, but does not hold in general when the initial or final state contains three or more particles. We also propose an all-orders conjecture for these tails beyond the Newtonian limit, but do not prove it. Nevertheless, the conjecture passes several nontrivial consistency checks.",
-      "published": "2026-10-05T18:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.07134",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2609.32063",
       "title": "Wormhole fragmentation and the axion Weak Gravity Conjecture",
       "authors": [
@@ -555,6 +556,24 @@
       "abstract": "Higgsino dark matter is a classic, but still viable, weakly-interacting massive particle (WIMP) scenario that could point to supersymmetry, a new spacetime symmetry of nature. It is a simple realization of the \"inelastic dark matter\" mechanism, where its scattering off a nucleus occurs between two nearly degenerate states. Intriguingly, very recently the LZ collaboration reported a single nuclear recoil event at a high recoil energy. Assuming that this event is a dark matter candidate, it could be explained by higgsino dark matter, e.g., a 1.1 TeV thermal higgsino with a mass splitting of order hundreds of keV. The mass splitting required is very sensitive to the extreme high speed tail of the local dark matter velocity distribution, and thus susceptible to astrophysical uncertainties: the standard halo model prefers ~350 keV, while a model incorporating Large Magellanic Cloud effects prefers ~500 keV (a rough estimate based on partial information about a particular simulation). A much better understanding of the high speed tail is needed to evaluate whether the parameter space is consistent with an IceCube constraint on the annihilation of dark matter captured by the Sun. In any case, the mass splitting of several hundred keV implies that the electroweak gauginos and heavy Higgs scalars in supersymmetry have to be at a much higher scale ~10^{3-4} TeV. We discuss possible UV completions to generate a SUSY spectrum in which all superpartners are at a common scale, except for a much lighter higgsino mass $μ$. Besides the thermal benchmark, we comment on possible non-thermal cosmological scenarios of higgsino dark matter with gravitino and modulus decays. The higgsino dark matter scenario could also be searched for at other complementary probes such as indirect detection and future colliders. One striking LZ event may herald an exciting future of further experimental developments.",
       "published": "2026-09-01T16:34:43.000Z",
       "url": "https://arxiv.org/abs/2609.01504",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.07134",
+      "title": "All-Orders Classical Soft Graviton Theorems in the Newtonian Limit and Beyond",
+      "authors": [
+        "Debanjan Karan",
+        "Babli Khatun",
+        "Raghu Mahajan",
+        "Biswajit Sahoo",
+        "Ashoke Sen"
+      ],
+      "abstract": "The classical soft graviton theorem aims to determine certain terms in the early- and late-time tails of the gravitational waveform produced in a scattering process, using only the asymptotic momenta of the scattered objects. In this paper we find an infinite series of leading-logarithmic tail terms in the Newtonian limit, where the incoming and outgoing particles move slowly, but the scattering itself can be violent. The all-orders conjecture of Alessio, Di Vecchia and Heissenberg agrees with our results for two-particle scattering, but does not hold in general when the initial or final state contains three or more particles. We also propose an all-orders conjecture for these tails beyond the Newtonian limit, but do not prove it. Nevertheless, the conjecture passes several nontrivial consistency checks.",
+      "published": "2026-10-05T18:00:00.000Z",
+      "url": "https://arxiv.org/abs/2610.07134",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
@@ -730,170 +749,153 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.20602",
-      "title": "Heavy-Heavy-Light-Light correlators from holography on the worldsheet",
+      "id": "2610.22326",
+      "title": "Stratification of opers with apparent singularities and isomonodromic bubbling",
       "authors": [
-        "Matías Colaneri",
-        "Diego H. Correa",
-        "Víctor I. Giraldo-Rivera",
-        "Nicolás A. Ivanovich"
+        "Duong Dinh",
+        "Troy Figiel",
+        "Joerg Teschner"
       ],
-      "abstract": "We study correlation functions of light local operators and defect changing operators on the conformal line set by the 1/2 BPS Wilson line of $\\mathcal N=4$ super Yang-Mills. We consider the defect changing operators associated with geometrical and internal cusp angles, which at strong coupling have a large scaling dimension and back-react on the dual $AdS_2$ world-sheet. We set up a holographic computation of correlation functions, in which the light operators are described by fluctuations around the cusped classical string solution, so that correlators of two defect changing operators and an arbitrary number of light protected operators are obtained from the on-shell action of these fluctuations. We implement this prescription in detail for the case of certain 4-point functions, with two light and two defect changing operators. Finally, since for small cusp angles the defect changing operators become light, we manage to derive relations satisfied by integrated correlators of light operators, valid at any coupling. We verify these relations at strong coupling for both internal and geometrical cusps.",
-      "published": "2026-10-14T17:59:46.000Z",
-      "url": "https://arxiv.org/abs/2610.20602",
+      "abstract": "On a compact Riemann surface of genus $g \\geq 2$, we study Simpson's stratification of the de Rham moduli space of rank-2 flat connections. Upon representing flat $\\mathrm{SL}_2(\\mathbb{C})$-connections by branched projective structures, or equivalently by opers with apparent singularities, the stratum containing a flat connection is determined by the minimal number of apparent singularities needed to represent it. We construct explicit holomorphic families in which two simple apparent singularities collide and disappear, so that the family crosses into a smaller stratum; this realizes Simpson's closure relation between strata near generic points. The analogous families of Higgs bundles are described by Baker--Akhiezer divisors on the spectral curve in which two points converge to a pair of points exchanged by the spectral involution. We show that, before the collision, the two apparent singularities are joined by twin paths bounding a bubble, so that these families arise from the isomonodromic bubbling surgery discussed by Calsamiglia, Deroin and Francaviglia.",
+      "published": "2026-10-15T17:52:15.000Z",
+      "url": "https://arxiv.org/abs/2610.22326",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20398",
-      "title": "Relative entropy in quantum field theory: the case of squeezed fermions",
+      "id": "2610.22274",
+      "title": "Exact algebraic separation of the gravitoelectromagnetic perturbations of Kerr-Newman-(anti-)de Sitter black holes",
       "authors": [
-        "Markus B. Fröb"
+        "Jun-Kun Zhao"
       ],
-      "abstract": "We review the role of relative entropy in quantum field theories, where the local von Neumann algebras are generically of type III. Consequently, only few exact results are known, and even bounds are difficult to obtain. As a new result, we prove that the relative entropy between a locally squeezed state and the Minkowski vacuum is finite for free fermions.",
-      "published": "2026-10-14T16:02:32.000Z",
-      "url": "https://arxiv.org/abs/2610.20398",
+      "abstract": "We obtain an explicit separation of the coupled gravitational and electromagnetic radiative equations on nonextremal Kerr--Newman--(anti-)de Sitter black holes with nonzero charge and rotation. The construction uses a matrix with constant determinant, chosen independently of the frequency and azimuthal number, and treats the positive- and negative-spin sectors within the same formulation. We establish that this transformation is smooth and invertible throughout the open AdS exterior and between the event and cosmological horizons in dS. The resulting radial and angular systems are valid at arbitrary complex frequencies. We also express regularity of the radiative Newman--Penrose variables at the rotation axes and future horizons as conditions on the separated solutions. In the asymptotically flat limit, the transformation is related to Hintz's matrix integrating factor by the allowed frame freedom. These results provide a basis for studying quasinormal modes and black-hole stability in Kerr--Newman--(anti-)de Sitter spacetimes, as well as exploring holographic applications to strongly coupled systems.",
+      "published": "2026-10-15T17:35:40.000Z",
+      "url": "https://arxiv.org/abs/2610.22274",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20378",
-      "title": "Origin of the red spectral tilt in Inflation without an Inflaton",
+      "id": "2610.22101",
+      "title": "Aspects of Codimension two Holography in de Sitter Space",
       "authors": [
-        "Raul Jimenez",
-        "Daniele Bertacca",
-        "Mariam Abdelaziz",
-        "Sabino Matarrese",
-        "Angelo Ricciardone",
-        "Marisol Traforetti"
+        "Kanhu Kishore Nanda",
+        "Somnath Porey",
+        "Masataka Watanabe",
+        "Gopal Yadav"
       ],
-      "abstract": "In Inflation without an Inflaton (IWI), a de Sitter (dS) background drives inflation, and the graviton bilinear generates scalar perturbations at second order, with no inflaton or additional fundamental scalar field. We investigate how this scenario can account for the observed scalar spectral tilt. The tensor-mode dependence of the scalar power spectrum gives the consistency relation $n_s-1=2n_T$, since it contains four tensor mode functions. The scalar spectral tilt $n_s\\simeq0.9649$ at CMB scales therefore gives $n_T\\simeq-0.0175$, independent of the tensor-to-scalar ratio $r$, hence different from the standard single-field slow-roll prediction $n_T=-r/8$. A full time-dependent calculation of $φ_2$ in exact dS leads to an almost scale-invariant scalar power spectrum, with a small blue infrared residual on the order of $n_s-1\\simeq+4\\times10^{-4}$. In order to account for the observed red tilt, we introduce a slow drift in the Hubble rate, parametrized by $\\varepsilon=-\\dot H/H^2$. The tensor tilt is then given by $n_T=-2\\varepsilon$, implying $n_s-1\\simeq-4\\varepsilon$, at leading order. The observed tilt requires $\\varepsilon_\\ast\\simeq0.0088$, far exceeding the drift that can be sustained by the classical graviton backreaction, for which we find $|\\varepsilon_{\\rm self}|\\lesssim10^{-11}$. Therefore, we investigate the quantum break-time of dS as the origin of the background evolution. In this picture, the scalar tilt becomes $n_s-1=-4C_qN_{sp}(H/m_{pl})^2$, where $C_q$ is an order-one depletion coefficient, and the tilt is directly connected to the particle content of dS, $N_{sp}$. The evolution of the drift itself further predicts a positive running of $α_s=+\\tfrac12(1-n_s)^2\\simeq+6\\times10^{-4}$. These results conclude the distinctive observational predictions of the IWI scenario, establishing it as a falsifiable alternative to standard inflaton-driven models.",
-      "published": "2026-10-14T15:46:36.000Z",
-      "url": "https://arxiv.org/abs/2610.20378",
+      "abstract": "Following \\cite{Yadav:2024ray} we embark on a further study of the codimension two holography in de Sitter (dS) space. The $d$ dimensional bulk dS space is sliced by two end of the world $(d-1)$ dimensional branes which are bestowed with either Lorentzian dS or Euclidean AdS metric joining at a common $(d-2)$ dimensional space where the dual CFT lives. Through explicit computations of the holographic entanglement entropy, partition function, and Renyi entropy in both slicings for the bulk dS space emphasizing their similarities as well as differences we provide further evidence for this duality. We also make comments on further generalization of the codimension two holography.",
+      "published": "2026-10-15T15:47:10.000Z",
+      "url": "https://arxiv.org/abs/2610.22101",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20340",
-      "title": "Black hole cohomologies in N=4 SYM",
+      "id": "2610.21927",
+      "title": "On the exact quantization of BCOV Theory on Calabi-Yau Manifolds",
       "authors": [
-        "Seunggyu Kim",
-        "Jehyun Lee",
-        "Siyul Lee",
-        "Jaewon Song"
+        "Si Li",
+        "Minghao Wang"
       ],
-      "abstract": "We systematically investigate BPS cohomologies of $\\mathcal{N}=4$ super-Yang-Mills (SYM) theory with gauge group SU$(N)$ with $N=2, 3, 4$, focusing primarily on the BMN sector. We find non-Coulomb graviton cohomologies for $N>2$. For $N>2$, the lightest black hole cohomology in the BMN sector always carries non-trivial $R$-charge and corresponds to the brane-fused type. Therefore, the `core' black holes without hair are `heavier'. We also find that a family of brane-fused cohomologies in $N=3$ is not lifted at the first quantum order. At a fixed charge sector, gravitons carry definite parity under charge conjugation. Up to the levels we have tested, every black hole cohomology either has opposite parity to that of gravitons or is lifted by quantum corrections. We conjecture that black hole cohomologies always carry parity opposite to gravitons in the same charge sector.",
-      "published": "2026-10-14T15:21:50.000Z",
-      "url": "https://arxiv.org/abs/2610.20340",
+      "abstract": "We announce the solution of constructing perturbative quantum BCOV invariants on arbitrary Calabi-Yau manifolds. In this note, we outline the construction and present an explicit solution. The quantization includes all descendant fields and all loop orders, and expresses the quantum BCOV interaction by an explicit integration over the moduli space of marked Riemann surfaces. This canonical solution provides a mathematical construction of all higher genus BCOV invariants on compact Calabi-Yau manifolds, which are conjecturally equivalent to all higher genus Gromov-Witten invariants on the mirror.",
+      "published": "2026-10-15T14:09:08.000Z",
+      "url": "https://arxiv.org/abs/2610.21927",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20301",
-      "title": "Realisation of de Sitter space as an excited state in string theory",
+      "id": "2610.21860",
+      "title": "From Accelerating Rotating Black Holes to a Swirling Universe",
       "authors": [
-        "Archana Maji"
+        "José Barrientos",
+        "Adolfo Cisterna"
       ],
-      "abstract": "String theory is widely regarded as the only plausible candidate for a consistent UV-complete theory of quantum gravity. Cosmological observations suggest that our universe is undergoing accelerated expansion, pointing towards the presence of a small positive cosmological constant. Since de Sitter space is the maximally symmetric solution of Einstein's equations with a positive cosmological constant, understanding whether four-dimensional de Sitter space can be realized within string theory has become one of the central questions. Following a series of works that realize de Sitter space as an excited state---namely, as a Glauber--Sudarshan (GS) state in type IIB string theory---our goal has been to extend such a construction to heterotic string theories. Realizing de Sitter space as an excited state over a time-independent supersymmetric Minkowski background provides a mechanism for evading the vacuum-based no-go theorems that obstruct de Sitter solutions in string theory. Starting from a generic M-theory configuration, we obtain four-dimensional de Sitter space in the late-time limit of flat-slicing coordinates in both heterotic $SO(32)$ and heterotic $E_8 \\times E_8$ theories through appropriate dynamical duality sequences. The corresponding GS state is constructed by evaluating the expectation value of the metric operator in M-theory using path-integral techniques. We analyse the conditions required for the existence of a well-defined effective field theory description of the setup and find that these conditions are equivalent to satisfying the null energy condition in a 3+1-dimensional FLRW cosmology. Furthermore, the de Sitter GS states are found to lie well within the temporal bound imposed by the Trans-Planckian Censorship Conjecture, rendering them as transient states. In the case of $E_8\\times E_8$ theory, we also investigate implications arising from axion cosmology.",
-      "published": "2026-10-14T14:53:33.000Z",
-      "url": "https://arxiv.org/abs/2610.20301",
+      "abstract": "We demonstrate that the swirling universe can be recovered through a coordinated horizon-degeneration and scaling procedure applied to the Kerr C-metric. The construction exploits the horizon structure of accelerating, rotating black holes, which allows their inner and outer horizons to coalesce while simultaneously approaching the acceleration horizon. By magnifying the near-acceleration-horizon region faster than the black hole horizons approach it, the pair of accelerating, rotating black holes is pushed to an infinite proper distance, while a finite gravitomagnetic twist survives. The resulting geometry reproduces precisely the swirling universe, providing a physical interpretation of its intrinsic rotation as the gravitational remnant of rotating black holes sent to infinity.",
+      "published": "2026-10-15T13:35:30.000Z",
+      "url": "https://arxiv.org/abs/2610.21860",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20177",
-      "title": "Quantization of positive Lagrangians",
+      "id": "2610.21706",
+      "title": "Renormalization of Quantum Gravity with Lagrange Multiplier Fields",
       "authors": [
-        "Jake P. Solomon",
-        "Bentzion Yavetz"
+        "F. T. Brandt",
+        "J. Frenkel",
+        "S. Martins-Filho",
+        "D. G. C. McKeon"
       ],
-      "abstract": "A Lagrangian submanifold in an almost Calabi-Yau manifold is called positive if the real part of the holomorphic volume form restricted to it is positive. It is called $ε$-positive if the ratio of the restrictions of the imaginary and real parts of the holomorphic volume form is bounded by $\\frac{1}ε.$ An exact isotopy class of positive Lagrangian submanifolds admits a natural Riemannian metric. We prove that the Riemannian metric restricted to the subset of $ε$-positive Lagrangians induces a path metric when the relative Kähler class of the ambient Calabi-Yau manifold lies on a line of rational slope. The proof relies on the construction of a sequence of quantization maps from a circle bundle over the space of positive Lagrangians to the dual of the space of holomorphic sections of powers of a prequantum line bundle. The rationality condition for the relative Kähler class allows us to reduce to the case of Bohr-Sommerfeld Lagrangians. Building on ideas of Tian and Nirenberg-Wells, Hörmander estimates are used to show that functions on a Bohr-Sommerfeld Lagrangian can be approximated by holomorphic sections of a sufficiently high power of the prequantum line bundle. Consequently, the quantization maps eventually separate fibers of the circle bundle.",
-      "published": "2026-10-14T13:21:45.000Z",
-      "url": "https://arxiv.org/abs/2610.20177",
+      "abstract": "We study the renormalization of Einstein gravity coupled to a scalar field in the Lagrange multiplier (LM) formulation, where a pair of quantum LM fields, $(λ'_{μν},σ')$, is coupled to the gauge-fixed gravitational and scalar equations of motion. Using the fact that in this approach there are no higher loop corrections, we show that renormalizing the two quantum LM fields at one-loop order absorbs, off-shell, five out of the six independent divergent structures. The remaining off-shell counterterm, proportional to $ (\\partial_μ\\barφ\\,\\partial^μ\\barφ)^2, $ is nonzero on shell and cannot be absorbed by any LM field redefinition, since such redefinitions generate only counterterms that vanish on shell. In contrast, in pure gravity (no matter), the LM renormalization absorbs all one-loop divergences and no additional counterterms are required. The LM formulation therefore provides a sharp off-shell separation between equation-of-motion divergences, absorbed into LM field renormalizations, and the single irreducible structure.",
+      "published": "2026-10-15T11:25:48.000Z",
+      "url": "https://arxiv.org/abs/2610.21706",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.20167",
-      "title": "Correlation between gravitational wave frequencies as a signature of new black hole physics",
+      "id": "2610.21574",
+      "title": "Krylov complexity and oscillatory quantum dynamics in two-field inflation",
       "authors": [
-        "Ngo Phuc Duc Loc"
+        "Tao Li",
+        "Lei-Hua Liu",
+        "Hai-Bing Fu"
       ],
-      "abstract": "We point out that for black holes (BH) of the same mass, despite of arising from two entirely different physical arguments, the peak frequency of the coarse-grained gravitational wave (GW) spectrum of gravitons $f_\\text{peak}^\\text{graviton}$ is very close to the peak frequency of the GW spectrum produced from binary BH mergers $f_\\text{peak}^\\text{merger}$. In particular, we find that $f_\\text{peak}^\\text{graviton}/f_\\text{peak}^\\text{merger}\\approx 2.3$ independent from BH mass or population. If BHs are still evaporating, the peak frequencies scale as $\\propto M_i^{-1}$ with $M_i$ is the initial BH mass. If BHs evaporated in the radiation (matter) dominated era, the peak frequencies scale as $\\propto M_i^{1/2}$ ($\\propto M_i$) respectively after taking into account redshift effect. Any deviation from the aforementioned magical ratio would indicate new BH physics. The sweetest frequency ballpark to look for this correlation is around $10^{14}\\ \\rm Hz-10^{20}\\ \\rm Hz$ where both GW spectra are allowed to have maximum amplitude. As a demonstration of what the new physics could be, we consider a phenomenological self-similar regular BH model of Hayward featuring a single hair parameter. The observed ratio of peak frequencies can be used to directly infer the hair parameter, along with crucial properties of the novel BH solution such as Hawking temperature, horizon size, and innermost stable circular orbit. We also comment on the pros and cons of correlating frequencies among other GW sources such as formation, population fluctuation, and sudden transition of adiabatic perturbation.",
-      "published": "2026-10-14T13:18:32.000Z",
-      "url": "https://arxiv.org/abs/2610.20167",
+      "abstract": "We investigate Krylov-space dynamics of primordial perturbations in two-field inflation. Starting from the quadratic action for coupled curvature and entropy perturbations, we solve the mode equations with Bunch-Davies initial conditions and construct the corresponding quadratic Hamiltonian. The Gaussian quantum state is described by a four-mode squeezed state with two squeezing channels. We derive the evolution of the squeezing strength and squeezing angle and use them to evaluate the Krylov complexity, Krylov entropy, and channel-resolved Lanczos coefficients. Our numerical results show that the two channels remain weakly squeezed inside the horizon but develop different squeezing histories after horizon exit. The two channels exhibit different onset times and distinct oscillatory Krylov dynamics. The second channel develops strong squeezing earlier and dominates the intermediate evolution, whereas the first channel shows a delayed enhancement. The corresponding Krylov complexities exhibit oscillatory structures across horizon crossing and pronounced fluctuations in the strongly squeezed superhorizon regime. These oscillations originate from the relative phases entering the squeezing equations and are amplified through the nonlinear relation between Krylov complexity of different channels.",
+      "published": "2026-10-15T09:26:20.000Z",
+      "url": "https://arxiv.org/abs/2610.21574",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.19616",
-      "title": "A quantum probabilistic approach to the emergence of an inflationary Starobinsky Universe",
+      "id": "2610.21426",
+      "title": "Bound States Inside the Horizon and Black Hole Entropy",
       "authors": [
-        "Eftychios Kaimakkamis"
+        "Hassan Firouzjahi"
       ],
-      "abstract": "We propose that the necessary conditions for the existence of inflation could be explained by a quantum probabilistic approach. We interpret physical states $ψ$ obtained via the path integral formulation as probability density amplitudes for the Universe to be measured at a particular geometric configuration. First, we examine the problem of ordering ambiguities in the Wheeler-DeWitt (WDW) equation. We develop a formalism to handle ambiguities in the canonical quantization of a $1d$ minisuperspace by defining ambiguity functions within the WDW equation. We define a Hilbert space inner product for calculating physical observables, and using an argument from the hermiticity of the Hamiltonian, we obtain an expression for its measure $μ$ in addition to constraints on the ambiguity functions. By defining a new quantum state $Ψ=\\sqrtμ ψ$ and using the path integral formalism, we are able to resolve ambiguities and prove the theory is universal. We then generalize for any $M$-dimensional minisuperspace system, for which we can prove universality in the semi-classical approximation for a large class of models. We also show that this universality extends to all orders of quantum theory if the target space manifold of the theory is flat. We calculate probability amplitudes for various cosmological scenarios involving Starobinsky inflation. We summarize the Hartle-Hawking no-boundary proposal for GR and we comment on the distinct possibilities of defining a contour of integration: the sign choice of Hartle-Hawking vs that of Linde-Vilenkin. We make an analogous calculation for $R^{2}$ gravity and find that for the Linde- Vilenkin choice it is statistically more likely for the Universe to emerge in its inflationary stage. Finally, we calculate transition amplitudes when the kinetic energy of the inflaton field $φ$ takes non-zero values.",
-      "published": "2026-10-14T05:37:20.000Z",
-      "url": "https://arxiv.org/abs/2610.19616",
+      "abstract": "We study the bound states perturbations in the interior of the Schwarzschild black hole and examine whether or not their microstates spectrum can furnish a statistical description of the black hole entropy. These states contain a discrete set of modes characterized by the labels $(s, p,\\ell,m)$, where $s$ represents the spin of the species, $p$ denotes the radial excitation number while $(\\ell,m)$ are the usual angular momentum labels. Requiring that the shortest wavelength resolved by the highly excited bound states remains above the quantum gravity scale introduces an angular cutoff $\\ell_{\\rm max}\\sim r_H/L_{\\rm Pl}$. The resulting angular degeneracy therefore scales with the horizon area. We count the corresponding configurations in the microcanonical ensemble and find an entropy of the form $S_{\\rm bs}=αA/\\hbar G$. Demanding that the bound state sector to be in thermal equilibrium with the black hole at the Hawking temperature fixes the fraction of the bound state energy in total black hole energy. For the gravitational perturbations sector, the equilibrium bound state contribution in entropy and the energy fraction are typically small. We also examine the conditions under which the bound states could account for the full black hole entropy. Although such saturation is possible at the level of state counting, it requires an order unity fraction in the black hole energy and therefore the backreactions on the background geometry cannot be ignored.",
+      "published": "2026-10-15T07:38:45.000Z",
+      "url": "https://arxiv.org/abs/2610.21426",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.19522",
-      "title": "Nambu's Dynamics, Strings and Gravitized Quantum Theory",
+      "id": "2610.21058",
+      "title": "Regge Dilaton Gravity from BF Theory",
       "authors": [
-        "Tristan Hübsch",
-        "Djordje Minic"
+        "Florian Girelli",
+        "Christopher Pollack"
       ],
-      "abstract": "In this article we present a new view on string theory that is rooted in quantum foundations extended to the domain of quantum gravity in the form of gravitized quantum theory, in which the canonical probability measure captured by the Born rule of quantum theory, turns out to be dynamical and contextual. We claim that this gravitization of quantum theory is the essence of string theory. String theory, according to this view, originates in foundations of quantum theory and Nambu's dynamics, which features in the non-perturbative definition of string theory in terms of a T-duality covariant and non-commutative formulation, called the metastring. Nambu's dynamics and the associated cubic and hypercubic objects also appear as the natural language for exploring the new observables and phenomena implied by a dynamical Born rule, including triple and higher order quantum interference, that can be investigated in experiments involving massive quantum probes, and that are also needed for direct empirical tests of the Born rule, a cornerstone of quantum theory.",
-      "published": "2026-10-14T03:41:06.000Z",
-      "url": "https://arxiv.org/abs/2610.19522",
+      "abstract": "In this work we investigate the relation between gauge and geometric descriptions of two-dimensional dilaton gravity at the level of discrete path integrals. We develop a Regge discretization of Euclidean two-dimensional dilaton gravity using homogeneously curved simplices, as well as a ribbon refined discretization of two-dimensional BF theory adapted to homogeneously curved spacetimes. For Euclidean signature and vanishing or negative cosmological constant we show how the ribbon BF discretization, through appropriate gauge fixings, leads to the Regge dilaton gravity formulation. The resulting correspondence makes explicit how a geometric Regge path integral with its associated measure emerges from its gauge theoretic formulation.",
+      "published": "2026-10-15T01:02:53.000Z",
+      "url": "https://arxiv.org/abs/2610.21058",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2610.19440",
-      "title": "Magnetically Charged Black Holes from Grand Unified Theory",
+      "id": "2610.20996",
+      "title": "Quantum-Corrected and Hairy Black Holes via Analogue Gravity",
       "authors": [
-        "Tanmay Vachaspati",
-        "Anja Wachowitz"
+        "Christian Noberto de Souza"
       ],
-      "abstract": "Grand Unified models of particle physics inevitably give rise to magnetic monopoles. Often the model will also contain a weakly broken discrete symmetry that leads to the formation of biased domain walls that survive for a limited period in cosmology. For a range of the discrete symmetry breaking parameter, domain walls can collapse to form magnetically charged extremal black holes lighter than $\\simeq 1\\, {\\rm kg}$ but these are not expected to survive until the present epoch due to Hawking evaporation and Schwinger pair production of monopoles. If the parameter is smaller still, the black holes may be astrophysical, with mass greater than $10^{15}\\, {\\rm g}$ and with sub-extremal magnetic charge: $Q \\simeq 10^8$ (for our canonical choice of parameters). The cosmological energy density in residual magnetic monopoles depends on the discrete symmetry breaking parameter and for sufficiently small values of the parameter, the magnetic monopole density can satisfy all observational constraints.",
-      "published": "2026-10-14T02:32:00.000Z",
-      "url": "https://arxiv.org/abs/2610.19440",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.19286",
-      "title": "Mutual Information of Measurement in Conformal Field Theories",
-      "authors": [
-        "Israel Klich",
-        "Ravisankar Rajagopal",
-        "Diana Vaman"
-      ],
-      "abstract": "The mutual information of measurement of a local operator between two spatial regions characterizes the reduction in the uncertainty of measurement outcomes in one region given the outcome in the other. We study the Rényi-Shannon mutual information of measurement in conformal field theories (CFTs). Explicit calculations for scalar primaries and descendants in large $N$ CFTs are performed in the two extreme limits of the intervals being adjacent or largely separated. The results depend on only the cross ratio and the scaling dimension $Δ$ of the operator being measured, with striking similarities to the mutual information of entanglement. We find a surprising quadratic dependence as $(Δ-1/2)^2$ for adjacent intervals. This dependence superficially seems to violate the information processing inequality, which we discuss and resolve. We also offer a holographic interpretation of the mutual information of measurement.",
-      "published": "2026-10-13T23:05:04.000Z",
-      "url": "https://arxiv.org/abs/2610.19286",
+      "abstract": "This thesis maps two exotic black-hole geometries onto the transonic flow of a de Laval nozzle and reads their perturbative response in aerodynamic variables. The first is the hairy black hole of gravitational decoupling, constrained by the dominant energy condition and by the existence of a horizon. The second is the Calmet-Kuipers metric, short-ranged and governed by the single Wilson coefficient of the dimension-six operator that the two-loop Goroff-Sagnotti divergence identifies. Perturbations of spin 0, 1/2, 1 and 2 reduce to a Schrödinger-type wave equation, whose spectrum the Mashhoon method returns as a whole overtone tower in closed form, every frequency damped. The two corrections are distinguished by which channel responds and by how strongly all of them do, the quantum coupling moving the quality factor by up to 37% in the scalar and Dirac channels and by about 10% in the other two, while the hair acts on every channel alike. Identifying the two tortoise coordinates turns the equality of the potentials into a Sturm-Liouville problem, so that the prescribed barrier fixes the wall profile and with it the flow variables and the thrust coefficient. The hair is felt across the whole divergent section, whereas the quantum correction registers only near the throat and grows as the inverse fourth power of the mass, which confines it to primordial black holes. The analogy is kinematical, so the duct reproduces the scattering of perturbations off these geometries without reproducing the field equations behind them.",
+      "published": "2026-10-14T22:20:36.000Z",
+      "url": "https://arxiv.org/abs/2610.20996",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
