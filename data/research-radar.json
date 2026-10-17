@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T06:36:44.594Z",
+  "updatedAt": "2026-10-17T06:31:02.369Z",
   "status": "verified",
   "sources": [
     "arXiv (official research preprints)"
@@ -204,21 +204,6 @@
       "abstract": "We study the collider phenomenology of a theory in which the Higgs quartic self-coupling and the top Yukawa coupling are \\textit{varying couplings}, which arise dynamically from two scalar fields, $φ_1$ and $φ_2$. Depending on the scalar masses relative to twice the top-quark mass, the heavy scalars decay mainly to Higgs boson pairs ($hh$) or to top-quark pairs ($t\\bar t$), giving two distinct signatures. We find sizeable cross sections for resonant $hh$ production, and also for the background-suppressed process with three Higgs bosons ($hhh$) from associated production, $pp \\to hφ_i \\to hhh$. By recasting ATLAS resonance searches, we set bounds on the effective new-physics scales $Λ_1$ and $Λ_2$ at the TeV scale. We also show that the High-Luminosity LHC (HL-LHC) will probe this parameter space further, through combined measurements of the $hh$, $t\\bar t$ and multi-Higgs channels. This gives a strong, multi-channel test of whether the electroweak sector has a dynamical origin.",
       "published": "2026-10-15T12:07:57.000Z",
       "url": "https://arxiv.org/abs/2610.21751",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.20573",
-      "title": "Beyond LLM Judge: Mechanical Verification for Agentic Autoformalization",
-      "authors": [
-        "Anna Mei",
-        "Michael R. Douglas"
-      ],
-      "abstract": "We introduce a novel method for verifying Lean formalizations that goes beyond LLM-judged faithfulness. Unlike most verification methods, which rely on LLMs or trained models, our method combines LLM-based semantic review with mechanical numerical and vacuity checks, providing checkable feedback and detecting errors missed by LLM judges. We apply this method, along with our Extract-Verify-Proof autoformalization pipeline, to construct the Formalized Library of Mathematical Functions (FLMF), a partial formalization of the NIST Digital Library of Mathematical Functions (DLMF). On three labeled datasets, our method achieves the lowest accepted-error rate among the evaluated methods, measured as the fraction of incorrect statements accepted by the verification method. Expert review of the results also identifies translation and source defects in existing datasets. Code available at https://github.com/annamei1/FLMF-Ch7ErrFunc-Release.git.",
-      "published": "2026-10-14T17:54:48.000Z",
-      "url": "https://arxiv.org/abs/2610.20573",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
@@ -462,6 +447,21 @@
       "abstract": "We initiate a systematic study of compactifications of type II string theory to two dimensions on Ricci-flat spaces with fluxes and sources. We derive universal constraints on such compactifications, and then develop type IIA compactifications on $\\mathrm{Spin}(7)$-holonomy spaces with bulk fluxes whose tadpole is cancelled by $\\mathrm{OF1}$-planes. We derive the resulting two-dimensional $\\mathcal N=(1,1)$ supergravity for a toroidal $\\mathrm{Spin}(7)$ orbifold, and we extend the metric and universal sectors geometrically to general compact $\\mathrm{Spin}(7)$ manifolds. In candidate supersymmetric Minkowski vacua, all untwisted shape modes appear in the flux scalar potential and can in principle be classically stabilised. However, in an explicit toroidal orbifold example flux quantisation together with the tadpole bound may obstruct the existence of candidate vacua supported entirely within the untwisted sector. The string-frame volume in string units is bounded by $7χ/192$, so suppressing $α'$ corrections requires $\\mathrm{Spin}(7)$ manifolds with large Euler characteristic.",
       "published": "2026-08-18T20:05:11.000Z",
       "url": "https://arxiv.org/abs/2608.18284",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.20573",
+      "title": "Beyond LLM Judge: Mechanical Verification for Agentic Autoformalization",
+      "authors": [
+        "Anna Mei",
+        "Michael R. Douglas"
+      ],
+      "abstract": "We introduce a novel method for verifying Lean formalizations that goes beyond LLM-judged faithfulness. Unlike most verification methods, which rely on LLMs or trained models, our method combines LLM-based semantic review with mechanical numerical and vacuity checks, providing checkable feedback and detecting errors missed by LLM judges. We apply this method, along with our Extract-Verify-Proof autoformalization pipeline, to construct the Formalized Library of Mathematical Functions (FLMF), a partial formalization of the NIST Digital Library of Mathematical Functions (DLMF). On three labeled datasets, our method achieves the lowest accepted-error rate among the evaluated methods, measured as the fraction of incorrect statements accepted by the verification method. Expert review of the results also identifies translation and source defects in existing datasets. Code available at https://github.com/annamei1/FLMF-Ch7ErrFunc-Release.git.",
+      "published": "2026-10-14T17:54:48.000Z",
+      "url": "https://arxiv.org/abs/2610.20573",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
       "source": "arXiv",
