@@ -14,7 +14,7 @@ function driveProfileSections(value?: string | null): Array<[string, string]> {
   try {
     const parsed = JSON.parse(value) as Record<string, unknown>;
     return Object.entries(parsed)
-      .filter((entry): entry is [string, string] => typeof entry[1] === "string" && Boolean(entry[1].trim()))
+      .filter((entry): entry is [string, string] => typeof entry[1] === "string" && Boolean(entry[1].trim()) && entry[0] !== "other" && !/^(?:template instructions|instructions)$/i.test(entry[0]))
       .map(([key, text]) => [key === "other" ? "Other information" : humanize(key), text]);
   } catch {
     return [];
@@ -160,7 +160,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
       <div className="mt-14 grid gap-14 lg:grid-cols-[1.35fr_.65fr]">
         <div>
-          {p.bio && <section><SectionHeader eyebrow="Biography" title="Profile" /><p className="whitespace-pre-line text-lg leading-8 text-muted">{p.bio}</p></section>}
+          {p.bio && <section><SectionHeader title="About" /><p className="whitespace-pre-line text-lg leading-8 text-muted">{p.bio}</p></section>}
           {p.researchSummary && <section className="mt-14"><SectionHeader eyebrow="Research" title="Current research" /><p className="whitespace-pre-line leading-8 text-muted">{p.researchSummary}</p></section>}
           {extraSections.map(([title, text]) => <section className="mt-14" key={title}><SectionHeader title={title} /><p className="whitespace-pre-line leading-8 text-muted">{text}</p></section>)}
 
