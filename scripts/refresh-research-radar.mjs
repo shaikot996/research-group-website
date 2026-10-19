@@ -150,13 +150,17 @@ const CATEGORY_MAXIMUM = {
 export function prepareSnapshot(current, incoming, now = new Date()) {
   const cutoff = now.getTime() - DAYS_TO_KEEP * 86400000;
   const map = new Map();
-  const incomingIds = new Set(incoming.map(p => p.id));
   for (const item of [...(current.papers || []), ...incoming]) {
     if (!item?.id || !isIso(item.published) || Date.parse(item.published) < cutoff) continue;
     if (Date.parse(item.published) > now.getTime() + 86400000) continue;
     if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url) || !isRelevantPaper(item)) continue;
     // Prefer freshly fetched metadata over a stored record with the same ID.
-    if (!map.has(item.id) || incomingIds.has(item.id) && incoming.includes(item))
+    const existing = map.get(item.id);
+    // Author-only queries do not carry a reliable subject; preserve a feed
+    // category when an overlapping article is also found in an official feed.
+    const fromWatchedAuthorWithGenericHep = item.primaryCategory === "hep-th" &&
+      item.category === "High-Energy Theory" && incoming.includes(item);
+    if (!existing || !fromWatchedAuthorWithGenericHep || existing.category === "High-Energy Theory")
       map.set(item.id, item);
   }
   const ranked = [...map.values()].sort((a,b) =>

@@ -51,7 +51,25 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/research-radar.json
             git commit -m "Update daily verified Research Radar arXiv digest"
-            git push origin main
+            # Other Drive/website workflows may commit while we collect arXiv.
+            # Retry non-fast-forward pushes without force, preserving their changes.
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Concurrent Radar snapshot conflict; retry on next scheduled refresh."
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                echo "Radar snapshot committed and published to main."
+                break
+              fi
+              if [ "$attempt" = 5 ]; then
+                echo "::error::Unable to push arXiv snapshot after 5 attempts."
+                exit 1
+              fi
+              sleep $((3 * attempt))
+            done
           fi
       - name: Republish site with refreshed Research Radar snapshot
         env:
