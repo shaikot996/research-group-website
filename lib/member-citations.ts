@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { inspireAuthorId } from "@/lib/inspire";
+import { resolveInspireUrl } from "@/lib/verified-inspire-profiles";
 
 export type MemberCitationSummary = {
   citations: number;
@@ -36,7 +37,8 @@ export async function getMemberCitationMap(): Promise<Map<string, MemberCitation
 export function memberCitationFor(
   map: Map<string, MemberCitationSummary>,
   inspireUrl?: string | null,
+  slug?: string | null,
 ): MemberCitationSummary | null {
-  const id = inspireAuthorId(inspireUrl);
+  const id = inspireAuthorId(resolveInspireUrl(inspireUrl, slug));
   return id ? map.get(id) ?? null : null;
 }
