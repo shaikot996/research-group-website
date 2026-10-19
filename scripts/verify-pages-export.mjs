@@ -70,6 +70,19 @@ if (existsSync(joinExport)) {
   }
 }
 
+const hasibProfilePath = path.join(out, "people", "syed-hasibul-hassan-chowdhury", "index.html");
+if (!existsSync(hasibProfilePath)) {
+  errors.push("Hasib PI profile page missing from Pages export");
+} else {
+  const hasibProfile = await readFile(hasibProfilePath, "utf8");
+  if (!hasibProfile.includes("https://inspirehep.net/authors/1511186")) {
+    errors.push("Hasib PI profile is missing his verified INSPIRE author link");
+  }
+  if (!hasibProfile.includes("INSPIRE citations")) {
+    errors.push("Hasib PI profile is missing cached INSPIRE citation statistics");
+  }
+}
+
 // Compare deployed DP bytes with the authoritative Drive snapshot from this run.
 // This catches wrong portrait sources, stale assets, and accidental dummy images.
 const shaikotSource = path.resolve(process.env.DRIVE_PEOPLE_ASSET_DIR || "data/drive-people",
