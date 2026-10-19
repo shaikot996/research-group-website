@@ -32,7 +32,7 @@ export default async function Page() {
                   <PersonCard
                     key={person.id}
                     p={person}
-                    citationStats={memberCitationFor(memberCitations, person.inspire)}
+                    citationStats={memberCitationFor(memberCitations, person.inspire, person.slug)}
                   />
                 ))}
               </div>
