@@ -7,10 +7,17 @@ on:
       - ".github/workflows/research-radar.yml"
       - "scripts/refresh-research-radar.mjs"
       - "data/research-radar.json"
+      - "lib/research-radar.ts"
+      - "data/radar-author-watchlist.json"
   workflow_dispatch:
   schedule:
-    # 08:00 Bangladesh (UTC+06), best-effort GitHub schedule.
-    - cron: "0 2 * * *"
+    # Multiple staggered checks improve resilience to delayed/missed Actions cron.
+    # Bangladesh local times: 07:17, 13:23, 19:29 and 01:35.
+    # These are checks, not claims that arXiv publishes new papers every day.
+    - cron: "17 1 * * *"
+    - cron: "23 7 * * *"
+    - cron: "29 13 * * *"
+    - cron: "35 19 * * *"
 
 permissions:
   contents: write
@@ -33,7 +40,7 @@ jobs:
           node-version: 22
       - name: Test verified-paper parser and ranking
         run: node scripts/test-research-radar.mjs
-      - name: Fetch official arXiv papers with backup endpoints
+      - name: Fetch 13 official arXiv subject feeds with backup endpoints
         run: node scripts/refresh-research-radar.mjs
       - name: Commit verified snapshot (never fabricate records)
         run: |

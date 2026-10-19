@@ -4,10 +4,11 @@ import type {RadarPaper,RadarSubject} from "@/lib/research-radar";
 
 const topics:{label:string;value:RadarSubject|"All"}[]=[
   {label:"All",value:"All"},
-  {label:"String Theory",value:"High-Energy Theory"},
+  {label:"String Theory & HEP",value:"High-Energy Theory"},
   {label:"Quantum Gravity & Cosmology",value:"Quantum Gravity & Cosmology"},
   {label:"Mathematics",value:"Mathematics"},
   {label:"AI for Science",value:"AI for Science"},
+  {label:"Quantum Information",value:"Quantum Information"},
 ];
 const short=(s:string,n=220)=>s.length>n?s.slice(0,n).trimEnd()+"…":s;
 function shortDate(date:string){return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(date));}

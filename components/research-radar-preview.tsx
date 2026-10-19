@@ -8,7 +8,7 @@ export function ResearchRadarPreview(){
       <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
         <div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-accent"><span className="radar-pulse-dot" aria-hidden="true"/> SAM research intelligence</div>
           <h2 id="home-radar-heading" className="mt-3 font-serif text-4xl tracking-tight md:text-5xl">Research Radar <span className="text-accent">↗</span></h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">Daily discoveries across string theory, gravity, mathematics and AI—linked to original arXiv research.</p></div>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">Automatically refreshed arXiv research across string theory, cosmology, mathematical physics, AI for science and quantum information.</p></div>
         <Link href="/research-radar" className="focus-ring inline-flex border border-[#8c2131] px-5 py-3 text-sm font-semibold text-accent transition hover:bg-[#8c2131] hover:text-white">Explore Research Radar ↗</Link>
       </div>
       {papers.length?<div className="grid gap-4 lg:grid-cols-3">

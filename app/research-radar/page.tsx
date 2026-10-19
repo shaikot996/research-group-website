@@ -28,7 +28,7 @@ export default function ResearchRadarPage() {
           Research <span className="radar-gradient-ink">Radar.</span>
         </h1>
         <p className="radar-enter mt-8 max-w-2xl text-base leading-8 text-muted md:text-xl md:leading-9">
-          A daily window into emerging ideas—from strings and spacetime to mathematics and AI.
+          An automatically refreshed view of string theory, cosmology, quantum gravity, mathematical physics, quantum information and AI for scientific research.
           Real papers. Original authors. Traceable science.
         </p>
         <div className="radar-enter mt-9 flex flex-wrap items-center gap-3">
@@ -37,13 +37,17 @@ export default function ResearchRadarPage() {
           <Link href="/news-events" className="focus-ring inline-flex border academic-rule bg-[var(--surface)] px-6 py-3.5 text-sm font-semibold hover:text-accent">Group news & events</Link>
         </div>
         <div className="radar-enter mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t academic-rule pt-6 text-xs text-muted">
-          <span>Refresh target <strong className="text-[var(--text)]">08:00 BST · daily</strong></span>
-          <span>Last verified <strong className="text-[var(--text)]">{snapshot.updatedAt?prettyRadarDate(snapshot.updatedAt):"Awaiting first sync"}</strong></span>
-          <span>Coverage <strong className="text-[var(--text)]">5 arXiv subject feeds</strong></span>
+          <span>Refresh schedule <strong className="text-[var(--text)]">4 checks/day · Bangladesh time</strong></span>
+          <span>Last successful collection <strong className="text-[var(--text)]">{snapshot.updatedAt?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Dhaka"}).format(new Date(snapshot.updatedAt))+" (BDT)":"Awaiting first sync"}</strong></span>
+          <span>Coverage <strong className="text-[var(--text)]">13 arXiv subject feeds · 5 themes</strong></span>
         </div>
       </div>
     </header>
 
+    <section className="container-site border-b academic-rule py-5">
+      <p className="text-xs leading-6 text-muted"><strong className="text-[var(--text)]">SAM focus:</strong> String compactifications, fluxes &amp; moduli · Early-universe cosmology · Swampland &amp; quantum gravity · CFT &amp; holography · Black holes · Noncommutative geometry &amp; operator algebras · Quantum information · AI for physics &amp; mathematics</p>
+      <p className="mt-1 text-xs text-muted">The collection is checked several times daily. arXiv has no new announcements every calendar day; the time above indicates the latest successful ingestion, not the submission date of every paper.</p>
+    </section>
     <section className="container-site py-12 md:py-20" aria-labelledby="radar-today">
       <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
         <div>
