@@ -7,6 +7,7 @@ import { Portrait } from "@/components/portrait";
 import { MahbubProfileSections } from "@/components/mahbub-profile-sections";
 import { getInspireArticles, type InspireArticle } from "@/lib/inspire";
 import { getMemberCitationMap, memberCitationFor } from "@/lib/member-citations";
+import { resolveInspireUrl } from "@/lib/verified-inspire-profiles";
 import { getResearchGateAuthorStats } from "@/lib/group-stats";
 
 function driveProfileSections(value?: string | null): Array<[string, string]> {
@@ -83,9 +84,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   });
   if (!p) notFound();
   const extraSections = driveProfileSections(p.profileSections);
-  const inspirePublications = p.inspire ? await getInspireArticles(p.inspire) : null;
+  const inspireUrl = resolveInspireUrl(p.inspire, p.slug);
+  const inspirePublications = inspireUrl ? await getInspireArticles(inspireUrl) : null;
   const memberCitationMap = await getMemberCitationMap();
-  const cachedCitations = memberCitationFor(memberCitationMap, p.inspire);
+  const cachedCitations = memberCitationFor(memberCitationMap, inspireUrl, p.slug);
   const currentArticles = inspirePublications && !inspirePublications.error ? inspirePublications.articles : [];
   const liveCitations = currentArticles.length
     ? {
@@ -100,11 +102,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const isHasibProfile = p.slug === "syed-hasibul-hassan-chowdhury";
   const researchGateSnapshot = isHasibProfile ? await getResearchGateAuthorStats("1511186") : null;
 
-  const same = [p.website, p.googleScholar, p.inspire, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
+  const same = [p.website, p.googleScholar, inspireUrl, p.orcid, p.arxiv, p.github, p.linkedin].filter(Boolean);
   const externalLinks = [
     ["Website", p.website],
     ["Scholar", p.googleScholar],
-    ["INSPIRE", p.inspire],
+    ["INSPIRE", inspireUrl],
     ["ResearchGate", p.slug === "syed-hasibul-hassan-chowdhury" ? "https://www.researchgate.net/profile/S-Chowdhury-2" : null],
     ["ORCID", p.orcid],
     ["arXiv", p.arxiv],
@@ -123,7 +125,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     image: absolute(`/portraits/${p.slug}`),
     description: p.bio || p.researchSummary || undefined,
     knowsAbout: lines(p.researchInterests),
-    identifier: p.inspire || undefined,
+    identifier: inspireUrl || undefined,
     mainEntityOfPage: absolute(`/people/${p.slug}/`),
   };
 
