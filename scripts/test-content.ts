@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { resolveInspireUrl } from "../lib/verified-inspire-profiles";
 import { imageExtensionFromBytes, validatePdf, portraitRank, cvRank } from "../lib/drive-leader-media";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -6,6 +7,17 @@ import { extractDocxText } from "../lib/docx-text";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
 import { candidatePersonFolders, chooseLeaderDocument, isDocxLeaderDocument, isPlaceholderPersonFolder, isValidLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import { portraitDirectories } from "../lib/portrait-paths";
+
+if (resolveInspireUrl(null, "syed-hasibul-hassan-chowdhury") !== "https://inspirehep.net/authors/1511186?ui-citation-summary=true") {
+  throw new Error("Verified Hasib INSPIRE author link was lost when Drive profile omitted INSPIRE.");
+}
+if (resolveInspireUrl("https://inspirehep.net/authors/123", "syed-hasibul-hassan-chowdhury") !== "https://inspirehep.net/authors/1511186?ui-citation-summary=true") {
+  throw new Error("Curated INSPIRE identity was accidentally overwritten by Drive.");
+}
+if (resolveInspireUrl("https://inspirehep.net/authors/456", "new-faculty") !== "https://inspirehep.net/authors/456") {
+  throw new Error("Noncurated faculty INSPIRE link must stay editable in Drive.");
+}
+console.log("Drive-safe INSPIRE author identity regression tests passed.");
 
 const sample = `NAME: Walid Hasan
 CURRENT POSITION: Research Assistant
