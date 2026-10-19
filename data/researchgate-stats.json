@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-10-16",
-  "methodology": "Publicly accessible profile snapshot; not an official API. Compare source-specific metrics; do not sum citation totals across INSPIRE and ResearchGate or assume RG entries are all distinct publications.",
+  "updatedAt": "2026-10-20",
+  "methodology": "Source: verified public ResearchGate author profile (accessed 2026-10-20). ResearchGate reports profile-level counts that cover publications also indexed by INSPIRE, including journal/preprint versions. ResearchGate citation totals are independently source-reported and cannot be added to INSPIRE group citations without citation-level deduplication. No unique additional citations have yet been verified.",
   "authors": [
     {
       "name": "S. Hasibul Hassan Chowdhury",
       "inspireControlNumber": "1511186",
-      "publications": 29,
-      "citations": 119,
+      "publications": 30,
+      "citations": 124,
       "url": "https://www.researchgate.net/profile/S-Chowdhury-2",
-      "verifiedAt": "2026-10-16"
+      "verifiedAt": "2026-10-20"
     }
   ]
 }
