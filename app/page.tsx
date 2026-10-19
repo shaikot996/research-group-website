@@ -40,6 +40,20 @@ export default async function Home() {
       </div>
     </section>
 
+    <section className="container-site border-b academic-rule py-14 md:py-20" aria-labelledby="research-vision-heading">
+      <div className="grid items-start gap-8 lg:grid-cols-[.7fr_1.3fr] lg:gap-16">
+        <div>
+          <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">SAM Research Group</div>
+          <h2 id="research-vision-heading" className="mt-4 font-serif text-4xl leading-tight tracking-[-.025em] md:text-5xl">Research Vision</h2>
+        </div>
+        <div className="max-w-3xl space-y-5 text-base leading-8 text-muted">
+          <p>The <strong className="font-semibold text-[var(--text)]">Strings, Artificial Intelligence and Mathematics (SAM) Research Group</strong> is dedicated to advancing fundamental research in theoretical and mathematical physics, with particular emphasis on string theory, quantum gravity, cosmology, and the interplay between mathematics and fundamental physics.</p>
+          <p>The group pursues these questions through rigorous analytical investigations and computational methods, drawing on techniques from artificial intelligence and machine learning where they can provide new insights, reveal underlying structures, and facilitate the exploration of complex theoretical problems.</p>
+          <p>Through interdisciplinary collaboration, the development of theoretical and computational tools, and the mentorship of emerging researchers, SAM seeks to deepen our understanding of fundamental physics and contribute to new directions in scientific research.</p>
+        </div>
+      </div>
+    </section>
+
     <FeaturedHighlights />
 
     <ResearchRadarPreview />
