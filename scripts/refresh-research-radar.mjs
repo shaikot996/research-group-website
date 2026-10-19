@@ -2,16 +2,23 @@ import { readFile, writeFile } from "node:fs/promises";
 import authorWatchlist from "../data/radar-author-watchlist.json" with {type:"json"};
 
 const OUTPUT = "data/research-radar.json";
-const DAYS_TO_KEEP = 60;
-const MAX_HISTORY = 54;
+const DAYS_TO_KEEP = 45;
+const MAX_HISTORY = 110;
 const FEEDS = [
   { key: "High-Energy Theory", category: "hep-th" },
   { key: "Quantum Gravity & Cosmology", category: "gr-qc" },
   { key: "Quantum Gravity & Cosmology", category: "astro-ph.CO" },
+  { key: "High-Energy Theory", category: "hep-ph" },
   { key: "Mathematics", category: "math-ph" },
+  { key: "Mathematics", category: "math.DG" },
+  { key: "Mathematics", category: "math.OA" },
+  { key: "Mathematics", category: "math.FA" },
+  { key: "Mathematics", category: "math.QA" },
   { key: "AI for Science", category: "cs.LG" },
+  { key: "AI for Science", category: "cs.AI" },
+  { key: "AI for Science", category: "stat.ML" },
+  { key: "Quantum Information", category: "quant-ph" },
 ];
-const keywords = /string theor|compactification|quantum gravit|swampland|holograph|cosmolog|black hole|inflation|moduli|conformal field|ads\/cft|calabi.?yau|mirror symmetry|machine learning|neural network|ai for science|mathematical physics|geometr|gauge theor|quantum field|large language model|automated theorem|foundation model/i;
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const xmlDecode = s => (s || "")
   .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
@@ -83,52 +90,101 @@ const normalizeAuthor = name => String(name||"").normalize("NFKD").toLowerCase()
   .replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
 const matchedAuthors = (paper,list) => (paper.authors||[]).some(author=>
   list.some(name=>normalizeAuthor(author)===normalizeAuthor(name)));
-const deepPhysics = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|anti.de sitter|ads.?cft|brane|flux vacua|flux compact|type iib|supergrav|worldsheet|matrix string|f.theory|heterotic|de sitter|black hole|quantum gravit|inflation|effective field theor|conformal field theor|topological string|extra dimensions|quantum cosmolog|decompactif|supersymmet|quantum field theor|black brane|m.theory|landscape/i;
-const highlySpecific = /string theor|superstring|compactification|calabi.?yau|kahler|kähler|moduli|swampland|holograph|ads.?cft|flux vacua|type iib|supergrav|worldsheet|f.theory|heterotic|topological string|decompactif|m.theory/i;
+const stringTheory = /string theor|superstring|compactific|calabi.?yau|k[aä]hler|moduli|swampland|holograph|ads.?cft|flux vacua|flux compact|type iib|type iia|supergrav|worldsheet|f.theory|heterotic|topological string|decompactif|m.theory|brane|extra.dimension|landscape|kaluza.klein|quantum gravit|supersymmetr|conformal field theor/i;
+const cosmology = /cosmolog|inflation|early.universe|de sitter|anti.de sitter|black hole|raychaudhuri|anisotrop|bianchi|bounce|dark energy|dark matter|primordial|big bang|reheating|scalar.tens|quantum gravity|spacetime|gravitational collapse|singularit|black brane/i;
+const mathematics = /noncommutative|operator algebra|functional analy|spectral triple|dirac operator|moyal|symplectic|differential geometr|kahler|kähler|k.theor|index theor|geometric quantiz|gauge theor|quantum group|quantum algebra|geometric representation|quantum field theor|integrable system|moduli space|mirror symmetry|algebraic geometr|topological field theor|conformal field theor|mathematical physics/i;
+const aiMethod = /machine learning|deep learning|neural network|neural operator|physics.informed|artificial intelligence|large language model|foundation model|symbolic regression|automated theorem|theorem prov|scientific machine learning|equation discovery/i;
+const aiDomain = /physic|quantum|cosmolog|gravit|astronom|mathematic|theorem|geometry|algebra|partial differential|pdes?\b|differential equation|scientific computing|scientific discover|field theor|particle|lattice gauge|computational science|symbolic mathematic/i;
+const quantumInfo = /quantum inform|quantum comput|quantum algorithm|quantum circuit|quantum error correct|quantum channel|entanglement|quantum entropy|quantum complexity|quantum simulation|quantum cryptograph|quantum many.body|holograph|quantum code|quantum teleport/i;
+
 export function isRelevantPaper(paper) {
-  if(matchedAuthors(paper,authorWatchlist.excludedAuthors)) return false;
-  if(matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
-     matchedAuthors(paper,authorWatchlist.groupResearchers))return true;
-  if(matchedAuthors(paper,authorWatchlist.prominentStringTheorists))return true;
-  const text=paper.title+" "+paper.abstract;
-  if(paper.category==="AI for Science")
-    return /machine learning|deep learning|neural network|artificial intelligence|ai for science/i.test(text) &&
-      /string theor|physics|quantum|cosmolog|general relativ|gravitation|mathematical physics|theorem prov|particle physic|field theor|scientific discover/i.test(text);
-  if(paper.category==="Mathematics")
-    return highlySpecific.test(text) || (/quantum field|quantum gravit|black hole|gauge theor/i.test(text) &&
-      /geometry|conformal|supersymmetr|algebra/i.test(text));
-  return highlySpecific.test(text) ||
-    (deepPhysics.test(paper.title) && /gravity|cosmology|field theory|strings|black hole|quantum/i.test(text));
+  if (matchedAuthors(paper,authorWatchlist.excludedAuthors)) return false;
+  const combined = paper.title + " " + paper.abstract;
+  const title = paper.title;
+  // Focus gates also apply to watched authors: a famous name is not enough.
+  if (paper.category === "Mathematics") {
+    return mathematics.test(title) || (mathematics.test(combined) &&
+      /physics|quantum|spectral|operator|noncommutative|gauge|symplectic|geometry/i.test(title));
+  }
+  if (paper.category === "AI for Science")
+    return aiMethod.test(combined) && aiDomain.test(combined) &&
+      (aiMethod.test(title) || aiDomain.test(title));
+  if (paper.category === "Quantum Information")
+    return quantumInfo.test(title) ||
+      (quantumInfo.test(combined) && /quantum|entanglement|holograph|information/i.test(title));
+  if (paper.category === "Quantum Gravity & Cosmology")
+    return stringTheory.test(title) || cosmology.test(title) ||
+      (stringTheory.test(combined) && cosmology.test(combined));
+  return stringTheory.test(title) || cosmology.test(title) ||
+    (/quantum field|conformal field|effective field|gauge theor|scattering amplitude|spectral theor/i.test(title) &&
+      /string|quantum|gravity|field|conformal|holograph|gauge/i.test(combined));
 }
-export function relevance(paper) {
-  const haystack = (paper.title + " " + paper.abstract).toLowerCase();
-  const authorScore=matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
-    matchedAuthors(paper,authorWatchlist.groupResearchers) ? 100 :
-    matchedAuthors(paper,authorWatchlist.prominentStringTheorists) ? 50 : 0;
-  const focus = (paper.title + " " + paper.abstract.slice(0, 380)).toLowerCase();
-  const matched = keywords.test(haystack);
-  const strong = keywords.test(focus);
-  const daysOld = Math.max(0, (Date.now() - Date.parse(paper.published)) / 86400000);
-  const subjects = {"High-Energy Theory":5,"Quantum Gravity & Cosmology":4,"Mathematics":3,"AI for Science":2};
-  return authorScore + (subjects[paper.category] || 0) + (matched ? 4 : 0) + (strong ? 4 : 0) + Math.max(0, 9 - daysOld / 2);
+export function relevance(paper, now = new Date()) {
+  const title = paper.title;
+  const abstract = paper.abstract;
+  const isAuthor = matchedAuthors(paper,authorWatchlist.verifiedCoauthors) ||
+    matchedAuthors(paper,authorWatchlist.groupResearchers);
+  const isProminent = matchedAuthors(paper,authorWatchlist.prominentStringTheorists);
+  const titleFocus = stringTheory.test(title) || cosmology.test(title) ||
+    mathematics.test(title) || quantumInfo.test(title) || (aiMethod.test(title) && aiDomain.test(title));
+  const abstractFocus = stringTheory.test(abstract) || cosmology.test(abstract) ||
+    mathematics.test(abstract) || quantumInfo.test(abstract) || (aiMethod.test(abstract) && aiDomain.test(abstract));
+  const daysOld = Math.max(0, (now.getTime() - Date.parse(paper.published)) / 86400000);
+  return (isAuthor ? 14 : isProminent ? 7 : 0) + (titleFocus ? 13 : 0) +
+    (abstractFocus ? 4 : 0) + Math.max(0, 34 - daysOld * 1.8);
 }
+const CATEGORY_QUOTAS = {
+  "High-Energy Theory": 36,
+  "Quantum Gravity & Cosmology": 24,
+  "Mathematics": 20,
+  "AI for Science": 15,
+  "Quantum Information": 15,
+};
+const CATEGORY_MAXIMUM = {
+  "High-Energy Theory": 46,
+  "Quantum Gravity & Cosmology": 30,
+  "Mathematics": 25,
+  "AI for Science": 19,
+  "Quantum Information": 19,
+};
 export function prepareSnapshot(current, incoming, now = new Date()) {
   const cutoff = now.getTime() - DAYS_TO_KEEP * 86400000;
   const map = new Map();
+  const incomingIds = new Set(incoming.map(p => p.id));
   for (const item of [...(current.papers || []), ...incoming]) {
     if (!item?.id || !isIso(item.published) || Date.parse(item.published) < cutoff) continue;
     if (Date.parse(item.published) > now.getTime() + 86400000) continue;
     if (!/^https:\/\/arxiv\.org\/abs\//.test(item.url) || !isRelevantPaper(item)) continue;
-    const existing = map.get(item.id);
-    if (!existing || (incoming.includes(item) && !incoming.includes(existing))) map.set(item.id, item);
+    // Prefer freshly fetched metadata over a stored record with the same ID.
+    if (!map.has(item.id) || incomingIds.has(item.id) && incoming.includes(item))
+      map.set(item.id, item);
   }
-  const papers = [...map.values()].sort((a,b) => relevance(b)-relevance(a) ||
-    Date.parse(b.published)-Date.parse(a.published) || a.id.localeCompare(b.id)).slice(0, MAX_HISTORY);
-  return {
-    updatedAt:now.toISOString(), status:"verified",
-    sources:["arXiv (official research preprints)"], papers
-  };
+  const ranked = [...map.values()].sort((a,b) =>
+    relevance(b, now)-relevance(a, now) ||
+    Date.parse(b.published)-Date.parse(a.published) || a.id.localeCompare(b.id));
+  const selected = [], used = new Set(), perCategory = {};
+  function select(item) {
+    if (used.has(item.id)) return;
+    used.add(item.id); selected.push(item);
+    perCategory[item.category] = (perCategory[item.category] || 0) + 1;
+  }
+  for (const [category, quota] of Object.entries(CATEGORY_QUOTAS))
+    for (const paper of ranked) {
+      if (perCategory[category] >= quota) break;
+      if (paper.category === category) select(paper);
+    }
+  for (const paper of ranked) {
+    if (selected.length >= MAX_HISTORY) break;
+    if ((perCategory[paper.category] || 0) < (CATEGORY_MAXIMUM[paper.category] || 0))
+      select(paper);
+  }
+  const papers = selected.sort((a,b)=>relevance(b,now)-relevance(a,now) ||
+    Date.parse(b.published)-Date.parse(a.published) || a.id.localeCompare(b.id));
+  return {updatedAt:now.toISOString(),status:"verified",
+    sources:["arXiv official API and official subject feeds"],
+    papers};
 }
+
 async function loadPrevious() {
   try{return JSON.parse(await readFile(OUTPUT,"utf8"));}
   catch{return {updatedAt:null,papers:[]};}
@@ -143,7 +199,7 @@ async function download(url) {
 }
 async function fetchCategory(topic) {
   const params = new URLSearchParams({
-    search_query:"cat:"+topic.category, start:"0", max_results:"40",
+    search_query:"cat:"+topic.category, start:"0", max_results:"75",
     sortBy:"submittedDate", sortOrder:"descending"
   });
   const api = "https://export.arxiv.org/api/query?"+params.toString();
@@ -224,7 +280,7 @@ async function main() {
   const snapshot=prepareSnapshot(previous,collected);
   if(!snapshot.papers.length)throw Error("No recent verified papers; preserving existing snapshot.");
   await writeFile(OUTPUT,JSON.stringify(snapshot,null,2)+"\n","utf8");
-  console.log("[radar] Refreshed "+snapshot.papers.length+" highly relevant papers from "+
+  console.log("[radar] Refreshed "+snapshot.papers.length+" topic-balanced papers from "+
     successful+"/"+FEEDS.length+" subject feeds plus "+authorPapers.length+" tracked-author records.");
 }
 if(process.argv[1]?.endsWith("refresh-research-radar.mjs")) {
