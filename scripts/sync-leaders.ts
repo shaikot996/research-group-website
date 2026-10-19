@@ -1,4 +1,5 @@
 import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
+import { resolveInspireUrl } from "../lib/verified-inspire-profiles";
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
@@ -189,7 +190,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     researchInterests: profile.researchInterests || null,
     website: profile.website || null,
     googleScholar: profile.googleScholar || null,
-    inspire: profile.inspire || null,
+    inspire: resolveInspireUrl(profile.inspire || existing?.inspire, slug),
     orcid: profile.orcid || null,
     github: profile.github || null,
     linkedin: profile.linkedin || null,
