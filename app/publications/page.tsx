@@ -1,3 +1,5 @@
+export const metadata:Metadata={title:"Research Publications",description:"Publications and preprints from the SAM Research Group at BRAC University in mathematical physics, string theory and cosmology.",alternates:{canonical:"/publications/"}};
+import type {Metadata} from "next";
 import { prisma } from "@/lib/db";
 import { SectionHeader } from "@/components/ui";
 import { readFile } from "node:fs/promises";

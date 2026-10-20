@@ -1,3 +1,5 @@
+export const metadata:Metadata={title:"Researchers and Group Members",description:"Meet the principal investigators, researchers and research assistants of the SAM Research Group at BRAC University.",alternates:{canonical:"/people/"}};
+import type {Metadata} from "next";
 import { prisma } from "@/lib/db";
 import { PERSON_ROLES } from "@/lib/constants";
 import { humanize } from "@/lib/utils";

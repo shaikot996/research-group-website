@@ -1,3 +1,5 @@
+export const metadata:Metadata={title:"Research Areas",description:"String theory, mathematical physics, quantum gravity, cosmology and scientific computing research at SAM Research Group, BRAC University.",alternates:{canonical:"/research/"}};
+import type {Metadata} from "next";
 import { prisma } from "@/lib/db";
 import { AreaCard, SectionHeader } from "@/components/ui";
 import { ResearchSnapshot } from "@/components/research-snapshot";

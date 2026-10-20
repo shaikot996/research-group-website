@@ -1,1 +1,3 @@
+export const metadata:Metadata={title:"About the Group",description:"About the Strings, Artificial Intelligence and Mathematics (SAM) Research Group at BRAC University and its research vision.",alternates:{canonical:"/about/"}};
+import type {Metadata} from "next";
 import {prisma} from "@/lib/db"; import {RichText,SectionHeader} from "@/components/ui"; export default async function Page(){const p=await prisma.page.findFirst({where:{slug:"about",status:"PUBLISHED"}});return <div className="container-site section-space max-w-5xl"><SectionHeader eyebrow={p?.eyebrow||"About"} title={p?.title||"About the Group"}/>{p&&<RichText text={p.body}/>}</div>}
