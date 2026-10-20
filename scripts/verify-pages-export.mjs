@@ -115,6 +115,26 @@ if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
 if (process.env.SAM_VERIFY_LIVE_SEO === "1") {
 // Ensure every important static section has its own canonical, not the root.
 // A root canonical inherited on all pages can prevent individual-page indexing.
+const priorityMemberProfiles=[
+  ["mahbubul-alam-majumdar","Mahbubul Alam Majumdar"],
+  ["syed-hasibul-hassan-chowdhury","Syed Hasibul Hassan Chowdhury"],
+  ["md-shaikot-jahan-shuvo","Md Shaikot Jahan Shuvo"],
+  ["mishaal-hai","Mishaal Hai"],
+  ["ahmed-rakin-kamal","Ahmed Rakin Kamal"],
+];
+for(const [slug,memberName] of priorityMemberProfiles){
+  const memberFile=path.join(out,"people",slug,"index.html");
+  if(!existsSync(memberFile)){
+    errors.push(`Missing priority researcher profile: ${slug}`);
+    continue;
+  }
+  const html=await readFile(memberFile,"utf8");
+  const title=html.match(/<title>([\\s\\S]*?)<\\/title>/i)?.[1]||"";
+  if(!title.includes(memberName)||!title.includes("SAM Research Group")||!title.includes("BRAC University"))
+    errors.push(`${slug}: researcher title missing name/SAM/BRAC University`);
+  if(!html.includes('memberOf')||!html.includes("sam.cse.bracu.ac.bd/#organization"))
+    errors.push(`${slug}: researcher profile lacks SAM Person membership structured data`);
+}
 const seoCanonicalPages = [
   ["index.html", "https://sam.cse.bracu.ac.bd/"],
   ["people/index.html", "https://sam.cse.bracu.ac.bd/people/"],

@@ -1,5 +1,18 @@
 # Strings, Artificial Intelligence and Mathematics (SAM)
 
+## Official SAM Research Group website and researchers
+
+The **[SAM Research Group at BRAC University](https://sam.cse.bracu.ac.bd/)** works in string theory, theoretical and mathematical physics, quantum gravity, cosmology, and computational research. Its official [researcher directory](https://sam.cse.bracu.ac.bd/people/) lists current members and their academic profiles.
+
+- [Mahbubul Alam Majumdar — SAM researcher profile](https://sam.cse.bracu.ac.bd/people/mahbubul-alam-majumdar/)
+- [Syed Hasibul Hassan Chowdhury — SAM researcher profile](https://sam.cse.bracu.ac.bd/people/syed-hasibul-hassan-chowdhury/)
+- [Md Shaikot Jahan Shuvo — SAM researcher profile](https://sam.cse.bracu.ac.bd/people/md-shaikot-jahan-shuvo/)
+- [Mishaal Hai — SAM researcher profile](https://sam.cse.bracu.ac.bd/people/mishaal-hai/)
+- [Ahmed Rakin Kamal — SAM researcher profile](https://sam.cse.bracu.ac.bd/people/ahmed-rakin-kamal/)
+
+Member biographies, research interests, publications, and external scholarly identity links are maintained on the individual pages.
+
+
 Research group website for BRAC University, built with Next.js, TypeScript, Prisma and SQLite. It runs on a university-managed Node.js server or Docker behind the university's HTTPS reverse proxy.
 
 **Visitors never need an account. Administration is disabled by default.** There is no shared password or pre-created account. The source package contains no private database, secrets, installed dependencies or build cache.

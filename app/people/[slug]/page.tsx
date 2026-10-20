@@ -10,6 +10,13 @@ import { getMemberCitationMap, memberCitationFor } from "@/lib/member-citations"
 import { resolveInspireUrl } from "@/lib/verified-inspire-profiles";
 import { getResearchGateAuthorStats } from "@/lib/group-stats";
 
+// Publicly used short forms, only where the researcher has a known variant.
+// The official full name from the member record remains the primary identity.
+const researcherNameVariants:Record<string,string[]>={
+  "mahbubul-alam-majumdar":["Mahbub Majumdar"],
+  "md-shaikot-jahan-shuvo":["Shaikot Jahan Shuvo","Md. Shaikot Jahan Shuvo"],
+};
+
 function driveProfileSections(value?: string | null): Array<[string, string]> {
   if (!value) return [];
   try {
@@ -50,15 +57,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
   if (!p) return { title: "Researcher not found", robots: { index: false, follow: false } };
   const canonical = absolute(`/people/${slug}/`);
-  const description = [p.title, p.affiliation, p.researchInterests?.split("\\n").slice(0, 3).join(", ") || p.bio?.slice(0, 120)]
-    .filter(Boolean).join(" · ").slice(0, 260);
+  const expertise=p.researchInterests?.split(/\\r?\\n|;/).map(x=>x.trim()).filter(Boolean).slice(0,2).join(", ");
+  const description=`Research profile of ${p.name}, ${p.title} (${p.affiliation}), at SAM Research Group, BRAC University.`+
+    (expertise ? ` Interests: ${expertise}.` : "");
   return {
-    title: `${p.name} — Research Profile`,
-    description,
+    title:{absolute:`${p.name} | SAM Research Group — BRAC University`},
+    description:description.slice(0,190),
     alternates: { canonical },
-    openGraph: { type: "profile", title: p.name, description, url: canonical,
+    openGraph: { type: "profile", title:`${p.name} | SAM Research Group`, description, url: canonical,
       images: [{url:absolute(`/portraits/${slug}`),alt:`Photograph of ${p.name}`}] },
-    twitter: {card:"summary_large_image", title:p.name, description },
+    twitter: {card:"summary_large_image", title:`${p.name} | SAM Research Group`, description },
     robots: { index: true, follow: true },
   };
 }
@@ -117,10 +125,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const ld = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": absolute(`/people/${p.slug}/#person`),
     name: p.name,
+    ...(researcherNameVariants[p.slug]?.length ? {alternateName:researcherNameVariants[p.slug]} : {}),
     jobTitle: p.title,
     affiliation: { "@type": "Organization", name: p.affiliation },
-    url: absolute(`/people/${p.slug}`),
+    memberOf: {"@id":"https://sam.cse.bracu.ac.bd/#organization"},
+    url: absolute(`/people/${p.slug}/`),
     sameAs: same,
     image: absolute(`/portraits/${p.slug}`),
     description: p.bio || p.researchSummary || undefined,
@@ -143,6 +154,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <h1 className="mt-3 font-serif text-5xl md:text-6xl">{p.name}</h1>
           <p className="mt-3 text-lg text-navy">{p.title}</p>
           <p className="text-sm text-muted">{p.affiliation}</p>
+          <p className="mt-1 text-sm text-muted">Research profile at <a href="/" className="link-academic">SAM Research Group</a> · BRAC University</p>
           {memberCitationStats && <div className="mt-5 flex flex-wrap gap-6 border-y academic-rule py-4">
             <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.citations.toLocaleString("en-US")}</div><div className="text-xs text-muted">INSPIRE citations</div></div>
             <div><div className="text-2xl font-semibold tabular-nums">{memberCitationStats.publications}</div><div className="text-xs text-muted">INSPIRE publications</div></div>

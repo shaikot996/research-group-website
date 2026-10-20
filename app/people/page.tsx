@@ -2,7 +2,7 @@ export const metadata:Metadata={title:"Researchers and Group Members",descriptio
 import type {Metadata} from "next";
 import { prisma } from "@/lib/db";
 import { PERSON_ROLES } from "@/lib/constants";
-import { humanize } from "@/lib/utils";
+import { absolute, humanize } from "@/lib/utils";
 import { PersonCard, SectionHeader } from "@/components/ui";
 import { getMemberCitationMap, memberCitationFor } from "@/lib/member-citations";
 
@@ -17,8 +17,20 @@ export default async function Page() {
     getMemberCitationMap(),
   ]);
 
+  const researcherDirectory={
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    name:"SAM Research Group members — BRAC University",
+    itemListElement:people.map((person,index)=>({
+      "@type":"ListItem",
+      position:index+1,
+      item:{"@type":"Person","@id":absolute(`/people/${person.slug}/#person`),
+        name:person.name,url:absolute(`/people/${person.slug}/`)}
+    }))
+  };
   return (
     <div className="container-site section-space">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(researcherDirectory).replace(/</g,"\\u003c")}}/>
       <SectionHeader eyebrow="People" title="Group members"
         description="Individual publication and citation counts are synchronized from verified INSPIRE-HEP author records where available." />
       <div className="space-y-12 lg:space-y-14">
