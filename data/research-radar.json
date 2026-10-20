@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T06:01:22.657Z",
+  "updatedAt": "2026-10-20T12:49:34.798Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
@@ -1135,6 +1135,21 @@
       "status": "Preprint"
     },
     {
+      "id": "2610.23580",
+      "title": "Holographic two-point functions across a PT symmetry-breaking transition",
+      "authors": [
+        "Zuo Wang",
+        "Liang He"
+      ],
+      "abstract": "In parity-time (PT)-symmetric non-Hermitian systems, an exceptional point, where eigenvalues and eigenvectors coalesce, typically separates a real spectrum from complex-conjugate eigenvalues. In logarithmic conformal field theories (LCFTs), such an exceptional point appears in the spectrum of scaling dimensions. Holographic models of LCFTs, such as the dipole model, are built exactly at this point. Here, we deform the holographic dipole model so that its two coalescing scaling dimensions split into either two real ones or a complex-conjugate pair. We obtain the renormalized two-point functions in closed form. They change continuously from a linear combination of two power laws, through the logarithmic form of the LCFT at the exceptional point, to log-periodic oscillations. For any pair of scalar primary operators with real mixing under dilatations, the conformal Ward identities fix this form up to two normalization constants, which the holographic dictionary determines. In PT-symmetric theories with such a dilatation operator, real and complex-conjugate scaling dimensions correspond to the PT-unbroken and PT-broken phases. In the BTZ black hole at finite temperature, the difference between the quasinormal frequencies associated with the two scaling dimensions changes from purely imaginary to purely real across the real-to-complex spectral transition. Correspondingly, the linear response changes from overdamped to underdamped, with critical damping at the exceptional point.",
+      "published": "2026-10-16T15:03:06.000Z",
+      "url": "https://arxiv.org/abs/2610.23580",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2610.23522",
       "title": "The metric-affine $\\mathring{R}^2$ scalaron: parameter-free inflation",
       "authors": [
@@ -1540,21 +1555,6 @@
       "url": "https://arxiv.org/abs/2610.20751",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.20745",
-      "title": "Orientation-Dependent Casimir Energy and Generalized Torque in Lorentz-Violating Rectangular Compactifications",
-      "authors": [
-        "Zohreh Ashkipoor Gofreh",
-        "Reza Moazzemi"
-      ],
-      "abstract": "We derive the renormalized Casimir energy of a free massive real scalar field on the rectangular compactification \\(\\mathbb{R}^{1,r}\\times T^p\\) in the presence of a constant CPT-even aether-like Lorentz-violating background. Allowing the spatial part of the background vector to have an arbitrary orientation relative to the compactification lattice, we characterize the resulting orientation-dependent geometric response of the vacuum. Integrating out the noncompact momenta reduces the effective spatial kinetic matrix to its Schur complement, and Poisson resummation yields a closed, exponentially convergent Bessel-function lattice sum within the stability domain. The resulting expression separates an orientation-independent kinetic normalization, \\([1+λu_μu^μ]^{-1/2}\\), from an orientation-dependent deformation of the image-lattice metric. Coordinate-aligned configurations are recovered as special cases, and the exact massless limit and the compact-direction pressures are obtained. For a two-dimensional compact subspace, we explicitly analyze the angular dependence of the vacuum energy and derive the associated generalized Casimir torque. These results establish how the relative orientation between a Lorentz-violating background and an anisotropic compactification lattice enters the renormalized vacuum energy and its directional response.",
-      "published": "2026-10-14T18:04:20.000Z",
-      "url": "https://arxiv.org/abs/2610.20745",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
