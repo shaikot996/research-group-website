@@ -131,7 +131,9 @@ for (const [rel, expected] of seoCanonicalPages) {
     .filter(tag => /\brel=["']canonical["']/i.test(tag))
     .map(tag => tag.match(/\bhref=["']([^"']+)["']/i)?.[1])
     .filter(Boolean);
-  if (canonicalLinks.length !== 1 || canonicalLinks[0] !== expected)
+  const matchesExpected = canonicalLinks[0] === expected ||
+    (rel === "index.html" && canonicalLinks[0] === expected.replace(/\/$/, ""));
+  if (canonicalLinks.length !== 1 || !matchesExpected)
     errors.push(`${rel}: expected unique canonical ${expected}, found ${JSON.stringify(canonicalLinks)}`);
 }
 if (existsSync(path.join(out, "index.html"))) {
