@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {prisma} from "@/lib/db";
@@ -42,4 +43,15 @@ export default async function Page({params}:{params:Promise<{slug:string}>}) {
       </section>}
     </article>
   </main>;
+}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
+  const {slug}=await params;
+  const item=await prisma.newsPost.findFirst({where:{slug,status:"PUBLISHED"},select:{title:true,summary:true}});
+  if(!item)return {title:"Page not found",robots:{index:false,follow:false}};
+  return {
+    title:item.title,
+    description:(item.summary).slice(0,155),
+    alternates:{canonical:`/news/${slug}/`}
+  };
 }

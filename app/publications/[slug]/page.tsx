@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
@@ -12,4 +13,15 @@ export default async function Page({params}:{params:Promise<{slug:string}>}){
   const ld={"@context":"https://schema.org","@type":"ScholarlyArticle",headline:p.title,author:p.authors.map(a=>({"@type":"Person",name:a.name,url:absolute(`/people/${a.slug}`)})),datePublished:String(p.year),description:p.abstract,url:absolute(`/publications/${p.slug}`),...(p.doi?{sameAs:`https://doi.org/${p.doi}`}:{})};
   const venue=[p.journal,p.volume,p.pages].filter(Boolean).join(" · ");
   return <div className="container-site section-space max-w-5xl"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(ld).replace(/</g,"\\u003c")}}/><Breadcrumbs items={[{label:"Publications",href:"/publications"},{label:p.title}]}/><div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{p.year}</div><h1 className="mt-4 font-serif text-5xl leading-tight">{p.title}</h1><p className="mt-6 text-lg text-muted">{p.authorText}</p>{venue&&<p className="mt-4 text-sm text-muted">{venue}</p>}<div className="mt-8 flex flex-wrap gap-4 text-sm">{p.inspireUrl&&<a className="link-academic" target="_blank" rel="noopener noreferrer" href={p.inspireUrl}>INSPIRE record</a>}{p.arxivId&&<a className="link-academic" target="_blank" rel="noopener noreferrer" href={`https://arxiv.org/abs/${p.arxivId}`}>arXiv:{p.arxivId}{p.eprintClass?` [${p.eprintClass}]`:""}</a>}{p.doi&&<a className="link-academic" target="_blank" rel="noopener noreferrer" href={`https://doi.org/${p.doi}`}>DOI</a>}{p.pdfUrl&&<a className="link-academic" target="_blank" rel="noopener noreferrer" href={p.pdfUrl}>PDF</a>}{p.citationCount!==null&&p.citationCount!==undefined&&<span className="text-muted">INSPIRE citations: {p.citationCount}</span>}</div>{p.abstract&&<section className="mt-12"><h2 className="font-serif text-3xl">Abstract</h2><p className="mt-4 leading-8 text-muted">{p.abstract}</p></section>}{p.authors.length>0&&<section className="mt-10"><h2 className="font-serif text-2xl">Group authors</h2><div className="mt-3 flex flex-wrap gap-2">{p.authors.map(a=><Link className="border academic-rule px-3 py-2 text-sm" key={a.id} href={`/people/${a.slug}`}>{a.name}</Link>)}</div></section>}{p.bibtex&&<section className="mt-12 border-t academic-rule pt-7"><div className="flex justify-between"><h2 className="font-serif text-2xl">BibTeX</h2><CopyButton value={p.bibtex}/></div><pre className="mt-4 overflow-x-auto border academic-rule p-4 text-xs"><code>{p.bibtex}</code></pre></section>}<p className="mt-10 text-xs text-muted">INSPIRE metadata reviewed 6 October 2026. Follow the INSPIRE record for the current citation count and latest bibliographic state.</p></div>;
+}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
+  const {slug}=await params;
+  const item=await prisma.publication.findFirst({where:{slug,status:"PUBLISHED"},select:{title:true,abstract:true}});
+  if(!item)return {title:"Page not found",robots:{index:false,follow:false}};
+  return {
+    title:item.title,
+    description:(item.abstract || "Publication and preprint by SAM Research Group researchers at BRAC University.").slice(0,155),
+    alternates:{canonical:`/publications/${slug}/`}
+  };
 }
