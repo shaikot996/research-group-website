@@ -129,7 +129,7 @@ for(const [slug,memberName] of priorityMemberProfiles){
     continue;
   }
   const html=await readFile(memberFile,"utf8");
-  const title=html.match(/<title>([\\s\\S]*?)<\\/title>/i)?.[1]||"";
+  const title=html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]||"";
   if(!title.includes(memberName)||!title.includes("SAM Research Group")||!title.includes("BRAC University"))
     errors.push(`${slug}: researcher title missing name/SAM/BRAC University`);
   if(!html.includes('memberOf')||!html.includes("sam.cse.bracu.ac.bd/#organization"))
