@@ -112,6 +112,7 @@ if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
   if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");
   if (!/<script\b[^>]*type=["\']application\/ld\+json["\'][^>]*>[\s\S]*?https:\/\/schema\.org[\s\S]*?<\/script>/i.test(profile)) errors.push("Person profile missing preserved JSON-LD structured data");
 }
+if (process.env.SAM_VERIFY_LIVE_SEO === "1") {
 // Ensure every important static section has its own canonical, not the root.
 // A root canonical inherited on all pages can prevent individual-page indexing.
 const seoCanonicalPages = [
@@ -126,9 +127,9 @@ for (const [rel, expected] of seoCanonicalPages) {
   const file = path.join(out, rel);
   if (!existsSync(file)) continue;
   const html = await readFile(file, "utf8");
-  const canonicalLinks = [...html.matchAll(/<link\\b[^>]*>/gi)].map(m => m[0])
-    .filter(tag => /\\brel=["']canonical["']/i.test(tag))
-    .map(tag => tag.match(/\\bhref=["']([^"']+)["']/i)?.[1])
+  const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)].map(m => m[0])
+    .filter(tag => /\brel=["']canonical["']/i.test(tag))
+    .map(tag => tag.match(/\bhref=["']([^"']+)["']/i)?.[1])
     .filter(Boolean);
   if (canonicalLinks.length !== 1 || canonicalLinks[0] !== expected)
     errors.push(`${rel}: expected unique canonical ${expected}, found ${JSON.stringify(canonicalLinks)}`);
@@ -139,6 +140,8 @@ if (existsSync(path.join(out, "index.html"))) {
     errors.push("Homepage brand and university missing from search metadata");
   if (!homeSeo.includes('"@type":"Organization"') || !homeSeo.includes('"@type":"WebSite"'))
     errors.push("Homepage missing Organization / WebSite JSON-LD identity");
+}
+
 }
 
 if (existsSync(path.join(out, "index.html"))) {

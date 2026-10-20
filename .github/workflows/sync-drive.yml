@@ -130,6 +130,7 @@ jobs:
       - name: Verify custom-domain export and required assets
         env:
           SAM_VERIFY_CURRENT_PROFILES: "1"
+          SAM_VERIFY_LIVE_SEO: "1"
         run: node scripts/verify-pages-export.mjs
 
       - name: Configure GitHub Pages
