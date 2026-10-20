@@ -3,10 +3,7 @@ import Link from "next/link";
 import {getRadarSnapshot,radarHighlights,prettyRadarDate,radarExcerpt} from "@/lib/research-radar";
 import {RadarExplorer} from "@/components/research-radar-explorer";
 export const dynamic="force-dynamic";
-export const metadata:Metadata={
-  title:"Research Radar",
-  description:"Daily curated-by-algorithm arXiv preprints spanning string theory, quantum gravity, cosmology, mathematics and AI for science, with verified links and original abstract excerpts.",
-};
+export const metadata:Metadata={title:"Research Radar",description:"SAM Research Radar: arXiv preprints in string theory, quantum gravity, cosmology, mathematical physics and AI for science.",alternates:{canonical:"/research-radar/"}};
 
 export default function ResearchRadarPage() {
   const snapshot=getRadarSnapshot();

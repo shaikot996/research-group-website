@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "RAY — Relativity and Geometry Toolkit",
-  description: "RAY v1.0.0: current tensor geometry and Raychaudhuri features, installation, examples, and planned implementations.",
-};
+export const metadata:Metadata={title:"RAY — Relativity and Geometry Toolkit",description:"RAY is a symbolic general relativity and differential geometry toolkit developed by the SAM Research Group.",alternates:{canonical:"/open-source/ray/"}};
 
 const features = [
   {title:"Tensor geometry",items:["Arbitrary-dimensional explicit metrics and metric signatures","Christoffel symbols and Riemann, Ricci, Einstein, and Weyl tensors","Ricci scalar, Kretschmann invariant, and quadratic Ricci/Weyl invariants","Configurable raised, lowered, and mixed tensor indices"]},

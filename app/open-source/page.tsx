@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Open Source Hub",
-  description: "Open research software from SAM: reproducible tools, examples, documentation and development roadmaps.",
-};
+export const metadata:Metadata={title:"Open Source Research Software",description:"Open-source scientific software, computational tools and mathematical research from the SAM Research Group.",alternates:{canonical:"/open-source/"}};
 
 export default function OpenSourceHub() {
   return <main>

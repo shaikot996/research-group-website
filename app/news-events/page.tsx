@@ -1,3 +1,5 @@
+export const metadata:Metadata={title:"News and Events",description:"Seminars, research news and academic activities from the SAM Research Group at BRAC University.",alternates:{canonical:"/news-events/"}};
+import type {Metadata} from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import type { NewsPost, Event } from "@prisma/client";
