@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { getSiteSettings } from "@/lib/site";
@@ -9,6 +10,13 @@ import { getGroupCitationStats } from "@/lib/group-stats";
 import { ResearchSnapshot } from "@/components/research-snapshot";
 
 export const dynamic = "force-dynamic";
+export const metadata:Metadata={
+  title:{absolute:"SAM Research Group | BRAC University"},
+  description:"The Strings, Artificial Intelligence and Mathematics (SAM) Research Group at BRAC University advances research in string theory, mathematical physics, quantum gravity, cosmology and computational methods.",
+  alternates:{canonical:"/"},
+  openGraph:{title:"SAM Research Group | BRAC University",url:"/",type:"website"},
+};
+
 
 export default async function Home() {
   const [s,areas,projects,pubs,news,events,peopleCount,localPubCount,projectCount,citationStats] = await Promise.all([
@@ -24,7 +32,31 @@ export default async function Home() {
     getGroupCitationStats(),
   ]);
 
+  const organizationSchema = {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://sam.cse.bracu.ac.bd/#organization",
+        name:"Strings, Artificial Intelligence and Mathematics (SAM) Research Group",
+        alternateName:["SAM Research Group","Strings, Artificial Intelligence and Mathematics"],
+        url:"https://sam.cse.bracu.ac.bd/",
+        description:"A research group at BRAC University focused on theoretical and mathematical physics, string theory, quantum gravity, cosmology and scientific computation.",
+        parentOrganization:{"@type":"CollegeOrUniversity",name:"BRAC University",url:"https://www.bracu.ac.bd/"}
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://sam.cse.bracu.ac.bd/#website",
+        name:"SAM Research Group",
+        alternateName:"Strings, Artificial Intelligence and Mathematics",
+        url:"https://sam.cse.bracu.ac.bd/",
+        publisher:{"@id":"https://sam.cse.bracu.ac.bd/#organization"},
+        inLanguage:"en"
+      }
+    ]
+  };
   return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationSchema).replace(/</g,"\\u003c")}}/>
     <section className="hero-shell relative overflow-hidden border-b academic-rule">
       <div className="hero-grid absolute inset-0" />
       <div className="hero-art absolute inset-0" aria-hidden="true" />

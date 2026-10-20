@@ -11,12 +11,11 @@ export async function generateMetadata():Promise<Metadata>{
  const canonical=absolute("/");
  return {
   metadataBase:new URL(canonical),
-  title:{default:s.groupName,template:`%s | ${s.groupName}`},
-  description:s.groupDescription,
-  alternates:{canonical},
+  title:{default:"SAM Research Group | BRAC University",template:"%s | SAM Research Group"},
+  description:"Strings, Artificial Intelligence and Mathematics (SAM) Research Group at BRAC University. Research in string theory, mathematical physics, quantum gravity, cosmology and computational methods.",
   robots:{index:true,follow:true,googleBot:{index:true,follow:true,"max-image-preview":"large","max-snippet":-1}},
-  openGraph:{type:"website",url:canonical,siteName:"SAM Research Group",title:s.groupName,description:s.groupDescription},
-  twitter:{card:"summary_large_image",title:s.groupName,description:s.groupDescription}
+  openGraph:{type:"website",url:canonical,siteName:"SAM Research Group",title:"SAM Research Group | BRAC University",description:"Strings, Artificial Intelligence and Mathematics at BRAC University — theoretical and mathematical physics research."},
+  twitter:{card:"summary_large_image",title:"SAM Research Group | BRAC University",description:"Strings, Artificial Intelligence and Mathematics at BRAC University."}
  };
 }
 export default async function Layout({children}:{children:ReactNode}){
