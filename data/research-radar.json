@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T06:07:14.645Z",
+  "updatedAt": "2026-10-21T13:02:03.197Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
@@ -33,23 +33,6 @@
       "url": "https://arxiv.org/abs/2610.27059",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.26907",
-      "title": "Reverse Module Categories of Vertex Operator Algebras",
-      "authors": [
-        "Chongying Dong",
-        "Binghui Li",
-        "Li Ren",
-        "Yilong Wang"
-      ],
-      "abstract": "We study the realization of the reverse braided category of the module category of a rational vertex operator algebra V. Using holomorphic extensions and commutant constructions, we prove that this realization property is preserved under suitable cosets, tensor products, extensions, and finite-group orbifolds. As applications, we establish the property for unitary Virasoro minimal models, affine vertex operator algebras of types ABCDE at positive integral levels, the corresponding principal W-algebras of type ADE, and related parafermion vertex operator algebras.",
-      "published": "2026-10-21T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.26907",
-      "category": "Mathematics",
-      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -118,26 +101,6 @@
       "abstract": "Industrial fluid transport systems are monitored through heterogeneous sensing streams, but robust fault diagnosis remains difficult because response signals vary with operating conditions and differ from physical variables in sampling rate, observation duration and data granularity. To address these challenges, we propose a physical-variable-informed deep learning framework (PhyNet) for robust fault diagnosis under real-world sampling heterogeneity. PhyNet treats physical variables as global operating constraints and response signals as local diagnostic evidence. Its physical-to-response cross-attention mechanism connects sequence-level physical-variable tokens with a learnable global response token, enabling interaction without strict temporal alignment. Across four benchmarks, including three real-world cavitation datasets and one public two-phase-flow dataset, PhyNet achieves the best performance across all evaluated metrics. Class-wise analyses, together with attention and masking analyses, show improved discrimination of ambiguous states and indicate that physical variables meaningfully constrain local response interpretation. These findings demonstrate a deployment-oriented approach to robust diagnosis in heterogeneous industrial environments.",
       "published": "2026-10-21T04:00:00.000Z",
       "url": "https://arxiv.org/abs/2610.27891",
-      "category": "AI for Science",
-      "primaryCategory": "cs.AI",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.28264",
-      "title": "PI-MLLM: Psychophysics-Inspired Multimodal Large Language Model for Oddly Satisfying Video Emotion Analysis",
-      "authors": [
-        "Yuheng Zhang",
-        "Jie Zhang",
-        "Yuecong Min",
-        "Yunwei Zhao",
-        "Meichen Liu",
-        "Qiankun Li",
-        "Shiguang Shan"
-      ],
-      "abstract": "Oddly Satisfying Videos (OSVs) can evoke strong viewer responses through repetitive motion, visual tactility, and ASMR-like sounds despite containing few explicit semantic emotion cues. This makes OSVs a challenging setting for Video Emotion Analysis (VEA), since most existing methods focus on semantic video content and under-model the physical sensory dynamics that shape viewer responses. To support Oddly Satisfying Video Emotion Analysis (OSVEA), we construct the Oddly Satisfying Video Dataset (OSVD), comprising 12,000 annotated 5-second clips. Each clip provides viewer-emotion labels under video-only, audio-only, and audio-visual conditions, together with explanations grounded in visual and acoustic sensory evidence. Building on OSVD, we propose PI-MLLM, a psychophysics-inspired multimodal large language model that integrates Modality-Specific Dynamics Alignment (MSDA) and Coalition-Based Audio-Visual Attribution (CAVA). MSDA uses auxiliary prediction objectives to align modality representations with visual motion and acoustic energy-onset dynamics. CAVA evaluates emotion scores across modality coalitions and applies Shapley attribution to identify the dominant modality and determine whether visual and auditory evidence is synergistic or conflicting. Experiments show that PI-MLLM improves both viewer-side emotion prediction and sensory-grounded explanation quality, suggesting the value of physical sensory cues to video emotion analysis.",
-      "published": "2026-10-21T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.28264",
       "category": "AI for Science",
       "primaryCategory": "cs.AI",
       "source": "arXiv",
@@ -351,6 +314,26 @@
       "url": "https://arxiv.org/abs/2610.28287",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.28264",
+      "title": "PI-MLLM: Psychophysics-Inspired Multimodal Large Language Model for Oddly Satisfying Video Emotion Analysis",
+      "authors": [
+        "Yuheng Zhang",
+        "Jie Zhang",
+        "Yuecong Min",
+        "Yunwei Zhao",
+        "Meichen Liu",
+        "Qiankun Li",
+        "Shiguang Shan"
+      ],
+      "abstract": "Oddly Satisfying Videos (OSVs) can evoke strong viewer responses through repetitive motion, visual tactility, and ASMR-like sounds despite containing few explicit semantic emotion cues. This makes OSVs a challenging setting for Video Emotion Analysis (VEA), since most existing methods focus on semantic video content and under-model the physical sensory dynamics that shape viewer responses. To support Oddly Satisfying Video Emotion Analysis (OSVEA), we construct the Oddly Satisfying Video Dataset (OSVD), comprising 12,000 annotated 5-second clips. Each clip provides viewer-emotion labels under video-only, audio-only, and audio-visual conditions, together with explanations grounded in visual and acoustic sensory evidence. Building on OSVD, we propose PI-MLLM, a psychophysics-inspired multimodal large language model that integrates Modality-Specific Dynamics Alignment (MSDA) and Coalition-Based Audio-Visual Attribution (CAVA). MSDA uses auxiliary prediction objectives to align modality representations with visual motion and acoustic energy-onset dynamics. CAVA evaluates emotion scores across modality coalitions and applies Shapley attribution to identify the dominant modality and determine whether visual and auditory evidence is synergistic or conflicting. Experiments show that PI-MLLM improves both viewer-side emotion prediction and sensory-grounded explanation quality, suggesting the value of physical sensory cues to video emotion analysis.",
+      "published": "2026-10-20T14:20:39.000Z",
+      "url": "https://arxiv.org/abs/2610.28264",
+      "category": "AI for Science",
+      "primaryCategory": "cs.AI",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1123,7 +1106,7 @@
       "published": "2026-10-19T15:37:22.000Z",
       "url": "https://arxiv.org/abs/2610.26590",
       "category": "Mathematics",
-      "primaryCategory": "math-ph",
+      "primaryCategory": "math.OA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1202,7 +1185,7 @@
       "published": "2026-10-19T13:10:36.000Z",
       "url": "https://arxiv.org/abs/2610.26341",
       "category": "Mathematics",
-      "primaryCategory": "math-ph",
+      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1335,22 +1318,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.28249",
-      "title": "Oscillator representations of quantum affine orthosymplectic superalgebras II",
-      "authors": [
-        "Jae-Hoon Kwon",
-        "Sin-Myung Lee",
-        "Masato Okado"
-      ],
-      "abstract": "As a continuation of our study on quantum affine spin-oscillator correspondence, we introduce a category of $q$-oscillator representations of quantum affine superalgebras of type $XB$ ($X=B,D$) and construct irreducible objects in a uniform way. Under the truncation functor inspired by the theory of super duality, they are related to finite-dimensional irreducible representations of $U_q(D^{(2)}_{n+1})$ ($X=B$) or $U_q(B^{(1)}_{n})$ ($X=D$). We also considerably streamline our previous arguments, which clarifies how our construction can be understood as a quantum affinization of classical super duality.",
-      "published": "2026-10-21T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.28249",
-      "category": "Mathematics",
-      "primaryCategory": "math.QA",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2610.25423",
       "title": "Exothermic Dark Matter with a Dark Higgs: The LZ 248 keV Event and the Galactic Center Excess",
       "authors": [
@@ -1380,6 +1347,22 @@
       "url": "https://arxiv.org/abs/2610.25339",
       "category": "Mathematics",
       "primaryCategory": "math.OA",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.28249",
+      "title": "Oscillator representations of quantum affine orthosymplectic superalgebras II",
+      "authors": [
+        "Jae-Hoon Kwon",
+        "Sin-Myung Lee",
+        "Masato Okado"
+      ],
+      "abstract": "As a continuation of our study on quantum affine spin-oscillator correspondence, we introduce a category of $q$-oscillator representations of quantum affine superalgebras of type $XB$ ($X=B,D$) and construct irreducible objects in a uniform way. Under the truncation functor inspired by the theory of super duality, they are related to finite-dimensional irreducible representations of $U_q(D^{(2)}_{n+1})$ ($X=B$) or $U_q(B^{(1)}_{n})$ ($X=D$). We also considerably streamline our previous arguments, which clarifies how our construction can be understood as a quantum affinization of classical super duality.",
+      "published": "2026-10-20T14:10:08.000Z",
+      "url": "https://arxiv.org/abs/2610.28249",
+      "category": "Mathematics",
+      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1442,6 +1425,23 @@
       "url": "https://arxiv.org/abs/2610.24547",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.26907",
+      "title": "Reverse Module Categories of Vertex Operator Algebras",
+      "authors": [
+        "Chongying Dong",
+        "Binghui Li",
+        "Li Ren",
+        "Yilong Wang"
+      ],
+      "abstract": "We study the realization of the reverse braided category of the module category of a rational vertex operator algebra V. Using holomorphic extensions and commutant constructions, we prove that this realization property is preserved under suitable cosets, tensor products, extensions, and finite-group orbifolds. As applications, we establish the property for unitary Virasoro minimal models, affine vertex operator algebras of types ABCDE at positive integral levels, the corresponding principal W-algebras of type ADE, and related parafermion vertex operator algebras.",
+      "published": "2026-10-17T03:21:34.000Z",
+      "url": "https://arxiv.org/abs/2610.26907",
+      "category": "Mathematics",
+      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
