@@ -98,14 +98,20 @@ async function discoverLeaders(auth: GoogleDriveAuth | null) {
 }
 
 async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promise<boolean> {
+  // An RA may move into the researcher section without becoming a Co-PI.
+  // Adopt the previous DRIVE/DRIVE_BOOTSTRAP row by stable slug: preserve its
+  // public URL and avoid an incorrectly duplicated member.
+  const movedWalid = !entry.curated && entry.folderId === "1bAsyI9_ih9iNGn2Ej4jN3jGepksD0Rbs";
   const existing = entry.curated
     ? await prisma.person.findUnique({ where: { slug: entry.slug! } })
-    : await prisma.person.findUnique({ where: { externalSourceId: entry.docId } });
+    : (await prisma.person.findUnique({ where: { externalSourceId: entry.docId } })) ||
+      (movedWalid ? await prisma.person.findUnique({ where: { slug: "walid-hasan" } }) : null);
 
   if (entry.curated && (!existing || !["PRINCIPAL_INVESTIGATOR", "RESEARCHER", "FACULTY"].includes(existing.role))) {
     throw new Error("Expected curated leader missing or wrong role: " + entry.slug);
   }
-  if (existing && !entry.curated && existing.contentSource !== "DRIVE_LEADER_AUTO") {
+  if (existing && !entry.curated && existing.contentSource !== "DRIVE_LEADER_AUTO" &&
+    !(movedWalid && ["DRIVE","DRIVE_BOOTSTRAP","LOCAL"].includes(existing.contentSource))) {
     console.warn("[leaders] Profile already owned by a curated/local source; skipping " + entry.folderName);
     return false;
   }
@@ -148,8 +154,10 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
   // The selected profile belongs to the PI or Co-PI folder. Do not classify
   // a new leader as a Research Assistant merely because the title is empty.
   const titleFromDoc = /(?:^|\n)\s*(?:CURRENT POSITION|POSITION|TITLE)\s*(?:\n|:)/i.test(body);
-  const title = titleFromDoc ? profile.title :
-    entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : entry.role === "FACULTY" ? "Faculty" : "Co-Principal Investigator";
+  const title = movedWalid
+    ? (titleFromDoc ? profile.title : "Researcher")
+    : titleFromDoc ? profile.title :
+      entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : entry.role === "FACULTY" ? "Faculty" : "Co-Principal Investigator";
   const files = await retry(entry.folderName + " media listing", () => listGoogleDriveChildren(auth, entry.folderId));
   const photo = files.filter(f => /\.(jpe?g|png|webp)$/i.test(f.name) || /image\/(png|jpeg|webp)/i.test(f.mimeType))
     .sort((a, b) => portraitRank(b.name) - portraitRank(a.name) || a.name.localeCompare(b.name))[0];
