@@ -1,6 +1,18 @@
 {
-  "updatedAt": "2026-10-22T07:46:06.812Z",
+  "updatedAt": "2026-10-23T07:43:46.878Z",
   "records": [
+    {
+      "id": "3217980",
+      "title": "Big Crunching Your Big Bang: Doubly Warped Time-Dependent Type II Flux Backgrounds and Scale Separation",
+      "authors": "Arko, Kazi Fahim Reza, Hasan, Walid, Hoque, M. Fahim, Kamal, Ahmed Rakin",
+      "year": 2026,
+      "date": "2026-10-21",
+      "journal": null,
+      "arxiv": "2610.30248",
+      "doi": null,
+      "citations": 0,
+      "url": "https://inspirehep.net/literature/3217980"
+    },
     {
       "id": "3213558",
       "title": "Fire at the tip of the throat: Hagedorn phase after brane-antibrane inflation?",
@@ -46,7 +58,7 @@
       "journal": "JHEP 06 188",
       "arxiv": "2512.19793",
       "doi": "10.1007/JHEP06(2026)188",
-      "citations": 3,
+      "citations": 4,
       "url": "https://inspirehep.net/literature/3095325"
     },
     {
@@ -70,7 +82,7 @@
       "journal": "JCAP 06 025",
       "arxiv": "2511.19610",
       "doi": "10.1088/1475-7516/2026/06/025",
-      "citations": 13,
+      "citations": 15,
       "url": "https://inspirehep.net/literature/3086355"
     },
     {
@@ -154,7 +166,7 @@
       "journal": "Eur.Phys.J.C 85 315",
       "arxiv": "2410.00097",
       "doi": "10.1140/epjc/s10052-025-13982-9",
-      "citations": 25,
+      "citations": 26,
       "url": "https://inspirehep.net/literature/2836034"
     },
     {
