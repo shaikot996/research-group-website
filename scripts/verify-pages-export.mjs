@@ -107,6 +107,37 @@ if (existsSync(shaikotPage)) {
 }
 
 }
+// Researcher migration and joint publication must survive every fresh export.
+if (process.env.SAM_VERIFY_CURRENT_PROFILES === "1") {
+  const peopleFile=path.join(out,"people","index.html");
+  if (existsSync(peopleFile)) {
+    const html=await readFile(peopleFile,"utf8");
+    const researchers=html.indexOf(">Researcher</h2>");
+    const assistants=html.indexOf(">Research Assistant</h2>",researchers+1);
+    if (researchers<0 || assistants<0 || assistants<researchers ||
+        !html.slice(researchers,assistants).includes("Walid Hasan"))
+      errors.push("Walid Hasan is not listed among Researchers before the Research Assistant section");
+    if (assistants>=0 && html.slice(assistants).includes(">Walid Hasan</"))
+      errors.push("Walid Hasan still appears as a Research Assistant");
+  }
+  for(const [slug,id] of [
+    ["walid-hasan","3217983"],
+    ["kazi-fahim-reza-arko","3217981"],
+    ["m-fahim-hoque","3217985"],
+  ]){
+    const file=path.join(out,"people",slug,"index.html");
+    if(!existsSync(file)){
+      errors.push("Missing research coauthor profile: "+slug);
+      continue;
+    }
+    const html=await readFile(file,"utf8");
+    if(!html.includes("2610.30248"))
+      errors.push("Missing 2026 joint arXiv preprint on "+slug);
+    if(!html.includes("/authors/"+id))
+      errors.push("Missing verified INSPIRE author identity on "+slug);
+  }
+}
+
 if (existsSync(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"))) {
   const profile = await readFile(path.join(out, "people/md-shaikot-jahan-shuvo/index.html"), "utf8");
   if (!profile.includes('rel="canonical"') || !profile.includes("md-shaikot-jahan-shuvo")) errors.push("Person profile missing SEO canonical");
