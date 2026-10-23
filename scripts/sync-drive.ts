@@ -2,6 +2,7 @@ import { appendFile, mkdir, readdir, rm, unlink, writeFile } from "node:fs/promi
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 import { parseDriveProfile, slugifyDriveName } from "../lib/drive-profile";
+import { resolveInspireUrl } from "../lib/verified-inspire-profiles";
 import { extractDocxText } from "../lib/docx-text";
 import { candidatePersonFolders, isDocxLeaderDocument, normalizePersonIdentity } from "../lib/drive-leader-discovery";
 import { imageExtensionFromBytes, validatePdf } from "../lib/drive-leader-media";
@@ -198,7 +199,8 @@ async function syncPerson(auth: GoogleDriveAuth | null, folder: GoogleDriveFile)
     researchInterests: profile.researchInterests || null,
     website: profile.website || null,
     googleScholar: profile.googleScholar || null,
-    inspire: profile.inspire || null,
+    // Preserve verified INSPIRE identity even when the editable DOCX/Google Doc omits it.
+    inspire: resolveInspireUrl(profile.inspire, slug),
     orcid: profile.orcid || null,
     github: profile.github || null,
     linkedin: profile.linkedin || null,
