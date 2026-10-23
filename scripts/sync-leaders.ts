@@ -155,7 +155,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
   // a new leader as a Research Assistant merely because the title is empty.
   const titleFromDoc = /(?:^|\n)\s*(?:CURRENT POSITION|POSITION|TITLE)\s*(?:\n|:)/i.test(body);
   const title = movedWalid
-    ? (titleFromDoc ? profile.title : "Researcher")
+    ? "Graduate Student in Theoretical Physics"
     : titleFromDoc ? profile.title :
       entry.role === "PRINCIPAL_INVESTIGATOR" ? "Principal Investigator" : entry.role === "FACULTY" ? "Faculty" : "Co-Principal Investigator";
   const files = await retry(entry.folderName + " media listing", () => listGoogleDriveChildren(auth, entry.folderId));
@@ -192,11 +192,11 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     name: profile.name,
     title,
     affiliation: profile.affiliation,
-    email: profile.email || null,
-    bio: profile.bio || null,
-    researchSummary: profile.researchSummary || null,
-    researchInterests: profile.researchInterests || null,
-    website: profile.website || null,
+    email: profile.email || (movedWalid ? existing?.email : null) || null,
+    bio: profile.bio || (movedWalid ? existing?.bio : null) || null,
+    researchSummary: profile.researchSummary || (movedWalid ? existing?.researchSummary : null) || null,
+    researchInterests: profile.researchInterests || (movedWalid ? existing?.researchInterests : null) || null,
+    website: profile.website || (movedWalid ? existing?.website : null) || null,
     googleScholar: profile.googleScholar || null,
     inspire: resolveInspireUrl(profile.inspire || existing?.inspire, slug),
     orcid: profile.orcid || null,
