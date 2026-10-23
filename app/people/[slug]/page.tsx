@@ -9,6 +9,31 @@ import { getInspireArticles, type InspireArticle } from "@/lib/inspire";
 import { getMemberCitationMap, memberCitationFor } from "@/lib/member-citations";
 import { resolveInspireUrl } from "@/lib/verified-inspire-profiles";
 import { getResearchGateAuthorStats } from "@/lib/group-stats";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import type {GroupPublicationSnapshot, GroupInspirePublication} from "@/lib/inspire-publication-snapshot";
+
+/** INSPIRE literature records from the group citation cache can precede the
+ * creation/indexing of an individual INSPIRE author profile. Match by exact
+ * verified coauthor credit, not by an unverified author ID. */
+const verifiedGroupAuthorCredits:Record<string,string>={
+  "ahmed-rakin-kamal":"Kamal, Ahmed Rakin",
+  "walid-hasan":"Hasan, Walid",
+  "kazi-fahim-reza-arko":"Arko, Kazi Fahim Reza",
+  "m-fahim-hoque":"Hoque, M. Fahim",
+};
+async function groupPapersForMember(slug:string):Promise<GroupInspirePublication[]>{
+  const credit=verifiedGroupAuthorCredits[slug];
+  if(!credit)return [];
+  try{
+    const raw=await readFile(path.resolve("data/inspire-publications.json"),"utf8");
+    const data=JSON.parse(raw) as GroupPublicationSnapshot;
+    return (data.records||[]).filter(record=>
+      (", "+record.authors+", ").includes(", "+credit+", ")
+    );
+  }catch{return [];}
+}
+
 
 // Publicly used short forms, only where the researcher has a known variant.
 // The official full name from the member record remains the primary identity.
@@ -94,6 +119,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const extraSections = driveProfileSections(p.profileSections);
   const inspireUrl = resolveInspireUrl(p.inspire, p.slug);
   const inspirePublications = inspireUrl ? await getInspireArticles(inspireUrl) : null;
+  const groupIndexedPapers = await groupPapersForMember(p.slug);
   const memberCitationMap = await getMemberCitationMap();
   const cachedCitations = memberCitationFor(memberCitationMap, inspireUrl, p.slug);
   const currentArticles = inspirePublications && !inspirePublications.error ? inspirePublications.articles : [];
@@ -105,6 +131,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       }
     : null;
   const memberCitationStats = cachedCitations ?? liveCitations;
+  const displayedInspireIds=new Set(currentArticles.map(article=>article.id));
+  const additionalGroupPapers=groupIndexedPapers.filter(article=>!displayedInspireIds.has(article.id) &&
+    !p.publications.some(existing=> existing.arxivId===article.arxiv || existing.inspireUrl===article.url));
   // ResearchGate represents a broader subject scope than INSPIRE. Keep their
   // source-specific counts distinct; never add potentially overlapping citations.
   const isHasibProfile = p.slug === "syed-hasibul-hassan-chowdhury";
@@ -195,6 +224,19 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               {p.publications.map((x) => <PubEntry key={x.id} p={x} />)}
             </section>
           ) : null}
+
+          {additionalGroupPapers.length>0 && <section className="mt-14">
+            <SectionHeader eyebrow="Scholarship" title="INSPIRE-indexed research publications"
+              description="Verified coauthor credits from the SAM group INSPIRE literature cache. Author identity profiles are linked only when independently confirmed."/>
+            {additionalGroupPapers.map(paper=><article key={paper.id} className="border-t academic-rule py-5">
+              <a href={paper.url} target="_blank" rel="noopener noreferrer" className="font-serif text-xl hover:text-accent">{paper.title}</a>
+              <p className="mt-2 text-sm text-muted">{paper.authors} · {paper.year} · Preprint</p>
+              <div className="mt-2 flex flex-wrap gap-x-4 text-xs text-muted">
+                {paper.arxiv && <a className="link-academic" href={`https://arxiv.org/abs/${paper.arxiv}`} target="_blank" rel="noopener noreferrer">arXiv:{paper.arxiv}</a>}
+                <a className="link-academic" href={paper.url} target="_blank" rel="noopener noreferrer">INSPIRE literature record</a>
+              </div>
+            </article>)}
+          </section>}
 
           {p.projects.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Projects" title="Research projects" /><div className="grid gap-8 md:grid-cols-2">{p.projects.map((x) => <ProjectCard key={x.id} p={x} />)}</div></section>}
           {p.software.length > 0 && <section className="mt-14"><SectionHeader eyebrow="Open Source" title="Scientific software" /><div className="divide-y academic-rule border-y academic-rule">{p.software.map((x) => <article key={x.id} className="grid gap-3 py-6 md:grid-cols-[180px_1fr]"><div><h3 className="font-serif text-xl">{x.name}</h3><p className="text-xs text-muted">{x.languages}</p></div><div><p className="text-sm text-muted">{x.description}</p>{x.url && <a className="link-academic text-sm" href={x.url}>Repository →</a>}</div></article>)}</div></section>}
