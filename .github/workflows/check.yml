@@ -11,6 +11,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run setup
+      - name: Audit INSPIRE author identities for the joint 2026 preprint
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: node scripts/check-inspire-paper-authors.mjs
       - run: npm run check:project
       - run: npm run test:content
       - run: npm run build
