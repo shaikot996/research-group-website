@@ -135,11 +135,13 @@ async function fetchAuthorLiterature(author: AuthorConfig) {
 }
 
 async function main() {
+  const authors = JSON.parse(await readFile(configPath, "utf8")) as AuthorConfig[];
+  if (!Array.isArray(authors) || !authors.length) throw new Error("No INSPIRE authors configured.");
   const previous = await readOutput();
   let publicationCacheMissing = false;
   try { await readFile(path.resolve("data/inspire-publications.json"), "utf8"); }
   catch { publicationCacheMissing = true; }
-  const memberStatsMissing = !previous?.authors?.length || previous.authors.some((author) => !Number.isFinite(author.citations));
+  const memberStatsMissing = !previous?.authors?.length || previous.authors.some((author) => !Number.isFinite(author.citations)) || authors.some(author => !previous?.authors?.some(old => old.controlNumber === author.controlNumber));
   if (!force && !publicationCacheMissing && !memberStatsMissing && previous?.updatedAt && previous.totalCitations !== null) {
     const age = Date.now() - new Date(previous.updatedAt).getTime();
     if (Number.isFinite(age) && age >= 0 && age < maxAgeMs) {
@@ -147,9 +149,6 @@ async function main() {
       return;
     }
   }
-
-  const authors = JSON.parse(await readFile(configPath, "utf8")) as AuthorConfig[];
-  if (!Array.isArray(authors) || !authors.length) throw new Error("No INSPIRE authors configured.");
 
   const papers = new Map<string, number>();
   const allLiterature: LiteratureHit[] = [];
