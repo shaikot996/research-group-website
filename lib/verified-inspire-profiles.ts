@@ -11,6 +11,10 @@ const VERIFIED_INSPIRE_CONTROL_NUMBERS: Readonly<Record<string, string>> = {
   "sayeda-tashnuba-jahan": "3088919",
   "mishaal-hai": "2931658",
   "md-shaikot-jahan-shuvo": "2648798",
+  // Matched to named INSPIRE author records from literature/3217980 (arXiv:2610.30248).
+  "kazi-fahim-reza-arko": "3217981",
+  "walid-hasan": "3217983",
+  "m-fahim-hoque": "3217985",
 };
 
 export function verifiedInspireUrlForSlug(slug?: string | null): string | null {

@@ -227,3 +227,11 @@ if (!isDocxLeaderDocument(genuineWordFile)) {
 console.log("Converted Google Doc versus actual DOCX MIME regression tests passed.");
 
 console.log("DOCX-based PI and Co-PI onboarding tests passed.");
+
+// Author IDs are taken from the actual linked author records of INSPIRE
+// literature/3217980, rather than guessed from name searches.
+import {verifiedInspireUrlForSlug} from "../lib/verified-inspire-profiles";
+for(const [slug,id] of [["kazi-fahim-reza-arko","3217981"],["walid-hasan","3217983"],["m-fahim-hoque","3217985"]]){
+  if(!verifiedInspireUrlForSlug(slug)?.includes(`/authors/${id}`))throw Error("Incorrect verified INSPIRE author for "+slug);
+}
+console.log("Verified new group author records covered.");
