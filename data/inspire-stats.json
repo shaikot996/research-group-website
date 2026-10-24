@@ -1,7 +1,7 @@
 {
   "totalCitations": 1069,
   "uniquePublications": 52,
-  "updatedAt": "2026-10-23T07:43:46.885Z",
+  "updatedAt": "2026-10-24T07:26:30.073Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
@@ -44,6 +44,27 @@
       "bai": "Md.Shaikot.Jahan.Shuvo.1",
       "records": 3,
       "citations": 53
+    },
+    {
+      "name": "Kazi Fahim Reza Arko",
+      "controlNumber": "3217981",
+      "bai": "K.F.R.Arko.1",
+      "records": 1,
+      "citations": 0
+    },
+    {
+      "name": "Walid Hasan",
+      "controlNumber": "3217983",
+      "bai": "Walid.Hasan.1",
+      "records": 1,
+      "citations": 0
+    },
+    {
+      "name": "M. Fahim Hoque",
+      "controlNumber": "3217985",
+      "bai": "M.F.Hoque.2",
+      "records": 1,
+      "citations": 0
     }
   ]
 }
