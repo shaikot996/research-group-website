@@ -1,7 +1,7 @@
 {
   "totalCitations": 1069,
   "uniquePublications": 52,
-  "updatedAt": "2026-10-26T07:56:21.606Z",
+  "updatedAt": "2026-10-27T08:03:28.361Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
@@ -48,7 +48,7 @@
     {
       "name": "Kazi Fahim Reza Arko",
       "controlNumber": "3217981",
-      "bai": "K.F.R.Arko.1",
+      "bai": "Kazi.Fahim.Reza.Arko.1",
       "records": 1,
       "citations": 0
     },
