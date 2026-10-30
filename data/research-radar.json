@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T18:51:52.436Z",
+  "updatedAt": "2026-10-30T23:09:54.978Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
@@ -845,31 +845,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.37751",
-      "title": "A GLIMPSE of Dark Matter: JWST Constraints on Early Structure Formation",
-      "authors": [
-        "Julian B. Mu\\~noz",
-        "John Chisholm",
-        "Seiji Fujimoto",
-        "Tiger Yu-Yang Hsiao",
-        "Kristen B. W. McQuinn",
-        "Priyamvada Natarajan",
-        "A. Saldana-Lopez",
-        "Hakim Atek",
-        "Arghyadeep Basu",
-        "Danielle Berg",
-        "Ryan Endsley",
-        "Lukas J. Furtak"
-      ],
-      "abstract": "While we have a solid understanding of how dark matter (DM) behaves during recombination ($z\\sim 10^3$) and in the late universe ($z\\lesssim$ a few), much less is known about intermediate times, when the first galaxies formed. These galaxies provide a powerful handle on DM through structure formation, as halos have to exist to host luminous sources. Here we use recent determinations of the UV luminosity function from the James Webb Space Telescope (JWST) GLIMPSE lensing program, along with legacy Hubble and Subaru data, to test the small-scale behavior of DM during the epoch of reionization ($z\\sim 7$). Marginalizing over astrophysical uncertainties, we find the matter power spectrum to be consistent with the cold-DM prediction down to sub-Mpc scales, with 1$\\sigma$ uncertainties of 0.2 dex at $k=3-9 \\, \\rm Mpc^{-1}$ and 0.5 dex at $k=9-27 \\, \\rm Mpc^{-1}$, the smallest scales probed at these early times. For thermal-relic warm DM we constrain $m_{\\rm WDM} > 3.2\\, \\rm keV$ (95% CL), independent of lower-$z$ probes. Our results test small-scale structure formation in a new redshift window and demonstrate the promise of JWST to constrain the nature of DM.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.37751",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2610.37766",
       "title": "Quiver Lab -- A Computing Tool for Quiver Gauge Theories",
       "authors": [
@@ -914,58 +889,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.37852",
-      "title": "Core-collapse universality for inelastic self-interacting dark matter halos",
-      "authors": [
-        "Evan Batteas",
-        "Alexander Brisebois",
-        "Maheen Hemani",
-        "Maximilian Heyne",
-        "J. Leo Kim",
-        "Lukas Lehmann",
-        "Laura Sagunski",
-        "Aster Schnell",
-        "Sean Tulin"
-      ],
-      "abstract": "We study the gravothermal collapse of inelastic dark matter halos with velocity-dependent elastic and dissipative self-interactions. Within the gravothermal fluid framework, we derive the effective cooling rate for dark matter upscattering to an excited state followed by decay back to the ground state, with emitted states carrying off energy from the halo. We solve the gravothermal fluid equations numerically to simulate spherically symmetric halos over the core-growing and collapse phases of their evolution. While halos with purely elastic self-interactions have universal evolution trajectories, inelastic dark matter halos exhibit much more diversity in their evolution. Nevertheless, inelastic halo dynamics contain a hidden parametric universality from which we derive a semi-analytic formula for calculating the halo collapse time for arbitrary velocity-dependent elastic and inelastic cross sections without the need for simulations.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.37852",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.37861",
-      "title": "The Geometry of Quantum Teleportation in Phase Space",
-      "authors": [
-        "Jasel Berra-Montiel",
-        "Alberto Molgado",
-        "Mar S\\'anchez-C\\'ordova"
-      ],
-      "abstract": "We formulate the standard quantum teleportation protocol within the framework of deformation quantization, employing the Stratonovich--Weyl (SW) correspondence and the associated star product on the coadjoint orbits of $SU(2)$. Each qubit is represented by a spherical phase space $S^2$ endowed with the Kirillov--Kostant--Souriau (KKS) symplectic structure. Within this setting, we explicitly construct the phase space representations of the entangled Bell resource, the controlled-NOT and Hadamard operators, the projective measurements, and the conditional Pauli corrections. We demonstrate how the quantum information initially encoded in the Wigner function for the input qubit is redistributed through bipartite and tripartite phase space correlations. Upon consideration of a conditional unitary transformation, the measurement outcome produces a Wigner function on the receiver's coadjoint orbit that is related to the input by an outcome-dependent rotation, which can subsequently be inverted through the implementation of an appropriate Pauli correction. The covariance of the SW correspondence provides a geometric interpretation of this process, in which quantum information is redistributed and reconstructed without transferring the underlying symplectic geometry. Our formulation can also be extended to study quantum teleportation in more general phase space geometries equipped with suitable star products.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.37861",
-      "category": "Mathematics",
-      "primaryCategory": "math-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.37904",
-      "title": "Algebraic Quantum Field Theory",
-      "authors": [
-        "Kasia Rejzner"
-      ],
-      "abstract": "Algebraic quantum field theory describes a quantum system through its observables, their localisation in spacetime, and the states that assign them expectation values. The separation of the specification of observables from the choice of a state makes it possible to compare vacuum, thermal and charged representations without assuming that they share a preferred Hilbert space. We develop the framework from familiar quantum mechanics, construct the free scalar field, and explain how causality and positive energy constrain local measurements. The Reeh--Schlieder theorem, the structure of local von Neumann algebras and the split property reveal key differences between quantum theory in the continuum (i.e. QFT) and ordinary quantum mechanics with finitely many degrees of freedom. Superselection theory relates observable charges to statistics and internal symmetries. Finally, local covariance and perturbative and homological methods extend the discussion to curved spacetime, interactions and gauge theories. We also discuss measurement theory and quantum information aspects of AQFT.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.37904",
-      "category": "Mathematics",
-      "primaryCategory": "math-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2610.37908",
       "title": "Near-horizon BF bounds for the $t^+$ KK tower on extremal AdS$_5$ black holes",
       "authors": [
@@ -978,139 +901,6 @@
       "url": "https://arxiv.org/abs/2610.37908",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38188",
-      "title": "Gravitational baryogenesis in Gauss-Bonnet braneworld cosmology",
-      "authors": [
-        "Ian B Whittingham"
-      ],
-      "abstract": "The present study investigates the feasibility of gravitational baryogenesis in a Gauss-Bonnet (GB) modified Randall-Sundrum (RS) type II braneworld cosmology. The modified expansion rate of the Universe in this scenario evolves through three distinct expansion regimes, the GB regime at early times where the expansion rate $H \\sim \\rho^{1/3}$ falls more slowly than the standard expansion law $H\\sim \\rho^{1/2}$ of GR, then the RS type era with an enhanced expansion $H \\sim \\rho$, before finally reducing to the standard expansion law in the low energy limit. Gravitational baryogenesis depends on $\\dot{R}$ and requires $\\dot{R} <0$. This condition is satisfied for the GB and GR regimes. However, $\\dot{R}>0$ for the RS regime and successful baryogenesis requires either that the decoupling temperature occurs during the GB regime or that the Universe makes a direct transition from the GB regime to the GR regime. The GB baryon asymmetry $\\eta(T)$ is proportional to $\\mu (1+w)(1-w)(1+1/\\beta)$, where $\\mu$ is the energy scale $\\mu \\equiv 1/l$ associated with the bulk curvature scale $l$, $\\beta \\equiv 4 \\alpha \\mu^{2}$, where $\\alpha$ is the GB coupling, and $w$ is the equation of state parameter $p=w \\rho$. Studies of inflation in GB-braneworld cosmology place constraints on the allowed ranges of the parameters $\\mu$ and $\\beta$. Guided by these, the asymmetry has been calculated for ranges of $(\\mu, \\beta, w)$ and it is found that the observed values can be obtained for a value of $\\beta$ within the range $(10^{-2} - 10^{-3})$ for $\\mu =10^{12}$ GeV, and within the range $(10^{-1}- 10^{-2})$ for $\\mu =10^{13}$ GeV. All values of $\\eta$ for $\\mu=10^{14}$ are too high. In contrast to GR where $\\eta$ is zero for a radiation dominated Universe ($w=1/3$), it is non-zero in GB braneworld cosmology.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38188",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38226",
-      "title": "Entropically favored scalar hair on AdS black branes",
-      "authors": [
-        "Alex Buchel"
-      ],
-      "abstract": "We construct neutral AdS$_5$ black branes with source-free scalar hair that is entropically favored over the symmetric phase. A quadratic scalar--Gauss--Bonnet coupling destabilizes the thermal state while leaving the ultraviolet operator dimension fixed at $\\Delta=3$. The fully backreacted solutions require only a quadratic scalar potential. We describe how a neural-network search led to this simple model.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38226",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38260",
-      "title": "A Physics-Informed Neural Network for Geodesic Computation and Visualization of Geodesic Spheres on Riemannian Manifolds",
-      "authors": [
-        "Sujit Bhattacharyya"
-      ],
-      "abstract": "Visualizing geodesic structures associated with general Riemannian metrics is a challenging problem in computational differential geometry. In this work, we present a computational framework for visualizing geodesics and geodesic spheres on a three-dimensional Riemannian manifold equipped with the metric $g=\\text{diag}(1,x^2,1), x>0$. The associated Christoffel symbols and curvature tensors are computed symbolically, and the resulting geodesic equations are solved using both \\texttt{SciPy}'s numerical integration method and a Physics-Informed Neural Network (PINN). The two solutions are compared to assess the accuracy of the neural network approximation. We further develop geodesic spike diagrams and surface visualizations to illustrate the deformation of geodesic spheres relative to their Euclidean counterparts. Intrinsic Riemannian surface area and volume are estimated numerically using the induced metric and the Riemannian volume density, respectively. For the chosen metric and a geodesic ball of radius one, the computed area and volume are approximately $0.362\\%$ and $0.364\\%$ smaller than the corresponding Euclidean values at the base grid resolution. A grid-refinement study is also performed to examine the sensitivity of these estimates to numerical resolution. The proposed framework demonstrates how symbolic differential geometry, numerical integration, and PINNs can be combined to investigate and visualize geometric structures associated with Riemannian metrics.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38260",
-      "category": "Mathematics",
-      "primaryCategory": "math.DG",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38397",
-      "title": "Gravitational Dark Matter Production from Spectator Field in $R^2$-Higgs Inflation",
-      "authors": [
-        "Arnab Samanta",
-        "Rajesh Mondal",
-        "Tanmoy Modak"
-      ],
-      "abstract": "We investigate the cosmological gravitational dark matter production of spectator field $\\chi$ in the multifield $R^2$-Higgs inflation. The spectator field $\\chi$ couples to gravity only through a non-minimal coupling $\\xi_\\chi\\chi^2R$ and serves as a dark matter (DM) candidate. Working consistently in the Einstein frame, we derive the equation of motion of the background fields and fluctuations at linear order using the doubly covariant formalism. We show the dark matter production and the subsequent comoving relic abundance heavily depend on this effective mass of the field $\\chi$. Specifically, we find that there exists cancellation regions in the effective mass-squared of $\\chi$, which ensures the correct relic abundance is achieved. Further, we show that the preheating from Higgs and Goldstone may play critical role in accounting the observed relic density.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38397",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38618",
-      "title": "Two-loop BRST-restoring finite counter-terms for chiral non-abelian gauge theories",
-      "authors": [
-        "Achilleas Lazopoulos",
-        "Vera Paroutiadou"
-      ],
-      "abstract": "We study the renormalization of anomaly-free chiral $SU(N)$ gauge theories without scalar fields through two-loop order. We adopt the Breitenlohner--Maison--'t Hooft--Veltman (BMHV) scheme for the treatment of $\\gamma_5$ in dimensional regularization. This prescription induces spurious breaking of BRST symmetry, requiring finite symmetry-restoring counter-terms in addition to the subtraction of ultraviolet divergences. We derive these counter-terms for a general, possibly reducible fermion representation, thus restoring the BRST symmetry, through two loops.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38618",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38695",
-      "title": "Equivariant Morita equivalence for finite cyclic group actions on noncommutative tori",
-      "authors": [
-        "Sayan Chakraborty",
-        "Pratik Kumar Kundu"
-      ],
-      "abstract": "Li proved that the noncommutative tori $A_\\theta$ and $A_{g\\theta}$ are strongly Morita equivalent whenever $g\\in\\mathrm{SO}(n,n|\\mathbb{Z})$ and $g\\theta$ is defined. We study equivariant extensions of these equivalences for canonical finite cyclic group actions. Let $W\\in\\mathrm{GL}_n(\\mathbb{Z})$ satisfy $W^t\\theta W=\\theta$, $W^k=I_n$ and $1\\notin\\operatorname{spec}(W)$, and write $\\rho(R)=\\operatorname{diag}(R,(R^t)^{-1})$. If $g\\rho(W^t)g^{-1}=\\rho(P)$ for some $P\\in\\mathrm{GL}_n(\\mathbb{Z})$, we equip Li's $A_{g\\theta}$--$A_\\theta$ Heisenberg equivalence bimodule with a compatible $\\mathbb{Z}_k$-action. Consequently, the crossed products $A_{g\\theta}\\rtimes_{\\alpha_{P^t}}\\mathbb{Z}_k$ and $A_\\theta\\rtimes_{\\alpha_W}\\mathbb{Z}_k$ are strongly Morita equivalent. For the canonical flip action by $\\mathbb{Z}_2$, we prove that Morita equivalence of crossed products implies Morita equivalence of the underlying tori in every dimension, and prove the converse in dimensions two through four. For each fixed dimension $2\\leq n\\leq 4$, the complete invariants are the central rank and canonical $K_0$-trace range of the underlying torus, with the latter taken up to positive scaling. For the standard cyclic group actions of orders $2$, $3$, $4$ and $6$ on rotation algebras, we prove that the crossed products are Morita equivalent exactly when the action orders agree and the parameters lie in the same fractional-linear $\\mathrm{GL}_2(\\mathbb{Z})$-orbit, generalizing the result of B\\\"onicke et al.\\ from irrational to arbitrary real parameters. We also construct infinite families of distinct parameters giving Morita-equivalent crossed products for each fixed $W$ satisfying the stated hypotheses.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38695",
-      "category": "Mathematics",
-      "primaryCategory": "math.OA",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38886",
-      "title": "Odds Estimation for Supermassive Black Hole Binaries in Local Core Galaxies",
-      "authors": [
-        "C. J. Harris",
-        "Kayhan G\\\"ultekin"
-      ],
-      "abstract": "Supermassive black hole binaries (SMBHBs) are expected products of massive galaxy mergers, but identifying binaries in nearby galaxies remains challenging. We combine simulated massive-galaxy assembly histories from IllustrisTNG with a semi-analytic core-scouring model to connect observable core galaxy properties to the probability of hosting a bound SMBHB at z=0. We (i) construct a core galaxy population using an observationally motivated galaxy stellar mass function, (ii) model binary evolution through dynamical friction, stellar hardening, and gravitational-wave emission, and (iii) perform logistic regressions with five observable predictors: stellar mass deficit, stellar mass, central density, central velocity dispersion, and effective radius. The resulting models perform well on simulated systems, achieving a pseudo-$R^2$ of $0.51\\pm0.03$, accuracy $0.95\\pm0.01$, precision $0.92\\pm0.03$, and recall $0.82\\pm0.04$. Uncoalesced binaries are typically compact, with separations peaking near 0.3 pc, though only $\\sim0.3\\%$ emit in the pulsar timing array band. Applying the model to observed core galaxies, we identify eight nearby galaxies more likely than not to host SMBHBs. Of those eight host candidates, we note Messier 86 (NGC 4406) as a particularly likely example that was similarly identified using independent means and therefore warrants future follow-up.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38886",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.38958",
-      "title": "Compactification of parabolic Hermitian--Einstein moduli spaces on complex surfaces",
-      "authors": [
-        "Xilun Li",
-        "Gang Tian"
-      ],
-      "abstract": "Let $\\overline{X}$ be a compact complex surface with a Gauduchon metric, and let $D\\subset\\overline{X}$ be a smooth connected divisor. We construct an Uhlenbeck compactification of the moduli space of rank-two parabolic Hermitian--Einstein connections with prescribed holomorphic determinant.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.38958",
-      "category": "Mathematics",
-      "primaryCategory": "math.DG",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2610.40174",
-      "title": "A density calculus for quantum field theory",
-      "authors": [
-        "Tanay Kibe",
-        "Pratik Roy"
-      ],
-      "abstract": "These notes provide an introduction to Haagerup noncommutative $L^p$ spaces for quantum field theorists. The aim is to explain how the familiar calculus of density matrices, fractional powers, and Schatten norms extends to local observable algebras of type~III, where an intrinsic trace is unavailable. We develop the construction first for a matrix algebra, making the crossed product, its trace, and the dual action explicit, before passing to general von Neumann algebras. Particular attention is paid to the representation of normal states by Haagerup densities and to the distinction between the crossed-product trace and the canonical Haagerup functional used to compute expectation values. As a concrete application, we calculate the sandwiched R\\'enyi divergence for a coherent excitation of a chiral current, verifying monotonicity under restriction and the R\\'enyi quantum null energy condition at every real order $\\alpha>1$. The presentation assumes familiarity with quantum mechanics and elementary quantum field theory, while introducing the operator-algebraic concepts needed for the construction and calculation.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.40174",
-      "category": "Mathematics",
-      "primaryCategory": "math.OA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1181,6 +971,22 @@
       "status": "Preprint"
     },
     {
+      "id": "2610.40529",
+      "title": "Thermodynamics of Swirling Black Holes and Kerr-Taub-NUT",
+      "authors": [
+        "Ernesto Frodden",
+        "Diego Hidalgo",
+        "Francisco Manzano"
+      ],
+      "abstract": "We establish the first law of black hole thermodynamics for the recently discovered Kerr swirling (KS) and accelerated Kerr swirling (AKS) black hole solutions. We also revisit the first law for the Kerr-Taub-NUT (KTN) spacetime. Guided by Noether's original insight that global symmetries give rise to conservation laws, we employ and adapt the surface charge method for computing the associated charges (mass and angular momentum) in the presence of spacetime string-like defects (conical singularities) along the axes of both KS and KTN black holes. We obtain finite integrated charges in a quasi-local manner, without relying on the non-flat asymptotic regions characteristic of these spacetimes. We then establish a first law without introducing independent stringy terms unrelated to symmetries. For both KS and KTN, the quantities that play the role of the black hole entropy differ from the simple geometrical rule of one-fourth of the horizon area. This mismatch arises because we keep first-law charges associated with conservation laws. It indicates that standard formulas may not be naively used for black holes with string-like defects; they have a different topology and suggest the need for a new geometrical framework. In stark contrast, for the AKS spacetime, which can be regularized outside the singularity and lacks string-like defects, we find that the charges are consistent with a first law having the usual one-fourth of the area entropy. We first determine the mass using the Christodoulou-Ruffini formula and then check its agreement with the result obtained from the surface charge method.",
+      "published": "2026-10-29T17:33:31.000Z",
+      "url": "https://arxiv.org/abs/2610.40529",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2610.40528",
       "title": "NEOPIC: A Neural Operator Framework for Particle-based Kinetic Plasma Simulations",
       "authors": [
@@ -1200,6 +1006,21 @@
       "status": "Preprint"
     },
     {
+      "id": "2610.40514",
+      "title": "Localization in Seven-Dimensional Supergravity",
+      "authors": [
+        "Florian Gaar",
+        "Michèle Levi"
+      ],
+      "abstract": "Seven-dimensional supergravity provides holographic access to strongly coupled six-dimensional superconformal theories through its highest-dimensional supersymmetric AdS vacua. Its unique spinor-bilinear geometry and massive higher-form dynamics make systematic analysis and solution-finding distinctively challenging. Relative equivariant localization can obtain supersymmetric observables in odd dimensions from fixed-point data on an auxiliary even-dimensional filling, without an explicit solution. We extend this approach to seven dimensions in maximal Cartan-gauged supergravity with all gauge fields active. We formulate the Euclidean action and Killing-spinor equations in terms of field strengths, and construct a bilinear system adapted to the change in spinor reality conditions from symplectic-Majorana to Majorana. On the non-null gauged active spinor branch, independent, oppositely R-charged spinors are paired by Majorana conjugation on the same complex background. One algebraic gauging correction and two algebraic bilinear projections suffice to extend the equal-charge sector to independent Cartan charges, and the underlying efficient reorganization also applies in the Lorentzian theory. Massive 3-form self-duality fixes the quartic anomaly class and determines the higher-form fixed-point datum from Abelian moment maps. Localization at the single fixed point of the filling recovers the general supersymmetric AdS$_7$ black-hole action, without extending the solution. We prove gauge-covariant Killing-spinor invariance under the combined supersymmetric Killing flow and R-symmetry action, deriving the linear chemical-potential constraint. Extremizing the constrained entropy functional and requiring real positive stationary entropy yields the nonlinear charge relation within the Euclidean analysis, equivalent to Lorentzian horizon extremality for the known spherical black-hole family.",
+      "published": "2026-10-29T17:25:00.000Z",
+      "url": "https://arxiv.org/abs/2610.40514",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2610.40419",
       "title": "Complete Kähler Manifolds with pinched Ricci curvature",
       "authors": [
@@ -1211,6 +1032,20 @@
       "url": "https://arxiv.org/abs/2610.40419",
       "category": "Mathematics",
       "primaryCategory": "math.DG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.40412",
+      "title": "A Simplified Born Rule for Cosmological Correlators",
+      "authors": [
+        "Fan Zhu"
+      ],
+      "abstract": "Cosmological correlators are natural observables of the primordial universe and are related to wavefunction coefficients by the Born rule. For equal-time in-in correlators in flat spacetime, we prove that all double-boundary poles cancel for arbitrary graphs, including in theories with local derivative interactions. These cancellations occur before integration over spatial loop momenta and yield a $\\textit{simplified Born rule}$ in terms of what we call embedded wavefunction coefficients. The resulting expansion reveals which physical poles can occur together while keeping the interaction dependence explicit. For conformally coupled $\\operatorname{Tr}(φ^3)$ theory in flat spacetime, the simplified Born rule takes the form of a uniformly weighted forest-cut expansion. From its pole combinatorics, we construct what we call the $\\textit{Born polytope}$, whose canonical function reproduces the normalized correlator for arbitrary graphs after matching its facet supports to the physical energies. The same geometry also yields a stringy formula for correlators.",
+      "published": "2026-10-29T16:41:39.000Z",
+      "url": "https://arxiv.org/abs/2610.40412",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1233,6 +1068,53 @@
       "status": "Preprint"
     },
     {
+      "id": "2610.40347",
+      "title": "Cosmological tests of chameleon dark energy with dark sector coupling",
+      "authors": [
+        "Jia-Qi Wang",
+        "Zong-Kuan Guo",
+        "Shao-Jiang Wang"
+      ],
+      "abstract": "Recent DESI measurements of baryon acoustic oscillations favor a value of $Ω_{\\mathrm m}$ different from that preferred by Planck cosmic microwave background observations. Combined with supernova data, these observations suggest an evolving dark energy equation of state that crosses $w=-1$. As a potential solution to multiple cosmological problems, chameleon dark energy has attracted increasing attention in recent years. In this work, we constrain a chameleon model in which late-time cosmic acceleration is driven by a canonical scalar field nonminimally coupled to dark matter. At early times, the scalar field evolves under the combined influence of its potential and the nonminimal coupling, and its effective mass greatly exceeds the Hubble parameter. The chameleon model with energy transfer from dark energy to dark matter yields a best-fit improvement of $Δχ^2=-7.25$ relative to $Λ\\mathrm{CDM}$, comparable to that for energy transfer in the opposite direction. Joint sampling over both coupling directions favors a nonzero interaction at $3.3σ$. Although no phantom field is introduced, the modified dark matter evolution produces an effective dark energy equation of state that crosses $w=-1$ at $z\\simeq0.5$.",
+      "published": "2026-10-29T16:06:33.000Z",
+      "url": "https://arxiv.org/abs/2610.40347",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.40174",
+      "title": "A density calculus for quantum field theory",
+      "authors": [
+        "Tanay Kibe",
+        "Pratik Roy"
+      ],
+      "abstract": "These notes provide an introduction to Haagerup noncommutative $L^p$ spaces for quantum field theorists. The aim is to explain how the familiar calculus of density matrices, fractional powers, and Schatten norms extends to local observable algebras of type~III, where an intrinsic trace is unavailable. We develop the construction first for a matrix algebra, making the crossed product, its trace, and the dual action explicit, before passing to general von Neumann algebras. Particular attention is paid to the representation of normal states by Haagerup densities and to the distinction between the crossed-product trace and the canonical Haagerup functional used to compute expectation values. As a concrete application, we calculate the sandwiched Rényi divergence for a coherent excitation of a chiral current, verifying monotonicity under restriction and the Rényi quantum null energy condition at every real order $α>1$. The presentation assumes familiarity with quantum mechanics and elementary quantum field theory, while introducing the operator-algebraic concepts needed for the construction and calculation.",
+      "published": "2026-10-29T14:41:41.000Z",
+      "url": "https://arxiv.org/abs/2610.40174",
+      "category": "Mathematics",
+      "primaryCategory": "math.OA",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.40064",
+      "title": "At the EDGES of MADness: phenomenology of relic millicharged atomic dark matter",
+      "authors": [
+        "Eleonora Vanzan",
+        "Kimberly K. Boddy",
+        "Ely D. Kovetz"
+      ],
+      "abstract": "Millicharged dark matter lives in a corner of parameter space that has been considerably shrinking over the past decades, due to constraints from cosmology, astrophysical systems, and ground-based experiments. A particularly interesting probe is the 21-cm absorption signal at Cosmic Dawn, which attracted interest in light of the EDGES claim: the reported excess absorption can be explained by millicharged dark matter with a fractional electric charge of~$10^{-6} \\lesssim ε\\lesssim 10^{-4}$, but it must be a subpercent of the total dark matter abundance to remain consistent with the cosmic microwave background (CMB). We show that very low fractions of millicharged dark matter naturally arise from atomic dark matter: a dark sector model that replicates the physics of standard atomic hydrogen. Dark ions undergo the process of dark recombination, leaving a relic ionized component that, in the presence of kinetic mixing, is naturally millicharged. We modify the cosmological Boltzmann solver CLASS to incorporate this scenario, and we investigate the parameter space of millicharged atomic dark matter (MAD) that is allowed by CMB, large-scale structure, and supernovae data. We find there are cosmologically viable regions of MAD parameter space that are consistent with laboratory and astrophysical bounds and also overlap with the EDGES-defined window. Although the EDGES result is likely not a Cosmic Dawn signal, MAD leaves distinctive cosmological signatures, accessible to upcoming 21-cm observations.",
+      "published": "2026-10-29T13:49:20.000Z",
+      "url": "https://arxiv.org/abs/2610.40064",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2610.39993",
       "title": "A physics-informed uncertainty-aware surrogate for $p$-$n$ junction diodes",
       "authors": [
@@ -1243,6 +1125,37 @@
       "url": "https://arxiv.org/abs/2610.39993",
       "category": "AI for Science",
       "primaryCategory": "cs.LG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.30248",
+      "title": "Big Crunching Your Big Bang: Doubly Warped Time-Dependent Type II Flux Backgrounds and Scale Separation",
+      "authors": [
+        "Kazi Fahim Reza Arko",
+        "Walid Hasan",
+        "M. Fahim Hoque",
+        "Ahmed Rakin Kamal"
+      ],
+      "abstract": "We construct three analytic, doubly warped cosmological solutions of massless type IIA supergravity with different choices of fluxes, namely, $H_3$, $\\tilde F_2$ and $\\tilde F_4$ along internal directions. The $H_3$ solution also belongs to the common NS--NS sector of type IIB. Our solutions show that, without localised sources, nonconstant warping on a smooth compact space is possible. We derive their eleven-dimensional uplifts and four-dimensional Einstein-frame cosmology. Each universe undergoes (decelerating) expansion from a Big Bang, reaches a maximum size, and undergoes contraction towards a Big Crunch. We also analyse the scale separation of these backgrounds and find that they exhibit a small Einstein frame Hubble scale to KK mass ratio $\\frac{|H_E|}{m_{\\mathrm{KK}}}\\ll1,$ although for a brief period of time, around the maxima of the scale factor in the Einstein frame. Finally, we analyse the supersymmetry of these backgrounds, which demonstrates that all three solutions break all forms of type IIA supersymmetry.",
+      "published": "2026-10-21T18:00:03.000Z",
+      "url": "https://arxiv.org/abs/2610.30248",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.39930",
+      "title": "Sleptons Masses in the Minimal Supersymmetric $SU(3)_{C}\\times SU(3)_{L}\\times U(1)_{N}$ Model",
+      "authors": [
+        "M. C. Rodriguez"
+      ],
+      "abstract": "We present the mass spectrum of the sleptons in the Minimal Supersymmetric $SU(3)_{C}\\times SU(3)_{L}\\times U(1)_{N}$ Model, when all the usual neutral scalars fields obtain vacuum expectation values. In this model, we can define $R$-Parity conservation, where our superpotential respect the invariance of the quantum number ${\\cal F} \\equiv B+L$, where $B$ is the baryon number while $L$ is the total lepton number.",
+      "published": "2026-10-29T12:32:11.000Z",
+      "url": "https://arxiv.org/abs/2610.39930",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-ph",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1326,14 +1239,74 @@
       "status": "Preprint"
     },
     {
-      "id": "2610.39806",
-      "title": "An Egorov-type Theorem for Analytic Wick Observables in Quantum Field Theory",
+      "id": "2610.38958",
+      "title": "Compactification of parabolic Hermitian--Einstein moduli spaces on complex surfaces",
       "authors": [
-        "Julien Malartre"
+        "Xilun Li",
+        "Gang Tian"
       ],
-      "abstract": "We provide an exact Egorov-type formula, given by a convergent expansion in the semi-classical parameter $\\varepsilon > 0$, for the propagation of a certain class of analytic Wick observables with super-exponentially decaying coefficients, under the action of a time-dependent quadratic Hamiltonian. This work generalizes a result established by S. Breteaux for polynomial symbols, and includes the spatially cutoff $P(\\varphi)_2$ model, as well as a variant of the H\\\"oegh-Krohn model.",
-      "published": "2026-10-30T04:00:00.000Z",
-      "url": "https://arxiv.org/abs/2610.39806",
+      "abstract": "Let $\\overline{X}$ be a compact complex surface with a Gauduchon metric, and let $D\\subset\\overline{X}$ be a smooth connected divisor. We construct an Uhlenbeck compactification of the moduli space of rank-two parabolic Hermitian--Einstein connections with prescribed holomorphic determinant.",
+      "published": "2026-10-28T21:40:57.000Z",
+      "url": "https://arxiv.org/abs/2610.38958",
+      "category": "Mathematics",
+      "primaryCategory": "math.DG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.38695",
+      "title": "Equivariant Morita equivalence for finite cyclic group actions on noncommutative tori",
+      "authors": [
+        "Sayan Chakraborty",
+        "Pratik Kumar Kundu"
+      ],
+      "abstract": "Li proved that the noncommutative tori $A_θ$ and $A_{gθ}$ are strongly Morita equivalent whenever $g\\in\\mathrm{SO}(n,n|\\mathbb{Z})$ and $gθ$ is defined. We study equivariant extensions of these equivalences for canonical finite cyclic group actions. Let $W\\in\\mathrm{GL}_n(\\mathbb{Z})$ satisfy $W^tθW=θ$, $W^k=I_n$ and $1\\notin\\operatorname{spec}(W)$, and write $ρ(R)=\\operatorname{diag}(R,(R^t)^{-1})$. If $gρ(W^t)g^{-1}=ρ(P)$ for some $P\\in\\mathrm{GL}_n(\\mathbb{Z})$, we equip Li's $A_{gθ}$--$A_θ$ Heisenberg equivalence bimodule with a compatible $\\mathbb{Z}_k$-action. Consequently, the crossed products $A_{gθ}\\rtimes_{α_{P^t}}\\mathbb{Z}_k$ and $A_θ\\rtimes_{α_W}\\mathbb{Z}_k$ are strongly Morita equivalent. For the canonical flip action by $\\mathbb{Z}_2$, we prove that Morita equivalence of crossed products implies Morita equivalence of the underlying tori in every dimension, and prove the converse in dimensions two through four. For each fixed dimension $2\\leq n\\leq 4$, the complete invariants are the central rank and canonical $K_0$-trace range of the underlying torus, with the latter taken up to positive scaling. For the standard cyclic group actions of orders $2$, $3$, $4$ and $6$ on rotation algebras, we prove that the crossed products are Morita equivalent exactly when the action orders agree and the parameters lie in the same fractional-linear $\\mathrm{GL}_2(\\mathbb{Z})$-orbit, generalizing the result of Bönicke et al.\\ from irrational to arbitrary real parameters. We also construct infinite families of distinct parameters giving Morita-equivalent crossed products for each fixed $W$ satisfying the stated hypotheses.",
+      "published": "2026-10-28T19:00:09.000Z",
+      "url": "https://arxiv.org/abs/2610.38695",
+      "category": "Mathematics",
+      "primaryCategory": "math.OA",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.38260",
+      "title": "A Physics-Informed Neural Network for Geodesic Computation and Visualization of Geodesic Spheres on Riemannian Manifolds",
+      "authors": [
+        "Sujit Bhattacharyya"
+      ],
+      "abstract": "Visualizing geodesic structures associated with general Riemannian metrics is a challenging problem in computational differential geometry. In this work, we present a computational framework for visualizing geodesics and geodesic spheres on a three-dimensional Riemannian manifold equipped with the metric $g=\\text{diag}(1,x^2,1), x>0$. The associated Christoffel symbols and curvature tensors are computed symbolically, and the resulting geodesic equations are solved using both \\texttt{SciPy}'s numerical integration method and a Physics-Informed Neural Network (PINN). The two solutions are compared to assess the accuracy of the neural network approximation. We further develop geodesic spike diagrams and surface visualizations to illustrate the deformation of geodesic spheres relative to their Euclidean counterparts. Intrinsic Riemannian surface area and volume are estimated numerically using the induced metric and the Riemannian volume density, respectively. For the chosen metric and a geodesic ball of radius one, the computed area and volume are approximately $0.362\\%$ and $0.364\\%$ smaller than the corresponding Euclidean values at the base grid resolution. A grid-refinement study is also performed to examine the sensitivity of these estimates to numerical resolution. The proposed framework demonstrates how symbolic differential geometry, numerical integration, and PINNs can be combined to investigate and visualize geometric structures associated with Riemannian metrics.",
+      "published": "2026-10-28T04:20:35.000Z",
+      "url": "https://arxiv.org/abs/2610.38260",
+      "category": "Mathematics",
+      "primaryCategory": "math.DG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.37904",
+      "title": "Algebraic Quantum Field Theory",
+      "authors": [
+        "Kasia Rejzner"
+      ],
+      "abstract": "Algebraic quantum field theory describes a quantum system through its observables, their localisation in spacetime, and the states that assign them expectation values. The separation of the specification of observables from the choice of a state makes it possible to compare vacuum, thermal and charged representations without assuming that they share a preferred Hilbert space. We develop the framework from familiar quantum mechanics, construct the free scalar field, and explain how causality and positive energy constrain local measurements. The Reeh--Schlieder theorem, the structure of local von Neumann algebras and the split property reveal key differences between quantum theory in the continuum (i.e. QFT) and ordinary quantum mechanics with finitely many degrees of freedom. Superselection theory relates observable charges to statistics and internal symmetries. Finally, local covariance and perturbative and homological methods extend the discussion to curved spacetime, interactions and gauge theories. We also discuss measurement theory and quantum information aspects of AQFT.",
+      "published": "2026-10-27T19:44:26.000Z",
+      "url": "https://arxiv.org/abs/2610.37904",
+      "category": "Mathematics",
+      "primaryCategory": "math-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.37861",
+      "title": "The Geometry of Quantum Teleportation in Phase Space",
+      "authors": [
+        "Jasel Berra-Montiel",
+        "Alberto Molgado",
+        "Mar Sánchez-Córdova"
+      ],
+      "abstract": "We formulate the standard quantum teleportation protocol within the framework of deformation quantization, employing the Stratonovich--Weyl (SW) correspondence and the associated star product on the coadjoint orbits of $SU(2)$. Each qubit is represented by a spherical phase space $S^2$ endowed with the Kirillov--Kostant--Souriau (KKS) symplectic structure. Within this setting, we explicitly construct the phase space representations of the entangled Bell resource, the controlled-NOT and Hadamard operators, the projective measurements, and the conditional Pauli corrections. We demonstrate how the quantum information initially encoded in the Wigner function for the input qubit is redistributed through bipartite and tripartite phase space correlations. Upon consideration of a conditional unitary transformation, the measurement outcome produces a Wigner function on the receiver's coadjoint orbit that is related to the input by an outcome-dependent rotation, which can subsequently be inverted through the implementation of an appropriate Pauli correction. The covariance of the SW correspondence provides a geometric interpretation of this process, in which quantum information is redistributed and reconstructed without transferring the underlying symplectic geometry. Our formulation can also be extended to study quantum teleportation in more general phase space geometries equipped with suitable star products.",
+      "published": "2026-10-27T19:05:36.000Z",
+      "url": "https://arxiv.org/abs/2610.37861",
       "category": "Mathematics",
       "primaryCategory": "math-ph",
       "source": "arXiv",
@@ -1566,6 +1539,20 @@
       "url": "https://arxiv.org/abs/2610.37009",
       "category": "Quantum Information",
       "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2610.39806",
+      "title": "An Egorov-type Theorem for Analytic Wick Observables in Quantum Field Theory",
+      "authors": [
+        "Julien Malartre"
+      ],
+      "abstract": "We provide an exact Egorov-type formula, given by a convergent expansion in the semi-classical parameter $\\varepsilon > 0$, for the propagation of a certain class of analytic Wick observables with super-exponentially decaying coefficients, under the action of a time-dependent quadratic Hamiltonian. This work generalizes a result established by S. Breteaux for polynomial symbols, and includes the spatially cutoff $P(\\varphi)_2$ model, as well as a variant of the Höegh-Krohn model.",
+      "published": "2026-10-29T10:50:38.000Z",
+      "url": "https://arxiv.org/abs/2610.39806",
+      "category": "Mathematics",
+      "primaryCategory": "math-ph",
       "source": "arXiv",
       "status": "Preprint"
     },
