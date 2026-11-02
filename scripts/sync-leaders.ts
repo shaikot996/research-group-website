@@ -188,6 +188,24 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
     });
   }
 
+  // Only synchronize explicitly allowed editable contact sections for curated
+  // researchers. Preserve all existing curated awards, features and other data.
+  let academicContactSections: Record<string,string> | null = null;
+  if(entry.curated && profile.sections["Additional Academic Email"]?.trim()) {
+    let preserved: Record<string,string> = {};
+    if(existing?.profileSections) {
+      try {
+        const parsed = JSON.parse(existing.profileSections);
+        if(parsed && typeof parsed === "object" && !Array.isArray(parsed))
+          preserved = parsed as Record<string,string>;
+      } catch { /* Bad historical custom sections must not block contact updates. */ }
+    }
+    academicContactSections = {
+      ...preserved,
+      "Additional Academic Email":profile.sections["Additional Academic Email"].trim()
+    };
+  }
+
   const update = {
     name: profile.name,
     title,
@@ -216,6 +234,7 @@ async function syncOne(auth: GoogleDriveAuth | null, entry: LeaderEntry): Promis
       where: { id: existing.id },
       data: {
         ...update,
+        ...(academicContactSections ? {profileSections:JSON.stringify(academicContactSections)} : {}),
         ...(!entry.curated ? {
           status: "PUBLISHED",
           role: entry.role,
