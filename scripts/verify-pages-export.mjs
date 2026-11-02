@@ -112,18 +112,18 @@ if (process.env.SAM_VERIFY_CURRENT_PROFILES === "1") {
   const peopleFile=path.join(out,"people","index.html");
   if (existsSync(peopleFile)) {
     const html=await readFile(peopleFile,"utf8");
-    const researchers=html.indexOf(">Researchers</h2>");
-    const assistants=html.indexOf(">Research Assistants</h2>",researchers+1);
-    const researcherBlock=researchers>=0 && assistants>researchers ? html.slice(researchers,assistants) : "";
-    if (!researcherBlock.includes("Walid Hasan"))
-      errors.push("Walid Hasan is not listed in Researchers");
-    for (const name of ["Mahbubul Alam Majumdar","Syed Hasibul Hassan Chowdhury",
-      "Md Shaikot Jahan Shuvo","Mishaal Hai","Ahmed Rakin Kamal"]) {
-      if (!researcherBlock.includes(name))
-        errors.push("Missing researcher in unified Researchers section: "+name);
-    }
-    if (/>Principal Investigators<|>Co.Principal Investigators</i.test(html))
-      errors.push("Retired PI/Co-PI website category is still visible");
+    const pis=html.indexOf(">Principal Investigators</h2>");
+    const faculty=html.indexOf(">Faculty</h2>",pis+1);
+    const researchers=html.indexOf(">Researcher</h2>",pis+1);
+    const assistants=html.indexOf(">Research Assistant</h2>",researchers+1);
+    if(pis<0 || researchers<0 || assistants<0 || pis>=researchers || researchers>=assistants)
+      errors.push("Original PI / Researcher / Research Assistant categories not restored");
+    const piBlock=html.slice(pis,faculty>=0&&faculty<researchers?faculty:researchers);
+    for(const name of ["Mahbubul Alam Majumdar","Syed Hasibul Hassan Chowdhury"])
+      if(!piBlock.includes(name))errors.push("Principal Investigator missing from PI section: "+name);
+    const researcherBlock=html.slice(researchers,assistants);
+    for(const name of ["Md Shaikot Jahan Shuvo","Mishaal Hai","Ahmed Rakin Kamal","Walid Hasan"])
+      if(!researcherBlock.includes(name))errors.push("Researcher missing from original section: "+name);
     if (assistants>=0 && html.slice(assistants).includes(">Walid Hasan</"))
       errors.push("Walid Hasan still appears as a Research Assistant");
   }
@@ -150,8 +150,8 @@ if (process.env.SAM_VERIFY_CURRENT_PROFILES === "1") {
     const filename=path.join(out,"people",slug,"index.html");
     if(!existsSync(filename))continue;
     const html=await readFile(filename,"utf8");
-    if(!html.includes("Visiting Researcher") || !html.includes("Former Faculty"))
-      errors.push(slug+": missing visiting researcher / former faculty appointment");
+    if(!html.includes("Co-Principal Investigator"))
+      errors.push(slug+": previous Co-Principal Investigator presentation was not restored");
   }
   const profile=path.join(out,"people","md-shaikot-jahan-shuvo","index.html");
   if(existsSync(profile) && !(await readFile(profile,"utf8")).includes("mshuvo@gradcenter.cuny.edu"))

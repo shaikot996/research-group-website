@@ -184,7 +184,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <Portrait slug={p.slug} name={p.name} photo={p.photo} revision={p.contentSource.startsWith("DRIVE_LEADER") ? p.sourceUpdatedAt?.toISOString() : undefined} sizes="280px" />
         </div>
         <div className="self-end">
-          <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{["PRINCIPAL_INVESTIGATOR","FACULTY","RESEARCHER"].includes(p.role) ? "Researcher" : humanize(p.role)}</div>
+          <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{humanize(p.role)}</div>
           <h1 className="mt-3 font-serif text-5xl md:text-6xl">{p.name}</h1>
           <p className="mt-3 text-lg text-navy">{p.title}</p>
           <p className="text-sm text-muted">{p.affiliation}</p>
