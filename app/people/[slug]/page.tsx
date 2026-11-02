@@ -117,6 +117,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   });
   if (!p) notFound();
   const extraSections = driveProfileSections(p.profileSections);
+  const additionalAcademicEmail = extraSections.find(([heading]) =>
+    heading.toLowerCase() === "additional academic email")?.[1].split(/\s+/).find(value =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+  const visibleExtraSections = extraSections.filter(([heading]) =>
+    heading.toLowerCase() !== "additional academic email");
   const inspireUrl = resolveInspireUrl(p.inspire, p.slug);
   const inspirePublications = inspireUrl ? await getInspireArticles(inspireUrl) : null;
   const groupIndexedPapers = await groupPapersForMember(p.slug);
@@ -179,7 +184,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <Portrait slug={p.slug} name={p.name} photo={p.photo} revision={p.contentSource.startsWith("DRIVE_LEADER") ? p.sourceUpdatedAt?.toISOString() : undefined} sizes="280px" />
         </div>
         <div className="self-end">
-          <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{humanize(p.role)}</div>
+          <div className="text-xs font-bold uppercase tracking-[.18em] text-accent">{["PRINCIPAL_INVESTIGATOR","FACULTY","RESEARCHER"].includes(p.role) ? "Researcher" : humanize(p.role)}</div>
           <h1 className="mt-3 font-serif text-5xl md:text-6xl">{p.name}</h1>
           <p className="mt-3 text-lg text-navy">{p.title}</p>
           <p className="text-sm text-muted">{p.affiliation}</p>
@@ -193,7 +198,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <div><div className="text-2xl font-semibold tabular-nums">{researchGateSnapshot.publications}</div><div className="text-xs text-muted">ResearchGate publications</div></div>
             <div className="self-end text-xs text-muted"><a href={researchGateSnapshot.url} target="_blank" rel="noopener noreferrer" className="link-academic">Source ↗</a><span className="ml-2">Snapshot: {researchGateSnapshot.verifiedAt}</span></div>
           </div>}
-          {p.email && <a className="mt-5 inline-block link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
+          <div className="mt-5 flex flex-col items-start gap-1 text-sm">
+            {p.email && <a className="link-academic" href={`mailto:${p.email}`}>{p.email}</a>}
+            {additionalAcademicEmail && <a className="link-academic" href={`mailto:${additionalAcademicEmail}`}>{additionalAcademicEmail}</a>}
+          </div>
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
             {externalLinks.map(([label, url]) => <a className="link-academic" key={label} href={url} target="_blank" rel="noopener noreferrer">{label}</a>)}
             {p.cvUrl && <a className="bg-[#172a46] px-4 py-2 text-xs font-semibold text-white" href={p.cvUrl} target="_blank" rel="noopener noreferrer">View CV</a>}
@@ -205,7 +213,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div>
           {p.bio && <section><SectionHeader title="About" /><p className="whitespace-pre-line text-lg leading-8 text-muted">{p.bio}</p></section>}
           {p.researchSummary && <section className="mt-14"><SectionHeader eyebrow="Research" title="Current research" /><p className="whitespace-pre-line leading-8 text-muted">{p.researchSummary}</p></section>}
-          {extraSections.map(([title, text]) => <section className="mt-14" key={title}><SectionHeader title={title} /><p className="whitespace-pre-line leading-8 text-muted">{text}</p></section>)}
+          {visibleExtraSections.map(([title, text]) => <section className="mt-14" key={title}><SectionHeader title={title} /><p className="whitespace-pre-line leading-8 text-muted">{text}</p></section>)}
 
           {p.slug === "mahbubul-alam-majumdar" && <MahbubProfileSections />}
           {inspirePublications && !inspirePublications.error ? (
