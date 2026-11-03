@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T09:41:01.536Z",
+  "updatedAt": "2026-11-03T09:44:31.816Z",
   "records": [
     {
       "id": "3217980",
@@ -22,7 +22,7 @@
       "journal": "Eur.Phys.J.C 86 1153",
       "arxiv": "2606.08767",
       "doi": "10.1140/epjc/s10052-026-16470-w",
-      "citations": 2,
+      "citations": 3,
       "url": "https://inspirehep.net/literature/3213558"
     },
     {
@@ -82,7 +82,7 @@
       "journal": "JCAP 06 025",
       "arxiv": "2511.19610",
       "doi": "10.1088/1475-7516/2026/06/025",
-      "citations": 15,
+      "citations": 16,
       "url": "https://inspirehep.net/literature/3086355"
     },
     {
@@ -106,7 +106,7 @@
       "journal": "JHEP 02 010",
       "arxiv": "2506.16391",
       "doi": "10.1007/JHEP02(2026)010",
-      "citations": 7,
+      "citations": 8,
       "url": "https://inspirehep.net/literature/2937270"
     },
     {
@@ -134,6 +134,18 @@
       "url": "https://inspirehep.net/literature/2939510"
     },
     {
+      "id": "2933166",
+      "title": "Perturbative Kähler Moduli Inflation",
+      "authors": "Hai, Mishaal, Kamal, Ahmed Rakin, Shamma, Noshin Ferdous, Shuvo, Md Shaikot Jahan",
+      "year": 2026,
+      "date": "2026-01-01",
+      "journal": "Int.J.Mod.Phys.D 35 2650071",
+      "arxiv": "2506.08083",
+      "doi": "10.1142/S0218271826500719",
+      "citations": 31,
+      "url": "https://inspirehep.net/literature/2933166"
+    },
+    {
       "id": "2960225",
       "title": "A Symmetry-Based Taxonomy of Quantum Algorithms",
       "authors": "Kumar, Sakshi, Chilkoti, Sumit, Majumdar, Mrittunjoy Guha",
@@ -144,18 +156,6 @@
       "doi": null,
       "citations": 1,
       "url": "https://inspirehep.net/literature/2960225"
-    },
-    {
-      "id": "2933166",
-      "title": "Perturbative Kähler Moduli Inflation",
-      "authors": "Hai, Mishaal, Kamal, Ahmed Rakin, Shamma, Noshin Ferdous, Shuvo, Md Shaikot Jahan",
-      "year": 2025,
-      "date": "2025-06-09",
-      "journal": null,
-      "arxiv": "2506.08083",
-      "doi": null,
-      "citations": 31,
-      "url": "https://inspirehep.net/literature/2933166"
     },
     {
       "id": "2836034",
