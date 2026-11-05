@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T15:39:38.280Z",
+  "updatedAt": "2026-11-05T20:48:03.778Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
@@ -149,111 +149,16 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.05473",
-      "title": "Exact thermal correlators at vanishing momenta and the black hole singularity",
+      "id": "2611.06907",
+      "title": "Conformal field theory from automorphic forms on a quantum group",
       "authors": [
-        "Kaustubh Singhi"
+        "Dalimil Mazac"
       ],
-      "abstract": "We study thermal two- and three-point functions of scalar primaries in holographic CFTs dual to AdS black branes. The three-point function arises from a cubic scalar interaction in the bulk. At vanishing external momenta, the tree-level results can be written in closed form and are exact in the operator dimensions. We reproduce them through direct CFT calculations in two dimensions. Their large-dimension expansions contain subleading exponential terms encoding the radial proper time from the horizon to the black hole singularity. These results provide an exact test of earlier WKB and saddle-point predictions for higher-point thermal correlators, confirming the proper-time signature while correcting the predicted asymptotic form.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.05473",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.05526",
-      "title": "Quantum error correcting codes from quiver moduli: Grassmannians, cyclic monodromy, and argyle collision divisors",
-      "authors": [
-        "Steven Rayan",
-        "Evan Sundbo"
-      ],
-      "abstract": "Building on aspects of a recent diagrammatic field-theory programme for quantum error correction put forward by the first-named author (arXiv:2607.08911), we construct exact finite-dimensional codes from twisted cyclic and argyle quiver moduli on the projective line. A regular fibre of the node-labelled cyclic Hitchin map records the ways to distribute simple spectral zeroes among the arrows with prescribed degrees. The Hilbert space spanned by these allocations is a Young permutation module. Root monodromy acts on its Specht factors and leaves their multiplicity spaces noiseless. Resetting the Specht factor therefore recovers the encoded state for every channel in the monodromy noise model. We prove that the largest Kostka multiplicity is the optimal dimension of a subspace code correcting the full monodromy algebra, even among codes spanning several isotypic blocks. Quantizing an argyle master space recovers the cyclic sheet space as a weight sector of a tensor power, with the identification preserving monodromy. For the balanced three-cycle with $t$ zeroes per arrow, the multiplicity of a partition $(a,b,c)$ of $3t$ is $1+\\min(a-b,b-c)$. The optimal logical dimension is thus $t+1$, attained uniquely by the block indexed by $(2t,t)$. At $t=1$ we give explicit codewords for a qubit on six sheets. The commuting right action generates its full logical algebra, yielding errors outside the monodromy model that leave the measured footprint statistics unchanged yet require different recoveries. We also compute collision-parity ranks, give a higher-rank Grassmannian example, and derive a conditional criterion for recovery across splitting types.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.05526",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06411",
-      "title": "A dynamical Einstein-Proca-dilaton holographic model and exotic hybrid meson resonances",
-      "authors": [
-        "Bruno Toniato",
-        "David Dudal",
-        "Hudson Almeida",
-        "Roldao da Rocha"
-      ],
-      "abstract": "A fully dynamical Einstein-Proca-dilaton (EPD) holographic model is developed for the exotic $J^{PC}=1^{-+}$ hybrid meson, incorporating the backreaction of the massive vector field dual to the hybrid current in the bulk. Solving the coupled EPD system yields a self-consistent gravitational background and the mass spectrum of hybrid resonances. While the soft-wall limit reproduces linear Regge behavior, the inclusion of backreaction yields quantitative shifts that improve agreement with experimental candidates. The finite-temperature regime is approached by studying black hole thermodynamics and spectral functions across the confinement-deconfinement transition, fixing the Hawking-Page temperature to $T_c \\sim 150 \\, \\mathrm{MeV}$. Unlike non-backreacted AdS/QCD models, the dynamical background predicts a strong suppression of hybrid states already near the onset of deconfinement. These results demonstrate that gravitational backreaction has measurable consequences for both vacuum spectroscopy and in-medium properties of exotic hybrid mesons, emphasizing the relevance of a dynamical self-consistent approach in AdS/QCD.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.06411",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06679",
-      "title": "Form Factors in AdS from the Worldsheet",
-      "authors": [
-        "Luis F. Alday",
-        "Cl\\'ement Virally",
-        "Xinan Zhou"
-      ],
-      "abstract": "We study AdS form factors describing closed strings scattering off D-branes. Assuming that these form factors admit worldsheet integral representations in terms of multiple polylogarithms, we determine their leading curvature corrections around the flat-space limit by matching their pole structure to CFT data. We focus on two examples of defects in 4d $\\mathcal{N}=4$ SYM: a $\\frac{1}{2}$-BPS 't Hooft loop, dual to a D1 brane, and a pair of giant gravitons, dual to a D3 brane. For the 't Hooft loop, the worldsheet bootstrap completely fixes the form factor, and the result passes nontrivial checks from supersymmetric localization. For the giant gravitons, the bootstrap initially leaves five free coefficients, one of which can be fixed using localization. Remarkably, imposing instead that no new operators appear in the defect channel at this order fixes all five coefficients and reproduces the localization constraint. Under this additional assumption, we therefore obtain a unique D3-brane form factor, with supersymmetric localization providing an independent check.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.06679",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06771",
-      "title": "Non-compact Kogut-Susskind gauge theories: 1D lattice models with exact ${\\rm SL}(2,\\mathbb{R})$ gauge invariance",
-      "authors": [
-        "Carlos Fulgado-Claudio",
-        "Torsten V. Zache"
-      ],
-      "abstract": "The Kogut-Susskind (KS) formulation of gauge theories constructs quantum many-body Hamiltonians with gauge invariance under a compact Lie group exactly implemented on a spatial lattice. Here, we revisit this construction for a non-compact gauge group. Although motivated in part by theories like general relativity whose first-order formulation involves the non-compact Lorentz group as a local symmetry, we focus on simpler cases in one spatial dimension akin to the Schwinger model. In a bottom-up approach, we show how exact gauge invariance under the simplest non-compact Lie group ${\\rm SL}(2,\\mathbb{R})$ can be retained exactly on a 1D lattice, and highlight the differences that arise with respect to compact gauge groups, including a continuous spectrum of the Casimir operators of the gauge fields and the emergence of infinite-dimensional representations of the matter fields. For the pure gauge theory, we discuss how a consistent restriction to the positive semigroup ${\\rm SL}^{+}(2,\\mathbb{R})$ reproduces well-known results from the quantization of Jackiw-Teitelboim (JT) gravity. Motivated by the constraint structure of general dilaton gravity, we introduce static charges coupled to the non-compact gauge field, which can be realised by single-fermion degrees of freedom living in an additional, synthetic dimension. With static charges our lattice model remains exactly integrable, but when extending to dynamical fermionic matter, we arrive at an interacting 1D ${\\rm SL}(2,\\mathbb{R})$ KS gauge theory. We give an interpretation of this model as a chain of charges sequentially connected by strings whose tension pulls matter left or right depending on the sign of the relative continuous ${\\rm SL}(2,\\mathbb{R})$ fluxes. This picture becomes exact when the involved ${\\rm SL}(2,\\mathbb{R})$ charges are strongly self-interacting, where we solve the reduced two-body problem analytically.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.06771",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06794",
-      "title": "5-brane webs and generalised symmetries",
-      "authors": [
-        "Mohammad Akhond",
-        "Federico Carta",
-        "Sung-Soo Kim",
-        "Futoshi Yagi"
-      ],
-      "abstract": "5-brane webs provide a powerful geometric description of five-dimensional quantum field theories, encoding data such as symmetries and dualities. Although the extraction of continuous 0-form symmetries from these systems is well understood, their higher-form symmetries have received less attention. We develop a microscopic prescription for determining 1-form symmetries directly from 5-brane webs. BPS Wilson lines are represented by configurations of D3-branes and $(p,q)$ strings, while their screening by local operators is realised through string junctions, Higgsing, and Hanany-Witten transitions. For webs without orientifold planes, this construction reproduces the Smith normal form prescription based on asymptotic 7-brane charges. We extend the analysis to webs containing O7- and O5- planes. For O7$^-$-planes, the resolved 7-brane charges can be incorporated into the Smith normal form, whereas for O7$^+$-planes we propose an effective charge prescription and test it in both Lagrangian and non-Lagrangian examples. For webs with O5-planes, configurations of half-D3-branes reproduce the centre symmetries of Spin gauge theories and their breaking by matter. Crucially, we find that the 1-form symmetry of an O5-plane system is not determined by asymptotic data alone, but can depend on the local structure of the brane configuration near the orientifold.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.06794",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06842",
-      "title": "Anomaly effective actions for 4d $\\mathcal{N}=1$ superconformal field theories",
-      "authors": [
-        "Pantelis Panopoulos",
-        "Ioannis Papadimitriou"
-      ],
-      "abstract": "We present a comprehensive analysis of the Wess-Zumino anomaly effective action of four-dimensional $\\mathcal{N}=1$ superconformal field theories in components. After reviewing the coset construction of the Wess-Zumino action in the presence of an unbroken subgroup, the gauging of the conformal algebra and the Wess-Zumino effective action for non-supersymmetric conformal field theories with a U(1) symmetry in two and four dimensions, we revisit the superconformal anomalies of $\\mathcal{N}=1$ conformal supergravity. Solving the Wess-Zumino consistency conditions we determine both the bosonic and fermionic superconformal anomalies in a two-parameter family of schemes, to quadratic order in the gravitino. Turning on a chiral compensator multiplet and identifying a local super-Poincar\\'e subalgebra of the conformal supergravity algebra without gauge-fixing the coset symmetries, we employ the coset construction and the superconformal anomalies in order to evaluate the Wess-Zumino action for generic $\\mathcal{N}=1$ superconformal field theories coupled to conformal supergravity. By construction, this action reproduces the Weyl, R-symmetry, and S-supersymmetry coset anomalies, but its transformation under the unbroken Poincar\\'e supersymmetry differs from the corresponding anomaly of the conformal supergravity functional. We show that there exists a local functional of the coset-invariant old-minimal fields that, when added to the Wess-Zumino action, results in a generalized Wess-Zumino action that reproduces all anomalies of the conformal supergravity functional. The same local functional enables us to determine the super-Weyl anomalies and the Wess-Zumino action of old-minimal supergravity, providing a component version of the known superspace Wess-Zumino action.",
-      "published": "2026-11-05T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.06842",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
+      "abstract": "We reformulate two-dimensional conformal field theory (2d CFT) in the language of noncommutative geometry. To this end, we introduce automorphic forms for the von Neumann algebraic quantum group $\\mathrm{SL}^+_b(2,\\mathbb{R})$. A quantum measure space is a von Neumann algebra equipped with a weight. We study such spaces carrying a weight-preserving action of $\\mathrm{SL}^+_b(2,\\mathbb{R})$. We argue that every unitary bosonic 2d CFT with central charge $c=1+6(b+b^{-1})^2>1$ is equivalent to a quantum measure space with an action of $\\mathrm{SL}^+_b(2,\\mathbb{R})\\times\\mathrm{SL}^+_b(2,\\mathbb{R})$. In this dictionary, Virasoro primary operators are quantum automorphic forms and their scaling dimensions correspond to the spectrum of a quantum Laplace operator. The Virasoro crossing equations express associativity of multiplication on the quantum measure space. For compact theories, the algebra is a type III$_1$ factor. Liouville CFT is realized as $\\mathrm{SL}^+_b(2,\\mathbb{R})$ acting on itself by left and right translations. Virasoro boundary conditions correspond to quantum measure spaces with an action of a single copy of $\\mathrm{SL}^+_b(2,\\mathbb{R})$. When the boundary spectrum is discrete, these are noncommutative counterparts of compact hyperbolic surfaces. The formulation accommodates models both with and without extended chiral algebras. It bridges the Virasoro conformal bootstrap with categorical and von Neumann algebraic approaches to 2d CFT.",
+      "published": "2026-11-04T18:55:13.000Z",
+      "url": "https://arxiv.org/abs/2611.06907",
+      "category": "Mathematics",
+      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -265,24 +170,10 @@
         "Hersh Singh"
       ],
       "abstract": "Chiral gauge theories underlie the Standard Model, yet none has been simulated nonperturbatively. Lattice constructions that evade the Nielsen-Ninomiya obstruction entail complex fermion measures or infinite-dimensional local Hilbert spaces. Here we provide a gauge-invariant Hamiltonian lattice regularization of 1+1-dimensional abelian chiral gauge theories built from clock-and-shift qudits with $\\mathbb{Z}_N$ gauge fields, in which the global chiral symmetry and its 't Hooft anomaly survive exactly mod $N$. Anomaly cancellation on the lattice lets the Gauss laws be imposed and solved exactly, reducing the theory to an unconstrained qudit chain. Using infinite matrix product states, we simulate the canonical 1+1-dimensional chiral gauge theory, the 34-50 model, and find excellent agreement with analytic predictions, showing that a finite-dimensional local Hilbert space at $N=6$ reproduces the expected infrared physics of the continuum 34-50 model. This provides an efficient and practical solution to the problem of simulating general abelian chiral gauge theories in 1+1 dimensions, both on classical and quantum computers.",
-      "published": "2026-11-05T05:00:00.000Z",
+      "published": "2026-11-04T18:36:32.000Z",
       "url": "https://arxiv.org/abs/2611.06880",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.06907",
-      "title": "Conformal field theory from automorphic forms on a quantum group",
-      "authors": [
-        "Dalimil Mazac"
-      ],
-      "abstract": "We reformulate two-dimensional conformal field theory (2d CFT) in the language of noncommutative geometry. To this end, we introduce automorphic forms for the von Neumann algebraic quantum group $\\mathrm{SL}^+_b(2,\\mathbb{R})$. A quantum measure space is a von Neumann algebra equipped with a weight. We study such spaces carrying a weight-preserving action of $\\mathrm{SL}^+_b(2,\\mathbb{R})$. We argue that every unitary bosonic 2d CFT with central charge $c=1+6(b+b^{-1})^2>1$ is equivalent to a quantum measure space with an action of $\\mathrm{SL}^+_b(2,\\mathbb{R})\\times\\mathrm{SL}^+_b(2,\\mathbb{R})$. In this dictionary, Virasoro primary operators are quantum automorphic forms and their scaling dimensions correspond to the spectrum of a quantum Laplace operator. The Virasoro crossing equations express associativity of multiplication on the quantum measure space. For compact theories, the algebra is a type III$_1$ factor. Liouville CFT is realized as $\\mathrm{SL}^+_b(2,\\mathbb{R})$ acting on itself by left and right translations. Virasoro boundary conditions correspond to quantum measure spaces with an action of a single copy of $\\mathrm{SL}^+_b(2,\\mathbb{R})$. When the boundary spectrum is discrete, these are noncommutative counterparts of compact hyperbolic surfaces. The formulation accommodates models both with and without extended chiral algebras. It bridges the Virasoro conformal bootstrap with categorical and von Neumann algebraic approaches to 2d CFT.",
-      "published": "2026-11-04T18:55:13.000Z",
-      "url": "https://arxiv.org/abs/2611.06907",
-      "category": "Mathematics",
-      "primaryCategory": "math.QA",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -330,6 +221,21 @@
       "url": "https://arxiv.org/abs/2611.06862",
       "category": "Mathematics",
       "primaryCategory": "math-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.06842",
+      "title": "Anomaly effective actions for 4d $\\mathcal{N}=1$ superconformal field theories",
+      "authors": [
+        "Pantelis Panopoulos",
+        "Ioannis Papadimitriou"
+      ],
+      "abstract": "We present a comprehensive analysis of the Wess-Zumino anomaly effective action of four-dimensional $\\mathcal{N}=1$ superconformal field theories in components. After reviewing the coset construction of the Wess-Zumino action in the presence of an unbroken subgroup, the gauging of the conformal algebra and the Wess-Zumino effective action for non-supersymmetric conformal field theories with a U(1) symmetry in two and four dimensions, we revisit the superconformal anomalies of $\\mathcal{N}=1$ conformal supergravity. Solving the Wess-Zumino consistency conditions we determine both the bosonic and fermionic superconformal anomalies in a two-parameter family of schemes, to quadratic order in the gravitino. Turning on a chiral compensator multiplet and identifying a local super-Poincaré subalgebra of the conformal supergravity algebra without gauge-fixing the coset symmetries, we employ the coset construction and the superconformal anomalies in order to evaluate the Wess-Zumino action for generic $\\mathcal{N}=1$ superconformal field theories coupled to conformal supergravity. By construction, this action reproduces the Weyl, R-symmetry, and S-supersymmetry coset anomalies, but its transformation under the unbroken Poincaré supersymmetry differs from the corresponding anomaly of the conformal supergravity functional. We show that there exists a local functional of the coset-invariant old-minimal fields that, when added to the Wess-Zumino action, results in a generalized Wess-Zumino action that reproduces all anomalies of the conformal supergravity functional. The same local functional enables us to determine the super-Weyl anomalies and the Wess-Zumino action of old-minimal supergravity, providing a component version of the known superspace Wess-Zumino action.",
+      "published": "2026-11-04T17:59:11.000Z",
+      "url": "https://arxiv.org/abs/2611.06842",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -402,6 +308,23 @@
       "status": "Preprint"
     },
     {
+      "id": "2611.06794",
+      "title": "5-brane webs and generalised symmetries",
+      "authors": [
+        "Mohammad Akhond",
+        "Federico Carta",
+        "Sung-Soo Kim",
+        "Futoshi Yagi"
+      ],
+      "abstract": "5-brane webs provide a powerful geometric description of five-dimensional quantum field theories, encoding data such as symmetries and dualities. Although the extraction of continuous 0-form symmetries from these systems is well understood, their higher-form symmetries have received less attention. We develop a microscopic prescription for determining 1-form symmetries directly from 5-brane webs. BPS Wilson lines are represented by configurations of D3-branes and $(p,q)$ strings, while their screening by local operators is realised through string junctions, Higgsing, and Hanany-Witten transitions. For webs without orientifold planes, this construction reproduces the Smith normal form prescription based on asymptotic 7-brane charges. We extend the analysis to webs containing O7- and O5- planes. For O7$^-$-planes, the resolved 7-brane charges can be incorporated into the Smith normal form, whereas for O7$^+$-planes we propose an effective charge prescription and test it in both Lagrangian and non-Lagrangian examples. For webs with O5-planes, configurations of half-D3-branes reproduce the centre symmetries of Spin gauge theories and their breaking by matter. Crucially, we find that the 1-form symmetry of an O5-plane system is not determined by asymptotic data alone, but can depend on the local structure of the brane configuration near the orientifold.",
+      "published": "2026-11-04T17:11:55.000Z",
+      "url": "https://arxiv.org/abs/2611.06794",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2611.06787",
       "title": "Cosmological Backreaction and the Separate Universe Conjecture: Dynamical volume partitioning of Newtonian cosmologies",
       "authors": [
@@ -429,6 +352,21 @@
       "url": "https://arxiv.org/abs/2611.06774",
       "category": "Quantum Information",
       "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.06771",
+      "title": "Non-compact Kogut-Susskind gauge theories: 1D lattice models with exact ${\\rm SL}(2,\\mathbb{R})$ gauge invariance",
+      "authors": [
+        "Carlos Fulgado-Claudio",
+        "Torsten V. Zache"
+      ],
+      "abstract": "The Kogut-Susskind (KS) formulation of gauge theories constructs quantum many-body Hamiltonians with gauge invariance under a compact Lie group exactly implemented on a spatial lattice. Here, we revisit this construction for a non-compact gauge group. Although motivated in part by theories like general relativity whose first-order formulation involves the non-compact Lorentz group as a local symmetry, we focus on simpler cases in one spatial dimension akin to the Schwinger model. In a bottom-up approach, we show how exact gauge invariance under the simplest non-compact Lie group ${\\rm SL}(2,\\mathbb{R})$ can be retained exactly on a 1D lattice, and highlight the differences that arise with respect to compact gauge groups, including a continuous spectrum of the Casimir operators of the gauge fields and the emergence of infinite-dimensional representations of the matter fields. For the pure gauge theory, we discuss how a consistent restriction to the positive semigroup ${\\rm SL}^{+}(2,\\mathbb{R})$ reproduces well-known results from the quantization of Jackiw-Teitelboim (JT) gravity. Motivated by the constraint structure of general dilaton gravity, we introduce static charges coupled to the non-compact gauge field, which can be realised by single-fermion degrees of freedom living in an additional, synthetic dimension. With static charges our lattice model remains exactly integrable, but when extending to dynamical fermionic matter, we arrive at an interacting 1D ${\\rm SL}(2,\\mathbb{R})$ KS gauge theory. We give an interpretation of this model as a chain of charges sequentially connected by strings whose tension pulls matter left or right depending on the sign of the relative continuous ${\\rm SL}(2,\\mathbb{R})$ fluxes. This picture becomes exact when the involved ${\\rm SL}(2,\\mathbb{R})$ charges are strongly self-interacting, where we solve the reduced two-body problem analytically.",
+      "published": "2026-11-04T16:50:20.000Z",
+      "url": "https://arxiv.org/abs/2611.06771",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -492,6 +430,22 @@
       "url": "https://arxiv.org/abs/2611.06700",
       "category": "AI for Science",
       "primaryCategory": "cs.LG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.06679",
+      "title": "Form Factors in AdS from the Worldsheet",
+      "authors": [
+        "Luis F. Alday",
+        "Clément Virally",
+        "Xinan Zhou"
+      ],
+      "abstract": "We study AdS form factors describing closed strings scattering off D-branes. Assuming that these form factors admit worldsheet integral representations in terms of multiple polylogarithms, we determine their leading curvature corrections around the flat-space limit by matching their pole structure to CFT data. We focus on two examples of defects in 4d $\\mathcal{N}=4$ SYM: a $\\frac{1}{2}$-BPS 't Hooft loop, dual to a D1 brane, and a pair of giant gravitons, dual to a D3 brane. For the 't Hooft loop, the worldsheet bootstrap completely fixes the form factor, and the result passes nontrivial checks from supersymmetric localization. For the giant gravitons, the bootstrap initially leaves five free coefficients, one of which can be fixed using localization. Remarkably, imposing instead that no new operators appear in the defect channel at this order fixes all five coefficients and reproduces the localization constraint. Under this additional assumption, we therefore obtain a unique D3-brane form factor, with supersymmetric localization providing an independent check.",
+      "published": "2026-11-04T15:47:46.000Z",
+      "url": "https://arxiv.org/abs/2611.06679",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -657,6 +611,23 @@
       "url": "https://arxiv.org/abs/2611.06460",
       "category": "Quantum Gravity & Cosmology",
       "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.06411",
+      "title": "A dynamical Einstein-Proca-dilaton holographic model and exotic hybrid meson resonances",
+      "authors": [
+        "Bruno Toniato",
+        "David Dudal",
+        "Hudson Almeida",
+        "Roldao da Rocha"
+      ],
+      "abstract": "A fully dynamical Einstein-Proca-dilaton (EPD) holographic model is developed for the exotic $J^{PC}=1^{-+}$ hybrid meson, incorporating the backreaction of the massive vector field dual to the hybrid current in the bulk. Solving the coupled EPD system yields a self-consistent gravitational background and the mass spectrum of hybrid resonances. While the soft-wall limit reproduces linear Regge behavior, the inclusion of backreaction yields quantitative shifts that improve agreement with experimental candidates. The finite-temperature regime is approached by studying black hole thermodynamics and spectral functions across the confinement-deconfinement transition, fixing the Hawking-Page temperature to $T_c \\sim 150 \\, \\mathrm{MeV}$. Unlike non-backreacted AdS/QCD models, the dynamical background predicts a strong suppression of hybrid states already near the onset of deconfinement. These results demonstrate that gravitational backreaction has measurable consequences for both vacuum spectroscopy and in-medium properties of exotic hybrid mesons, emphasizing the relevance of a dynamical self-consistent approach in AdS/QCD.",
+      "published": "2026-11-04T12:12:18.000Z",
+      "url": "https://arxiv.org/abs/2611.06411",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -964,6 +935,21 @@
       "status": "Preprint"
     },
     {
+      "id": "2611.05526",
+      "title": "Quantum error correcting codes from quiver moduli: Grassmannians, cyclic monodromy, and argyle collision divisors",
+      "authors": [
+        "Steven Rayan",
+        "Evan Sundbo"
+      ],
+      "abstract": "Building on aspects of a recent diagrammatic field-theory programme for quantum error correction put forward by the first-named author (arXiv:2607.08911), we construct exact finite-dimensional codes from twisted cyclic and argyle quiver moduli on the projective line. A regular fibre of the node-labelled cyclic Hitchin map records the ways to distribute simple spectral zeroes among the arrows with prescribed degrees. The Hilbert space spanned by these allocations is a Young permutation module. Root monodromy acts on its Specht factors and leaves their multiplicity spaces noiseless. Resetting the Specht factor therefore recovers the encoded state for every channel in the monodromy noise model. We prove that the largest Kostka multiplicity is the optimal dimension of a subspace code correcting the full monodromy algebra, even among codes spanning several isotypic blocks. Quantizing an argyle master space recovers the cyclic sheet space as a weight sector of a tensor power, with the identification preserving monodromy. For the balanced three-cycle with $t$ zeroes per arrow, the multiplicity of a partition $(a,b,c)$ of $3t$ is $1+\\min(a-b,b-c)$. The optimal logical dimension is thus $t+1$, attained uniquely by the block indexed by $(2t,t)$. At $t=1$ we give explicit codewords for a qubit on six sheets. The commuting right action generates its full logical algebra, yielding errors outside the monodromy model that leave the measured footprint statistics unchanged yet require different recoveries. We also compute collision-parity ranks, give a higher-rank Grassmannian example, and derive a conditional criterion for recovery across splitting types.",
+      "published": "2026-11-03T19:25:02.000Z",
+      "url": "https://arxiv.org/abs/2611.05526",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2611.05499",
       "title": "Raychaudhuri-Ehlers Kinematics on Quantum State-Space: Caustics and Extrinsic Quantum Geometry",
       "authors": [
@@ -994,6 +980,20 @@
       "url": "https://arxiv.org/abs/2611.05488",
       "category": "Quantum Gravity & Cosmology",
       "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.05473",
+      "title": "Exact thermal correlators at vanishing momenta and the black hole singularity",
+      "authors": [
+        "Kaustubh Singhi"
+      ],
+      "abstract": "We study thermal two- and three-point functions of scalar primaries in holographic CFTs dual to AdS black branes. The three-point function arises from a cubic scalar interaction in the bulk. At vanishing external momenta, the tree-level results can be written in closed form and are exact in the operator dimensions. We reproduce them through direct CFT calculations in two dimensions. Their large-dimension expansions contain subleading exponential terms encoding the radial proper time from the horizon to the black hole singularity. These results provide an exact test of earlier WKB and saddle-point predictions for higher-point thermal correlators, confirming the proper-time signature while correcting the predicted asymptotic form.",
+      "published": "2026-11-03T19:00:02.000Z",
+      "url": "https://arxiv.org/abs/2611.05473",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
