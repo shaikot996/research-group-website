@@ -1,7 +1,7 @@
 {
   "totalCitations": 1072,
-  "uniquePublications": 52,
-  "updatedAt": "2026-11-05T09:40:34.759Z",
+  "uniquePublications": 53,
+  "updatedAt": "2026-11-06T09:33:40.163Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
@@ -14,7 +14,7 @@
       "name": "Syed Hasibul Hassan Chowdhury",
       "controlNumber": "1511186",
       "bai": "S.H.H.Chowdhury.1",
-      "records": 16,
+      "records": 17,
       "citations": 65
     },
     {

@@ -1,6 +1,18 @@
 {
-  "updatedAt": "2026-11-05T09:40:34.751Z",
+  "updatedAt": "2026-11-06T09:33:40.154Z",
   "records": [
+    {
+      "id": "3223533",
+      "title": "Probing dark matter annihilation with radio excess in galaxy clusters",
+      "authors": "Mat Sabri, M.R., Hamidi, Z.S., Abidin, Z.Z., Asmi, N., Norizam, N.A.F, Azmi, K.A., Chowdhury, S.H.",
+      "year": 2026,
+      "date": "2026-10-31",
+      "journal": "Phys.Dark Univ. 54 102511",
+      "arxiv": null,
+      "doi": "10.1016/j.dark.2026.102511",
+      "citations": 0,
+      "url": "https://inspirehep.net/literature/3223533"
+    },
     {
       "id": "3217980",
       "title": "Big Crunching Your Big Bang: Doubly Warped Time-Dependent Type II Flux Backgrounds and Scale Separation",
