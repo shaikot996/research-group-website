@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T09:13:59.399Z",
+  "updatedAt": "2026-11-09T09:57:55.197Z",
   "records": [
     {
       "id": "3223533",
@@ -178,7 +178,7 @@
       "journal": "Eur.Phys.J.C 85 315",
       "arxiv": "2410.00097",
       "doi": "10.1140/epjc/s10052-025-13982-9",
-      "citations": 26,
+      "citations": 27,
       "url": "https://inspirehep.net/literature/2836034"
     },
     {
@@ -562,7 +562,7 @@
       "journal": "JHEP 07 047",
       "arxiv": "hep-th/0105204",
       "doi": "10.1088/1126-6708/2001/07/047",
-      "citations": 563,
+      "citations": 564,
       "url": "https://inspirehep.net/literature/556974"
     },
     {

@@ -1,14 +1,14 @@
 {
-  "totalCitations": 1072,
+  "totalCitations": 1074,
   "uniquePublications": 53,
-  "updatedAt": "2026-11-08T09:13:59.408Z",
+  "updatedAt": "2026-11-09T09:57:55.206Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
       "controlNumber": "1023635",
       "bai": "M.Majumdar.1",
       "records": 26,
-      "citations": 887
+      "citations": 888
     },
     {
       "name": "Syed Hasibul Hassan Chowdhury",
@@ -22,7 +22,7 @@
       "controlNumber": "2763317",
       "bai": "Ahmed.Rakin.Kamal.1",
       "records": 9,
-      "citations": 113
+      "citations": 114
     },
     {
       "name": "Sayeda Tashnuba Jahan",
