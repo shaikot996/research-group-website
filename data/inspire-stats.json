@@ -1,7 +1,7 @@
 {
-  "totalCitations": 1074,
-  "uniquePublications": 53,
-  "updatedAt": "2026-11-10T10:06:09.185Z",
+  "totalCitations": 1081,
+  "uniquePublications": 54,
+  "updatedAt": "2026-11-11T09:37:40.612Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
@@ -21,50 +21,50 @@
       "name": "Ahmed Rakin Kamal",
       "controlNumber": "2763317",
       "bai": "Ahmed.Rakin.Kamal.1",
-      "records": 9,
-      "citations": 114
+      "records": 10,
+      "citations": 121
     },
     {
       "name": "Sayeda Tashnuba Jahan",
       "controlNumber": "3088919",
       "bai": "Sayeda.Tashnuba.Jahan.1",
       "records": 1,
-      "citations": 16
+      "citations": 17
     },
     {
       "name": "Mishaal Hai",
       "controlNumber": "2931658",
       "bai": "M.Hai.2",
       "records": 2,
-      "citations": 47
+      "citations": 50
     },
     {
       "name": "Md Shaikot Jahan Shuvo",
       "controlNumber": "2648798",
       "bai": "Md.Shaikot.Jahan.Shuvo.1",
       "records": 3,
-      "citations": 54
+      "citations": 57
     },
     {
       "name": "Kazi Fahim Reza Arko",
       "controlNumber": "3217981",
       "bai": "Kazi.Fahim.Reza.Arko.1",
       "records": 1,
-      "citations": 0
+      "citations": 1
     },
     {
       "name": "Walid Hasan",
       "controlNumber": "3217983",
       "bai": "Walid.Hasan.1",
       "records": 1,
-      "citations": 0
+      "citations": 1
     },
     {
       "name": "M. Fahim Hoque",
       "controlNumber": "3217985",
       "bai": "M.F.Hoque.2",
       "records": 1,
-      "citations": 0
+      "citations": 1
     }
   ]
 }

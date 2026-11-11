@@ -1,6 +1,18 @@
 {
-  "updatedAt": "2026-11-10T10:06:09.180Z",
+  "updatedAt": "2026-11-11T09:37:40.603Z",
   "records": [
+    {
+      "id": "3226684",
+      "title": "Quality time in extra dimensions: axion quality and radion cosmology",
+      "authors": "Biswas, Falguni, Juberi, Yeshan, Kamal, Ahmed Rakin",
+      "year": 2026,
+      "date": "2026-11-09",
+      "journal": null,
+      "arxiv": "2611.12765",
+      "doi": null,
+      "citations": 0,
+      "url": "https://inspirehep.net/literature/3226684"
+    },
     {
       "id": "3223533",
       "title": "Probing dark matter annihilation with radio excess in galaxy clusters",
@@ -22,7 +34,7 @@
       "journal": null,
       "arxiv": "2610.30248",
       "doi": null,
-      "citations": 0,
+      "citations": 1,
       "url": "https://inspirehep.net/literature/3217980"
     },
     {
@@ -34,7 +46,7 @@
       "journal": "Eur.Phys.J.C 86 1153",
       "arxiv": "2606.08767",
       "doi": "10.1140/epjc/s10052-026-16470-w",
-      "citations": 3,
+      "citations": 4,
       "url": "https://inspirehep.net/literature/3213558"
     },
     {
@@ -70,7 +82,7 @@
       "journal": "JHEP 06 188",
       "arxiv": "2512.19793",
       "doi": "10.1007/JHEP06(2026)188",
-      "citations": 4,
+      "citations": 5,
       "url": "https://inspirehep.net/literature/3095325"
     },
     {
@@ -94,7 +106,7 @@
       "journal": "JCAP 06 025",
       "arxiv": "2511.19610",
       "doi": "10.1088/1475-7516/2026/06/025",
-      "citations": 16,
+      "citations": 17,
       "url": "https://inspirehep.net/literature/3086355"
     },
     {
@@ -154,7 +166,7 @@
       "journal": "Int.J.Mod.Phys.D 35 2650071",
       "arxiv": "2506.08083",
       "doi": "10.1142/S0218271826500719",
-      "citations": 31,
+      "citations": 33,
       "url": "https://inspirehep.net/literature/2933166"
     },
     {
@@ -178,7 +190,7 @@
       "journal": "Eur.Phys.J.C 85 315",
       "arxiv": "2410.00097",
       "doi": "10.1140/epjc/s10052-025-13982-9",
-      "citations": 27,
+      "citations": 28,
       "url": "https://inspirehep.net/literature/2836034"
     },
     {
