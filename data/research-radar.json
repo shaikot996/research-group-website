@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:35:54.268Z",
+  "updatedAt": "2026-11-18T21:33:08.273Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
@@ -13,7 +13,7 @@
         "Richard Nally"
       ],
       "abstract": "We investigate signatures of weak cosmic censorship in non-supersymmetric vacua of both IIA and IIB string theory. In particular, we examine the Penrose Inequality, which can be proven holographically using Ryu-Takayanagi, and can be independently proven in SUSY AdS vacua for spherically symmetric initial data. We prove that any EFT of scalars coupled to gravity in AdS, including in particular those of string compactifications, satisfies both the Penrose Inequality and a positive mass theorem if a function that we call a \"weak fake superpotential\" exists. We demonstrate that this condition is satisfied globally for the DGKT skew-whiffed vacua in IIA. Since there is no known nonperturbative instability in this DGKT vacuum, this provides evidence that the IIA SUSY-broken AdS vacua may be absolutely stable. We also find the weak fake superpotential exists locally in field space in some SUSY-broken AdS vacua in a KKLT construction in IIB. Thus, within the framework considered here, some false SUSY-broken KKLT AdS vacua are stable against vacuum decay. Conversely, we find that some KKLT vacua do not have a weak fake superpotential, and correspondingly violate the Penrose Inequality and fail to have a positive mass theorem; the DGKT vacua only violate the Penrose Inequality in the presence of designer gravity boundary conditions. In all cases studied, this is due to false vacuum decay. We discuss the implications of these violations for holography and black hole thermodynamics in these SUSY-broken AdS vacua.",
-      "published": "2026-11-18T05:00:00.000Z",
+      "published": "2026-11-16T19:00:02.000Z",
       "url": "https://arxiv.org/abs/2611.21722",
       "category": "Quantum Gravity & Cosmology",
       "primaryCategory": "gr-qc",
@@ -291,82 +291,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.21727",
-      "title": "Supersymmetric warped AdS$_3$ solutions in eleven-dimensional supergravity",
-      "authors": [
-        "Ruggero Noris"
-      ],
-      "abstract": "We construct new families of supersymmetric solutions of eleven-dimensional supergravity by deforming the half-BPS $\\mathrm{AdS}_3\\times \\mathrm{S}^3_+\\times \\mathrm{S}^3_-\\times\\mathbb R^2$ background. We consider lightlike, spacelike and timelike warpings of the anti-de Sitter factor, accompanied by deformations of the two three-spheres, and determine the supporting four-form fluxes and the constraints imposed by the equations of motion. In particular, the deformation parameters of the two spheres are necessarily equal, although their radii need not coincide. We compute the conserved charges and determine the preserved supersymmetries and Killing superalgebras. Generic lightlike solutions preserve four real supercharges, whereas spacelike and timelike solutions preserve eight, with a Killing superalgebra containing a single exceptional $\\mathfrak d(2,1;\\alpha)$ factor.",
-      "published": "2026-11-18T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.21727",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.21730",
-      "title": "Gravity/Thermodynamics Correspondence for Generic Dynamical Spacetimes",
-      "authors": [
-        "Vahid Reza Shajiee",
-        "Mohammad Mehdi Sheikh-Jabbari",
-        "Vahid Taghiloo"
-      ],
-      "abstract": "Working within covariant phase space formalism, we establish \\textit{gravity-thermodynamics correspondence} for generic dynamical spacetimes. We derive local first and second laws of thermodynamics on general null boundaries, for generic non-stationary solutions to Einstein gravity {with minimally coupled matter} for physical observers that we carefully specify. Entropy variation, which receives contribution only from the gravitational sector, is the surface charge variation associated with a vector field generating the null boundary, and temperature is its non-affinity parameter (divided by $2\\pi$). The statement of the second law in our setting is that the entropy variation evaluated along the null vector field is strictly non-negative for the admissible positive-non-affinity clock and matter satisfying the null energy condition. Our dynamical entropy variation, which is non-integrable for generic non-stationary solutions, becomes integrable in near-stationary configurations, reproducing the Hollands--Wald--Zhang dynamical entropy formula. Strikingly, this local second law holds even when the boundary area is decreasing, disentangling thermodynamic irreversibility and the second law from standard area theorems. Our first-principles construction demonstrates that gravitational thermodynamics requires neither a stationary background, teleological event horizons, nor an exact entropy state function on individual codimension-1 spacelike slices of the null boundary (codimension two in spacetime).",
-      "published": "2026-11-18T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.21730",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.21735",
-      "title": "Gravitational Mode Instabilities in Kerr-like Black Holes",
-      "authors": [
-        "Pedro Henrique Croti Siqueira",
-        "Rodrigo Dal Bosco Fontana",
-        "Maur\\'icio Richartz"
-      ],
-      "abstract": "We identify exponentially growing modes of a homogeneous gravitational Teukolsky-like operator on highly spinning Kerr-like black holes subject to quasinormal mode boundary conditions. Specifically, we compute electromagnetic and gravitational quasinormal modes of a spacetime proposed by Konoplya, Rezzolla, and Zhidenko that parametrizes deformations from the Kerr geometry, including configurations with black hole spin parameter $a/M > 1$ that retain an event horizon. Using the continued fraction method, we find that the spin-weight $s=-2$ operator develops exponentially growing modes when the black hole spin and deformation parameters are sufficiently large, while the electromagnetic modes remain damped throughout the parameter space. We further compare the quasinormal mode predictions with an agnostic analysis of the GW250114 ringdown, identifying regions of the parameter space that are compatible with the spectrum inferred from the data.",
-      "published": "2026-11-18T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.21735",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.21911",
-      "title": "Self-gravitating Lee-Huang-Yang fluids as dark matter halos",
-      "authors": [
-        "Abdelaali Boudjemaa"
-      ],
-      "abstract": "We propose a model of dark matter halos based on a self-gravitating Bose fluid whose effective equation of state is dominated by Lee-Huang-Yang quantum fluctuations. The model is governed by coupled generalized Gross-Pitaevskii-Poisson equations, which incorporate quantum pressure, Lee-Huang-Yang-induced repulsion, and gravitational attraction. By retaining the full quantum pressure, we examine the halo structure from its central region to its asymptotic regime. We first derive the Jeans dispersion relation and analyze how the Lee-Huang-Yang fluctuations alter the gravitational instability criterion and the associated characteristic length and mass scales. We then obtain analytical expressions for the central and large-radius behaviors of the equilibrium solutions. To verify the validity and the performance of the model, we fit the model-predicted curves with a sample of 20 galaxies from the SPARC database and compare the results with those obtained from Navarro-Frenk-White, standard Bose-Einstein condensate, and quantum-droplet dark matter models. We find that the pure-LHY model reproduces a broad range of observed galactic kinematics, yielding reduced $\\chi^2$ values and a lower sample average compared to the aforementioned models. These results indicate that the combined effects of quantum pressure, LHY quantum fluctuations and the self-gravity provide additional flexibility in describing both the central and extended outer regions of galactic halos. We also discuss the implications of the inferred halo parameters and emphasize their dependence on the assumed effective equation of state and its microscopic interpretation. The pure-LHY model constitutes an ideal platform for exploring the role of quantum-fluctuation-induced interaction in the formation and structure of dark matter halos.",
-      "published": "2026-11-18T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.21911",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.22107",
-      "title": "Regular/Singular Black Hole Thermodynamics from Renormalised Volume/Area",
-      "authors": [
-        "Gabriel Arenas-Henriquez",
-        "Rodrigo Olea",
-        "David Rivera-Betancour"
-      ],
-      "abstract": "We study the finite mismatch between the holographically and topologically renormalised Euclidean actions of the four-dimensional AdS C-metric. Starting from the relation between Renormalised Volume and the Einstein sector of Conformal Gravity, we separate the regular curvature contribution from the contributions supported on the two conical axes. After introducing the usual Euler normalisation for smooth manifolds, the residual difference between the regular action evaluations is determined by the tension-weighted Euler terms of the renormalised worldsheet area. We identify this difference with the Gauss--Bonnet entropy contribution at the polar conical points of the horizon. The ordinary Euler characteristic remains fixed, while the deficits determine how its curvature representation is divided between regular and singular contributions. At fixed total string tension, the difference of the renormalised worldsheet areas per unit Euclidean time determines the relative tension work, giving a geometric interpretation of the relative thermodynamic length.",
-      "published": "2026-11-18T05:00:00.000Z",
-      "url": "https://arxiv.org/abs/2611.22107",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.23220",
       "title": "Complete Cosmological Collider Signatures from Right-handed Neutrino Loops",
       "authors": [
@@ -418,6 +342,20 @@
       "status": "Preprint"
     },
     {
+      "id": "2611.23103",
+      "title": "Riemannian geometry and quantum gravity on trees",
+      "authors": [
+        "Shahn Majid"
+      ],
+      "abstract": "We show that the tree graphs that admit a quantum Riemannian geometry (QRG) with a positive ratio metric are exactly the Dynkin graphs of finite type $A,D,E$ and affine type $\\widetilde D,\\widetilde E$. A metric in this context is an assignment of a nonzero real value to each arrow and positive ratio requires that the two directions on any edge have the same sign. It turns out that the metric value in one direction can be chosen freely and the other is then determined. For finite $A, D, E$ type, the construction involves $q$-integers where $q=e^{\\imathπ/h}$ with $h$ the Coxeter number and there is a conjugate pair of $*$-preserving quantum Levi-Civita connections (QLCs). In the case of type $A$, these are necessarily contained in a previously known 1-parameter space of connections. For affine $\\widetilde D,\\widetilde E$ type, there is only one QLC, with real coefficients. Using the quantum Riemannian geometry, we construct a natural Einstein--Hilbert action and hence new quantum gravity models on $A_3,D_4,\\widetilde D_4,\\widetilde D_5,\\widetilde D_6,\\widetilde E_6$ in a functional integral approach, other than the 4-star $\\widetilde D_4$ which we revisit.",
+      "published": "2026-11-17T17:26:05.000Z",
+      "url": "https://arxiv.org/abs/2611.23103",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2611.23083",
       "title": "Performance of Fusion-Based Quantum Computing with Imperfect Photon Indistinguishability",
       "authors": [
@@ -432,6 +370,21 @@
       "url": "https://arxiv.org/abs/2611.23083",
       "category": "Quantum Information",
       "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.22936",
+      "title": "Probing the Macroscopic Imprints of Singularity Resolution: Polarization Diagnostics of Rotating ABG Black Holes",
+      "authors": [
+        "Zi-Yang Li",
+        "Jia-Hui Huang"
+      ],
+      "abstract": "Recent observations by the Event Horizon Telescope have revealed important electromagnetic information around the supermassive black holes $\\text{M87}^*$ and $\\text{Sgr A}^*$, providing experimental supports for investigating physics near the event horizon. In the absence of a complete quantum gravity theory, exploring the observational appearances and polarized images of accretion flows in regularized geometries, and seeking specific observational differences from Kerr black holes, is of value for understanding the singularity problem. Based on backward ray tracing method, this work investigates both the optical and polarimetric observational features of rotating Ayón-Beato-García spacetime with regularization parameter $Q$. It is found that, compared with the Kerr case, the parameter $Q$ leads to a significant contraction of the size of the inner shadow in the observed optical images. This contraction remains visible even after an illustrative Gaussian filter for images observed at a low inclination angle (e.g. $17^\\circ$). In the polarized images, we focus on two observables, the electric vector position angles (EVPAs) and the depolarization regions, on the observer's screen. It is found that depolarization regions do not necessarily reside in the vicinity of the bright photon ring in images at high inclination angles (e.g. $83^\\circ$), and a multi-branch structure can be observed. Furthermore, the distribution of EVPAs is insensitive to the regularization parameter $Q$ while the morphology of the depolarization regions can be impacted remarkably by $Q$. The results provide possible optical observable characteristics for the rotating regular spacetime.",
+      "published": "2026-11-17T15:31:14.000Z",
+      "url": "https://arxiv.org/abs/2611.22936",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -560,6 +513,22 @@
       "status": "Preprint"
     },
     {
+      "id": "2611.22687",
+      "title": "Spectral recurrences and maximal analyticity: cosmological correlators at one and two loops",
+      "authors": [
+        "Bruce A. Bassett",
+        "Sergio L. Cacciatori",
+        "Ugo Moschella"
+      ],
+      "abstract": "We develop a method for computing de Sitter boundary correlators based on the maximal analyticity of the two-point function and differential--difference equations satisfied by Schwinger--Keldysh diagrams. The vertex integrations are analytically continued through the relevant de Sitter tuboids onto purely imaginary Lobachevskij cycles. Taking the Mehler--Fock transform of the invariant bubble kernels on these Riemannian cycles converts their differential--difference equations into algebraic recurrences in the spectral parameter. The mixed-branch kernel obeys a homogeneous recurrence, whereas the chronological and antichronological kernels satisfy sourced recurrences whose local terms are determined by dimensionally continued tadpoles. We solve these recurrences, constructing explicit particular solutions in terms of generalised hypergeometric functions and identifying the analytic conditions selecting their physical completion. Attachment to the external boundary points then yields an intrinsic spectral representation and a complete solution of the boundary in--in diagrams considered here. Our method is fully coordinate-independent. Specialising to a Poincaré chart readily gives expressions that can be compared directly with those obtained by the standard coordinate-dependent approach. Composing two or more bubbles yields a multi-loop chain whose spectral multiplier is determined by the one-loop building blocks and the sum over intermediate Schwinger--Keldysh branches.",
+      "published": "2026-11-17T12:36:54.000Z",
+      "url": "https://arxiv.org/abs/2611.22687",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
       "id": "2611.12765",
       "title": "Quality time in extra dimensions: axion quality and radion cosmology",
       "authors": [
@@ -572,6 +541,22 @@
       "url": "https://arxiv.org/abs/2611.12765",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.22647",
+      "title": "Inflation with an Exponential Power-Law Potential:Analytical Slow-Roll Relations, Branch Dynamics, and Conditional Reheating Matching",
+      "authors": [
+        "Feyzollah Younesizadeh",
+        "Younes Younesizadeh",
+        "Wen-Xiang Chen"
+      ],
+      "abstract": "We study canonical single-field inflation driven by the potential $V(φ)=M^4\\exp(φ/M_{\\rm Pl})(1+kφ/M_{\\rm Pl})^{-1/k}$ with $k<0$. We retain the canonical Einstein--scalar action and derive analytical relations within the slow-roll approximation. Expressing the local spectra through the logarithmic slope $A=kx/(1+kx)$, with $x=φ/M_{\\rm Pl}$, yields an endpoint-independent consistency relation among the scalar tilt, tensor ratio, and running at their stated approximation orders. On the negative-field branch, an exact phase-space argument shows that an initially downhill, inflationary hilltop trajectory cannot end inflation within the bare single-field model. We specify the endpoint as a phenomenological input and use a Lambert-$W$ solution of the slow-roll e-fold integral. Tables and figures illustrate the fixed choice $x_e=-2$ and must be interpreted conditionally on a completion that implements this endpoint and preserves the adiabatic spectrum. The reheating-matching relation uses explicit scale and thermal conventions and imposes both endpoint energy bounds and nonnegative reheating duration. The observational comparison uses published marginalized intervals rather than reconstructed joint posteriors. These results establish local analytical structure and conditional numerical benchmarks. A complete exit mechanism, a unique reheating equation of state, and precision spectral predictions remain unestablished.",
+      "published": "2026-11-17T12:03:18.000Z",
+      "url": "https://arxiv.org/abs/2611.22647",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -616,6 +601,20 @@
       "url": "https://arxiv.org/abs/2611.22594",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.22586",
+      "title": "Shadows and Images of Black Holes with Purely Nonlinear Scalarization",
+      "authors": [
+        "Hao Yang"
+      ],
+      "abstract": "We investigate the shadows and radiative images of static, spherically symmetric black holes with purely nonlinear scalarization in Einstein--scalar--Gauss--Bonnet gravity. The quartic exponential coupling supports scalarized backgrounds without a linear tachyonic instability of Schwarzschild black holes. We compare mass and coupling dependences and construct images on radially stable backgrounds using optically thin spherical emission and face-on thin disks. On the sampled radially stable branches, we find smaller shadow radii than those of Schwarzschild black holes at the same mass, with reductions reaching approximately $21.7\\%$. The sampled radially unstable branches show much smaller shadow-size deviations. The photon-orbit index, which measures radial instability per unit orbital angle, varies nonmonotonically even when the normalized shadow radius changes monotonically. The index also controls the asymptotic compression of higher-order images, providing information complementary to shadow size. For spherical emission, radial infall produces a darker center relative to the bright ring than static emission. For circular disks, we find that smooth metric variations can create an unstable interval separating two stable regions of timelike circular motion. When the disk occupies the stable region connected to infinity, its inner edge moves outward across this transition, suppressing emission inside the geometric shadow boundary while the normalized shadow radius changes only slightly. Our results show that purely nonlinear scalarization can alter images through both photon propagation and the orbital structure of emitting matter, with the visible features depending on the emission model.",
+      "published": "2026-11-17T11:10:02.000Z",
+      "url": "https://arxiv.org/abs/2611.22586",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
       "source": "arXiv",
       "status": "Preprint"
     },
