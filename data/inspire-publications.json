@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T12:41:44.737Z",
+  "updatedAt": "2026-11-25T11:29:33.778Z",
   "records": [
     {
       "id": "3226684",
@@ -106,7 +106,7 @@
       "journal": "JCAP 06 025",
       "arxiv": "2511.19610",
       "doi": "10.1088/1475-7516/2026/06/025",
-      "citations": 17,
+      "citations": 18,
       "url": "https://inspirehep.net/literature/3086355"
     },
     {
@@ -166,7 +166,7 @@
       "journal": "Int.J.Mod.Phys.D 35 2650071",
       "arxiv": "2506.08083",
       "doi": "10.1142/S0218271826500719",
-      "citations": 33,
+      "citations": 34,
       "url": "https://inspirehep.net/literature/2933166"
     },
     {
@@ -202,7 +202,7 @@
       "journal": "Phys.Rev.D 111 L061904",
       "arxiv": "2411.15302",
       "doi": "10.1103/PhysRevD.111.L061904",
-      "citations": 20,
+      "citations": 21,
       "url": "https://inspirehep.net/literature/2851702"
     },
     {
