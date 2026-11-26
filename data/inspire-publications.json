@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T11:29:33.778Z",
+  "updatedAt": "2026-11-26T11:09:33.425Z",
   "records": [
     {
       "id": "3226684",
@@ -70,7 +70,7 @@
       "journal": null,
       "arxiv": "2606.26280",
       "doi": null,
-      "citations": 6,
+      "citations": 7,
       "url": "https://inspirehep.net/literature/3173005"
     },
     {
