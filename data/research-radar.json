@@ -1,10 +1,410 @@
 {
-  "updatedAt": "2026-11-25T22:41:43.909Z",
+  "updatedAt": "2026-11-26T02:25:29.794Z",
   "status": "verified",
   "sources": [
     "arXiv official API and official subject feeds"
   ],
   "papers": [
+    {
+      "id": "2611.33744",
+      "title": "Late-time OTOCs in Toda conformal field theory",
+      "authors": [
+        "Giwan Kim",
+        "Masahito Yamazaki"
+      ],
+      "abstract": "We study late-time out-of-time-order correlators (OTOCs) of semi-degenerate primary fields in two-dimensional $A_{N-1}$ Toda conformal field theory. In Liouville theory ($N=2$), we find that the OTOC decays as $t^{-3/2}$ when the continuum edge dominates, correcting a previously reported constant limit. For $N=3$, a transverse contour pinch reduces the spectral integral to one dimension. Assuming that the reduced expansion is complete, in the continuous phase the regulated edge behaves as a discrete state, and the OTOC approaches a pure braiding phase. As we check numerically, the edge block is a free-field correlator in a charge-neutral Weyl frame; this explains the pure phase and is consistent with crossing symmetry. For both $N=2$ and $N=3$, a dominant discrete residue gives a constant late-time limit. For $N\\geq4$, the same one-dimensional reduction violates a crossing bound on the lowest intermediate weight of a positive diagonal expansion. Hence the $N=2,3$ phase diagram does not extend to higher rank without additional contributions below the reduced continuum edge or outside a positive diagonal expansion.",
+      "published": "2026-11-25T04:05:23.000Z",
+      "url": "https://arxiv.org/abs/2611.33744",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33730",
+      "title": "Improved Quantum Algorithms for TSP and More",
+      "authors": [
+        "Masayuki Miyamoto"
+      ],
+      "abstract": "The traveling salesman problem (TSP) is a canonical NP-hard optimization problem. For general edge weights, the classical dynamic programs of Bellman and of Held and Karp solve TSP on $n$ cities in $O^*(2^n)$ time. To date, no $\\Oh(c^n)$-time classical algorithm is known for any $c<2$. Combining Grover search with the dynamic programming technique, Ambainis et al. (SODA 2019) introduced a quantum algorithm with running time $O^*(1.7274^n)$, which is still the best known quantum time bound. In this work, we improve the running time to $O^*(1.70961^n)$. The core idea of our algorithm is to combine the framework of Ambainis et al. with the extremal set-system framework, which was recently used for classical space-time tradeoffs of TSP by Jabal Ameli, Nederlof and Wang (FOCS 2026) and Dallant and Kozma (FOCS 2026). To obtain our upper bound, we decompose the optimal tour into four consecutive subpaths of different sizes, for which, based on the idea of set-systems, the optimal values are computed using dynamic programming with small success probability and use amplitude amplification. Using the same idea, we also give a new quantum space-time tradeoff for TSP, improving the previous results of Caroppo et al. (ESA 2026) and Dallant (arXiv:2607.12374). Finally, we obtain the same quantum upper bounds for several other related problems.",
+      "published": "2026-11-25T03:51:27.000Z",
+      "url": "https://arxiv.org/abs/2611.33730",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33644",
+      "title": "Physics-Informed Learning for Multiplayer Differential Games",
+      "authors": [
+        "Takuma Adams",
+        "Andrew C. Cullen",
+        "Tansu Alpcan"
+      ],
+      "abstract": "Computing per-player feedback strategies in $N$-player adversarial differential games is challenging as the associated coupled Hamilton-Jacobi-Bellman system is high-dimensional and generally lacks classical solutions. We address this by approximating viscosity solutions using physics-informed neural networks within a policy iteration scheme with a vanishing-viscosity annealing schedule. Theoretically, we establish an explicit $\\varepsilon$-Nash guarantee by bounding per-player regret via computable residuals and prove our method reaches this stopping criterion in finite time. For two-player zero-sum games, we further establish a computable bound on the approximation error of the value function. Numerical experiments on pursuit-evasion scenarios illustrate the tightness of these computed bounds and the framework's scalability to high-dimensional environments.",
+      "published": "2026-11-25T02:11:54.000Z",
+      "url": "https://arxiv.org/abs/2611.33644",
+      "category": "AI for Science",
+      "primaryCategory": "cs.LG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33620",
+      "title": "The Dirac equation in arbitrary coordinate systems and curved spacetimes - An orthonormal frames approach",
+      "authors": [
+        "Andrew DeBenedictis",
+        "Saša Ilijić"
+      ],
+      "abstract": "In this pedagogical article we discuss the Dirac equation in arbitrary coordinate systems. We explain the need for connections when dealing with spinor fields and present the practical steps needed to compute the Dirac operator in a general setting, allowing for arbitrary coordinate systems and position-dependent orthonormal gamma matrices, both of which can simplify computations in certain scenarios. The extension to include minimally coupled gravity is straightforward. Examples are provided, including constructing the Dirac equation in spherical and cylindrical symmetry (with or without gravity) and the Kerr spacetime. We also briefly comment on the advantages and disadvantages of various tetrads and orthonormal gamma matrices. This manuscript should be accessible to readers who have studied the Dirac equation at an introductory level (e.g., in Cartesian coordinates in flat spacetime with constant gamma matrices). The emphasis is on the use of orthonormal frames, since these correspond to the coordinate systems most familiar to readers when dealing with most field theories, and represent the physical frames where measurements are performed. The aim is to get the reader quickly to the point of being able to do calculations, so the presentation favors a concise, pragmatic approach over extended derivations.",
+      "published": "2026-11-25T01:51:33.000Z",
+      "url": "https://arxiv.org/abs/2611.33620",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33599",
+      "title": "Holographic probes and Krylov complexity on asymptotically Lifshitz rotating black branes",
+      "authors": [
+        "Moises Bravo-Gaete",
+        "Mariano Chernicoff",
+        "Benjamin Mellado",
+        "Julio Oliva",
+        "Maria Guadalupe Olmos Andrade"
+      ],
+      "abstract": "We study two types of holographic probes on a five-dimensional, asymptotically Lifshitz, rotating black hole. This geometry solves the field equations of Einstein gravity coupled to a dilaton, two axionic scalars, and a Maxwell doublet, supplemented by two vector doublets that enter the action through a parity-odd, Chern-Simons-like combination, as recently found in \\cite{Bravo-Gaete:2026bdq}. This spacetime provides a concrete bottom-up arena to explore the imprints of rotation on probes in non-relativistic holography. First, we compute the holographic static quark-antiquark potential following the standard prescription that relates this boundary observable to the on shell-action of a string configuration whose endpoints are anchored at the boundary. We find that the screening length decreases both when the angular momentum is increased at fixed temperature and when the temperature is increased at fixed angular momentum. The former reflects centrifugal effects on the $q\\bar{q}$ pair, whereas the latter stems from enhanced thermal fluctuations, which weaken correlations at a given separation. Second, we compute the growth rate of the Krylov complexity, using the holographic prescription that relates this observable to the momentum of a massive particle probe falling into the IR. In particular, we find that, at a given instant, the complexity grows faster as the dynamical exponent $z$ is increased.",
+      "published": "2026-11-25T01:16:43.000Z",
+      "url": "https://arxiv.org/abs/2611.33599",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33564",
+      "title": "All known supersymmetric $\\mathrm{AdS}_4 \\times S^7$ uplifts from maximal supergravity",
+      "authors": [
+        "Krzysztof Pilch",
+        "Oscar Varela"
+      ],
+      "abstract": "The solutions of $D=4$ $\\mathcal N=8$ SO(8)-gauged supergravity uplift consistently to eleven dimensions. All known supersymmetric AdS$_4$ vacua of this theory lie in an $\\mathcal N=1$ truncation containing seven chiral multiplets. In this paper, we work out the uplift of this seven-chiral sector, providing a unified eleven-dimensional geometric description of all known supersymmetric AdS$_4$ solutions in this class. We then specialise to the $\\mathcal N=1$ vacua with U(1)$^2$ and SO(3) symmetry, obtain their new $D=11$ uplifts and bring out their internal geometries. Both of them admit a Kaluza--Klein-type description. For the U(1)$^2$ solution, this uses the global Hopf fibration of $S^7$ over $\\mathbb{CP}^3$. One U(1) acts on the fibre, while the other generates the only continuous isometry of the deformed $\\mathbb{CP}^3$ base. For the SO(3) solution, the geometry takes a local non-abelian Kaluza--Klein form, with SO(3) acting on the fibres and no residual continuous symmetry on the four-dimensional base.",
+      "published": "2026-11-25T00:25:45.000Z",
+      "url": "https://arxiv.org/abs/2611.33564",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33549",
+      "title": "FokasNets: Completing missing boundary data in Physics-Informed Neural Networks and Operators via the Global Relation",
+      "authors": [
+        "Kyriakos C. Georgiou",
+        "Khemraj Shukla",
+        "Athanassios S. Fokas",
+        "George Em Karniadakis"
+      ],
+      "abstract": "We introduce FokasNets, a framework that combines Physics-Informed Neural Networks (PINNs) and operators (PINOs) with the Global Relation (GR) formulation of the Fokas method (also referred to as the Unified Transform), for mixed boundary problems. The general framework considers lifted representations of the neural network models, where the Dirichlet boundary conditions are imposed by construction and the neural network learns the interior correction. The Global Relation is used as an additional solve during training that provides the missing boundary conditions to the lifted neural network, making training more efficient and accurate in the interior and on the boundary. We develop the construction of FokasNets for elliptic and evolution PDEs (Fokas-PINNs), and the corresponding PDE solution operator problems (Fokas Operator Networks - FONets), using the Global Relation formulations for these PDE classes. Furthermore, we develop the necessary theoretical framework for FokasNets, including error and stability analysis and show that FokasNets are universal approximators. We provide comprehensive numerical experiments, using examples with manufactured solutions and literature benchmarks. Compared to standard PINNs and Physics-Informed DeepONets and their lifted versions, FokasNets achieve significant improvements in solution accuracy in the interior and boundaries, both for single PDEs and particularly for solution operators, where the improvement reaches multiple orders of magnitude and fixed threshold errors are reached faster during training.",
+      "published": "2026-11-24T23:51:22.000Z",
+      "url": "https://arxiv.org/abs/2611.33549",
+      "category": "AI for Science",
+      "primaryCategory": "cs.LG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33522",
+      "title": "No Cluster Left Behind I: Joint Mass Calibration for Dark Energy Survey and South Pole Telescope Clusters",
+      "authors": [
+        "C. Zhou",
+        "A. N. Salcedo",
+        "S. Grandis",
+        "T. Jeltema",
+        "M. Costanzi",
+        "L. E. Bleem",
+        "A. Farahi",
+        "M. Gatti",
+        "T. Shin",
+        "F. Kéruzoré",
+        "C. L. Reichardt",
+        "J. H. Esteves",
+        "M. Aguena",
+        "S. Allam",
+        "D. Bacon",
+        "J. Blazek",
+        "S. Bocquet",
+        "D. Brooks",
+        "D. L. Burke",
+        "R. Camilleri",
+        "J. Carretero",
+        "L. N. da Costa",
+        "T. M. Davis",
+        "D. L. DePoy",
+        "S. Desai",
+        "P. Doel",
+        "A. E. Evrard",
+        "J. García-Bellido",
+        "D. Gruen",
+        "G. Gutierrez",
+        "D. L. Hollowood",
+        "D. J. James",
+        "K. Kuehn",
+        "O. Lahav",
+        "J. L. Marshall"
+      ],
+      "abstract": "Multiwavelength observations of galaxy clusters are among the most promising probes of the growth of structure and dark energy. Optically identified clusters have a high number density and can thus probe the halo mass function well into the group regime, but their weak-lensing mass calibration suffers from a selection bias induced by line-of-sight projection effects. Clusters detected via their intracluster medium (ICM) -- through X-ray emission or the thermal Sunyaev-Zel'dovich effect (SZe) -- are less affected by such selection biases, but current survey sensitivity restricts ICM-selected samples to high-mass systems. Previous multiwavelength analyses tend to limit to clusters with millimeter detections and thus to the high-mass population. In this paper, we propose a flexible modeling framework in which all clusters from multiwavelength surveys can be combined and modeled, even if they are detected in only one survey. As a pilot study, we jointly model richness and lensing of clusters from the Dark Energy Survey and the SZe signal from the South Pole Telescope. This approach yields precise cluster mass calibration while self-consistently constraining optical selection biases. We have found a $\\sim$20% bias in the large-scale lensing signal of clusters selected by richness, and a bias ranging from $\\sim-20$% at low richness to zero at high richness for clusters selected by both richness and SZe. Compared to current approaches, this framework is highly scalable and readily extensible, paving the way for the full utilization of multiwavelength cluster data in next-generation surveys.",
+      "published": "2026-11-24T22:54:36.000Z",
+      "url": "https://arxiv.org/abs/2611.33522",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "astro-ph.CO",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33489",
+      "title": "Data-free continuous-time physics-informed neural networks for vortex shedding: a consistent pressure across time windows",
+      "authors": [
+        "Mickaël Delcey",
+        "Cyril Regan",
+        "Masaki Fuchiwaki",
+        "Yoann Cheny"
+      ],
+      "abstract": "Without data, physics-informed neural networks (PINNs) in continuous time have so far failed to develop vortex shedding past a circular cylinder in a domain symmetric about the wake centerline: the training converges to the steady symmetric solution. We obtain shedding at Re=100 with a continuous-time PINN trained over successive time windows, without any reference data and without temporal discretization, the symmetry being broken by an analytical, divergence-free initial condition. The Strouhal number and the mean drag coefficient agree with an OpenFOAM solution computed on the same domain to within 0.5%. The pressure, however, is discontinuous at the junctions between windows, and the lift coefficient is a staircase. We relate this discontinuity to the differential-algebraic structure of the incompressible Navier-Stokes equations, of index 2 after spatial discretization: a consistent initial condition of each window must satisfy the constraint $\\nabla\\cdot\\mathbf{v}=0$ for the velocity, and the hidden constraint $\\nabla\\cdot\\partial_t\\mathbf{v}=0$, with $\\partial_t\\mathbf{v}$ given by the momentum equation, then determines the pressure. Imposing the pressure alone makes the solution continuous but not consistent; our remedy imposes the pressure at the junctions and adds this hidden constraint to the loss. Over five shedding periods, the jumps of the lift coefficient become 20 times smaller.",
+      "published": "2026-11-24T22:09:32.000Z",
+      "url": "https://arxiv.org/abs/2611.33489",
+      "category": "AI for Science",
+      "primaryCategory": "cs.LG",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33482",
+      "title": "Physics-informed neural networks for quark Dyson--Schwinger equations and propagator singularities",
+      "authors": [
+        "Xin-Peng Li",
+        "Zhong-Hua Huang"
+      ],
+      "abstract": "We develop a physics-informed neural-network (PINN) framework for solving the rainbow-truncated quark Dyson--Schwinger equation at real and complex momenta. The resulting dressing functions agree closely with conventional iterative solutions. We investigate the singularity structure of the quark propagator using two complementary methods. Analytic continuation of a PINN trained on the real momentum axis estimates the locations of poles and further reveals three complex-conjugate pole pairs. An independent reconstruction using PINN-parametrized spectral densities and a single pole pair yields $q=-0.146\\pm0.391i~\\mathrm{GeV}^2$. The agreement between the two methods substantially strengthens confidence in the properties of the leading singularities. Both spectral densities change sign, and the negative regions of the vector density and the complex poles indicate a violation of reflection positivity, consistent with quark confinement. Finally, we use the extracted poles and residues to calculate their contributions to two order parameters at finite quark chemical potential, the chiral condensate and the quark number density.",
+      "published": "2026-11-24T22:00:04.000Z",
+      "url": "https://arxiv.org/abs/2611.33482",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33454",
+      "title": "A Realistic End-to-End Runtime Crossover Estimation for Quantum-Enhanced Training of Large-Scale Machine Learning Models",
+      "authors": [
+        "Maximilian Alexander Wolf",
+        "Alona Sakhnenko",
+        "Florian Geissler",
+        "Andrea Matic",
+        "Jeanette Miriam Lorenz"
+      ],
+      "abstract": "Machine Learning (ML) is one promising application domain for Quantum Computing (QC) speedups, but asymptotic complexity considerations often mask the actual engineering costs of actual end-to-end workflows. For the use case of training a linearized Neural Network with a Quantum Linear Solver, a provably favorable quantum scaling has been suggested. We present realistic resource estimates for this problem, accounting for data access, computation, and readout. Our analysis examines three increasingly complex benchmarking scenarios, under distinct sparsity-scaling assumptions, thereby enabling progressively more realistic resource estimates. We identify crossover regimes relative to classical methods and find that crossover points emerge only for very large problem sizes, long computation times, and highly restrictive output requirements. This work provides a blueprint for evaluating quantum-enhanced ML algorithms under realistic hardware constraints and help identifying the bottlenecks that must be overcome to approach industrial quantum utility.",
+      "published": "2026-11-24T21:20:41.000Z",
+      "url": "https://arxiv.org/abs/2611.33454",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33445",
+      "title": "Probe branes from equivariant volumes",
+      "authors": [
+        "Kiril Hristov",
+        "Pedro Vicente Marto"
+      ],
+      "abstract": "Classical Euclidean probe actions control non-perturbative weights and extended observables in holography. We present a geometric prescription for M2-branes in arbitrary BPS backgrounds and D3-branes in the five-form sector of type IIB. The framework accommodates compact and non-compact supersymmetric worldvolumes in both internal and spacetime directions, expressing their actions as relative equivariant pairings. Under stated extension and boundary assumptions, equivariant volumes evaluate these pairings without explicit background metrics and provide a regularization for non-compact probes. Examples in $\\mathrm{AdS}_4\\times SE_7$ backgrounds dual to ABJM, ADHM and flavored quiver theories reproduce and refine worldsheet-type instanton exponents and finite Wilson-loop actions. We also recover M2 giant-graviton and surface-defect actions in $\\mathrm{AdS}_7\\times S^4$. D3 probes in $SE_5$ compactifications dual to $\\mathcal{N}=4$ super Yang--Mills and Klebanov--Witten theory provide tests involving giant gravitons, black hole probes and surface defects.",
+      "published": "2026-11-24T21:08:03.000Z",
+      "url": "https://arxiv.org/abs/2611.33445",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33421",
+      "title": "Extracting Operational Entanglement from a Noise-Protected Many-Body System",
+      "authors": [
+        "Bhavay Tyagi",
+        "Eric R. Bittner",
+        "Kevin E. Bassler"
+      ],
+      "abstract": "Can noisy dynamics generate entanglement that stays useful at long times? Under collective dephasing, a twelve-spin kicked Ising ring evolves from a uniform product state toward an entangled stationary state that is maximally mixed in the sector fixed by the ring's rotations and reflections. Gates and measurements within each half herald a spin pair that teleports an unknown qubit with a mean fidelity of 90.5\\%. Simulations show that stronger noise correlations extend the time over which the ring yields pairs that beat the classical teleportation limit.",
+      "published": "2026-11-24T20:44:32.000Z",
+      "url": "https://arxiv.org/abs/2611.33421",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33413",
+      "title": "How Many Keys Must a Quantum Computer Break to Take Over a Blockchain? A Quantum Nakamoto Coefficient for Fifteen Proof-of-Stake Networks",
+      "authors": [
+        "Seyyed Mohammad Hassan Halataei"
+      ],
+      "abstract": "Blockchains that run on proof of stake, among them Ethereum and Solana, are secured by a vote: a transaction becomes irreversible once computers holding two thirds of the deposited money have signed it. Each signature is made with a secret key whose public counterpart is permanently visible, and a large quantum computer could compute the secret from the public key. We ask a simple question: how many such keys would it have to break to take over the vote? We call the answer the quantum Nakamoto coefficient and measure it on live data from fifteen networks, collected on 15 November 2026. For fourteen of them, 2 to 18 keys are enough to break the network's security guarantee and 7 to 77 to control it outright; at one key every 12 minutes, the pace implied by recent resource estimates, a single quantum computer would defeat the guarantee of any of these networks in less than four hours and take full control in less than sixteen hours. Ethereum is far more robust, but a 2025 change that lets operators merge their deposits into fewer keys has cut the number of keys at its first threshold from about 465,000 to 7,682, a factor of 60. We derive a simple formula for this effect, and another for the small rotating committee on which wallets rely, and confirm both on the data. For fourteen of the fifteen networks, the first large quantum computer would be less than a day away from total control. Their validator signatures should therefore be migrated to post-quantum schemes before such a machine exists, since once it does, the time to respond is measured in hours.",
+      "published": "2026-11-24T20:39:48.000Z",
+      "url": "https://arxiv.org/abs/2611.33413",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33359",
+      "title": "Hamiltonian approach to isospectrality in nonrotating black holes",
+      "authors": [
+        "Guillermo A. Mena Marugán",
+        "Andrés Mínguez-Sánchez",
+        "Carlos F. Sopuerta"
+      ],
+      "abstract": "In this work, we revisit the isospectrality of black hole perturbations from a Hamiltonian perspective. For a nonrotating, uncharged system, we present a convenient canonical description of the background degrees of freedom that facilitates comparison with the usual Lagrangian formulation. This allows us to identify phase-space counterparts of the superpotential and the algebraically special modes and show that they satisfy the expected isospectral relations, at least on shell or off shell modulo some subtle lapse redefinitions. Finally, we investigate the extent to which these results persist in theories that effectively modify general relativity. In this setting, we formally quantify the corresponding deviations from the classical relations and the associated potential violations of isospectrality to first order in the modifications.",
+      "published": "2026-11-24T19:48:37.000Z",
+      "url": "https://arxiv.org/abs/2611.33359",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33311",
+      "title": "Machine Learning for Calabi--Yau Geometry and Heterotic Compactification",
+      "authors": [
+        "Vishnu Jejjala",
+        "Damian Mayorga Pena"
+      ],
+      "abstract": "Quantitative predictions from string compactification depend on geometric data that are difficult to compute analytically. This review surveys machine learning approaches to predicting topological properties of Calabi-Yau manifolds, discusses the search for new Calabi-Yau fourfolds, as well as numerical methods for approximating Ricci-flat metrics. In the context of heterotic compactifications, we explain how bundle metrics and harmonic matter forms enter calculations of canonically normalized Yukawa couplings and axion-matter interactions. We also outline applications to flux compactifications, warped and corrected backgrounds, and geometric structures beyond the Calabi-Yau setting. Finally, we review available datasets and software, highlight connections with analytic methods, and discuss geometric constraints, numerical validation, and recent progress in rigorous error control.",
+      "published": "2026-11-24T19:03:46.000Z",
+      "url": "https://arxiv.org/abs/2611.33311",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33299",
+      "title": "Quditology: harnessing many levels for quantum information processing",
+      "authors": [
+        "Abhijit Chakraborty",
+        "Zheng Shi",
+        "Noah Goss",
+        "Irfan Siddiqi",
+        "Barry C. Sanders",
+        "Christine A. Muschik"
+      ],
+      "abstract": "Quantum computing offers the prospect of surpassing classical computation on certain tasks by leveraging quantum coherence and entanglement. However, a significant gap remains between current quantum hardware and the requirements to transcend what classical computers can achieve, with decoherence limiting the capacity of storing quantum information and the number of logical steps that can be executed reliably. In the long term, fault tolerance bridges this gap, but simply changing the numerical base from binary to higher base d is a viable way to 'squeeze more juice'---get more quantum information processing---from a quantum computer of given size. Additionally, for quantum simulations, qudits offer a natural encoding scheme for high-dimensional physical degrees of freedom. Here, we review recent experimental progress in high-fidelity preparation, control, and measurement of qudits across various platforms such as trapped ions, superconducting circuits, solid-state nuclear spins, photonic systems, and neutral atoms. We highlight early demonstrations of qudit-based quantum simulation, computation and error suppression enabled by these developments, heralding the transition of qudits from conceptual constructs to viable building blocks for quantum technologies. Finally, we outline key challenges and potential future directions for scalable qudit quantum information processing.",
+      "published": "2026-11-24T19:00:22.000Z",
+      "url": "https://arxiv.org/abs/2611.33299",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33295",
+      "title": "Quasinormal modes of black holes in astrophysical environments: Rainbow in the dark matter",
+      "authors": [
+        "Kyriakos Destounis",
+        "Laura Pezzella"
+      ],
+      "abstract": "Matter around black holes affects the ringdown in two ways: through the background geometry and through the response of the matter itself. We compute axial and polar gravitational quasinormal modes of a black hole embedded in a relativistic Hernquist-type dark matter halo, following the fundamental mode and the first three overtones associated with the vacuum Schwarzschild spectrum. The polar sector couples metric and matter perturbations. At small halo compactness, both sectors follow the familiar gravitational redshift law. Most of the departure from the typical redshift at larger compactness is accounted for by the exact horizon lapse factor of the background. The remaining residual departure to this lapse is sector dependent. Axial and polar frequencies are split, with their splitting growing from the fundamental through the third overtone. At large halo compactness the split grows by an order of magnitude, while overtone-to-fundamental frequency ratios depart from a common rescaling. Within the adopted dark matter profile, the halo acts on the ringdown as a prism that disperses the gravitational spectrum, leaving a parity-dependent imprint that no common rescaling of the frequencies can reproduce. Parity-isospectrality is, thus, broken.",
+      "published": "2026-11-24T19:00:15.000Z",
+      "url": "https://arxiv.org/abs/2611.33295",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33287",
+      "title": "Chaotic singularities inside vacuum black holes",
+      "authors": [
+        "Robie A. Hennigar",
+        "Ayan K. Patra"
+      ],
+      "abstract": "According to the conjecture of Belinski, Khalatnikov and Lifshitz, general relativity gives rise to chaotic dynamics in the vicinity of generic spacelike singularities. However, no vacuum black hole has been shown to exhibit this behaviour. Here we construct stationary, asymptotically locally AdS$_5$ black holes with regular, triaxially squashed horizons and causal exteriors, whose homogeneous interiors realize the cosmological billiard of generic five-dimensional vacuum gravity. We identify a simple algebraic condition on the horizon data that is necessary for the interior billiard to be chaotic, and show that solutions with regular horizons locally access an open set of billiard trajectories.",
+      "published": "2026-11-24T19:00:04.000Z",
+      "url": "https://arxiv.org/abs/2611.33287",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33281",
+      "title": "Neural Network Field Theory and the AdS/CFT Correspondence",
+      "authors": [
+        "Dmitry S. Ageev",
+        "Yulia A. Ageeva",
+        "Anna S. Bernakevich"
+      ],
+      "abstract": "We develop a neural realization of massive scalar field theory on Euclidean anti--de Sitter space and its holographic boundary observables within neural network field theory (NN--FT). We construct Fourier--Bessel cosine neurons whose covariance reproduces the regulated massive AdS propagator exactly at finite network width, with the Gaussian field theory recovered in the infinite-width limit. We introduce quartic interactions through two complementary approaches. The first implements a prescribed interaction by deforming the neural parameter measure, while the second generates a local quartic interaction from the statistics of auxiliary binary neurons. Applying the BDHM prescription directly to the neural ensemble, we recover the scalar bulk-to-boundary propagator, the conformal boundary two-point function, and the leading connected four-point contact Witten diagram. We further show that distinct neural architectures can reproduce the same leading boundary correlators while defining inequivalent bulk theories. These results establish a framework for studying interacting scalar holography within NN--FT and clarify the role of neural architecture in encoding bulk dynamics and boundary observables.",
+      "published": "2026-11-24T19:00:03.000Z",
+      "url": "https://arxiv.org/abs/2611.33281",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33284",
+      "title": "Structure-factor witnesses of thermal entanglement: exact optimal covariance criteria for the XY chain",
+      "authors": [
+        "Julia Mathé",
+        "Ayaka Usui",
+        "Otfried Gühne",
+        "Giuseppe Vitagliano"
+      ],
+      "abstract": "Which entanglement witness is optimal for a thermal many-body state, and what does its structure reveal about the equilibrium physics? We address these questions for the spin-$1/2$ XY chain in a transverse field, using the covariance-matrix criterion (CMC), which requires only one- and two-spin correlations. We show that for thermal states the optimal CMC witness is fixed by the minima over momentum of the three static spin structure factors, which are accessible to scattering experiments and can be evaluated directly in the thermodynamic limit. The optimal witnesses select the collective spin modes with the smallest thermal fluctuations, with their form dictated by symmetry rather than by criticality. They certify entanglement, and can also bound entanglement measures, up to temperatures of the order of the exchange coupling, including in states without any pairwise entanglement. A systematic investigation of entanglement in small chains reveals that the CMC is nearly as powerful as a moment-matrix hierarchy supplied with all spin correlations, and close to the XX point it detects thermal states that are PPT across every bipartition. In addition, we observe that the same witnesses can also certify entanglement generated by a sudden quench from a thermal state in which none is detected.",
+      "published": "2026-11-24T19:00:03.000Z",
+      "url": "https://arxiv.org/abs/2611.33284",
+      "category": "Quantum Information",
+      "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33271",
+      "title": "The black hole IR triangle for scalar QED",
+      "authors": [
+        "Fabiano Feleppa",
+        "Nava Gaddam",
+        "Nico Groenenboom"
+      ],
+      "abstract": "We construct the black hole infrared triangle of scalar QED on a stretched Schwarzschild horizon at tree level. In the covariant phase space of the near-horizon Maxwell field, the soft charge is a corner term. The memory is the zero mode of the gauge-invariant radiative field along the generators. It is conjugate to the boundary gauge mode that labels the degenerate horizon vacua, and Gauss' law fixes it by the flux of charge through the horizon. The Noether flux of the residual gauge transformation through the stretched horizon is not conserved by the scattering, because charged matter crosses the stretched horizon in both directions. The flux with its matter part removed is the soft charge, which generates the large gauge transformation. Its Ward identity is equivalent to a soft photon theorem in every radiative partial wave, which we derive from the near-horizon Feynman rules and, where these do not control the emission, from the field equations at leading order. The main difference from null infinity is that on a stretched horizon both radial branches of the field are independent boundary data. The hard charge is a radial flux. With both branches present it weights each leg by the direction of its radial motion, and the soft factor is a sign per leg. The endpoint data on the two branches give two boundary observables, the time-integrated transverse magnetic and electric fields. The field radiated by a scattering process contributes only to the first, where it cancels the change in the Coulomb memory of the charges, so that the soft charge is conserved. A charge that crosses the horizon enters both. We also discuss the infrared divergence, the dressing of the external states, and the fate of the memory in the Hartle--Hawking state, where it performs a random walk driven by the Hawking radiation.",
+      "published": "2026-11-24T19:00:01.000Z",
+      "url": "https://arxiv.org/abs/2611.33271",
+      "category": "Quantum Gravity & Cosmology",
+      "primaryCategory": "gr-qc",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33273",
+      "title": "The String Theory Photinoverse",
+      "authors": [
+        "Andreas P. Braun",
+        "Thibaut Coudarchet",
+        "Arthur Hebecker",
+        "Joerg Jaeckel",
+        "Jonathan Steiner"
+      ],
+      "abstract": "Type-IIB string compactifications typically give rise to a significant number of RR-photons. These are generically massless and do not possess any light charged states, making them `superhidden'. However, since supersymmetry is present at least at some high scale, corresponding `dark photinos' are also predicted. The kinetic mixing of the photons together with the SUSY breaking mass terms of the photinos makes the latter observable. We identify geometries in which the mixing is induced by Wilson lines and show that their expectation values are generically non-zero. As a result, most of the dark photinos, which are lighter than the visible sector SUSY breaking scale, mix significantly with the bino and hence couple to the Standard Model sufficiently strongly to leave potentially observable traces. In particular, volume modulus and inflaton decays generically induce a cosmological abundance of dark photinos that can explain dark matter. We find that the `natural Photinoverse dark matter parameter space' is already accessible to current experiments, notably gamma ray observations, which therefore have discovery potential in the near future.",
+      "published": "2026-11-24T19:00:01.000Z",
+      "url": "https://arxiv.org/abs/2611.33273",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
     {
       "id": "2611.33152",
       "title": "Abelian envelopes and quantum groups in Knop's interpolation categories",
@@ -34,6 +434,21 @@
       "url": "https://arxiv.org/abs/2611.33138",
       "category": "Quantum Information",
       "primaryCategory": "quant-ph",
+      "source": "arXiv",
+      "status": "Preprint"
+    },
+    {
+      "id": "2611.33264",
+      "title": "Quantum critical collapse to an extremal black hole",
+      "authors": [
+        "Hugo Lange",
+        "Harvey S. Reall"
+      ],
+      "abstract": "It has been emphasized recently that some extremal black holes are \"critical\" solutions, lying at the threshold between gravitational collapse and dispersion. We study the effect of quantum gravity on critical solutions for the collapse of a thin shell of charged dust. We consider the Hamiltonian that generates the shell equation of motion with respect to the exterior Killing time and coincides with the ADM energy on-shell. Near criticality, this Hamiltonian is shown to be canonically equivalent to that of a Liouville theory with negative potential. After quantization, this model predicts that a collapsing shell has a non-trivial probability of undergoing a quantum mechanical bounce when its energy above extremality is comparable to the \"breakdown scale\". The bounce probability approaches unity at extremality. Hence this model predicts that the critical surface in the classical theory is thickened quantum mechanically into a \"critical layer\". The probability density function for the black hole energy is suppressed below the breakdown scale in the same way as found recently by Turiaci and Wu.",
+      "published": "2026-11-24T18:24:13.000Z",
+      "url": "https://arxiv.org/abs/2611.33264",
+      "category": "High-Energy Theory",
+      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -837,38 +1252,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.31459",
-      "title": "The Relaxation of Quantum Near-Extremal Black Holes. (I) Microcanonical States, Pruning of Quasinormal Modes, and the Aretakis Instability",
-      "authors": [
-        "Roberto Emparan",
-        "Sameer Murthy",
-        "Stefano Trezzi"
-      ],
-      "abstract": "The late-time relaxation of a near-extremal black hole is classically governed by an infinite tower of purely damped quasinormal modes. This poses a puzzle: the higher overtones decay at rates much larger than the energy $E$ of the black hole above extremality, so they would need black hole states below the extremal mass. We resolve it by including the quantum fluctuations that become large when $E$ falls below a scale $E_b$. We compute the retarded Green's function of a probe of conformal dimension $Δ$ in a black hole of fixed energy, and find that each classical mode splits into a pair of poles with real parts set by $E_b$. The perturbed black hole decays as an unstable quantum system, and a pair is a resonance, i.e., a quasinormal mode, only if its energy lies within the accessible black hole spectrum. This prunes the tower to finitely many modes, all damped faster than $Δ^2E_b$, and below $E=Δ^2E_b/2$ none is left. For generic $Δ$, the response of the black hole decays first as $t^{-2Δ}$ and finally as $t^{-3/2}$, with an exponential stage in between if $E\\ggΔ^2E_b$. The same quantum effects bear on the Aretakis instability of extremal black holes, in which transverse derivatives of a perturbation grow without bound on the horizon. Like the tower of modes, it originates in the scale invariance of the classical throat, which the quantum fluctuations break. The $t^{-2Δ}$ decay, which is the boundary counterpart of the Aretakis growth, ends by $t\\sim1/E_b$, when the throat ceases to be classical, and by then horizon derivatives have grown only to a finite value. Their unbounded growth is an artifact of taking the semiclassical limit before the late-time one, two limits that in quantum mechanics do not commute.",
-      "published": "2026-11-23T19:31:29.000Z",
-      "url": "https://arxiv.org/abs/2611.31459",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31438",
-      "title": "Split Ends: UV Physics branches Black Hole Hair",
-      "authors": [
-        "Georg Trenkler",
-        "Leonardo G. Trombetta",
-        "Alexander Vikman"
-      ],
-      "abstract": "Coupling a shift-symmetric scalar field to the Gauss-Bonnet invariant modifies black holes (BHs) via scalar hair. Here we consider this field to be the Goldstone of a complex scalar field with a symmetry-breaking potential. For BHs of a size comparable with the inverse mass gap, the gapped field tries to restore the symmetry close to the horizon, enhancing the departure from standard BHs. Moreover, BHs of the same mass can have up to three different horizon areas and surface gravities. This branching has profound consequences for BH physics, potentially observable in gravitational waves.",
-      "published": "2026-11-23T19:17:32.000Z",
-      "url": "https://arxiv.org/abs/2611.31438",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.31433",
       "title": "Topological Phase Transition of $ F_{α}{}^{γ} F^{αβ} F_{β}{}^{η} \\ F^{λμ} R_{γηλμ} $ AdS Black Holes",
       "authors": [
@@ -911,37 +1294,6 @@
       "url": "https://arxiv.org/abs/2611.31414",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31399",
-      "title": "Quantum black hole evaporation from thin shell collapse: a complete effective picture",
-      "authors": [
-        "Michał Bobula",
-        "Francesco Fazzini"
-      ],
-      "abstract": "Quantum gravity is expected to play a central role in resolving classical singularities and providing a complete, predictive spacetime picture. In this paper, we develop an effective model inspired by loop quantum gravity that aims to fulfill this expectation, providing a unified description of thin shell collapse, black hole formation, evaporation, and remnant dynamics. The framework exhibits general validity, holding across different effective equations of motion, matter sources, and evaporation laws. Specifically, we incorporate backreaction within a quasi-static approximation, modeling the radiation as null dust and matching the ingoing and outgoing fluxes across an evaporation surface using the Darmois-Israel junction conditions. For an evaporation law governed by the Stefan-Boltzmann law, we find that the final stage of evaporation yields an extremal black hole extending into a new asymptotic region, featuring both event and Cauchy horizons. Conversely, under the Schwinger approach, no event or Cauchy horizons form, instead, a temporary dynamical trapped region emerges, and the resulting spacetime remains globally hyperbolic. Under this variant, our model predicts a horizonless null remnant escaping to future null infinity.",
-      "published": "2026-11-23T19:01:31.000Z",
-      "url": "https://arxiv.org/abs/2611.31399",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31381",
-      "title": "How to Play a Black Hole: Understanding Quasinormal Mode Excitation",
-      "authors": [
-        "Lucía Vélez-Tartajo",
-        "Vitor Cardoso",
-        "Jaime Redondo-Yuste"
-      ],
-      "abstract": "Understanding the excitation of black hole quasinormal modes is essential for interpreting gravitational-wave signals and inferring black hole properties from them. In this work, we investigate the excitation of the quasinormal modes of Schwarzschild black holes under controlled probes. In the absence of a source, we find that broader initial data suppresses mode excitation, enhancing the relative contribution of the late-time tail, while data localized near the light ring strongly suppresses overtones relative to the fundamental mode. On the other hand, plunging sources give rise to two distinct ringdown stages, associated with scattered radiation generated during the particle's infall and with the particle crossing the light ring. Finally, we investigate how much of the signal is sourced from the strong-field region by switching off the source at some finite radius. The resulting waveform is exponentially close -- in cutoff radius -- to that of a standard infall. These results provide insight into the dependence of QNM excitation on the properties and dynamics of the perturbation, and offer a controlled setting in which to investigate the origin of black hole ringdown.",
-      "published": "2026-11-23T19:00:07.000Z",
-      "url": "https://arxiv.org/abs/2611.31381",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -995,21 +1347,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.31361",
-      "title": "Tidally Induced Coda: Double Transients from Black Hole-Star Binary Encounters with Massive Black Holes",
-      "authors": [
-        "Konstantinos Kritos",
-        "Rosalba Perna"
-      ],
-      "abstract": "Dense stellar environments surrounding massive black holes (MBHs) provide a natural setting for dynamical interactions that can produce transient electromagnetic and gravitational-wave sources. In particular, the tidal field of an MBH can strongly perturb binaries undergoing close encounters with it, driving their internal orbits to extreme eccentricities. Here, we investigate the outcomes of such interactions for binaries composed of a stellar-mass black hole (BH) and a star. Using direct few-body scattering experiments with the code SpaceHub, we explore hyperbolic encounters between BH-star binaries and MBHs. We systematically quantify the probabilities of different dynamical outcomes as functions of the binary orbital parameters and MBH mass, with particular emphasis on a channel in which the tidally induced eccentricity triggers a micro-tidal disruption event ($μ$TDE), as the star is disrupted by its BH companion, followed by accretion of the stellar debris onto the MBH. We derive fitting formulae for the $μ$TDE cross section and for the time delay between the two resulting flares, finding that the latter can be a few months for an MBH of $10^6\\,M_\\odot$. These double transients offer a distinctive observational signature of $μ$TDEs. We estimate event rates ranging from a few to $\\sim 100\\,{\\rm yr}^{-1}$ within a luminosity distance of $40\\,{\\rm Gpc}$.",
-      "published": "2026-11-23T19:00:01.000Z",
-      "url": "https://arxiv.org/abs/2611.31361",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.31364",
       "title": "Enhanced spatial resolution and performance for N-body simulation of self-interacting dark matter",
       "authors": [
@@ -1020,21 +1357,6 @@
       "url": "https://arxiv.org/abs/2611.31364",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31224",
-      "title": "Small-world networks yield tunable quantum codes at short circuit depth",
-      "authors": [
-        "Samuel Bevins",
-        "Gregory Bentsen"
-      ],
-      "abstract": "Monitored random quantum circuits naturally generate quantum error-correcting codes. We generate quantum codes with tunable properties by implementing random Clifford circuits on Watts--Strogatz `small-world' networks and tailor code properties via three knobs: nonlocal graph rewiring, measurement rate, and circuit depth. On fully rewired networks, circuits of logarithmic depth produce codes with a finite rate and an extensive mean contiguous distance with failure probability substantially lower than codes produced from local circuits. These small-world codes form at a circuit depth growing as $\\ln n$ compared to polynomial depths required for codes produced from local networks. Rewiring also moves the purification transition to higher measurement rates and changes its critical exponents. Connectivity is thus a knob for designing codes.",
-      "published": "2026-11-23T18:57:54.000Z",
-      "url": "https://arxiv.org/abs/2611.31224",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1067,22 +1389,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.31179",
-      "title": "Floquet spectra and parameter sensitivity of entanglement in the quantum kicked top",
-      "authors": [
-        "Dyari Jarvis",
-        "Peter A. Rose",
-        "Arjendu K. Pattanayak"
-      ],
-      "abstract": "We investigate the relationship between the Floquet spectrum and the sensitivity of the entanglement landscape to parameter and initial condition change in the quantum kicked top. We focus on the case of four qubits and on locating degeneracies in its Floquet eigenphases using the resultant of its characteristic polynomial $p$ and its derivative $\\partial_λp$ and quantitatively map the sensitivity of the entanglement landscape to changes in kicking strength over the sphere of spin coherent initial states. We find that prominent sensitivity maxima coincide with either Floquet eigenphase degeneracies or kick strengths exhibiting short-period quantum revivals, with some points satisfying both conditions. These results establish a connection between the spectral structure of the Floquet operator and entanglement landscape sensitivity, demonstrating the utility of the resultant in studying the dynamics of small-$j$ quantum kicked tops. Since this structure extends to all values of $j$, the central lessons apply completely generally.",
-      "published": "2026-11-23T18:34:44.000Z",
-      "url": "https://arxiv.org/abs/2611.31179",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.31130",
       "title": "The Sensitivity of Gamma-Ray Searches for Dark Matter Annihilation in Milky Way Dwarf Galaxies: the LSST Era and Beyond",
       "authors": [
@@ -1102,57 +1408,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.31106",
-      "title": "Near-boundary and near-horizon momentum--Krylov response in noncommutative-inspired BTZ spacetime",
-      "authors": [
-        "F. A. Brito",
-        "F. G. Costa",
-        "J. A. V. Campos"
-      ],
-      "abstract": "We compute the proper radial momentum of a massive probe falling into a Lorentzian-smeared, noncommutative-inspired BTZ black hole at fixed asymptotic mass, and use it as the growth rate of momentum--Krylov complexity. In the BTZ limit the accumulated complexity is $\\mathcal{K}_0 = X(\\coshτ- 1)$. With smearing, the initial growth coefficient is $F'_α(X)/4$, while the late-time exponent is the surface gravity $F'_α(x_+)/2$. The two depend differently on the smearing parameter, so the deformed response is not a rescaled BTZ curve; we show this analytically and confirm it numerically. For a distant release point the early response approaches BTZ, whereas the late-time rate does not. A BTZ black hole with the same Hawking temperature reproduces the response to within about ten percent, and the remaining difference is set by the early/late mismatch. A Gaussian mass profile gives the same picture. The horizon radius and the surface gravity vanish at the critical smearing with exponents $1/2$ and $3/2$. At fixed mass the boundary stress tensor coincides with that of BTZ, but the $z^3$ Fefferman--Graham coefficient and the lengths of boundary-anchored geodesics do not.",
-      "published": "2026-11-23T17:44:22.000Z",
-      "url": "https://arxiv.org/abs/2611.31106",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31061",
-      "title": "Relativistic dynamical friction and accretion for Kerr black holes",
-      "authors": [
-        "Nicholas Speeney",
-        "Soumodeep Mitra",
-        "Emanuele Berti",
-        "Andrea Maselli",
-        "Sumanta Chakraborty"
-      ],
-      "abstract": "Extreme-mass-ratio inspirals (EMRIs) observed by LISA will probe the environments of massive black holes (BHs), including the dark matter (DM) overdensities expected to form around them. We compute the relativistic dynamical friction and accretion experienced by a non-spinning compact object on circular equatorial orbits around a Kerr BH embedded in a collisionless DM distribution, extending previous results in Schwarzschild. The DM is modeled as a spike grown adiabatically from an initial Hernquist profile, and the momentum transfer is obtained by integrating relativistic scattering and capture cross sections over the full, generically anisotropic phase space seen by the secondary. Far from the primary the friction tracks the local DM density, which increases with spin. Near the innermost stable circular orbit of rapidly spinning BHs $(a\\gtrsim 0.37)$, however, frame dragging forces bound DM particles to co-rotate, so that the secondary is overtaken by the surrounding medium: the friction weakens and eventually reverses sign where the DM density peaks. We show that a similar reversal can be mimicked around a non-rotating BH if the initial halo carries large net angular momentum, although this requires anisotropies beyond those found in cosmological simulations. We also show that commonly used Chandrasekhar-like prescriptions, which depend only on the local density, can overestimate the friction force. Our results demonstrate that the full phase-space structure of the environment must be included when modeling DM effects on EMRIs.",
-      "published": "2026-11-23T17:20:07.000Z",
-      "url": "https://arxiv.org/abs/2611.31061",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.31035",
-      "title": "Lyapunov Stability of a Schwarzschild Black Hole Surrounded by the Kiselev Anisotropic Fluid",
-      "authors": [
-        "Saswati Roy",
-        "Paramita Debnath",
-        "Shubham Kala",
-        "Hemwati Nandan"
-      ],
-      "abstract": "We investigate the geodesic structure and the stability of circular orbits around a Schwarzschild black hole surrounded by a Kiselev anisotropic fluid, characterised by the equation-of-state parameter $ω$ and the normalisation parameter $N$. We consider six representative values, $ω=-1,-2/3,-1/3,0,1/3$ and $1$, over the admissible range of $N$ determined by the horizon structure, including the corresponding extremal limits. Using the effective potentials for null and timelike geodesics, we determine the photon sphere, the innermost stable circular orbit (ISCO) and the outermost stable circular orbit (OSCO), and examine their stability through coordinate-time Lyapunov exponents. The photon sphere is unstable for all values of $ω$ and $N$ considered. Its instability weakens with increasing $N$ for $ω\\leq0$ and vanishes at extremality for $ω=-1$ and $-2/3$, whereas it varies non-monotonically with $N$ for $ω=1/3$ and strengthens for $ω=1$. For $ω=-1$ and $-2/3$, stable circular orbits are confined between the ISCO and the OSCO, which merge at a critical value of $N$ beyond which no stable circular orbits exist. In contrast, for $ω\\geq-1/3$ stable circular orbits exist at all radii beyond the ISCO, whose location varies with $N$. We also derive a closed-form expression for the squared coordinate-time Lyapunov exponent $(λ_t^T)^2$, valid for arbitrary $ω$, whose sign changes exactly at the ISCO and OSCO, so that the Lyapunov criterion reproduces the boundaries of stable circular motion. The Schwarzschild--de Sitter, mass-shifted Schwarzschild and Reissner--Nordström geometries are recovered as special cases, and the results may have implications for black-hole shadows, thin accretion discs and quasi-periodic oscillations.",
-      "published": "2026-11-23T17:08:45.000Z",
-      "url": "https://arxiv.org/abs/2611.31035",
-      "category": "Quantum Gravity & Cosmology",
-      "primaryCategory": "gr-qc",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.30954",
       "title": "Global $C^{2,α}$ Estimates for Complex $k$-Hessian Equations on Kähler Manifolds",
       "authors": [
@@ -1163,35 +1418,6 @@
       "url": "https://arxiv.org/abs/2611.30954",
       "category": "Mathematics",
       "primaryCategory": "math.DG",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30947",
-      "title": "Linear entanglement suffices for $f$-routing",
-      "authors": [
-        "Kevin Bogner"
-      ],
-      "abstract": "In $f$-routing, Alice receives an $n$-bit string $x$ and an unknown qubit, and Bob receives an $n$-bit string $y$. They share a state prepared in advance and exchange one simultaneous message each. The party selected by the Boolean function $f(x,y)$ must then recover the unknown qubit without further communication. To perform $f$-routing successfully, Alice and Bob need to share entanglement that scales with $n$ for some functions $f$, but the lower and upper bounds for the entanglement are not tight. This paper shows that $2n+2$ shared EPR pairs suffice for every function $f$. The best previous bound that holds for all functions is a shared state of $2^{O(\\sqrt{n\\log n})}$ qubits. The new strategy moves the cost from the shared state to the messages: Alice sends an exponentially long message of $2^{n+1}+1$ qubits, while Bob sends only classical bits. When the messages are counted towards the resources as well, the previous strategy remains the cheapest known. The result also limits lower bounds that count only the shared state: they cannot exceed a linear number of EPR pairs. The result is formalized in Lean.",
-      "published": "2026-11-23T16:25:00.000Z",
-      "url": "https://arxiv.org/abs/2611.30947",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30795",
-      "title": "Multipartite entanglement structure of crystal quenches",
-      "authors": [
-        "Paul Gaudin",
-        "Clément Berthière"
-      ],
-      "abstract": "Understanding how entanglement emerges and spreads in out-of-equilibrium quantum many-body systems is a fundamental problem. In this paper, we investigate multipartite entanglement after quantum quenches. In particular, we study the entanglement structure and dynamics of quasiparticle multiplets generated by crystal quenches in the tight-binding chain. We identify zero-configurations for which a multiplet shared between three parties has no irreducible tripartite entanglement---these configurations consist entirely of pairwise distributed bipartite-entangled states. The existence of zero-configurations has important implications on the entanglement structure and dynamics of crystal quenches. For example, we show that it can further delay the production of tripartite entanglement. We build the quasiparticle picture for the Markov gap, and prove that it is a faithful witness of irreducible tripartite entanglement for crystal quenches. We discuss several key aspects of their tripartite entanglement dynamics through the lens of the Markov gap. We confront our results with exact lattice numerics and find perfect agreement in the hydrodynamic regime.",
-      "published": "2026-11-23T14:56:27.000Z",
-      "url": "https://arxiv.org/abs/2611.30795",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1207,23 +1433,6 @@
       "url": "https://arxiv.org/abs/2611.30762",
       "category": "High-Energy Theory",
       "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30738",
-      "title": "Optimizing Locally Equivalent Graph States in Quantum Computing Using Greedy Best-First Search",
-      "authors": [
-        "Sora Harada",
-        "Ryo Kuroiwa",
-        "Shin Nishio",
-        "Takeaki Uno"
-      ],
-      "abstract": "In measurement-based quantum computation and quantum repeater networks, graph-structured quantum states called graph states play a central role as an essential resource. In a graph state, each vertex corresponds to a qubit, and each edge is prepared by applying one controlled-Z (CZ) gate. Local complementation, which toggles adjacencies among the neighbors of a selected vertex, produces operationally equivalent graph states up to an inexpensive operation called local Clifford gates. Therefore, finding equivalent graphs up to local complementation with fewer edges and lower maximum degree can reduce the preparation cost, such as the number of CZ gates and the circuit depth. In this paper, we formulate the problem of finding a desirable equivalent graph via local complementations as a state space search problem. We apply a heuristic search algorithm, greedy best-first search (GBFS), to the formulated problem. Our experimental evaluation shows that despite its simplicity, GBFS outperforms existing approaches based on integer linear programming or local search across multiple graph classes, including random graphs, bounded-degree graphs, and most of the graphs constructed from quantum LDPC codes. In addition, we empirically analyze GBFS's search behavior, confirming that we need search rather than stopping at the first local minimum to find the best solution.",
-      "published": "2026-11-23T14:18:27.000Z",
-      "url": "https://arxiv.org/abs/2611.30738",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1336,77 +1545,6 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.30321",
-      "title": "Dark matter mass fraction in axion stars",
-      "authors": [
-        "A. S. Dmitriev",
-        "D. G. Levkov",
-        "A. G. Panin",
-        "I. I. Tkachev"
-      ],
-      "abstract": "QCD axion dark matter is fragmented into small mass miniclusters of high density. With the natural parameters of miniclusters, the time for Bose-Einstein condensation is less than the age of the Universe, which leads to the formation of Bose stars inside these structures. Recently, the problem of the subsequent growth of Bose stars was solved analytically (Dmitriev et al, Phys. Rev. Lett. 132, 091001 (2024)). We use this solution to determine present day mass fraction of dark matter in Bose stars and their mass function.",
-      "published": "2026-11-23T09:03:14.000Z",
-      "url": "https://arxiv.org/abs/2611.30321",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30303",
-      "title": "Impact of structured noise on bosonic quantum error correction",
-      "authors": [
-        "Guoyu Shu",
-        "Ling Hu",
-        "Hongbo Wu",
-        "Zhongchu Ni",
-        "Yanyan Cai",
-        "Xiaowei Deng",
-        "Pan Zheng",
-        "Pengbo Li",
-        "Fei Yan",
-        "Song Liu",
-        "Dapeng Yu",
-        "Yuan Xu"
-      ],
-      "abstract": "Bosonic quantum error correction relies on an accurate description of single-photon loss dissipation using an ideal annihilation operator, under which correctable loss errors act equivalently on different logical code states. In realistic weakly nonlinear bosonic modes, however, coupling to a structured environment can render photon loss Fock-state dependent, thereby modifying the effective dissipation operator and deforming the associated error space. Here, we experimentally investigate this effect in a three-dimensional circuit quantum electrodynamics system. By injecting spectrally engineered environmental noise into a weakly nonlinear oscillator, we observe pronounced frequency selectivity in the measured Fock-state dynamics. While the long-time transition rates converge to the Markovian limit, the transient dynamics display distinctly non-Markovian behavior, in quantitative agreement with a second-order time-convolutionless theory. By applying narrowband noise to a binomially encoded logical qubit, we further demonstrate Fock-state-dependent dissipation channels that drive logical states beyond the nominally correctable error space. These results establish structured environmental noise as a mechanism for deforming photon-loss errors in weakly nonlinear bosonic systems and highlight the need to incorporate realistic, state-dependent dissipation into the design and characterization of bosonic quantum error correction.",
-      "published": "2026-11-23T08:54:02.000Z",
-      "url": "https://arxiv.org/abs/2611.30303",
-      "category": "Quantum Information",
-      "primaryCategory": "quant-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30285",
-      "title": "A note on Kaluza-Klein theories",
-      "authors": [
-        "Fr{é}d{é}ric H{é}lein"
-      ],
-      "abstract": "We present a variant of the Kaluza-Klein theory that was introduced in previous papers (ATMP, 2020; LMP 2022; Ann. Fac. Sci. Toulouse, 2025), based on an action functional whose critical points, in the presence of point-wise constraints, lead-under reasonable assumptions-to the existence of a principal fiber bundle and solutions to the Einstein-Yang-Mills system. The difference is that it is not necessary to impose a point-wise constraint.",
-      "published": "2026-11-23T08:42:31.000Z",
-      "url": "https://arxiv.org/abs/2611.30285",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.30113",
-      "title": "Superheavy gravitational dark matter from runaway bubble collisions",
-      "authors": [
-        "Cheng-Wei Chiang",
-        "Van Que Tran"
-      ],
-      "abstract": "A stable particle that couples only through gravity is pair-produced in collisions of runaway bubble walls by graviton exchange. For a transition of duration $1/β$, a Dirac fermion reaches the yield $Y_X\\simeq6.8\\times10^{-3}(H/β)(T_{\\rm reh}/M_{\\rm P})^3$, where $H$ is the Hubble rate of the vacuum energy, $T_{\\rm reh}$ the reheating temperature and $M_{\\rm P}$ the reduced Planck mass. The yield is flat up to masses near $(H/β)M_{\\rm P}/ν^2$, where $ν$ of order one sets the wall-field excursion. Gravity alone then gives dark matter up to about $10^{17}$~GeV at reheating temperatures far below its mass, where freeze-in fails.",
-      "published": "2026-11-23T06:11:42.000Z",
-      "url": "https://arxiv.org/abs/2611.30113",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
       "id": "2611.29967",
       "title": "A decomposition of Hamiltonian matrices with symplectic kernels and its application to Williamson's diagonal form",
       "authors": [
@@ -1433,54 +1571,6 @@
       "url": "https://arxiv.org/abs/2611.29892",
       "category": "Mathematics",
       "primaryCategory": "math.DG",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.29823",
-      "title": "Compactification and non-zero density in (2+1)-dimensional four-fermion model",
-      "authors": [
-        "K. G. Klimenko",
-        "A. N. Kozhakin",
-        "R. N. Zhokhov"
-      ],
-      "abstract": "The phase diagram of (2+1)-dimensional NJL type model has been studied with one compact dimension. The effect of compactification and fermion density on the chiral symmetry breaking is considered for periodic boundary conditions.",
-      "published": "2026-11-22T23:03:04.000Z",
-      "url": "https://arxiv.org/abs/2611.29823",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-ph",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.29677",
-      "title": "A note on Holographic Renormalization for Polarized IKKT",
-      "authors": [
-        "Matteo Guglielmetti"
-      ],
-      "abstract": "We construct a boundary counterterm for the on-shell action of type IIB supergravity solutions dual to vacua of the polarized IKKT matrix model. The construction is based on the variational principle, with off-shell fluctuations whose fall-off conditions are based on the asymptotic equations of motion. The renormalized on-shell action of the supersymmetric saddles reproduces the matrix- model result once we pass to the ensemble of fixed D1-brane charges, which we implement off-shell by dualizing the RR two-form potential.",
-      "published": "2026-11-22T18:31:17.000Z",
-      "url": "https://arxiv.org/abs/2611.29677",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.29622",
-      "title": "Scattering amplitudes in AdS$_5\\times$ S$^5$ from the pure spinor superstring",
-      "authors": [
-        "Luis F. Alday",
-        "Thiago Fleury",
-        "Tobias Hansen",
-        "Lucas N. S. Martins",
-        "Dennis Zavaleta"
-      ],
-      "abstract": "We formulate a BRST-invariant prescription for the integration of zero modes in the pure spinor superstring on $AdS_5\\times S^5$. The measure includes contributions absent in flat space and admits a description in terms of picture changing operators or a non-minimal regulator. The prescription is valid for genus-zero amplitudes with arbitrary multiplicity and external states and removes a central obstacle to amplitude computations in this background. We use it to perform the first direct worldsheet computation of two and three-point amplitudes of half-BPS supergravity states. The properly normalised three-point amplitudes exactly reproduce the results of planar ${\\mathcal N}=4$ super Yang-Mills theory.",
-      "published": "2026-11-22T17:20:52.000Z",
-      "url": "https://arxiv.org/abs/2611.29622",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1513,22 +1603,6 @@
       "url": "https://arxiv.org/abs/2611.29139",
       "category": "Mathematics",
       "primaryCategory": "math.OA",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.29060",
-      "title": "Exact stress-tensor fluctuations from conformal symmetry and black hole radiation",
-      "authors": [
-        "José Navarro-Salas",
-        "Roberto Balbinot",
-        "Alessandro Fabbri"
-      ],
-      "abstract": "Semiclassical gravity is sourced by the expectation value of the stress tensor, and it is reliable only if the fluctuations around this value are small. In two dimensions, conformal symmetry captures the essential physics of Hawking radiation in its s-wave sector and determines the mean value exactly, for any background and any quantum state. We show that it also determines the local fluctuations of the null components $T_{\\pm\\pm}$. The square of the stress tensor is defined by the operator product expansion, up to a multiple $α$ of $\\partial_\\pm^2T_{\\pm\\pm}$ that labels point-splitting prescriptions. Its transformation law under the conformal map to locally inertial coordinates gives the variance in closed form. The relative fluctuation scales as $1/c$, with $c$ the central charge. For the Schwarzschild black hole it is $22/5c$ for the Hawking flux at infinity, that of flat-space thermal radiation. At the horizon it is $-44α/3c$ for the outgoing flux and $(238+720α)/5c$ for the ingoing flux that drives the backreaction. Both reduce to $22/5c$ for $α=-3/10$, which corresponds to the Möbius-covariant prescription. For large $c$ these results support the semiclassical approximation.",
-      "published": "2026-11-21T21:45:35.000Z",
-      "url": "https://arxiv.org/abs/2611.29060",
-      "category": "High-Energy Theory",
-      "primaryCategory": "hep-th",
       "source": "arXiv",
       "status": "Preprint"
     },
@@ -1689,123 +1763,36 @@
       "status": "Preprint"
     },
     {
-      "id": "2611.22782",
-      "title": "PANO: Parallel Latent Space Neural Operator for Solving PDEs",
+      "id": "2611.33716",
+      "title": "Flipping the Coins: Training Physical Simulators through Hard Switches",
       "authors": [
-        "Zijiang Yang",
-        "Xiaomeng Wu",
-        "Chen Kuang",
-        "Dongmei Fu"
+        "Tianrun Gao",
+        "Ruiqi Feng",
+        "Haomin Wen",
+        "Tailin Wu",
+        "Liangqiong Qu",
+        "Xiaomeng Huang",
+        "Ruiqi Shu"
       ],
-      "abstract": "Aggregating observations into a limited number of latent tokens and learning physical interactions in the latent space has emerged as an effective approach for Transformer-based neural operators to solve Partial Differential Equation (PDE) problems involving large-scale observations. However, existing methods typically compress observations using a single aggregation pattern, making physical information not retained by that pattern invisible to the latent space and thereby constraining physical interactions within it. To address this limitation, we propose PArallel Latent Space Neural Operator (PANO), a novel neural operator for solving PDEs that formulates physical interactions among observations as an additive combination of interaction results from parallel latent spaces with shared parameters. Specifically, PANO transforms observations into multiple distinct compressed representations through independent mappings, learns physical interactions in parallel based on these representations, and finally fuses the decoded results to predict the target physical field. Within PANO, we further propose Coupled Assignment Projection (CAP) to construct bidirectionally consistent encoding and decoding mappings, and Pairwise Latent Space Attention Layer (PaLA) to jointly update latent representations of each latent space through adaptive cross-space interactions. Extensive experiments on nine benchmarks spanning diverse physical systems, geometries, and observation scales demonstrate that PANO achieves state-of-the-art performance. Notably, PANO reduces equivalent plastic strain prediction errors on Unilateral Stamping by 28.3% (or more) and lift-coefficient prediction errors on AirCraft by 21.4% (or more) compared with existing methods. Code is available at https://github.com/ZijiangY1116/PANO.",
-      "published": "2026-11-17T13:46:57.000Z",
-      "url": "https://arxiv.org/abs/2611.22782",
-      "category": "AI for Science",
-      "primaryCategory": "cs.AI",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.26545",
-      "title": "The Geometry of Lies: Knowledge and Persona Directions for Detecting Deception in Large Language Models",
-      "authors": [
-        "Md. Abdullah Al Zami",
-        "Suraiya Shanaz",
-        "Mahdi Hasan",
-        "Shoaib Ahmed Dipu",
-        "Farig Yousuf Sadeque",
-        "Md. Sabbir Ahmed"
-      ],
-      "abstract": "Linear probes are the cheapest LLM lie detectors but often fail to transfer across kinds of lie. Label-free directions from honest and deceptive role-play are untested at 70B scale and on lies about knowledge, where a lie and an honest denial can be identical. We widen a published persona bank with roles that deny knowledge they have, plus honest counterparts. At each model's middle layer the resulting persona direction ranks lies across Liars' Bench better than single-dataset probes on three of its four models; it fails on Qwen, even when Qwen stays in role far more often. On Llama-3.3-70B-Instruct it beats directions from a random persona bank, but its gain over the published direction is within the range of random widenings. On lies about knowledge, persona directions mainly track a reply's wording: where lies and honest denials share their words, our three main contrasts stay inside the random-direction band on Llama and Qwen and reach only its edge on Gemma, though on Mistral one clears it. A knowledge direction contrasts questions the model can answer with ones nobody can, each followed by the same scripted denial. It separates lies from identical honest denials on two models and narrowly on a third, but not on the fourth; its other results partly depend on the benchmark's wording. On the Gender-Secret fine-tune it clears the band by a few hundredths on Llama and fails on Mistral. The sum of the two directions ranks lies better than a supervised probe at the same depth on all four models (on one, both near chance) but is level with the persona direction on Llama's average and behind that probe on held-out lies. More varied role-play questions do not help the persona direction on Liars' Bench.",
-      "published": "2026-11-19T18:20:01.000Z",
-      "url": "https://arxiv.org/abs/2611.26545",
-      "category": "AI for Science",
-      "primaryCategory": "cs.AI",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.32830",
-      "title": "PtychoFM: A Foundation Model for Ptychographic Imaging",
-      "authors": [
-        "Aileen Luo",
-        "Emon Dey",
-        "Ming Du",
-        "Tao Zhou",
-        "Peco Myint",
-        "Himanshu Goel",
-        "Shashank Subramanian",
-        "Xiangyu Yin",
-        "Tekin Bicer",
-        "Siniša Veseli",
-        "Cheng-Chu Chung",
-        "Jeffrey A. Klug",
-        "Aldo Peña Pérez",
-        "Llorenç Fanals-i-Batllori",
-        "Christopher Kenney",
-        "Henry Shi",
-        "Lorenzo Rota",
-        "Angelo Dragone",
-        "Zirui Gao",
-        "Douglas A. Bennett",
-        "John A. B. Mates",
-        "Leila R. Vale",
-        "Michael R. Vissers",
-        "Yi Jiang",
-        "Junjing Deng",
-        "Tejas Guruswamy",
-        "Varuni K. Sastry",
-        "Bowen Zheng",
-        "Takenori Shimamura",
-        "Oliver Hoidn",
-        "Aashwin Mishra",
-        "Hannah Parraga",
-        "Brandon Stone",
-        "Jonathan Baldwin",
-        "Aaron Michelson"
-      ],
-      "abstract": "Ptychography provides high-resolution lensless imaging across X-ray, electron, and optical microscopy, but reconstructing images from diffraction measurements generally requires computationally intensity iterative phase retrieval. These methods often require experiment-specific analysis, limiting real-time feedback as data acquisition rates increase. Here, we demonstrate PtychoFM, a physics-aware foundation model for ptychographic imaging that combines large-scale pre-training with experiment-specific fine-tuning to reconstruct complex object images directly from individual diffraction patterns. Trained using a differentiable forward model without object-space labels, PtychoFM transfers from step-scan training data on one sample to fly-scan measurements of other samples with different feature sizes, morphologies, and refraction indices. At a synchrotron beamline, diffraction frames were streamed from the detector to a single GPU for inference at up to 200 frames per second and returned for real-time visualization. PtychoFM provides a practical route to rapid, transferable ptychographic reconstruction and live experimental feedback under nonideal conditions.",
-      "published": "2026-11-24T15:46:16.000Z",
-      "url": "https://arxiv.org/abs/2611.32830",
+      "abstract": "Hybrid simulators embed learnable components such as neural networks in physical solvers and train them on reference trajectories. Many scientific solvers feature hard switches, such as a tripping power line, an igniting grid cell, or depolarizing brain tissue, where the loss exhibits discrete jumps across switch flips, leaving standard automatic differentiation to capture only its smooth part. Existing training paradigms face a fundamentally challenging trade-off, as gradient-based relaxations smooth the switches and introduce bias across jumps, whereas derivative-free methods treat the solver as a black box and discard path gradients of the continuous dynamics. Here we introduce EventFlip, which flips a near-threshold switch from a stored state, replays the original solver, and measures the loss difference between the two runs, in effect a finite difference across the switch. By perturbing every threshold with small Gaussian noise, we cast each switch as a stochastic binary decision and derive an unbiased gradient estimator that combines the continuous path gradient with a jump term constructed from these counterfactual rollouts. EventFlip-Rand optimizes this noise-averaged objective, whereas EventFlip-Hard operates on the deterministic hard-switch simulator used at deployment and provably targets the complete discontinuous loss. Under an identical forward evaluation budget, we benchmark EventFlip against twelve baselines across a power-grid cascade, a detonation wave, and cortical spreading depolarization, achieving the lowest error on every task and reducing the strongest baseline's error by factors of 1.5, 1.4, and 1.4, respectively.",
+      "published": "2026-11-25T03:28:14.000Z",
+      "url": "https://arxiv.org/abs/2611.33716",
       "category": "AI for Science",
       "primaryCategory": "cs.LG",
       "source": "arXiv",
       "status": "Preprint"
     },
     {
-      "id": "2611.32657",
-      "title": "GeoSurge: Geometry-Grounded Multimodal Reasoning for Auditable Liver Resection Planning",
+      "id": "2611.33712",
+      "title": "PowerFix: Physics-Guided Iterative Repair for LLM-Assisted Power Converter Design",
       "authors": [
-        "Wenjie Deng",
-        "Zijian Tu",
-        "Xueyin Zhou",
-        "Huayi Wang",
-        "Zhuoyun Du",
-        "Mingyu Chen",
-        "Haochao Ying",
-        "Jian Wu"
+        "Can Wang",
+        "Shi Qiu",
+        "Fanfan Lin"
       ],
-      "abstract": "Surgical resection planning centers on generating executable resection surfaces from anatomical evidence and operative constraints. Medical multimodal foundation models enable anatomical understanding, and segmentation models predict resection regions, but neither translates these capabilities into explicitly constrained, executable resection surfaces. We present GeoSurge, an anatomy-grounded framework that combines mask-derived metrics with structure-aware point-cloud tokens to generate executable, editable resection surfaces. To make resection geometry learnable and editable, GeoSurge maps actions to parametric geometry through a surface-action grammar. Using this grammar, anatomy-oriented and tumor-centered templates generate candidates, which are filtered by hard constraints and semantic deduplication. Training supervision is then derived from candidate-expert geometric agreement and independently recomputed feasibility metrics. At inference, the reasoner uses patient evidence and surgical requirements to select or revise an action, which an independent geometry engine subsequently materializes and verifies. GeoSurge achieves the best overall scores on DeepTumour Liver and CRLM-QA, improving the constraint satisfaction rate from 73% to 100% on CRLM and from 56% to 99% on GeoSurge-Bench.",
-      "published": "2026-11-24T14:12:05.000Z",
-      "url": "https://arxiv.org/abs/2611.32657",
-      "category": "AI for Science",
-      "primaryCategory": "cs.AI",
-      "source": "arXiv",
-      "status": "Preprint"
-    },
-    {
-      "id": "2611.32114",
-      "title": "An Automated Framework Integrating Deep Learning and Anatomical Reasoning for Cardiac Phenotyping From CCTA",
-      "authors": [
-        "Hien Minh Tran",
-        "Thi-Thu-Hien Pham",
-        "Le Duy Tan",
-        "Hieu Xuan Nguyen",
-        "Tuong-Anh Mai-Phan"
-      ],
-      "abstract": "Coronary computed tomography angiography (CCTA) depicts coronary anatomy and cardiac fat, but segmentation alone does not ensure anatomically consistent measurements. We propose an automated framework that combines deep learning with anatomical reasoning for quantitative cardiac phenotyping. Its anatomical measurement module uses graph geometry, branch identity, and surrounding structures to define vessel-specific pericoronary adipose tissue (PCAT) sampling and a surrogate epicardial adipose tissue (EAT) compartment. The latter also generates training targets without requiring expert pericardium contours. A companion module quantifies coronary calcium on non-contrast CT. Component-wise benchmarking was conducted on five public datasets: ImageCAS, ImageCAS-X, COCA, Visual Lab, and MultiD4CAD. On ImageCAS-X Test-160, lumen segmentation with validation-selected post-processing achieved a Dice score of 0.9133 and a clDice score of 0.940, exceeding the corresponding published CAS-Net point estimates. In the four-split ImageCAS evaluation, the four-member ensemble outperformed the single ResEnc-L model. Analysis of 800 paired scans showed that PCAT attenuation measurements differed between whole-vessel and lumen references. External EAT evaluation showed strong volume correlation and good spatial overlap. Explicit anatomical rules make the resulting measurements interpretable and inspectable. In practice, the framework provides a standardized pipeline for processing cardiac CT cohorts and quantifying coronary calcium, PCAT, and EAT for population-level analysis and comparison across studies. The source code is publicly available at https://github.com/HarryTRAN207/CardiacCT-Research",
-      "published": "2026-11-24T07:34:04.000Z",
-      "url": "https://arxiv.org/abs/2611.32114",
+      "abstract": "Large language model (LLM) agents are increasingly being explored for automated engineering design. However, repairing power-converter designs that fail engineering validation remains challenging: the system must identify physical causes, locate responsible design variables, and resolve violations without compromising other constraints. We introduce PowerFix, a physics-guided iterative repair framework that converts validation failures into structured diagnoses and executable patches while preserving topology and design requirements. PowerDiagGraph links failed checks to possible physical causes and constrains repair routes. An LLM prioritizes these routes, while a deterministic compiler translates selected repairs into authorized field-level edits. Candidates are validated on isolated design copies and committed only after all required engineering checks pass; failed validation can guide replanning. On our constructed 96-task flyback repair benchmark, comprising injected single faults, coupled faults, and held-out natural failures from our design generator, PowerFix achieves 78.7% verified repair success rate (VRSR), compared with 30.1% for the strongest of three LLM baselines. Three additional replanning rounds increase VRSR to 88.4%. These offline results provide pilot-stage evidence within a simulation-based design workflow, with hardware prototype validation and transfer to a second converter topology as the next steps toward deployment.",
+      "published": "2026-11-25T03:27:22.000Z",
+      "url": "https://arxiv.org/abs/2611.33712",
       "category": "AI for Science",
       "primaryCategory": "cs.AI",
       "source": "arXiv",
