@@ -1,14 +1,14 @@
 {
-  "totalCitations": 1086,
+  "totalCitations": 1087,
   "uniquePublications": 54,
-  "updatedAt": "2026-11-27T11:01:51.058Z",
+  "updatedAt": "2026-11-28T10:39:31.129Z",
   "authors": [
     {
       "name": "Mahbubul Alam Majumdar",
       "controlNumber": "1023635",
       "bai": "M.Majumdar.1",
       "records": 26,
-      "citations": 888
+      "citations": 889
     },
     {
       "name": "Syed Hasibul Hassan Chowdhury",
